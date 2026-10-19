@@ -1,0 +1,18 @@
+# .swiftlint.yml
+included:
+  - App
+  - Packages
+excluded:
+  - Packages/*/.build
+  - Packages/AstroCore/Sources/AstroCore/VSOP87Earth.swift   # generated coefficient table
+  - Packages/AstroCore/Sources/AstroCore/Moon.swift          # ported coefficient table
+disabled_rules:
+  - identifier_name      # astronomy code uses short symbols (t, ra, dec, x, y, z) on purpose
+  - function_body_length # ported Astronomy Engine routines are kept whole for traceability
+  - cyclomatic_complexity
+  - type_body_length
+  - file_length
+  - large_tuple
+line_length:
+  warning: 140
+  error: 200
