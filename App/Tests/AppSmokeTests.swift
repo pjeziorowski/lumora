@@ -1,6 +1,7 @@
 // App/Tests/AppSmokeTests.swift
 
 import AstroCore
+import Foundation
 import PlannerKit
 import Testing
 @testable import Lumora
