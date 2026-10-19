@@ -35,6 +35,8 @@ targets:
       - package: AstroCore
       - package: GeoCore
       - package: PlannerKit
+      - package: OpticsCore
+      - package: CameraCatalog
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.pjeziorowski.lumora
@@ -59,6 +61,8 @@ targets:
       - package: AstroCore
       - package: GeoCore
       - package: PlannerKit
+      - package: OpticsCore
+      - package: CameraCatalog
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES

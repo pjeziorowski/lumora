@@ -1,5 +1,6 @@
 // App/Sources/RootView.swift
 
+import CameraCatalog
 import PlannerKit
 import SwiftUI
 
@@ -60,4 +61,5 @@ struct RootView: View {
     return RootView()
         .environment(session)
         .environment(PlannerState(session: session))
+        .environment(CameraStore(defaults: nil))
 }
