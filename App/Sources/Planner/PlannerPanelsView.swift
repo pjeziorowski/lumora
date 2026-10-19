@@ -97,6 +97,8 @@ extension PlannerPanelKind {
         case .milkyWay: "sparkles"
         case .geodetics: "ruler"
         case .obstacle: "building.2"
+        case .meteors: "moon.stars"
+        case .eclipse: "circle.lefthalf.filled"
         }
     }
 }

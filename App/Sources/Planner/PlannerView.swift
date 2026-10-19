@@ -39,6 +39,7 @@ struct PlannerView: View {
                 target: state.target,
                 optics: state.mapOptics.isVisible ? MapOpticsInput(settings: state.mapOptics, sensor: opticsCamera.sensor,
                                                                    coc: opticsCamera.coc) : nil,
+                events: state.events,
                 recenterToken: state.recenterToken,
                 onPinMoved: { coordinate in
                     Task { await state.movePin(latitude: coordinate.latitude, longitude: coordinate.longitude) }
@@ -118,6 +119,8 @@ struct PlannerView: View {
                         layerToggle("Sun", .sun, id: "sun")
                         layerToggle("Moon", .moon, id: "moon")
                         layerToggle("Milky Way", .milkyWay, id: "milkyWay")
+                        layerToggle("Meteor radiant", .meteors, id: "meteors")
+                        layerToggle("Eclipse path", .eclipse, id: "eclipse")
                     }
                 } label: {
                     Label("Map options", systemImage: "map")

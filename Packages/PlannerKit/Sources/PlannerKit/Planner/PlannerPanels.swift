@@ -1,14 +1,15 @@
 // Packages/PlannerKit/Sources/PlannerKit/Planner/PlannerPanels.swift
 //
 // The Planner's information panels as ready-to-display rows: pin, Sun, Moon, twilights
-// (Phase 3), Milky Way (Phase 4), geodetics and obstacle (Phase 6). Times
+// (Phase 3), Milky Way (Phase 4), geodetics and obstacle (Phase 6), meteors and eclipses
+// (Phase 9). Times
 // are shown in the pin's zone unless the user switches to device time.
 
 import AstroCore
 import Foundation
 
 public enum PlannerPanelKind: String, Sendable, Hashable, CaseIterable, Identifiable {
-    case pin, sun, moon, twilights, milkyWay, geodetics, obstacle
+    case pin, sun, moon, twilights, milkyWay, geodetics, obstacle, meteors, eclipse
     public var id: String { rawValue }
 
     public var title: String {
@@ -20,6 +21,8 @@ public enum PlannerPanelKind: String, Sendable, Hashable, CaseIterable, Identifi
         case .milkyWay: "Milky Way"
         case .geodetics: "Geodetics"
         case .obstacle: "Obstacle"
+        case .meteors: "Meteors"
+        case .eclipse: "Eclipses"
         }
     }
 }
@@ -60,9 +63,12 @@ public struct PlannerDisplayOptions: Sendable, Hashable {
 }
 
 public enum PlannerPanels {
-    /// - Parameter obstacle: the target pin's report (panels 6 and 7), nil without a target.
+    /// - Parameters:
+    ///   - obstacle: the target pin's report (panels 6 and 7), nil without a target.
+    ///   - events: meteor showers and eclipses (panels 8 and 9), nil while computing.
     public static func panel(_ kind: PlannerPanelKind, snapshot s: PlannerSnapshot, instant: Date,
-                             options o: PlannerDisplayOptions, obstacle: ObstacleReport? = nil) -> PlannerPanel {
+                             options o: PlannerDisplayOptions, obstacle: ObstacleReport? = nil,
+                             events sky: PlannerEvents? = nil) -> PlannerPanel {
         let zone = o.useDeviceTimeZone ? o.deviceTimeZone : s.location.timeZone
         func time(_ d: Date) -> String { Formatting.clockTime(d, timeZone: zone, style: o.clock) }
         func event(_ e: SkyEvent) -> String { "\(time(e.time)) · \(Formatting.azimuth(e.azimuth))" }
@@ -159,13 +165,19 @@ public enum PlannerPanels {
             rows = geodeticsRows(obstacle?.geodetics, sun: s.sun, moon: s.moon.position, units: o.units)
         case .obstacle:
             rows = obstacleRows(obstacle, units: o.units, time: time)
+        case .meteors:
+            rows = sky?.meteorRows(instant: instant, moon: s.moon, time: time, zone: zone) ?? [PanelRow("Meteor showers", "Calculating…")]
+        case .eclipse:
+            rows = sky?.eclipseRows(time: time, zone: zone) ?? [PanelRow("Eclipses", "Calculating…")]
         }
         return PlannerPanel(kind: kind, rows: rows)
     }
 
     public static func all(snapshot: PlannerSnapshot, instant: Date, options: PlannerDisplayOptions,
-                           obstacle: ObstacleReport? = nil) -> [PlannerPanel] {
-        PlannerPanelKind.allCases.map { panel($0, snapshot: snapshot, instant: instant, options: options, obstacle: obstacle) }
+                           obstacle: ObstacleReport? = nil, events: PlannerEvents? = nil) -> [PlannerPanel] {
+        PlannerPanelKind.allCases.map {
+            panel($0, snapshot: snapshot, instant: instant, options: options, obstacle: obstacle, events: events)
+        }
     }
 
     static let noTarget = [PanelRow("Target pin", "None"), PanelRow("Add one", "Map options → Target pin")]

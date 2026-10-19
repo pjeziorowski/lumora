@@ -21,6 +21,8 @@ struct PlannerMapView: UIViewRepresentable {
     var target: TargetPin?
     /// Field and depth of field to draw from the pin (Phase 6), nil when off.
     var optics: MapOpticsInput?
+    /// Meteor radiant and eclipse centre line, when computed.
+    var events: PlannerEvents?
     let recenterToken: Int
     /// Called with the new coordinate when the pin is dropped or dragged.
     let onPinMoved: (CLLocationCoordinate2D) -> Void
@@ -64,6 +66,7 @@ struct PlannerMapView: UIViewRepresentable {
         coordinator.snapshot = snapshot
         coordinator.layers = layers
         coordinator.optics = optics
+        coordinator.events = events
         coordinator.updateTarget(target)
         coordinator.rebuildOverlays()
     }
@@ -79,6 +82,7 @@ struct PlannerMapView: UIViewRepresentable {
         var onPinMoved: ((CLLocationCoordinate2D) -> Void)?
         var onTargetMoved: ((CLLocationCoordinate2D) -> Void)?
         var optics: MapOpticsInput?
+        var events: PlannerEvents?
         private(set) var target: TargetPin?
         private var targetAnnotation: TargetAnnotation?
         var snapshot: PlannerSnapshot?
@@ -87,7 +91,7 @@ struct PlannerMapView: UIViewRepresentable {
         var isDragging = false
         private var style: PlannerMapStyle?
         private var radius = 2000.0
-        private var lastBuilt: (PlannerSnapshot, Double, PlannerLayers, GeoPoint?, MapOpticsInput?)?
+        private var lastBuilt: (PlannerSnapshot, Double, PlannerLayers, GeoPoint?, MapOpticsInput?, PlannerEvents?)?
         private var lines: [MKOverlay] = []
         private var markers: [OverlayBody: BodyAnnotation] = [:]
 
@@ -130,9 +134,14 @@ struct PlannerMapView: UIViewRepresentable {
             guard let map, let snapshot else { return }
             let targetPoint = target?.point
             if let last = lastBuilt, last.0 == snapshot, last.1 == radius, last.2 == layers, last.3 == targetPoint,
-               last.4 == optics { return }
-            lastBuilt = (snapshot, radius, layers, targetPoint, optics)
-            let overlays = PlannerOverlays.build(snapshot, radius: radius, layers: layers)
+               last.4 == optics, last.5 == events { return }
+            lastBuilt = (snapshot, radius, layers, targetPoint, optics, events)
+            let sky = PlannerOverlays.build(snapshot, radius: radius, layers: layers)
+            // Events computed for another place or night are not drawn.
+            let current = events.flatMap { $0.location == snapshot.location ? $0 : nil }
+            let happenings = current?.overlays(instant: snapshot.instant, radius: radius, layers: layers)
+            let overlays = PlannerOverlays(lines: (happenings?.lines ?? []) + sky.lines,
+                                           markers: sky.markers + (happenings?.markers ?? []))
             var extra: [OverlayLine] = []
             let pin = snapshot.location.geoPoint
             if let targetPoint { extra.append(PlannerOverlays.targetLine(pin: pin, target: targetPoint)) }
@@ -334,6 +343,8 @@ final class BodyAnnotationView: MKAnnotationView {
         case .galacticCenter: symbol = "sparkles"
         case .camera: symbol = "camera"
         case .target: symbol = "scope"
+        case .radiant: symbol = "sparkle"
+        case .eclipse: symbol = "circle.lefthalf.filled"
         }
         let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .semibold)
         image = UIImage(systemName: symbol, withConfiguration: config)?
@@ -351,6 +362,8 @@ final class BodyAnnotationView: MKAnnotationView {
         case .galacticCenter: accessibilityLabel = String(localized: "Galactic core")
         case .camera: accessibilityLabel = String(localized: "Camera")
         case .target: accessibilityLabel = String(localized: "Target")
+        case .radiant: accessibilityLabel = String(localized: "Meteor radiant")
+        case .eclipse: accessibilityLabel = String(localized: "Eclipse path")
         }
     }
 }
@@ -372,6 +385,8 @@ enum PlannerColors {
         case (.camera, .focus): UIColor(red: 0.95, green: 0.20, blue: 0.35, alpha: 1)
         case (.camera, _): UIColor(red: 0.10, green: 0.55, blue: 0.85, alpha: 0.9)
         case (.target, _): UIColor.label.withAlphaComponent(0.85)
+        case (.radiant, _): UIColor(red: 0.20, green: 0.85, blue: 0.80, alpha: 1)
+        case (.eclipse, _): UIColor(red: 0.90, green: 0.10, blue: 0.20, alpha: 0.9)
         }
     }
 

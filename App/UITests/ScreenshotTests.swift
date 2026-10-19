@@ -349,8 +349,8 @@ final class ScreenshotTests: XCTestCase {
         app.descendants(matching: .any)["planner.targetOptions"].firstMatch.tap()
         let fov = app.switches["planner.optics.fov"].firstMatch
         expectVisible(fov, in: app)
-        fov.tap()
-        app.switches["planner.optics.dof"].firstMatch.tap()
+        flip(fov)
+        flip(app.switches["planner.optics.dof"].firstMatch)
         snap(app, "planner-target-optics-sheet")
         app.buttons["Done"].firstMatch.tap()
         settleMap()
@@ -376,7 +376,8 @@ final class ScreenshotTests: XCTestCase {
         manhattan.press(forDuration: 1.2)
         expectVisible(app, "Share as text")
         snap(app, "plan-context-menu")
-        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.06)).tap()
+        // Tap the blurred background below the menu to close it.
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.85)).tap()
         Thread.sleep(forTimeInterval: 1)
 
         // Swipe to duplicate.
@@ -485,6 +486,64 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "ar-frame-50mm-dof")
     }
 
+    func testPhase9Events() throws {
+        continueAfterFailure = false
+        phase = 9
+        // Midnight on 12–13 August 2026 in Warsaw: the Perseid peak under a new Moon, hours
+        // after the total solar eclipse over Spain (partial from Warsaw before sunset).
+        var app = launch(date: "2026-08-12T22:00:00Z", place: "Warsaw")
+        app.tabBars.buttons["Planner"].tap()
+        waitFor(app, id: "planner.panel.pin")
+        app.buttons["planner.panelTab.meteors"].tap()
+        waitFor(app, id: "planner.panel.meteors")
+        expectVisible(app, "Shower")
+        settleMap(seconds: 3)
+        snap(app, "planner-meteors-perseids-radiant")
+        app.buttons["planner.panelTab.eclipse"].tap()
+        expectVisible(app, "Next here")
+        snap(app, "planner-eclipse-panel")
+        // Zoom out to the continent to see the eclipse centre line.
+        let map = app.descendants(matching: .any)["planner.map"].firstMatch
+        for _ in 0..<4 {
+            map.pinch(withScale: 0.12, velocity: -3)
+            Thread.sleep(forTimeInterval: 0.6)
+        }
+        settleMap(seconds: 4)
+        snap(app, "planner-eclipse-path-on-map")
+
+        app.tabBars.buttons["Tools"].tap()
+        openTool(app, "Meteor showers", expecting: "Showers in")
+        snap(app, "meteor-showers-year-warsaw")
+        openRow(app, app.buttons["meteors.PER"].firstMatch)
+        expectVisible(app, "Best time")
+        snap(app, "meteor-perseids-night-warsaw")
+        goBack(app)
+        goBack(app)
+        openTool(app, "Eclipses", expecting: "Next eclipses")
+        snap(app, "eclipses-list-warsaw")
+        let rows = app.buttons.matching(identifier: "eclipse.row")
+        openRow(app, rows.element(boundBy: 0))
+        expectVisible(app, "Magnitude")
+        snap(app, "eclipse-solar-2026-08-12-contacts")
+        app.swipeUp()
+        settleMap(seconds: 4)
+        snap(app, "eclipse-solar-path-map")
+        goBack(app)
+        openRow(app, rows.element(boundBy: 1))
+        expectVisible(app, "From Warsaw")
+        snap(app, "eclipse-lunar-2026-08-28")
+        app.terminate()
+
+        // Southern hemisphere: the Eta Aquariids from Cape Town, a southern shower whose
+        // radiant climbs high before dawn.
+        app = launch(date: "2026-05-06T00:00:00Z", place: "Cape Town")
+        app.tabBars.buttons["Tools"].tap()
+        openTool(app, "Meteor showers", expecting: "Showers in")
+        openRow(app, app.buttons["meteors.ETA"].firstMatch)
+        expectVisible(app, "Best time")
+        snap(app, "meteor-eta-aquariids-capetown")
+    }
+
     // MARK: Helpers
 
     /// Taps a place in the location sheet, scrolling the list first when the row sits under
@@ -545,11 +604,29 @@ final class ScreenshotTests: XCTestCase {
         expectVisible(app, label, file: file, line: line)
     }
 
+    /// Taps a list row, scrolling until it exists and clears the home indicator.
+    private func openRow(_ app: XCUIApplication, _ row: XCUIElement, file: StaticString = #filePath, line: UInt = #line) {
+        for _ in 0..<5 where !row.waitForExistence(timeout: 2) {
+            app.swipeUp()
+            Thread.sleep(forTimeInterval: 0.5)
+        }
+        expectVisible(row, in: app, file: file, line: line)
+        let screen = app.windows.firstMatch.frame
+        for _ in 0..<4 where row.frame.maxY > screen.maxY - 100 { app.swipeUp(); Thread.sleep(forTimeInterval: 0.5) }
+        row.tap()
+    }
+
     /// Lists drop rows that scroll off screen, so segmented pickers at the top must be
     /// scrolled back into view before tapping them.
     private func scrollToTop(_ app: XCUIApplication) {
         for _ in 0..<3 { app.swipeDown() }
         Thread.sleep(forTimeInterval: 0.5)
+    }
+
+    /// Tapping a SwiftUI toggle's centre hits its label; tap the switch at the trailing edge.
+    private func flip(_ toggle: XCUIElement) {
+        toggle.coordinate(withNormalizedOffset: CGVector(dx: 0.93, dy: 0.5)).tap()
+        Thread.sleep(forTimeInterval: 0.4)
     }
 
     private func goBack(_ app: XCUIApplication) {

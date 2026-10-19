@@ -18,6 +18,10 @@ public enum OverlayBody: String, Sendable, Hashable, CaseIterable {
     case camera
     /// The line to the target pin.
     case target
+    /// The active meteor shower's radiant (Phase 9).
+    case radiant
+    /// The centre line of a total or annular solar eclipse (Phase 9).
+    case eclipse
 }
 
 public enum OverlayRole: String, Sendable, Hashable {
@@ -45,7 +49,9 @@ public struct PlannerLayers: OptionSet, Sendable, Hashable, Codable {
     public static let sun = PlannerLayers(rawValue: 1)
     public static let moon = PlannerLayers(rawValue: 2)
     public static let milkyWay = PlannerLayers(rawValue: 4)
-    public static let all: PlannerLayers = [.sun, .moon, .milkyWay]
+    public static let meteors = PlannerLayers(rawValue: 8)
+    public static let eclipse = PlannerLayers(rawValue: 16)
+    public static let all: PlannerLayers = [.sun, .moon, .milkyWay, .meteors, .eclipse]
 }
 
 public struct OverlayLine: Sendable, Hashable, Identifiable {
@@ -69,6 +75,11 @@ public struct OverlayMarker: Sendable, Hashable, Identifiable {
 public struct PlannerOverlays: Sendable, Hashable {
     public let lines: [OverlayLine]
     public let markers: [OverlayMarker]
+
+    public init(lines: [OverlayLine], markers: [OverlayMarker]) {
+        self.lines = lines
+        self.markers = markers
+    }
 
     /// Mercator maps cannot show the poles; MapKit's limit is about ±85.05°.
     public static let mercatorLimit = 85.0511

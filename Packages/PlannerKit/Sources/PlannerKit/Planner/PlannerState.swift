@@ -49,6 +49,9 @@ public final class PlannerState {
     public var mapOptics = MapOptics()
     /// Geodetics and Sun/Moon alignments for the target pin on the snapshot's day.
     public private(set) var obstacle: ObstacleReport?
+    /// Meteor showers and eclipses for the pin's night (panels 8 and 9).
+    public private(set) var events: PlannerEvents?
+    @ObservationIgnored private var eventsTask: Task<Void, Never>?
     /// True while the target's ground elevation is being looked up.
     public private(set) var resolvingTarget = false
 
@@ -61,6 +64,12 @@ public final class PlannerState {
     @ObservationIgnored private var prefetched: PlannerDay?
     @ObservationIgnored private let elevations: ElevationService
     @ObservationIgnored private var obstacleKey: ObstacleKey?
+    @ObservationIgnored private var eventsKey: EventsKey?
+
+    private struct EventsKey: Equatable {
+        let location: PillLocation
+        let night: LocalDay
+    }
     @ObservationIgnored private var targetGeneration = 0
 
     struct ObstacleKey: Equatable {
@@ -107,6 +116,7 @@ public final class PlannerState {
                 let result = await engine.snapshot(location: next.location, instant: next.instant, thresholds: next.thresholds)
                 self.snapshot = result
                 self.updateObstacle()
+                self.updateEvents()
                 if self.pending == nil, self.prefetched != result.day {
                     self.prefetched = result.day
                     await engine.prefetchNeighbours(of: result.day.day, location: next.location, thresholds: next.thresholds)
@@ -123,7 +133,8 @@ public final class PlannerState {
 
     public func panels(options: PlannerDisplayOptions) -> [PlannerPanel] {
         guard let snapshot else { return [] }
-        return PlannerPanels.all(snapshot: snapshot, instant: session.instant, options: options, obstacle: obstacle)
+        return PlannerPanels.all(snapshot: snapshot, instant: session.instant, options: options, obstacle: obstacle,
+                                 events: events)
     }
 
     // MARK: Place
@@ -217,6 +228,28 @@ public final class PlannerState {
         guard key != obstacleKey else { return }
         obstacleKey = key
         obstacle = ObstacleReport.compute(observer: key.location, eyeHeight: eyeHeight, target: target, day: day)
+    }
+
+    /// Recomputes meteor showers and eclipses when the place or night changed.
+    func updateEvents() {
+        let location = session.location
+        let night = MeteorShowerCalendar.night(containing: session.instant, timeZone: location.timeZone)
+        if let events, events.location == location, events.night == night { return }
+        if eventsTask != nil, eventsKey == EventsKey(location: location, night: night) { return }
+        eventsKey = EventsKey(location: location, night: night)
+        eventsTask?.cancel()
+        let instant = session.instant
+        eventsTask = Task {
+            let result = await Task.detached(priority: .utility) { PlannerEvents.compute(location: location, instant: instant) }.value
+            guard !Task.isCancelled, self.eventsKey == EventsKey(location: location, night: night) else { return }
+            self.events = result
+            self.eventsTask = nil
+        }
+    }
+
+    /// Waits for the meteor and eclipse computation (tests).
+    public func settleEvents() async {
+        if let eventsTask { await eventsTask.value }
     }
 
     /// Bearing and distance used for the map's field of view: the target's, if any.

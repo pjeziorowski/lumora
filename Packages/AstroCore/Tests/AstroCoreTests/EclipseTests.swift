@@ -70,6 +70,21 @@ struct EclipseTests {
               + "place max \(String(format: "%.3f", worstPlace))°")
     }
 
+    @Test func centralLineCrossesTheUS() throws {
+        // 2017 Aug 21: the path ran from Oregon (≈44.6°N 124°W, about 17:16 UT) to South
+        // Carolina (≈33°N 79.5°W, about 18:48 UT) and passed greatest eclipse in Kentucky.
+        let e = try #require(Eclipses.nextGlobalSolarEclipse(after: AstroTime(year: 2017, month: 8, day: 1)))
+        let line = Eclipses.centralLine(of: e)
+        #expect(line.count > 50)
+        let oregon = try #require(line.min { abs($0.longitude + 124) < abs($1.longitude + 124) })
+        #expect(abs(oregon.latitude - 44.6) < 0.5)
+        #expect(abs(oregon.time.date.timeIntervalSince(Self.utc("2017-08-21T17:16:00Z"))) < 180)
+        let carolina = try #require(line.min { abs($0.longitude + 79.5) < abs($1.longitude + 79.5) })
+        #expect(abs(carolina.latitude - 33) < 0.6)
+        // West to east, in time order.
+        #expect(line.first!.longitude < line.last!.longitude)
+    }
+
     @Test func eclipseSequenceAndKinds() throws {
         // 2017–2022: the lunar eclipses in order with their NASA types.
         var t = AstroTime(year: 2017, month: 1, day: 1)

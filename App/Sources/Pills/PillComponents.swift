@@ -42,6 +42,13 @@ struct PillFormat {
         return day.noon.formatted(style.weekday(.abbreviated))
     }
 
+    /// "Aug 12, 2026" in the place's zone.
+    func date(_ date: Date) -> String {
+        var style = Date.FormatStyle(date: .abbreviated, time: .omitted)
+        style.timeZone = timeZone
+        return date.formatted(style)
+    }
+
     func dateAndTime(_ date: Date) -> String {
         var style = Date.FormatStyle(date: .abbreviated, time: .omitted)
         style.timeZone = timeZone
