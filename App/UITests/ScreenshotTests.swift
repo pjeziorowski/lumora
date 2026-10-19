@@ -155,16 +155,21 @@ final class ScreenshotTests: XCTestCase {
 
     // MARK: Helpers
 
-    /// Taps a jump button, scrolling the jump row first when the button is off screen.
+    /// Taps a jump button, first dragging the jump row sideways while the button is off
+    /// screen (XCUITest cannot even ask an off-screen SwiftUI button whether it is hittable).
     private func tapJump(_ app: XCUIApplication, _ name: String, file: StaticString = #filePath, line: UInt = #line) {
         let button = app.buttons["planner.jump.\(name)"].firstMatch
         XCTAssertTrue(button.waitForExistence(timeout: 10), "No jump \(name)", file: file, line: line)
-        let row = app.scrollViews.containing(.button, identifier: "planner.jump.now").firstMatch
         let screen = app.windows.firstMatch.frame
-        var attempts = 0
-        while !button.isHittable && attempts < 6 {
-            if button.frame.midX > screen.midX { row.swipeLeft() } else { row.swipeRight() }
-            attempts += 1
+        let origin = app.coordinate(withNormalizedOffset: .zero)
+        for _ in 0..<6 {
+            let frame = button.frame
+            if frame.minX >= screen.minX && frame.maxX <= screen.maxX { break }
+            let y = frame.midY
+            let (from, to) = frame.midX > screen.midX ? (0.8, 0.2) : (0.2, 0.8)
+            origin.withOffset(CGVector(dx: screen.width * from, dy: y))
+                .press(forDuration: 0.05, thenDragTo: origin.withOffset(CGVector(dx: screen.width * to, dy: y)))
+            Thread.sleep(forTimeInterval: 0.5)
         }
         button.tap()
     }

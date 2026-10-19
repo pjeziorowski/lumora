@@ -39,6 +39,7 @@ scripts/test-packages.sh        # prints ACCURACY lines for AstroCore and Planne
 
 - Phase 0 (skeleton) and Phase 1 (AstroCore) are done. See `docs/PHASE1_ACCURACY.md`.
 - Phase 2 (Sun and Moon tools, shared location and date picker) is done. See `docs/PHASE2_ACCURACY.md`.
+- Phase 3 (Planner: map, pin, time bar, Sun/Moon overlays, panels 1–4) is done. See `docs/PHASE3_ACCURACY.md`.
 - Settings: units, clock, coordinate format persist with `@AppStorage`.
 
 ## Licences
