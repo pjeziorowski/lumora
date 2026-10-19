@@ -333,6 +333,9 @@ final class ScreenshotTests: XCTestCase {
         app.buttons["planner.find"].tap()
         expectVisible(app.buttons["find.search"].firstMatch, in: app)
         snap(app, "find-form-target-bearing")
+        // The Find button sits under the home indicator until the form scrolls.
+        app.swipeUp()
+        Thread.sleep(forTimeInterval: 0.5)
         app.buttons["find.search"].firstMatch.tap()
         let result = app.buttons["find.result"].firstMatch
         expectVisible(result, in: app)

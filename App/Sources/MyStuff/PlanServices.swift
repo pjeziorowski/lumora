@@ -6,7 +6,7 @@
 
 import CoreTransferable
 import EventKit
-import MapKit
+@preconcurrency import MapKit
 import PlannerKit
 import SwiftUI
 import UniformTypeIdentifiers
