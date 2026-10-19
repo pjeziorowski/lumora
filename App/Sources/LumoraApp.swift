@@ -1,17 +1,33 @@
 // App/Sources/LumoraApp.swift
 
+import Foundation
 import PlannerKit
 import SwiftUI
 
 @main
 struct LumoraApp: App {
     /// Place and date shared by the Sun and Moon tools.
-    @State private var pillSession = PillSession()
+    @State private var pillSession = LumoraApp.makePillSession(arguments: ProcessInfo.processInfo.arguments)
 
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environment(pillSession)
         }
+    }
+
+    /// Normally restores the saved place and uses the real clock. The screenshot UI tests pass
+    /// `-fixedDate <ISO 8601>` and `-place <sample name>` so every capture shows the same
+    /// place and moment, without touching the user's saved place.
+    static func makePillSession(arguments: [String]) -> PillSession {
+        func value(after flag: String) -> String? {
+            guard let index = arguments.firstIndex(of: flag), index + 1 < arguments.count else { return nil }
+            return arguments[index + 1]
+        }
+        guard let text = value(after: "-fixedDate"), let date = ISO8601DateFormatter().date(from: text) else {
+            return PillSession()
+        }
+        let place = value(after: "-place").flatMap { name in PillLocation.samples.first { $0.name == name } }
+        return PillSession(defaults: nil, fallback: place ?? PillLocation.samples[0]) { date }
     }
 }

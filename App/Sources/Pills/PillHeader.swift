@@ -35,6 +35,7 @@ struct PillHeader: View {
                 }
             }
             .accessibilityHint("Choose another place")
+            .accessibilityIdentifier("pill.location")
             DateBar()
         }
         .sheet(isPresented: $showingPicker) {

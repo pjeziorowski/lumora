@@ -114,6 +114,7 @@ struct LocationPickerView: View {
             }
         }
         .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("place.\(place.name)")
     }
 
     private func runSearch() async {
