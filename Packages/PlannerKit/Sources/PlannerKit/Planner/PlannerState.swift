@@ -41,6 +41,16 @@ public final class PlannerState {
     public private(set) var recenterToken = 0
     /// True while a dropped pin's name and time zone are being looked up.
     public private(set) var resolvingPin = false
+    /// The second pin (distance, bearing, obstacles), with its ground elevation once known.
+    public private(set) var target: TargetPin?
+    /// Observer eye height above the ground at the pin (m).
+    public var eyeHeight = 1.7 { didSet { updateObstacle() } }
+    /// Field and depth of field drawn on the map.
+    public var mapOptics = MapOptics()
+    /// Geodetics and Sun/Moon alignments for the target pin on the snapshot's day.
+    public private(set) var obstacle: ObstacleReport?
+    /// True while the target's ground elevation is being looked up.
+    public private(set) var resolvingTarget = false
 
     @ObservationIgnored private let engine: PlannerEngine
     @ObservationIgnored private let placeLookup: PlaceLookup
@@ -49,6 +59,16 @@ public final class PlannerState {
     @ObservationIgnored private var worker: Task<Void, Never>?
     @ObservationIgnored private var pinGeneration = 0
     @ObservationIgnored private var prefetched: PlannerDay?
+    @ObservationIgnored private let elevations: ElevationService
+    @ObservationIgnored private var obstacleKey: ObstacleKey?
+    @ObservationIgnored private var targetGeneration = 0
+
+    struct ObstacleKey: Equatable {
+        let location: PillLocation
+        let day: LocalDay
+        let target: TargetPin
+        let eyeHeight: Double
+    }
 
     struct Request: Equatable {
         let location: PillLocation
@@ -59,12 +79,15 @@ public final class PlannerState {
     /// - Parameters:
     ///   - lookup: reverse geocoder for dropped pins (name and time zone); nil in tests.
     ///   - clock: source of "now" for the Now jump; nil uses the session's clock.
+    ///   - elevation: ground elevation service for pins; nil in tests (elevation unknown).
     public init(session: PillSession, engine: PlannerEngine = PlannerEngine(),
-                lookup: PlaceLookup.Lookup? = nil, clock: (@Sendable () -> Date)? = nil) {
+                lookup: PlaceLookup.Lookup? = nil, clock: (@Sendable () -> Date)? = nil,
+                elevation: ElevationService.Fetch? = nil) {
         self.session = session
         self.engine = engine
         self.placeLookup = PlaceLookup(lookup: lookup ?? { _, _ in nil })
         self.clock = clock
+        self.elevations = ElevationService(fetch: elevation ?? { _, _ in nil })
     }
 
     // MARK: Computation
@@ -83,6 +106,7 @@ public final class PlannerState {
                 self.pending = nil
                 let result = await engine.snapshot(location: next.location, instant: next.instant, thresholds: next.thresholds)
                 self.snapshot = result
+                self.updateObstacle()
                 if self.pending == nil, self.prefetched != result.day {
                     self.prefetched = result.day
                     await engine.prefetchNeighbours(of: result.day.day, location: next.location, thresholds: next.thresholds)
@@ -99,7 +123,7 @@ public final class PlannerState {
 
     public func panels(options: PlannerDisplayOptions) -> [PlannerPanel] {
         guard let snapshot else { return [] }
-        return PlannerPanels.all(snapshot: snapshot, instant: session.instant, options: options)
+        return PlannerPanels.all(snapshot: snapshot, instant: session.instant, options: options, obstacle: obstacle)
     }
 
     // MARK: Place
@@ -126,13 +150,91 @@ public final class PlannerState {
             name: cached?.name ?? "Dropped pin", latitude: lat, longitude: lon, elevation: 0,
             timeZoneIdentifier: cached?.timeZoneIdentifier ?? PlaceLookup.nauticalZone(longitude: lon).identifier))
         refresh()
-        guard cached == nil else { return }
-        resolvingPin = true
-        let resolved = await placeLookup.resolve(latitude: lat, longitude: lon)
-        guard generation == pinGeneration else { return }
-        resolvingPin = false
-        session.move(to: PillLocation(name: resolved.name ?? fallbackName, latitude: lat, longitude: lon, elevation: 0,
-                                      timeZoneIdentifier: resolved.timeZoneIdentifier))
+        if cached == nil {
+            resolvingPin = true
+            let resolved = await placeLookup.resolve(latitude: lat, longitude: lon)
+            guard generation == pinGeneration else { return }
+            resolvingPin = false
+            session.move(to: PillLocation(name: resolved.name ?? fallbackName, latitude: lat, longitude: lon, elevation: 0,
+                                          timeZoneIdentifier: resolved.timeZoneIdentifier))
+            refresh()
+        }
+        // Ground elevation of the new spot (the observer stands on it).
+        guard let ground = await elevations.elevation(latitude: lat, longitude: lon), generation == pinGeneration else { return }
+        var placed = session.location
+        placed.elevation = ground
+        session.move(to: placed)
+        refresh()
+        updateObstacle()
+    }
+
+    // MARK: Target pin
+
+    /// Places the target pin, or removes it with nil, then looks up its ground elevation.
+    public func setTarget(_ point: GeoPoint?, objectHeight: Double? = nil) async {
+        targetGeneration += 1
+        let generation = targetGeneration
+        guard let point else {
+            target = nil
+            obstacle = nil
+            obstacleKey = nil
+            return
+        }
+        let safe = GeoPoint(latitude: max(-90, min(90, point.latitude)), longitude: Geodesy.normalizeLongitude(point.longitude))
+        let height = objectHeight ?? target?.objectHeight ?? 0
+        let known = await elevations.cached(latitude: safe.latitude, longitude: safe.longitude)
+        guard generation == targetGeneration else { return }
+        target = TargetPin(point: safe, groundElevation: known, objectHeight: height)
+        updateObstacle()
+        guard known == nil else { return }
+        resolvingTarget = true
+        let ground = await elevations.elevation(latitude: safe.latitude, longitude: safe.longitude)
+        guard generation == targetGeneration else { return }
+        resolvingTarget = false
+        target?.groundElevation = ground
+        updateObstacle()
+    }
+
+    /// Adds a target pin 1 km from the observer along the Sun's current azimuth.
+    public func addTarget() async {
+        let bearing = snapshot?.sun.azimuth ?? 0
+        await setTarget(Geodesy.destination(from: session.location.geoPoint, bearing: bearing, distance: 1000).normalized)
+    }
+
+    public func setObjectHeight(_ height: Double) {
+        guard target != nil else { return }
+        target?.objectHeight = max(0, height)
+        updateObstacle()
+    }
+
+    /// Recomputes the obstacle report when the place, day, target or eye height changed.
+    func updateObstacle() {
+        guard let target, let day = snapshot?.day.day, snapshot?.location == session.location else {
+            if target == nil { obstacle = nil }
+            return
+        }
+        let key = ObstacleKey(location: session.location, day: day, target: target, eyeHeight: eyeHeight)
+        guard key != obstacleKey else { return }
+        obstacleKey = key
+        obstacle = ObstacleReport.compute(observer: key.location, eyeHeight: eyeHeight, target: target, day: day)
+    }
+
+    /// Bearing and distance used for the map's field of view: the target's, if any.
+    public var targetLine: GeodesicLine? {
+        target.map { Geodesy.inverse(session.location.geoPoint, $0.point) }
+    }
+
+    // MARK: Find
+
+    /// Runs a Find search for the current place off the main actor.
+    public func find(_ query: FindQuery) async -> [FindMatch] {
+        let observer = session.location.observer
+        return await Task.detached(priority: .userInitiated) { BodyFinder.find(query, observer: observer) }.value
+    }
+
+    /// Moves the Planner to a Find result.
+    public func show(_ match: FindMatch) {
+        session.instant = match.time
         refresh()
     }
 

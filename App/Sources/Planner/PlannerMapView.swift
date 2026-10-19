@@ -170,6 +170,16 @@ struct PlannerMapView: UIViewRepresentable {
             case .pathDown:
                 renderer.lineWidth = 1.5
                 renderer.lineDashPattern = [2, 5]
+            case .fovEdge:
+                renderer.lineWidth = 2.5
+            case .fovCenter:
+                renderer.lineWidth = 1
+                renderer.lineDashPattern = [6, 6]
+            case .dofNear, .dofFar:
+                renderer.lineWidth = 3
+            case .focus:
+                renderer.lineWidth = 2
+                renderer.lineDashPattern = [4, 4]
             }
             return renderer
         }
@@ -245,6 +255,8 @@ final class BodyAnnotationView: MKAnnotationView {
         case .sun: symbol = "sun.max.fill"
         case .moon: symbol = "moon.fill"
         case .galacticCenter: symbol = "sparkles"
+        case .camera: symbol = "camera"
+        case .target: symbol = "scope"
         }
         let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .semibold)
         image = UIImage(systemName: symbol, withConfiguration: config)?
@@ -260,6 +272,8 @@ final class BodyAnnotationView: MKAnnotationView {
         case .sun: accessibilityLabel = String(localized: "Sun")
         case .moon: accessibilityLabel = String(localized: "Moon")
         case .galacticCenter: accessibilityLabel = String(localized: "Galactic core")
+        case .camera: accessibilityLabel = String(localized: "Camera")
+        case .target: accessibilityLabel = String(localized: "Target")
         }
     }
 }
@@ -277,6 +291,10 @@ enum PlannerColors {
         case (.moon, .pathDown): UIColor(red: 0.45, green: 0.65, blue: 1.00, alpha: 0.8)
         case (.moon, _): UIColor(red: 0.40, green: 0.62, blue: 1.00, alpha: 1)
         case (.galacticCenter, _): UIColor(red: 0.78, green: 0.55, blue: 1.00, alpha: 1)
+        case (.camera, .dofNear), (.camera, .dofFar): UIColor(red: 0.10, green: 0.75, blue: 0.45, alpha: 1)
+        case (.camera, .focus): UIColor(red: 0.95, green: 0.20, blue: 0.35, alpha: 1)
+        case (.camera, _): UIColor(red: 0.10, green: 0.55, blue: 0.85, alpha: 0.9)
+        case (.target, _): UIColor.label.withAlphaComponent(0.85)
         }
     }
 
