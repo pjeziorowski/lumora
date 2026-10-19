@@ -33,6 +33,7 @@ targets:
       - App/Resources
     dependencies:
       - package: AstroCore
+      - package: GeoCore
       - package: PlannerKit
     settings:
       base:

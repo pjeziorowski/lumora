@@ -60,6 +60,25 @@ public final class PillSession {
         persist()
     }
 
+    /// Moves the place without adding it to the recents (the Planner pin being dragged or
+    /// renamed once its time zone resolves). Keeps the wall-clock time, like `select`.
+    public func move(to newLocation: PillLocation) {
+        guard newLocation != location else { return }
+        var oldCal = Calendar(identifier: .gregorian)
+        oldCal.timeZone = timeZone
+        let wall = oldCal.dateComponents([.year, .month, .day, .hour, .minute, .second], from: instant)
+        location = newLocation
+        var newCal = Calendar(identifier: .gregorian)
+        newCal.timeZone = newLocation.timeZone
+        if let moved = newCal.date(from: wall) { instant = moved }
+        persist()
+    }
+
+    /// Moves the instant by `minutes` (the Planner time bar).
+    public func scrub(minutes: Double) {
+        instant = instant.addingTimeInterval(minutes * 60)
+    }
+
     /// Moves by whole local days, keeping the wall-clock time (DST-safe).
     public func shift(days: Int) {
         var cal = Calendar(identifier: .gregorian)

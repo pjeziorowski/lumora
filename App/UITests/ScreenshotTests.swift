@@ -10,6 +10,8 @@ import XCTest
 @MainActor
 final class ScreenshotTests: XCTestCase {
     private var counter = 0
+    /// File names start with the phase ("p3-07-…") so every phase's captures can share one folder.
+    private var phase = 2
 
     /// Phase 2: Sun and Moon tools and the shared location picker.
     func testPhase2SunAndMoonTools() throws {
@@ -73,7 +75,94 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "moon-full-new-sydney-scrolled")
     }
 
+    /// Phase 3: Planner map with Sun/Moon overlays, panels 1–4, time bar and jumps, map
+    /// styles, the pin/device time toggle, and antimeridian, polar and southern pins.
+    func testPhase3Planner() throws {
+        continueAfterFailure = false
+        phase = 3
+        // 21 June 2026, 20:30 in Warsaw: evening golden hour, waxing Moon in the south-west.
+        let app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw")
+        app.tabBars.buttons["Planner"].tap()
+        waitFor(app, id: "planner.panel.pin")
+        settleMap()
+        snap(app, "planner-warsaw-pin")
+        for panel in ["sun", "moon", "twilights"] {
+            app.buttons["planner.panelTab.\(panel)"].tap()
+            waitFor(app, id: "planner.panel.\(panel)")
+            snap(app, "planner-warsaw-\(panel)")
+        }
+
+        app.buttons["planner.panelTab.sun"].tap()
+        app.buttons["planner.jump.sunrise"].tap()
+        settleMap()
+        snap(app, "planner-jump-sunrise")
+        app.buttons["planner.jump.moonrise"].tap()
+        app.buttons["planner.panelTab.moon"].tap()
+        settleMap()
+        snap(app, "planner-jump-moonrise")
+        app.buttons["planner.jump.now"].tap()
+        let ruler = app.descendants(matching: .any)["planner.timebar"]
+        XCTAssertTrue(ruler.waitForExistence(timeout: 5))
+        ruler.swipeLeft()
+        settleMap()
+        snap(app, "planner-scrubbed-later")
+
+        for style in ["Satellite", "Hybrid", "Terrain"] {
+            app.buttons["planner.options"].tap()
+            app.buttons[style].firstMatch.tap()
+            settleMap(seconds: 4)
+            snap(app, "planner-style-\(style.lowercased())")
+        }
+        app.buttons["planner.options"].tap()
+        app.buttons["Standard"].firstMatch.tap()
+
+        app.buttons["planner.panelTab.pin"].tap()
+        app.buttons["planner.options"].tap()
+        app.buttons["planner.timezoneToggle"].firstMatch.tap()
+        settleMap(seconds: 1)
+        snap(app, "planner-device-time")
+        app.buttons["planner.options"].tap()
+        app.buttons["planner.timezoneToggle"].firstMatch.tap()
+
+        // Taveuni sits on the antimeridian: lines cross it without wrapping round the map.
+        app.buttons["planner.search"].tap()
+        expectVisible(app, "Location")
+        snap(app, "planner-search")
+        app.buttons["place.Taveuni"].firstMatch.tap()
+        app.buttons["planner.panelTab.sun"].tap()
+        settleMap(seconds: 4)
+        snap(app, "planner-taveuni-antimeridian")
+
+        // Longyearbyen in June: midnight sun, no sunrise or sunset lines.
+        app.buttons["planner.search"].tap()
+        expectVisible(app, "Location")
+        app.buttons["place.Longyearbyen"].firstMatch.tap()
+        settleMap(seconds: 4)
+        snap(app, "planner-longyearbyen-midnight-sun")
+        app.buttons["planner.panelTab.twilights"].tap()
+        snap(app, "planner-longyearbyen-twilights")
+
+        // Sydney: southern hemisphere, the Sun's path arcs through the north.
+        app.buttons["planner.search"].tap()
+        expectVisible(app, "Location")
+        app.buttons["place.Sydney"].firstMatch.tap()
+        app.buttons["planner.panelTab.sun"].tap()
+        app.buttons["planner.jump.sunrise"].tap()
+        settleMap(seconds: 4)
+        snap(app, "planner-sydney-sunrise")
+    }
+
     // MARK: Helpers
+
+    private func waitFor(_ app: XCUIApplication, id: String, file: StaticString = #filePath, line: UInt = #line) {
+        let element = app.descendants(matching: .any)[id].firstMatch
+        XCTAssertTrue(element.waitForExistence(timeout: 15), "Nothing with identifier \(id)", file: file, line: line)
+    }
+
+    /// Gives map tiles and overlays time to draw.
+    private func settleMap(seconds: Double = 2.5) {
+        Thread.sleep(forTimeInterval: seconds)
+    }
 
     private func launch(date: String, place: String) -> XCUIApplication {
         let app = XCUIApplication()
@@ -93,7 +182,7 @@ final class ScreenshotTests: XCTestCase {
 
     private func snap(_ app: XCUIApplication, _ name: String) {
         counter += 1
-        let fileName = String(format: "%02d-%@", counter, name)
+        let fileName = String(format: "p%d-%02d-%@", phase, counter, name)
         let shot = app.screenshot()
         let attachment = XCTAttachment(screenshot: shot)
         attachment.name = fileName

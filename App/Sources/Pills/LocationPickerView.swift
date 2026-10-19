@@ -1,7 +1,8 @@
 // App/Sources/Pills/LocationPickerView.swift
 //
 // Shared location picker: current location, place search, typed coordinates, recent
-// places and sample places. Picking one updates the shared PillSession and dismisses.
+// places and sample places. Picking one updates the shared PillSession (or calls `onPick`,
+// which the Planner uses to also recentre its map) and dismisses.
 
 import PlannerKit
 import SwiftUI
@@ -17,6 +18,11 @@ struct LocationPickerView: View {
     @State private var locating = false
     @State private var resolvingCoordinates = false
     @State private var errorMessage: String?
+    private let onPick: ((PillLocation) -> Void)?
+
+    init(onPick: ((PillLocation) -> Void)? = nil) {
+        self.onPick = onPick
+    }
 
     var body: some View {
         NavigationStack {
@@ -156,7 +162,11 @@ struct LocationPickerView: View {
     }
 
     private func choose(_ place: PillLocation) {
-        session.select(place)
+        if let onPick {
+            onPick(place)
+        } else {
+            session.select(place)
+        }
         dismiss()
     }
 }

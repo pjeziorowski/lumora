@@ -5,6 +5,7 @@
 
 import AstroCore
 import Foundation
+import GeoCore
 
 public struct PillLocation: Sendable, Hashable, Codable, Identifiable {
     public var name: String
@@ -38,9 +39,10 @@ public struct PillLocation: Sendable, Hashable, Codable, Identifiable {
     /// UTC offset of the 15°-wide nautical zone containing `longitude` (±12 h). Used only when
     /// no real time zone is known, e.g. coordinates typed for the open sea.
     public static func nauticalTimeZone(longitude: Double) -> TimeZone {
-        let hours = Int((longitude / 15).rounded())
-        return TimeZone(secondsFromGMT: max(-12, min(12, hours)) * 3600) ?? TimeZone(identifier: "UTC")!
+        PlaceLookup.nauticalZone(longitude: longitude)
     }
+
+    public var geoPoint: GeoPoint { GeoPoint(latitude: latitude, longitude: longitude) }
 
     /// Places used by the acceptance tests and offered as quick picks in the location picker.
     public static let samples: [PillLocation] = [
@@ -50,6 +52,10 @@ public struct PillLocation: Sendable, Hashable, Codable, Identifiable {
         PillLocation(name: "Quito", latitude: -0.1807, longitude: -78.4678, elevation: 2850, timeZoneIdentifier: "America/Guayaquil"),
         PillLocation(name: "Tromsø", latitude: 69.6492, longitude: 18.9553, elevation: 10, timeZoneIdentifier: "Europe/Oslo"),
         PillLocation(name: "Cape Town", latitude: -33.9249, longitude: 18.4241, elevation: 10, timeZoneIdentifier: "Africa/Johannesburg"),
+        // Planner edge cases: on the antimeridian, and high Arctic (midnight sun / polar night).
+        PillLocation(name: "Taveuni", latitude: -16.8000, longitude: 179.9990, elevation: 5, timeZoneIdentifier: "Pacific/Fiji"),
+        PillLocation(name: "Longyearbyen", latitude: 78.2232, longitude: 15.6267, elevation: 10,
+                     timeZoneIdentifier: "Arctic/Longyearbyen"),
     ]
 }
 

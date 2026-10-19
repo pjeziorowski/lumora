@@ -6,13 +6,23 @@ import SwiftUI
 
 @main
 struct LumoraApp: App {
-    /// Place and date shared by the Sun and Moon tools.
-    @State private var pillSession = LumoraApp.makePillSession(arguments: ProcessInfo.processInfo.arguments)
+    /// Place and date shared by the Planner and the Sun and Moon tools.
+    @State private var pillSession: PillSession
+    @State private var plannerState: PlannerState
+
+    init() {
+        let session = LumoraApp.makePillSession(arguments: ProcessInfo.processInfo.arguments)
+        _pillSession = State(initialValue: session)
+        _plannerState = State(initialValue: PlannerState(session: session) { latitude, longitude in
+            await PlaceSearch.placeInfo(latitude: latitude, longitude: longitude)
+        })
+    }
 
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environment(pillSession)
+                .environment(plannerState)
         }
     }
 

@@ -2,7 +2,8 @@
 //
 // Geodesy (WGS84 distance/bearing, apparent elevation with curvature and refraction),
 // elevation client with cache, and coordinate → time zone lookup.
-// Phase 0 skeleton: geodesy lands in Phase 6, time zone lookup in Phase 3.
+// Phase 3: Vincenty geodesics (Geodesy.swift) and cached place/time zone lookup
+// (PlaceLookup.swift). Elevation and obstacle geometry land in Phase 6.
 
 import Foundation
 
