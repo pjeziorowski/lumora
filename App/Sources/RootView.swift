@@ -2,6 +2,7 @@
 
 import CameraCatalog
 import PlannerKit
+import SwiftData
 import SwiftUI
 
 enum AppTab: String, CaseIterable, Hashable {
@@ -30,10 +31,11 @@ enum AppTab: String, CaseIterable, Hashable {
 }
 
 struct RootView: View {
-    @State private var selection: AppTab = .planner
+    @Environment(AppNavigation.self) private var navigation
 
     var body: some View {
-        TabView(selection: $selection) {
+        @Bindable var navigation = navigation
+        TabView(selection: $navigation.tab) {
             ForEach(AppTab.allCases, id: \.self) { tab in
                 NavigationStack {
                     content(for: tab)
@@ -50,7 +52,7 @@ struct RootView: View {
         switch tab {
         case .planner: PlannerView()
         case .pills: ToolsView()
-        case .myStuff: PlaceholderView(message: "Saved plans, places and cameras arrive in Phase 7.")
+        case .myStuff: MyStuffView()
         case .settings: SettingsView()
         }
     }
@@ -62,4 +64,6 @@ struct RootView: View {
         .environment(session)
         .environment(PlannerState(session: session))
         .environment(CameraStore(defaults: nil))
+        .environment(AppNavigation())
+        .modelContainer(for: [PlanRecord.self, PlaceRecord.self], inMemory: true)
 }

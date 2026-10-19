@@ -43,6 +43,7 @@ scripts/test-packages.sh        # prints ACCURACY lines for AstroCore and Planne
 - Phase 4 (Milky Way tool, Planner panel 5, galactic arc on the map, Milky Way jumps) is done. See `docs/PHASE4_ACCURACY.md`.
 - Phase 5 (exposure, depth of field, field of view, spot stars, star trails, time lapse, camera catalogue) is done. See `docs/PHASE5_ACCURACY.md`.
 - Phase 6 (target pin, geodetics and obstacle panels, Find, field and depth of field on the map) is done. See `docs/PHASE6_ACCURACY.md`.
+- Phase 7 (saved plans and places, My Stuff, sharing, JSON export and import, reminders, calendar) is done. See `docs/PHASE7_ACCURACY.md`.
 - Settings: units, clock, coordinate format persist with `@AppStorage`.
 
 ## Licences

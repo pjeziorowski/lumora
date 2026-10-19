@@ -357,6 +357,70 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "planner-fov-dof-geodetics")
     }
 
+    func testPhase7Plans() throws {
+        continueAfterFailure = false
+        phase = 7
+        // Three example plans and two places are seeded into an in-memory store.
+        let app = launch(date: "2026-06-21T16:00:00Z", place: "Warsaw", camera: "sony-a7r-iv", extra: ["-seedPlans"])
+        app.tabBars.buttons["My Stuff"].tap()
+        let manhattan = app.buttons.matching(NSPredicate(format: "identifier == 'plan.row' AND label BEGINSWITH 'Manhattanhenge'"))
+            .firstMatch
+        expectVisible(manhattan, in: app)
+        settleMap(seconds: 4)
+        snap(app, "my-stuff-plans")
+
+        // Share and export from the context menu.
+        manhattan.press(forDuration: 1.2)
+        expectVisible(app, "Share as text")
+        snap(app, "plan-context-menu")
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.06)).tap()
+        Thread.sleep(forTimeInterval: 1)
+
+        // Swipe to duplicate.
+        manhattan.swipeLeft()
+        expectVisible(app.buttons["Duplicate"].firstMatch, in: app)
+        snap(app, "plan-swipe-actions")
+        app.buttons["Duplicate"].firstMatch.tap()
+        expectVisible(app, "Manhattanhenge copy")
+        snap(app, "plan-duplicated")
+
+        // Open a plan: the Planner jumps to its place, time, target pin and panel.
+        manhattan.tap()
+        waitFor(app, id: "planner.panel.obstacle")
+        settleMap(seconds: 4)
+        snap(app, "plan-opened-in-planner")
+
+        // Save the Planner's state as a new plan.
+        app.buttons["planner.savePlan"].tap()
+        expectVisible(app.buttons["plan.save"].firstMatch, in: app)
+        snap(app, "save-plan-sheet")
+        app.buttons["plan.save"].firstMatch.tap()
+        Thread.sleep(forTimeInterval: 3)
+        app.tabBars.buttons["My Stuff"].tap()
+        expectVisible(app, "New York plan")
+        settleMap(seconds: 2)
+        snap(app, "my-stuff-after-save")
+
+        app.buttons["Places"].firstMatch.tap()
+        expectVisible(app, "Tromsø")
+        snap(app, "my-stuff-places")
+        app.buttons["Cameras"].firstMatch.tap()
+        Thread.sleep(forTimeInterval: 1.5)
+        snap(app, "my-stuff-cameras")
+
+        app.tabBars.buttons["Settings"].tap()
+        expectVisible(app, "Default camera")
+        snap(app, "settings-default-camera")
+
+        // Export every plan as one JSON file through the share sheet.
+        app.tabBars.buttons["My Stuff"].tap()
+        app.buttons["Plans"].firstMatch.tap()
+        expectVisible(manhattan, in: app)
+        app.buttons["plans.export"].firstMatch.tap()
+        Thread.sleep(forTimeInterval: 3)
+        snap(app, "export-all-share-sheet")
+    }
+
     // MARK: Helpers
 
     /// Taps a place in the location sheet, scrolling the list first when the row sits under

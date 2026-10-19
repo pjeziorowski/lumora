@@ -224,6 +224,36 @@ public final class PlannerState {
         target.map { Geodesy.inverse(session.location.geoPoint, $0.point) }
     }
 
+    // MARK: Plans
+
+    /// The current Planner state as a plan.
+    public func plan(named name: String, notes: String = "", cameraID: String? = nil, reminderMinutes: Int? = nil,
+                     now: Date = Date()) -> Plan {
+        Plan(name: name, notes: notes, created: now, location: session.location, instant: session.instant, target: target,
+             eyeHeight: eyeHeight, mapOptics: mapOptics, cameraID: cameraID, layers: layers, mapStyle: mapStyle,
+             panel: selectedPanel.rawValue, reminderMinutes: reminderMinutes)
+    }
+
+    /// Restores a saved plan: place (recentring the map), moment, target, optics and display.
+    public func apply(_ plan: Plan) async {
+        session.select(plan.location)
+        session.instant = plan.instant
+        eyeHeight = plan.eyeHeight
+        mapOptics = plan.mapOptics
+        layers = plan.layers
+        mapStyle = plan.mapStyle
+        selectedPanel = PlannerPanelKind(rawValue: plan.panel) ?? .pin
+        recenterToken += 1
+        refresh()
+        if let t = plan.target {
+            targetGeneration += 1
+            target = t
+            updateObstacle()
+        } else {
+            await setTarget(nil)
+        }
+    }
+
     // MARK: Find
 
     /// Runs a Find search for the current place off the main actor.
