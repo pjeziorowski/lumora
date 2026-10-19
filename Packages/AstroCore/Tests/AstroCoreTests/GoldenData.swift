@@ -84,8 +84,12 @@ enum Golden {
     }
 
     static let cities: CityFile = {
-        let data = try! Data(contentsOf: url("cities", "json"))
-        return try! JSONDecoder().decode(CityFile.self, from: data)
+        do {
+            let data = try Data(contentsOf: url("cities", "json"))
+            return try JSONDecoder().decode(CityFile.self, from: data)
+        } catch {
+            fatalError("Cannot load golden cities.json: \(error)")
+        }
     }()
 }
 
