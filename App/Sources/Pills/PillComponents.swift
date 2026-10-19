@@ -56,6 +56,13 @@ struct PillFormat {
     }
 }
 
+/// "16h 47m", or a plain-language label for polar days with no sunrise or no sunset.
+func daylightText(_ seconds: Double) -> String {
+    if seconds <= 0 { return String(localized: "None (polar night)") }
+    if seconds >= 86_400 - 1 { return String(localized: "All day (midnight sun)") }
+    return Formatting.duration(seconds: seconds)
+}
+
 /// "+2m 31s" / "−1m 05s"
 func signedDuration(_ seconds: Double) -> String {
     let text = Formatting.duration(seconds: abs(seconds))
