@@ -23,12 +23,6 @@ struct ToolsView: View {
     }
 
     private let upcoming: [Upcoming] = [
-        Upcoming(name: "Exposure", systemImage: "camera.aperture", phase: "Phase 5"),
-        Upcoming(name: "Depth of field", systemImage: "scope", phase: "Phase 5"),
-        Upcoming(name: "Field of view", systemImage: "viewfinder", phase: "Phase 5"),
-        Upcoming(name: "Spot stars", systemImage: "star", phase: "Phase 5"),
-        Upcoming(name: "Star trails", systemImage: "circle.dashed", phase: "Phase 5"),
-        Upcoming(name: "Time lapse", systemImage: "timer", phase: "Phase 5"),
         Upcoming(name: "Meteor showers", systemImage: "moon.stars", phase: "Phase 9"),
     ]
 
@@ -49,6 +43,43 @@ struct ToolsView: View {
                     MilkyWayPillView()
                 } label: {
                     Label("Milky Way", systemImage: "sparkles")
+                }
+            }
+            Section("Photography") {
+                NavigationLink {
+                    ExposureView()
+                } label: {
+                    Label("Exposure", systemImage: "camera.aperture")
+                }
+                NavigationLink {
+                    DepthOfFieldView()
+                } label: {
+                    Label("Depth of field", systemImage: "scope")
+                }
+                NavigationLink {
+                    FieldOfViewView()
+                } label: {
+                    Label("Field of view", systemImage: "viewfinder")
+                }
+                NavigationLink {
+                    SpotStarsView()
+                } label: {
+                    Label("Spot stars", systemImage: "star")
+                }
+                NavigationLink {
+                    StarTrailsView()
+                } label: {
+                    Label("Star trails", systemImage: "circle.dashed")
+                }
+                NavigationLink {
+                    TimeLapseView()
+                } label: {
+                    Label("Time lapse", systemImage: "timer")
+                }
+                NavigationLink {
+                    CameraManagerView()
+                } label: {
+                    Label("Cameras", systemImage: "camera")
                 }
             }
             Section("Coming later") {

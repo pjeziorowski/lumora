@@ -223,6 +223,85 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "milkyway-night-warsaw-no-dark")
     }
 
+    /// Phase 5: photography calculators and the camera catalogue.
+    func testPhase5Optics() throws {
+        continueAfterFailure = false
+        phase = 5
+        let app = launch(date: "2026-07-15T03:30:00Z", place: "New York", camera: "sony-a7r-iv")
+        app.tabBars.buttons["Tools"].tap()
+        expectVisible(app.buttons["Exposure"].firstMatch)
+        snap(app, "tools-photography")
+
+        openTool(app, "Exposure", expecting: "Exposure value")
+        snap(app, "exposure-equivalent-nd")
+        app.segmentedControls.buttons["Aperture"].tap()
+        snap(app, "exposure-solve-aperture")
+        app.segmentedControls.buttons["Shutter"].tap()
+        app.swipeUp()
+        let timer = app.buttons["exposure.timer"].firstMatch
+        if timer.waitForExistence(timeout: 5) && timer.isEnabled {
+            timer.tap()
+            Thread.sleep(forTimeInterval: 0.4)
+        }
+        snap(app, "exposure-long-exposure-timer")
+        goBack(app)
+
+        openTool(app, "Depth of field", expecting: "Near limit")
+        snap(app, "dof-classic-a7riv-24mm")
+        app.segmentedControls.buttons["Advanced"].tap()
+        expectVisible(app, "Airy disc")
+        snap(app, "dof-advanced-print-diffraction")
+        app.segmentedControls.buttons["Table"].tap()
+        snap(app, "dof-table")
+        app.segmentedControls.buttons["Hyperfocal"].tap()
+        snap(app, "dof-hyperfocal-table")
+        goBack(app)
+
+        openTool(app, "Field of view", expecting: "Horizontal")
+        snap(app, "fov-forward")
+        app.segmentedControls.buttons["Find focal"].tap()
+        snap(app, "fov-find-focal-length")
+        goBack(app)
+
+        openTool(app, "Spot stars", expecting: "NPF rule")
+        snap(app, "spot-stars-npf")
+        goBack(app)
+
+        openTool(app, "Star trails", expecting: "Arc swept")
+        snap(app, "star-trails-length")
+        app.swipeUp()
+        snap(app, "star-trails-sketch")
+        app.swipeDown()
+        app.segmentedControls.buttons["Exposure time"].tap()
+        snap(app, "star-trails-exposure-for-length")
+        goBack(app)
+
+        openTool(app, "Time lapse", expecting: "Photos")
+        snap(app, "timelapse-clip")
+        app.segmentedControls.buttons["Interval"].tap()
+        snap(app, "timelapse-solve-interval")
+        app.swipeUp()
+        snap(app, "timelapse-presets")
+        goBack(app)
+
+        // Camera catalogue: search, the default camera, a custom camera form.
+        openTool(app, "Cameras", expecting: "Add a camera")
+        snap(app, "cameras-catalogue")
+        let search = app.searchFields.firstMatch
+        if !search.exists { app.swipeDown() }
+        if search.waitForExistence(timeout: 5) {
+            search.tap()
+            search.typeText("canon r5")
+            expectVisible(app.buttons["camera.canon-eos-r5"].firstMatch, in: app)
+            snap(app, "cameras-search")
+            app.buttons["Cancel"].firstMatch.tap()
+        }
+        app.buttons["camera.add"].firstMatch.tap()
+        expectVisible(app, "Brand")
+        snap(app, "cameras-custom-form")
+        app.buttons["Cancel"].firstMatch.tap()
+    }
+
     // MARK: Helpers
 
     /// Taps a place in the location sheet, scrolling the list first when the row sits under
@@ -267,14 +346,31 @@ final class ScreenshotTests: XCTestCase {
         XCTAssertTrue(element.waitForExistence(timeout: 15), "Nothing with identifier \(id)", file: file, line: line)
     }
 
+    /// Opens a Tools entry, scrolling the list until the row is reachable.
+    private func openTool(_ app: XCUIApplication, _ name: String, expecting label: String,
+                          file: StaticString = #filePath, line: UInt = #line) {
+        let row = app.buttons[name].firstMatch
+        expectVisible(row, in: app, file: file, line: line)
+        let screen = app.windows.firstMatch.frame
+        for _ in 0..<4 where row.frame.maxY > screen.maxY - 100 { app.swipeUp(); Thread.sleep(forTimeInterval: 0.5) }
+        row.tap()
+        expectVisible(app, label, file: file, line: line)
+    }
+
+    private func goBack(_ app: XCUIApplication) {
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        Thread.sleep(forTimeInterval: 0.5)
+    }
+
     /// Gives map tiles and overlays time to draw.
     private func settleMap(seconds: Double = 2.5) {
         Thread.sleep(forTimeInterval: seconds)
     }
 
-    private func launch(date: String, place: String) -> XCUIApplication {
+    private func launch(date: String, place: String, camera: String? = nil) -> XCUIApplication {
         let app = XCUIApplication()
         app.launchArguments += ["-fixedDate", date, "-place", place]
+        if let camera { app.launchArguments += ["-camera", camera] }
         app.launch()
         return app
     }
