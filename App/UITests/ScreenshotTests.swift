@@ -200,6 +200,8 @@ final class ScreenshotTests: XCTestCase {
         let bestNight = app.buttons["milkyway.bestNight"].firstMatch
         if bestNight.waitForExistence(timeout: 5) {
             bestNight.tap()
+            Thread.sleep(forTimeInterval: 1)
+            scrollToTop(app)
             expectVisible(app, "Core visible")
             snap(app, "milkyway-best-night")
         }
