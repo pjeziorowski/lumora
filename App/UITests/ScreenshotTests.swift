@@ -35,7 +35,7 @@ final class ScreenshotTests: XCTestCase {
         }
 
         app.buttons["pill.location"].tap()
-        expectVisible(app, "Location")
+        expectVisible(app.navigationBars.buttons["Cancel"])
         snap(app, "location-picker")
         app.buttons["place.Tromsø"].firstMatch.tap()
 
@@ -57,7 +57,7 @@ final class ScreenshotTests: XCTestCase {
 
         // Sydney: southern hemisphere, the Moon's lit side is mirrored.
         app.buttons["pill.location"].tap()
-        expectVisible(app, "Location")
+        expectVisible(app.navigationBars.buttons["Cancel"])
         app.buttons["place.Sydney"].firstMatch.tap()
         expectVisible(app, "Moonrise")
         snap(app, "moon-day-sydney")
@@ -84,9 +84,12 @@ final class ScreenshotTests: XCTestCase {
 
     /// Waits for any element whose label starts with `label` (rows combine label and value).
     private func expectVisible(_ app: XCUIApplication, _ label: String, file: StaticString = #filePath, line: UInt = #line) {
-        let element = app.descendants(matching: .any)
-            .matching(NSPredicate(format: "label BEGINSWITH[c] %@", label)).firstMatch
-        XCTAssertTrue(element.waitForExistence(timeout: 15), "Nothing labelled \(label)", file: file, line: line)
+        expectVisible(app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH[c] %@", label)).firstMatch,
+                      file: file, line: line)
+    }
+
+    private func expectVisible(_ element: XCUIElement, file: StaticString = #filePath, line: UInt = #line) {
+        XCTAssertTrue(element.waitForExistence(timeout: 15), "Not found: \(element)", file: file, line: line)
         // Let async reports and charts finish drawing.
         Thread.sleep(forTimeInterval: 0.8)
     }
