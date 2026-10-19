@@ -9,8 +9,11 @@ let package = Package(
     products: [
         .library(name: "CameraCatalog", targets: ["CameraCatalog"]),
     ],
+    dependencies: [
+        .package(path: "../OpticsCore"),
+    ],
     targets: [
-        .target(name: "CameraCatalog"),
+        .target(name: "CameraCatalog", dependencies: ["OpticsCore"], resources: [.process("Resources")]),
         .testTarget(name: "CameraCatalogTests", dependencies: ["CameraCatalog"]),
     ]
 )
