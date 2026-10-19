@@ -8,6 +8,7 @@
 
 import GeoCore
 import MapKit
+import OpticsCore
 import PlannerKit
 import SwiftUI
 
@@ -16,9 +17,14 @@ struct PlannerMapView: UIViewRepresentable {
     let snapshot: PlannerSnapshot?
     let style: PlannerMapStyle
     var layers: PlannerLayers = .all
+    /// The target pin, drawn black and draggable, with a line from the observer pin.
+    var target: TargetPin?
+    /// Field and depth of field to draw from the pin (Phase 6), nil when off.
+    var optics: MapOpticsInput?
     let recenterToken: Int
     /// Called with the new coordinate when the pin is dropped or dragged.
     let onPinMoved: (CLLocationCoordinate2D) -> Void
+    var onTargetMoved: (CLLocationCoordinate2D) -> Void = { _ in }
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
@@ -41,6 +47,7 @@ struct PlannerMapView: UIViewRepresentable {
     func updateUIView(_ map: MKMapView, context: Context) {
         let coordinator = context.coordinator
         coordinator.onPinMoved = onPinMoved
+        coordinator.onTargetMoved = onTargetMoved
         coordinator.apply(style: style, to: map)
 
         let coordinate = CLLocationCoordinate2D(latitude: max(-85, min(85, pin.latitude)), longitude: pin.longitude)
@@ -56,6 +63,8 @@ struct PlannerMapView: UIViewRepresentable {
         }
         coordinator.snapshot = snapshot
         coordinator.layers = layers
+        coordinator.optics = optics
+        coordinator.updateTarget(target)
         coordinator.rebuildOverlays()
     }
 
@@ -63,17 +72,22 @@ struct PlannerMapView: UIViewRepresentable {
     final class Coordinator: NSObject, @preconcurrency MKMapViewDelegate {
         static let pinReuseID = "pin"
         static let bodyReuseID = "body"
+        static let targetReuseID = "target"
 
         weak var map: MKMapView?
         let pinAnnotation = MKPointAnnotation()
         var onPinMoved: ((CLLocationCoordinate2D) -> Void)?
+        var onTargetMoved: ((CLLocationCoordinate2D) -> Void)?
+        var optics: MapOpticsInput?
+        private(set) var target: TargetPin?
+        private var targetAnnotation: TargetAnnotation?
         var snapshot: PlannerSnapshot?
         var layers: PlannerLayers = .all
         var recenterToken: Int?
         var isDragging = false
         private var style: PlannerMapStyle?
         private var radius = 2000.0
-        private var lastBuilt: (PlannerSnapshot, Double, PlannerLayers)?
+        private var lastBuilt: (PlannerSnapshot, Double, PlannerLayers, GeoPoint?, MapOpticsInput?)?
         private var lines: [MKOverlay] = []
         private var markers: [OverlayBody: BodyAnnotation] = [:]
 
@@ -88,16 +102,47 @@ struct PlannerMapView: UIViewRepresentable {
             }
         }
 
+        // MARK: Target pin
+
+        func updateTarget(_ newTarget: TargetPin?) {
+            target = newTarget
+            guard let map else { return }
+            guard let newTarget else {
+                if let targetAnnotation { map.removeAnnotation(targetAnnotation) }
+                targetAnnotation = nil
+                return
+            }
+            let safe = PlannerOverlays.mercatorSafe(newTarget.point)
+            let coordinate = CLLocationCoordinate2D(latitude: safe.latitude, longitude: safe.longitude)
+            if let targetAnnotation {
+                if !isDragging { targetAnnotation.coordinate = coordinate }
+            } else {
+                let annotation = TargetAnnotation()
+                annotation.coordinate = coordinate
+                targetAnnotation = annotation
+                map.addAnnotation(annotation)
+            }
+        }
+
         // MARK: Overlays
 
         func rebuildOverlays() {
             guard let map, let snapshot else { return }
-            if let last = lastBuilt, last.0 == snapshot, last.1 == radius, last.2 == layers { return }
-            lastBuilt = (snapshot, radius, layers)
+            let targetPoint = target?.point
+            if let last = lastBuilt, last.0 == snapshot, last.1 == radius, last.2 == layers, last.3 == targetPoint,
+               last.4 == optics { return }
+            lastBuilt = (snapshot, radius, layers, targetPoint, optics)
             let overlays = PlannerOverlays.build(snapshot, radius: radius, layers: layers)
+            var extra: [OverlayLine] = []
+            let pin = snapshot.location.geoPoint
+            if let targetPoint { extra.append(PlannerOverlays.targetLine(pin: pin, target: targetPoint)) }
+            if let optics, optics.settings.isVisible {
+                let geometry = optics.geometry(pin: pin, target: targetPoint, radius: radius)
+                extra += PlannerOverlays.opticsLines(optics.settings, geometry: geometry, pin: pin)
+            }
             let pinPoint = MKMapPoint(CLLocationCoordinate2D(latitude: max(-85, min(85, snapshot.location.latitude)),
                                                              longitude: snapshot.location.longitude))
-            let newLines = overlays.lines.map { line -> MKOverlay in
+            let newLines = (extra + overlays.lines).map { line -> MKOverlay in
                 let points = line.points.map { Self.mapPoint($0, near: pinPoint) }
                 let polyline = PlannerPolyline(points: points, count: points.count)
                 polyline.style = line
@@ -194,6 +239,18 @@ struct PlannerMapView: UIViewRepresentable {
                 view.refresh()
                 return view
             }
+            if annotation is TargetAnnotation {
+                let view = (mapView.dequeueReusableAnnotationView(withIdentifier: Self.targetReuseID) as? MKMarkerAnnotationView)
+                    ?? MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: Self.targetReuseID)
+                view.annotation = annotation
+                view.markerTintColor = .black
+                view.glyphImage = UIImage(systemName: "scope")
+                view.isDraggable = true
+                view.canShowCallout = false
+                view.displayPriority = .required
+                view.accessibilityLabel = String(localized: "Target pin")
+                return view
+            }
             guard annotation === pinAnnotation else { return nil }
             let view = mapView.dequeueReusableAnnotationView(withIdentifier: Self.pinReuseID, for: annotation)
             if let marker = view as? MKMarkerAnnotationView {
@@ -215,7 +272,11 @@ struct PlannerMapView: UIViewRepresentable {
             case .ending, .canceling:
                 isDragging = false
                 view.dragState = .none
-                onPinMoved?(pinAnnotation.coordinate)
+                if let target = view.annotation as? TargetAnnotation {
+                    onTargetMoved?(target.coordinate)
+                } else {
+                    onPinMoved?(pinAnnotation.coordinate)
+                }
             default:
                 break
             }
@@ -228,6 +289,22 @@ struct PlannerMapView: UIViewRepresentable {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             onPinMoved?(coordinate)
         }
+    }
+}
+
+/// The second pin on the map.
+final class TargetAnnotation: MKPointAnnotation {}
+
+/// What the map needs to draw field and depth of field: the settings and the camera.
+struct MapOpticsInput: Equatable {
+    var settings: MapOptics
+    var sensor: Sensor
+    var coc: Double
+
+    func geometry(pin: GeoPoint, target: GeoPoint?, radius: Double) -> MapOpticsGeometry {
+        let line = target.map { Geodesy.inverse(pin, $0) }
+        return MapOpticsGeometry.compute(settings, sensor: sensor, coc: coc, targetDistance: line?.distance,
+                                         targetBearing: line?.initialBearing, radius: radius)
     }
 }
 
