@@ -93,12 +93,12 @@ public struct ARAttitude: Sendable, Hashable {
     /// From Core Motion's `CMAttitude.rotationMatrix` in the `.xTrueNorthZVertical` reference
     /// frame (X true north, Y west, Z up). The matrix takes reference-frame vectors to device
     /// coordinates, so its rows are the device axes expressed in the reference frame.
-    public static func fromCoreMotion(m11: Double, m12: Double, m13: Double,
-                                      m21: Double, m22: Double, m23: Double,
-                                      m31: Double, m32: Double, m33: Double) -> ARAttitude {
+    /// `m` is the matrix row by row: m11, m12, m13, m21, … m33.
+    public static func fromCoreMotion(_ m: [Double]) -> ARAttitude {
+        precondition(m.count == 9, "A 3 × 3 rotation matrix has nine entries")
         // Reference (north, west, up) → ENU (east = −west).
-        func enu(_ n: Double, _ w: Double, _ u: Double) -> ARVector { ARVector(east: -w, north: n, up: u) }
-        return ARAttitude(x: enu(m11, m12, m13), y: enu(m21, m22, m23), z: enu(m31, m32, m33))
+        func enu(_ row: Int) -> ARVector { ARVector(east: -m[row * 3 + 1], north: m[row * 3], up: m[row * 3 + 2]) }
+        return ARAttitude(x: enu(0), y: enu(1), z: enu(2))
     }
 
     /// A phone held in portrait with the back camera toward `azimuth`/`elevation`, turned
