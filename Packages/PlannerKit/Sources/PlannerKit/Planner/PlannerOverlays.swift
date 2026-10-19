@@ -27,6 +27,16 @@ public enum OverlayRole: String, Sendable, Hashable {
     case pathDown
 }
 
+/// Which bodies the map draws.
+public struct PlannerLayers: OptionSet, Sendable, Hashable, Codable {
+    public let rawValue: Int
+    public init(rawValue: Int) { self.rawValue = rawValue }
+    public static let sun = PlannerLayers(rawValue: 1)
+    public static let moon = PlannerLayers(rawValue: 2)
+    public static let milkyWay = PlannerLayers(rawValue: 4)
+    public static let all: PlannerLayers = [.sun, .moon, .milkyWay]
+}
+
 public struct OverlayLine: Sendable, Hashable, Identifiable {
     public let body: OverlayBody
     public let role: OverlayRole
@@ -52,7 +62,7 @@ public struct PlannerOverlays: Sendable, Hashable {
     /// Mercator maps cannot show the poles; MapKit's limit is about ±85.05°.
     public static let mercatorLimit = 85.0511
 
-    public static func build(_ snapshot: PlannerSnapshot, radius: Double) -> PlannerOverlays {
+    public static func build(_ snapshot: PlannerSnapshot, radius: Double, layers: PlannerLayers = .all) -> PlannerOverlays {
         let pin = snapshot.location.geoPoint
         var lines: [OverlayLine] = []
         var markers: [OverlayMarker] = []
@@ -62,10 +72,10 @@ public struct PlannerOverlays: Sendable, Hashable {
             [pin, Geodesy.destination(from: pin, bearing: azimuth, distance: length).unwrapped(near: pin.longitude)]
         }
 
-        for (body, now, rises, sets, path) in [
-            (OverlayBody.sun, snapshot.sun, day.sunRises, day.sunSets, day.sunPath),
-            (OverlayBody.moon, snapshot.moon.position, day.moonRises, day.moonSets, day.moonPath),
-        ] {
+        var bodies: [(OverlayBody, BodyNow, [SkyEvent], [SkyEvent], SkyPath)] = []
+        if layers.contains(.sun) { bodies.append((.sun, snapshot.sun, day.sunRises, day.sunSets, day.sunPath)) }
+        if layers.contains(.moon) { bodies.append((.moon, snapshot.moon.position, day.moonRises, day.moonSets, day.moonPath)) }
+        for (body, now, rises, sets, path) in bodies {
             for (i, segment) in pathSegments(path.samples.map { ($0.azimuth, $0.altitude) }, pin: pin, radius: radius).enumerated() {
                 lines.append(OverlayLine(body: body, role: segment.up ? .pathUp : .pathDown, isAboveHorizon: segment.up,
                                          points: segment.points, index: i))
@@ -80,6 +90,19 @@ public struct PlannerOverlays: Sendable, Hashable {
                                      points: ray(now.azimuth, length: radius * 1.15), index: 0))
             markers.append(OverlayMarker(body: body, point: project(now.azimuth, now.altitude, pin: pin, radius: radius),
                                          isAboveHorizon: now.isUp))
+        }
+        if layers.contains(.milkyWay) {
+            // The galactic plane is a great circle: draw only the arc above the horizon.
+            let plane = snapshot.galacticPlane + snapshot.galacticPlane.prefix(1)
+            let segments = pathSegments(plane.map { ($0.azimuth, $0.altitude) }, pin: pin, radius: radius).filter(\.up)
+            for (i, segment) in segments.enumerated() {
+                lines.append(OverlayLine(body: .galacticCenter, role: .pathUp, isAboveHorizon: true, points: segment.points, index: i))
+            }
+            let gc = snapshot.galacticCenter
+            lines.append(OverlayLine(body: .galacticCenter, role: .now, isAboveHorizon: gc.isUp,
+                                     points: ray(gc.azimuth, length: radius * 1.15), index: 0))
+            markers.append(OverlayMarker(body: .galacticCenter, point: project(gc.azimuth, gc.altitude, pin: pin, radius: radius),
+                                         isAboveHorizon: gc.isUp))
         }
         return PlannerOverlays(lines: lines, markers: markers)
     }

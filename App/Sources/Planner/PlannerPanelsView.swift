@@ -94,6 +94,7 @@ extension PlannerPanelKind {
         case .sun: "sun.max"
         case .moon: "moon"
         case .twilights: "sun.horizon"
+        case .milkyWay: "sparkles"
         }
     }
 }

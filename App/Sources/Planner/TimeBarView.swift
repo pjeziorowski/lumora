@@ -223,6 +223,8 @@ extension PlannerJump {
         case .blueHour: "moon.haze"
         case .moonrise: "moon.circle"
         case .moonset: "moon.zzz"
+        case .milkyWayStart: "sparkles"
+        case .milkyWayEnd: "sparkle"
         }
     }
 }

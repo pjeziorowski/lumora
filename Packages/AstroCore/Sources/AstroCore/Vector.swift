@@ -52,6 +52,16 @@ struct Rotation: Sendable {
         )
     }
 
+    /// Rotation equivalent to applying `self`, then `next`. Port of `Astronomy_CombineRotation`.
+    func combined(with next: Rotation) -> Rotation {
+        let a = [[r00, r01, r02], [r10, r11, r12], [r20, r21, r22]]
+        let b = [[next.r00, next.r01, next.r02], [next.r10, next.r11, next.r12], [next.r20, next.r21, next.r22]]
+        func c(_ i: Int, _ j: Int) -> Double { a[i][0] * b[0][j] + a[i][1] * b[1][j] + a[i][2] * b[2][j] }
+        return Rotation(r00: c(0, 0), r01: c(0, 1), r02: c(0, 2),
+                        r10: c(1, 0), r11: c(1, 1), r12: c(1, 2),
+                        r20: c(2, 0), r21: c(2, 1), r22: c(2, 2))
+    }
+
     var transposed: Rotation {
         Rotation(r00: r00, r01: r10, r02: r20,
                  r10: r01, r11: r11, r12: r21,
