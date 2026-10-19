@@ -126,8 +126,8 @@ final class ScreenshotTests: XCTestCase {
         app.buttons["planner.timezoneToggle"].firstMatch.tap()
 
         // Taveuni sits on the antimeridian: lines cross it without wrapping round the map.
-        app.buttons["planner.search"].tap()
-        expectVisible(app, "Location")
+        app.buttons["planner.search"].firstMatch.tap()
+        expectVisible(app.buttons["place.Taveuni"].firstMatch)
         snap(app, "planner-search")
         app.buttons["place.Taveuni"].firstMatch.tap()
         app.buttons["planner.panelTab.sun"].tap()
@@ -135,8 +135,8 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "planner-taveuni-antimeridian")
 
         // Longyearbyen in June: midnight sun, no sunrise or sunset lines.
-        app.buttons["planner.search"].tap()
-        expectVisible(app, "Location")
+        app.buttons["planner.search"].firstMatch.tap()
+        expectVisible(app.buttons["place.Longyearbyen"].firstMatch)
         app.buttons["place.Longyearbyen"].firstMatch.tap()
         settleMap(seconds: 4)
         snap(app, "planner-longyearbyen-midnight-sun")
@@ -144,8 +144,8 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "planner-longyearbyen-twilights")
 
         // Sydney: southern hemisphere, the Sun's path arcs through the north.
-        app.buttons["planner.search"].tap()
-        expectVisible(app, "Location")
+        app.buttons["planner.search"].firstMatch.tap()
+        expectVisible(app.buttons["place.Sydney"].firstMatch)
         app.buttons["place.Sydney"].firstMatch.tap()
         app.buttons["planner.panelTab.sun"].tap()
         app.buttons["planner.jump.sunrise"].tap()

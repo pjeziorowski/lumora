@@ -57,6 +57,7 @@ targets:
     dependencies:
       - target: Lumora
       - package: AstroCore
+      - package: GeoCore
       - package: PlannerKit
     settings:
       base:

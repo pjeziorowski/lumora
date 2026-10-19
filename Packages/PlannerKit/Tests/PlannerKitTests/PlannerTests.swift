@@ -144,6 +144,7 @@ struct PlannerTests {
         #expect(snap.day.sunRises.isEmpty && snap.day.sunSets.isEmpty)
         let sun = PlannerPanels.panel(.sun, snapshot: snap, instant: snap.instant, options: PlannerDisplayOptions())
         #expect(sun.rows.first { $0.label == "Sunrise" }?.value == "Sun up all day")
+        #expect(sun.rows.first { $0.label == "Daylight" }?.value == "All day (midnight sun)")
         let twilight = PlannerPanels.panel(.twilights, snapshot: snap, instant: snap.instant, options: PlannerDisplayOptions())
         #expect(twilight.rows.last?.value == "Midnight sun")
         // No rise/set lines, but the path and the "now" line are drawn.

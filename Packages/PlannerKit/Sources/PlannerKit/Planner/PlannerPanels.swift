@@ -103,7 +103,9 @@ public enum PlannerPanels {
                 PanelRow("Sunrise", events(day.sunRises, day.sunState, "Sun")),
                 PanelRow("Sunset", events(day.sunSets, day.sunState, "Sun")),
                 PanelRow("Solar noon", day.solarNoon.map { "\(time($0.time)) · el \(Formatting.degrees($0.altitude))" } ?? "—"),
-                PanelRow("Daylight", Formatting.duration(seconds: day.daylightSeconds)),
+                PanelRow("Daylight", day.daylightSeconds <= 0 ? "None (polar night)"
+                    : day.daylightSeconds >= day.day.lengthHours * 3600 - 1 ? "All day (midnight sun)"
+                    : Formatting.duration(seconds: day.daylightSeconds)),
                 PanelRow("Shadow ratio",
                          s.shadowRatio.map { $0 > 99 ? "> 99 : 1" : String(format: "%.2f : 1", $0) } ?? "Sun down"),
                 PanelRow("Distance", String(format: "%.4f AU", s.sun.distanceKm / AstroConstants.kmPerAU)),
