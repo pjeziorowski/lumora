@@ -94,14 +94,14 @@ final class ScreenshotTests: XCTestCase {
         }
 
         app.buttons["planner.panelTab.sun"].tap()
-        app.buttons["planner.jump.sunrise"].tap()
+        tapJump(app, "sunrise")
         settleMap()
         snap(app, "planner-jump-sunrise")
-        app.buttons["planner.jump.moonrise"].tap()
+        tapJump(app, "moonrise")
         app.buttons["planner.panelTab.moon"].tap()
         settleMap()
         snap(app, "planner-jump-moonrise")
-        app.buttons["planner.jump.now"].tap()
+        tapJump(app, "now")
         let ruler = app.descendants(matching: .any)["planner.timebar"]
         XCTAssertTrue(ruler.waitForExistence(timeout: 5))
         ruler.swipeLeft()
@@ -148,12 +148,26 @@ final class ScreenshotTests: XCTestCase {
         expectVisible(app.buttons["place.Sydney"].firstMatch)
         app.buttons["place.Sydney"].firstMatch.tap()
         app.buttons["planner.panelTab.sun"].tap()
-        app.buttons["planner.jump.sunrise"].tap()
+        tapJump(app, "sunrise")
         settleMap(seconds: 4)
         snap(app, "planner-sydney-sunrise")
     }
 
     // MARK: Helpers
+
+    /// Taps a jump button, scrolling the jump row first when the button is off screen.
+    private func tapJump(_ app: XCUIApplication, _ name: String, file: StaticString = #filePath, line: UInt = #line) {
+        let button = app.buttons["planner.jump.\(name)"].firstMatch
+        XCTAssertTrue(button.waitForExistence(timeout: 10), "No jump \(name)", file: file, line: line)
+        let row = app.scrollViews.containing(.button, identifier: "planner.jump.now").firstMatch
+        let screen = app.windows.firstMatch.frame
+        var attempts = 0
+        while !button.isHittable && attempts < 6 {
+            if button.frame.midX > screen.midX { row.swipeLeft() } else { row.swipeRight() }
+            attempts += 1
+        }
+        button.tap()
+    }
 
     private func waitFor(_ app: XCUIApplication, id: String, file: StaticString = #filePath, line: UInt = #line) {
         let element = app.descendants(matching: .any)[id].firstMatch
