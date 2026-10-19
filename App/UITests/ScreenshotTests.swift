@@ -129,15 +129,14 @@ final class ScreenshotTests: XCTestCase {
         app.buttons["planner.search"].firstMatch.tap()
         expectVisible(app.buttons["place.Taveuni"].firstMatch)
         snap(app, "planner-search")
-        app.buttons["place.Taveuni"].firstMatch.tap()
+        pickPlace(app, "Taveuni")
         app.buttons["planner.panelTab.sun"].tap()
         settleMap(seconds: 4)
         snap(app, "planner-taveuni-antimeridian")
 
         // Longyearbyen in June: midnight sun, no sunrise or sunset lines.
         app.buttons["planner.search"].firstMatch.tap()
-        expectVisible(app.buttons["place.Longyearbyen"].firstMatch)
-        app.buttons["place.Longyearbyen"].firstMatch.tap()
+        pickPlace(app, "Longyearbyen")
         settleMap(seconds: 4)
         snap(app, "planner-longyearbyen-midnight-sun")
         app.buttons["planner.panelTab.twilights"].tap()
@@ -145,8 +144,7 @@ final class ScreenshotTests: XCTestCase {
 
         // Sydney: southern hemisphere, the Sun's path arcs through the north.
         app.buttons["planner.search"].firstMatch.tap()
-        expectVisible(app.buttons["place.Sydney"].firstMatch)
-        app.buttons["place.Sydney"].firstMatch.tap()
+        pickPlace(app, "Sydney")
         app.buttons["planner.panelTab.sun"].tap()
         tapJump(app, "sunrise")
         settleMap(seconds: 4)
@@ -154,6 +152,24 @@ final class ScreenshotTests: XCTestCase {
     }
 
     // MARK: Helpers
+
+    /// Taps a place in the location sheet, scrolling the list first when the row sits under
+    /// the home indicator.
+    private func pickPlace(_ app: XCUIApplication, _ name: String, file: StaticString = #filePath, line: UInt = #line) {
+        let row = app.buttons["place.\(name)"].firstMatch
+        expectVisible(row, in: app, file: file, line: line)
+        let screen = app.windows.firstMatch.frame
+        for _ in 0..<4 where row.frame.maxY > screen.maxY - 90 {
+            app.swipeUp()
+            Thread.sleep(forTimeInterval: 0.5)
+        }
+        row.tap()
+        // The sheet must close; a missed tap leaves it up.
+        let closed = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: row)
+        if XCTWaiter.wait(for: [closed], timeout: 5) != .completed && row.exists {
+            row.tap()
+        }
+    }
 
     /// Taps a jump button, first dragging the jump row sideways while the button is off
     /// screen (XCUITest cannot even ask an off-screen SwiftUI button whether it is hittable).

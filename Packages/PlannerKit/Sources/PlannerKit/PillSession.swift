@@ -43,6 +43,8 @@ public final class PillSession {
 
     public var timeZone: TimeZone { location.timeZone }
     public var day: LocalDay { LocalDay(containing: instant, timeZone: timeZone) }
+    /// The session's "now" (fixed in screenshots and tests).
+    public var now: Date { clock() }
     public var isToday: Bool { day == LocalDay(containing: clock(), timeZone: timeZone) }
 
     /// Switches place, keeping the same wall-clock date and time at the new place.

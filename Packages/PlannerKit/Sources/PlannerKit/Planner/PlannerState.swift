@@ -42,7 +42,7 @@ public final class PlannerState {
 
     @ObservationIgnored private let engine: PlannerEngine
     @ObservationIgnored private let placeLookup: PlaceLookup
-    @ObservationIgnored private let clock: @Sendable () -> Date
+    @ObservationIgnored private let clock: (@Sendable () -> Date)?
     @ObservationIgnored private var pending: Request?
     @ObservationIgnored private var worker: Task<Void, Never>?
     @ObservationIgnored private var pinGeneration = 0
@@ -54,9 +54,11 @@ public final class PlannerState {
         let thresholds: SolarThresholds
     }
 
-    /// - Parameter lookup: reverse geocoder for dropped pins (name and time zone); nil in tests.
+    /// - Parameters:
+    ///   - lookup: reverse geocoder for dropped pins (name and time zone); nil in tests.
+    ///   - clock: source of "now" for the Now jump; nil uses the session's clock.
     public init(session: PillSession, engine: PlannerEngine = PlannerEngine(),
-                lookup: PlaceLookup.Lookup? = nil, clock: @escaping @Sendable () -> Date = { Date() }) {
+                lookup: PlaceLookup.Lookup? = nil, clock: (@Sendable () -> Date)? = nil) {
         self.session = session
         self.engine = engine
         self.placeLookup = PlaceLookup(lookup: lookup ?? { _, _ in nil })
@@ -153,7 +155,7 @@ public final class PlannerState {
             if jump == .now { session.resetToNow(); refresh(); return true }
             return false
         }
-        guard let target = jump.target(from: session.instant, day: day, now: clock()) else { return false }
+        guard let target = jump.target(from: session.instant, day: day, now: clock?() ?? session.now) else { return false }
         session.instant = target
         refresh()
         return true
