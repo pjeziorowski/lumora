@@ -59,6 +59,22 @@ public struct PlannerDay: Sendable, Hashable {
     public let lightBands: [LightBand]
     /// New and full moons from three days before the day to three days after, with size.
     public let principalPhases: [LunarPhaseEvent]
+    /// Milky Way core windows from noon the day before to noon the day after, so both the
+    /// night ending this morning and the night starting this evening are covered.
+    public let milkyWay: MilkyWayWindows
+
+    /// The night (local noon to noon) that `instant` belongs to.
+    public func night(containing instant: Date) -> DateInterval {
+        let startDay = instant < day.noon ? day.adding(days: -1) : day
+        return DateInterval(start: startDay.noon, end: startDay.adding(days: 1).noon)
+    }
+
+    /// Milky Way spans of `kind` within the night containing `instant`.
+    public func milkyWaySpans(_ kind: KeyPath<MilkyWayWindows, [TimeSpan]>, night: DateInterval) -> [DateInterval] {
+        milkyWay[keyPath: kind]
+            .filter { $0.start.date < night.end && $0.end.date > night.start }
+            .map { DateInterval(start: max($0.start.date, night.start), end: min($0.end.date, night.end)) }
+    }
 
     public static func compute(location: PillLocation, day: LocalDay, thresholds: SolarThresholds = .standard,
                                rule: SupermoonRule = .standard) -> PlannerDay {
@@ -98,7 +114,9 @@ public struct PlannerDay: Sendable, Hashable {
                     return LunarPhaseEvent(quarter: q.quarter, time: q.time.date, distanceKm: distance,
                                            size: MoonSize.classify(distanceKm: distance, rule: rule),
                                            isMonthlyBlueMoon: false, isSeasonalBlueMoon: false)
-                }
+                },
+            milkyWay: MilkyWay.windows(observer: observer, from: AstroTime(day.adding(days: -1).noon),
+                                       to: AstroTime(day.adding(days: 1).noon))
         )
     }
 
@@ -134,6 +152,12 @@ public struct PlannerSnapshot: Sendable, Hashable {
     /// Light at the instant (Sun's airless elevation, as thresholds are defined).
     public let lightPhase: LightPhase
     public let moon: MoonNow
+    /// The galactic centre now (distance unused).
+    public let galacticCenter: BodyNow
+    /// Tilt of the Milky Way band at the core, degrees [0, 90].
+    public let arcTilt: Double
+    /// The galactic plane every 5° of galactic longitude, starting at the core.
+    public let galacticPlane: [SkySample]
 
     /// Shadow length per unit of object height; nil when the Sun is down.
     public var shadowRatio: Double? {
@@ -150,6 +174,7 @@ public struct PlannerSnapshot: Sendable, Hashable {
         let moonH = Ephemeris.horizontal(.moon, at: t, observer: observer)
         let illum = Lunar.illumination(at: t)
         let elongation = Lunar.phaseAngle(at: t)
+        let plane = MilkyWay.plane(at: t, observer: observer, step: 5)
 
         // Supermoon flag: only within two days of a new or full moon.
         let size = day.principalPhases
@@ -171,7 +196,10 @@ public struct PlannerSnapshot: Sendable, Hashable {
                 ageDays: Lunar.age(at: t),
                 angularDiameter: 2 * asin(AstroConstants.moonMeanRadiusKm / illum.distanceKm) * 180 / .pi,
                 size: size
-            )
+            ),
+            galacticCenter: BodyNow(azimuth: plane[0].horizontal.azimuth, altitude: plane[0].horizontal.altitude, distanceKm: 0),
+            arcTilt: MilkyWay.arcTilt(at: t, observer: observer),
+            galacticPlane: plane.map { SkySample(time: instant, azimuth: $0.horizontal.azimuth, altitude: $0.horizontal.altitude) }
         )
     }
 }

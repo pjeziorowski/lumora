@@ -151,6 +151,78 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "planner-sydney-sunrise")
     }
 
+    /// Phase 4: Milky Way pill (night windows, core path and arc orientation, best months and
+    /// nights) for northern and southern sites, and the Planner's Milky Way panel, arc and jumps.
+    func testPhase4MilkyWay() throws {
+        continueAfterFailure = false
+        phase = 4
+        // 14 July 2026, 23:30 in New York: new moon, the core low in the south.
+        let app = launch(date: "2026-07-15T03:30:00Z", place: "New York")
+
+        app.tabBars.buttons["Planner"].tap()
+        waitFor(app, id: "planner.panel.pin")
+        app.buttons["planner.panelTab.milkyWay"].tap()
+        waitFor(app, id: "planner.panel.milkyWay")
+        settleMap()
+        snap(app, "planner-milkyway-panel-newyork")
+        tapJump(app, "milkyWayEnd")
+        settleMap()
+        snap(app, "planner-jump-milkyway-end")
+        tapJump(app, "milkyWayStart")
+        settleMap()
+        snap(app, "planner-jump-milkyway-start")
+        // Only the Milky Way layer: the band's arc across the sky and the core's direction.
+        for layer in ["sun", "moon"] {
+            app.buttons["planner.options"].tap()
+            app.descendants(matching: .any)["planner.layer.\(layer)"].firstMatch.tap()
+        }
+        settleMap()
+        snap(app, "planner-milkyway-layer-only")
+        for layer in ["sun", "moon"] {
+            app.buttons["planner.options"].tap()
+            app.descendants(matching: .any)["planner.layer.\(layer)"].firstMatch.tap()
+        }
+
+        app.tabBars.buttons["Tools"].tap()
+        expectVisible(app.buttons["Milky Way"].firstMatch)
+        snap(app, "tools")
+        app.buttons["Milky Way"].firstMatch.tap()
+        expectVisible(app, "Core visible")
+        snap(app, "milkyway-night-newyork")
+        app.swipeUp()
+        snap(app, "milkyway-night-newyork-hourly")
+        app.segmentedControls.buttons["Year"].tap()
+        expectVisible(app, "First core night")
+        snap(app, "milkyway-year-newyork")
+        app.swipeUp()
+        snap(app, "milkyway-year-newyork-best-nights")
+        let bestNight = app.buttons["milkyway.bestNight"].firstMatch
+        if bestNight.waitForExistence(timeout: 5) {
+            bestNight.tap()
+            expectVisible(app, "Core visible")
+            snap(app, "milkyway-best-night")
+        }
+
+        // Sydney: southern winter is the best season, the core passes high overhead.
+        app.buttons["pill.location"].firstMatch.tap()
+        pickPlace(app, "Sydney")
+        app.segmentedControls.buttons["Night"].tap()
+        expectVisible(app, "Core visible")
+        snap(app, "milkyway-night-sydney")
+        app.segmentedControls.buttons["Year"].tap()
+        expectVisible(app, "First core night")
+        snap(app, "milkyway-year-sydney")
+
+        // Warsaw at 52°N: no astronomical night around midsummer, so a gap in the season.
+        app.buttons["pill.location"].firstMatch.tap()
+        pickPlace(app, "Warsaw")
+        expectVisible(app, "First core night")
+        snap(app, "milkyway-year-warsaw-summer-gap")
+        app.segmentedControls.buttons["Night"].tap()
+        expectVisible(app, "Core visible")
+        snap(app, "milkyway-night-warsaw-no-dark")
+    }
+
     // MARK: Helpers
 
     /// Taps a place in the location sheet, scrolling the list first when the row sits under

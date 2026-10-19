@@ -15,6 +15,7 @@ struct PlannerMapView: UIViewRepresentable {
     let pin: PillLocation
     let snapshot: PlannerSnapshot?
     let style: PlannerMapStyle
+    var layers: PlannerLayers = .all
     let recenterToken: Int
     /// Called with the new coordinate when the pin is dropped or dragged.
     let onPinMoved: (CLLocationCoordinate2D) -> Void
@@ -54,6 +55,7 @@ struct PlannerMapView: UIViewRepresentable {
             map.setRegion(region, animated: !first)
         }
         coordinator.snapshot = snapshot
+        coordinator.layers = layers
         coordinator.rebuildOverlays()
     }
 
@@ -66,11 +68,12 @@ struct PlannerMapView: UIViewRepresentable {
         let pinAnnotation = MKPointAnnotation()
         var onPinMoved: ((CLLocationCoordinate2D) -> Void)?
         var snapshot: PlannerSnapshot?
+        var layers: PlannerLayers = .all
         var recenterToken: Int?
         var isDragging = false
         private var style: PlannerMapStyle?
         private var radius = 2000.0
-        private var lastBuilt: (PlannerSnapshot, Double)?
+        private var lastBuilt: (PlannerSnapshot, Double, PlannerLayers)?
         private var lines: [MKOverlay] = []
         private var markers: [OverlayBody: BodyAnnotation] = [:]
 
@@ -89,9 +92,9 @@ struct PlannerMapView: UIViewRepresentable {
 
         func rebuildOverlays() {
             guard let map, let snapshot else { return }
-            if let last = lastBuilt, last.0 == snapshot, last.1 == radius { return }
-            lastBuilt = (snapshot, radius)
-            let overlays = PlannerOverlays.build(snapshot, radius: radius)
+            if let last = lastBuilt, last.0 == snapshot, last.1 == radius, last.2 == layers { return }
+            lastBuilt = (snapshot, radius, layers)
+            let overlays = PlannerOverlays.build(snapshot, radius: radius, layers: layers)
             let pinPoint = MKMapPoint(CLLocationCoordinate2D(latitude: max(-85, min(85, snapshot.location.latitude)),
                                                              longitude: snapshot.location.longitude))
             let newLines = overlays.lines.map { line -> MKOverlay in
@@ -104,6 +107,11 @@ struct PlannerMapView: UIViewRepresentable {
             map.addOverlays(newLines, level: .aboveRoads)
             lines = newLines
 
+            let shown = Set(overlays.markers.map(\.body))
+            for (body, annotation) in markers where !shown.contains(body) {
+                map.removeAnnotation(annotation)
+                markers[body] = nil
+            }
             for marker in overlays.markers {
                 let safe = PlannerOverlays.mercatorSafe(marker.point.normalized)
                 let coordinate = CLLocationCoordinate2D(latitude: safe.latitude, longitude: safe.longitude)
@@ -248,7 +256,11 @@ final class BodyAnnotationView: MKAnnotationView {
         layer.shadowOffset = .zero
         displayPriority = .required
         isAccessibilityElement = true
-        accessibilityLabel = body.body == .sun ? String(localized: "Sun") : String(localized: "Moon")
+        switch body.body {
+        case .sun: accessibilityLabel = String(localized: "Sun")
+        case .moon: accessibilityLabel = String(localized: "Moon")
+        case .galacticCenter: accessibilityLabel = String(localized: "Galactic core")
+        }
     }
 }
 

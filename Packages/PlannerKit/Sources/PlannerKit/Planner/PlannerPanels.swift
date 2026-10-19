@@ -1,14 +1,14 @@
 // Packages/PlannerKit/Sources/PlannerKit/Planner/PlannerPanels.swift
 //
-// The Planner's information panels as ready-to-display rows. Phase 3 ships panels 1–4
-// (pin, Sun, Moon, twilights); later phases append Milky Way, geodetics and so on. Times
+// The Planner's information panels as ready-to-display rows: pin, Sun, Moon, twilights
+// (Phase 3) and Milky Way (Phase 4); later phases append geodetics and so on. Times
 // are shown in the pin's zone unless the user switches to device time.
 
 import AstroCore
 import Foundation
 
 public enum PlannerPanelKind: String, Sendable, Hashable, CaseIterable, Identifiable {
-    case pin, sun, moon, twilights
+    case pin, sun, moon, twilights, milkyWay
     public var id: String { rawValue }
 
     public var title: String {
@@ -17,6 +17,7 @@ public enum PlannerPanelKind: String, Sendable, Hashable, CaseIterable, Identifi
         case .sun: "Sun"
         case .moon: "Moon"
         case .twilights: "Twilights"
+        case .milkyWay: "Milky Way"
         }
     }
 }
@@ -137,6 +138,20 @@ public enum PlannerPanels {
             if t.darkness != .fullNight {
                 rows.append(PanelRow("Night", t.darkness.label))
             }
+        case .milkyWay:
+            let night = day.night(containing: instant)
+            let visible = day.milkyWaySpans(\.visible, night: night)
+            let moonFree = day.milkyWaySpans(\.moonFree, night: night)
+            let dark = day.milkyWaySpans(\.dark, night: night)
+            let orientation = ArcOrientation.of(tilt: s.arcTilt)
+            rows = [
+                PanelRow("Core", "\(position(s.galacticCenter))\(s.galacticCenter.isUp ? "" : " (below horizon)")"),
+                PanelRow("Core visible", visible.isEmpty ? "Not tonight" : spans(visible)),
+                PanelRow("Dark sky", dark.isEmpty ? "No astronomical night" : spans(dark)),
+                PanelRow("Moon-free", visible.isEmpty ? "—" : (moonFree.isEmpty ? "Moon up all window" : spans(moonFree))),
+                PanelRow("Moon", "\(Int((s.moon.illumination * 100).rounded()))% lit, \(s.moon.position.isUp ? "up" : "down")"),
+                PanelRow("Arc", s.galacticCenter.isUp ? "\(orientation.label), \(Formatting.degrees(s.arcTilt, decimals: 0))" : "—"),
+            ]
         }
         return PlannerPanel(kind: kind, rows: rows)
     }

@@ -7,7 +7,7 @@
 import Foundation
 
 public enum PlannerJump: String, Sendable, Hashable, CaseIterable, Identifiable {
-    case now, sunrise, sunset, goldenHour, blueHour, moonrise, moonset
+    case now, sunrise, sunset, goldenHour, blueHour, moonrise, moonset, milkyWayStart, milkyWayEnd
     public var id: String { rawValue }
 
     public var title: String {
@@ -19,6 +19,8 @@ public enum PlannerJump: String, Sendable, Hashable, CaseIterable, Identifiable 
         case .blueHour: "Blue hour"
         case .moonrise: "Moonrise"
         case .moonset: "Moonset"
+        case .milkyWayStart: "Milky Way from"
+        case .milkyWayEnd: "Milky Way until"
         }
     }
 
@@ -33,6 +35,9 @@ public enum PlannerJump: String, Sendable, Hashable, CaseIterable, Identifiable 
         case .blueHour: list = day.twilight.blueHours.map(\.start)
         case .moonrise: list = day.moonRises.map(\.time)
         case .moonset: list = day.moonSets.map(\.time)
+        // Core windows that start or end inside this local day.
+        case .milkyWayStart: list = day.milkyWay.visible.map(\.start.date).filter { $0 >= day.day.start && $0 < day.day.end }
+        case .milkyWayEnd: list = day.milkyWay.visible.map(\.end.date).filter { $0 >= day.day.start && $0 < day.day.end }
         }
         return list.sorted()
     }

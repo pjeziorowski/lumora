@@ -23,7 +23,6 @@ struct ToolsView: View {
     }
 
     private let upcoming: [Upcoming] = [
-        Upcoming(name: "Milky Way", systemImage: "sparkles", phase: "Phase 4"),
         Upcoming(name: "Exposure", systemImage: "camera.aperture", phase: "Phase 5"),
         Upcoming(name: "Depth of field", systemImage: "scope", phase: "Phase 5"),
         Upcoming(name: "Field of view", systemImage: "viewfinder", phase: "Phase 5"),
@@ -45,6 +44,11 @@ struct ToolsView: View {
                     MoonPillView()
                 } label: {
                     Label("Moon", systemImage: "moon")
+                }
+                NavigationLink {
+                    MilkyWayPillView()
+                } label: {
+                    Label("Milky Way", systemImage: "sparkles")
                 }
             }
             Section("Coming later") {

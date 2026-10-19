@@ -26,6 +26,7 @@ struct PlannerView: View {
                 pin: state.session.location,
                 snapshot: state.snapshot,
                 style: state.mapStyle,
+                layers: state.layers,
                 recenterToken: state.recenterToken
             ) { coordinate in
                 Task { await state.movePin(latitude: coordinate.latitude, longitude: coordinate.longitude) }
@@ -69,6 +70,11 @@ struct PlannerView: View {
                               systemImage: state.useDeviceTimeZone ? "mappin" : "iphone")
                     }
                     .accessibilityIdentifier("planner.timezoneToggle")
+                    Section("Layers") {
+                        layerToggle("Sun", .sun, id: "sun")
+                        layerToggle("Moon", .moon, id: "moon")
+                        layerToggle("Milky Way", .milkyWay, id: "milkyWay")
+                    }
                 } label: {
                     Label("Map options", systemImage: "map")
                 }
@@ -86,6 +92,14 @@ struct PlannerView: View {
         .task { state.refresh() }
         .onChange(of: state.session.location) { state.refresh() }
         .onChange(of: state.session.instant) { state.refresh() }
+    }
+
+    private func layerToggle(_ title: LocalizedStringKey, _ layer: PlannerLayers, id: String) -> some View {
+        Toggle(title, isOn: Binding(
+            get: { state.layers.contains(layer) },
+            set: { on in if on { state.layers.insert(layer) } else { state.layers.remove(layer) } }
+        ))
+        .accessibilityIdentifier("planner.layer.\(id)")
     }
 
     private var options: PlannerDisplayOptions {
