@@ -60,6 +60,7 @@ private struct YearKey: Equatable, Sendable {
 }
 
 /// The night that contains the selected instant: before local noon it is the previous date's night.
+@MainActor
 private func nightDay(_ session: PillSession) -> LocalDay {
     let day = session.day
     return session.instant < day.noon ? day.adding(days: -1) : day
