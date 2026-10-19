@@ -32,6 +32,7 @@ enum AppTab: String, CaseIterable, Hashable {
 
 struct RootView: View {
     @Environment(AppNavigation.self) private var navigation
+    @State private var showsOnboarding = OnboardingKeys.shouldShow()
 
     var body: some View {
         @Bindable var navigation = navigation
@@ -45,6 +46,8 @@ struct RootView: View {
                 .tag(tab)
             }
         }
+        .syncsWidgets()
+        .fullScreenCover(isPresented: $showsOnboarding) { OnboardingView() }
     }
 
     @ViewBuilder

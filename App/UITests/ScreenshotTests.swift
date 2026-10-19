@@ -544,6 +544,117 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "meteor-eta-aquariids-capetown")
     }
 
+    func testPhase10WidgetsAndPolish() throws {
+        continueAfterFailure = false
+        phase = 10
+        // First launch: the introduction, page by page.
+        var app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw", extra: ["-showOnboarding", "-seedPlans"])
+        expectVisible(app, "Plan the light")
+        snap(app, "onboarding-welcome")
+        for name in ["place", "units", "plans"] {
+            app.buttons["onboarding.next"].firstMatch.tap()
+            Thread.sleep(forTimeInterval: 0.8)
+            snap(app, "onboarding-\(name)")
+        }
+        app.buttons["onboarding.start"].firstMatch.tap()
+
+        // Widgets at Warsaw's golden hour on the solstice, with the seeded plans.
+        app.tabBars.buttons["Settings"].tap()
+        openRow(app, app.buttons["settings.widgets"].firstMatch)
+        expectVisible(app.descendants(matching: .any)["widgets.small"].firstMatch, in: app)
+        snap(app, "widgets-sun-home")
+        app.swipeUp()
+        Thread.sleep(forTimeInterval: 0.5)
+        snap(app, "widgets-sun-lock-screen")
+        app.swipeDown()
+        for (label, name) in [("Moon", "moon"), ("Next plan", "next-plan")] {
+            app.segmentedControls["widgets.kind"].buttons[label].tap()
+            Thread.sleep(forTimeInterval: 1)
+            snap(app, "widgets-\(name)")
+        }
+        app.terminate()
+
+        // Milky Way widget: New York in mid-July, the core up after midnight.
+        app = launch(date: "2026-07-15T02:00:00Z", place: "New York")
+        app.tabBars.buttons["Settings"].tap()
+        openRow(app, app.buttons["settings.widgets"].firstMatch)
+        app.segmentedControls["widgets.kind"].buttons["Milky Way"].tap()
+        expectVisible(app.descendants(matching: .any)["widgets.small"].firstMatch, in: app)
+        Thread.sleep(forTimeInterval: 1)
+        snap(app, "widgets-milkyway")
+        app.terminate()
+
+        // Polish localization.
+        app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw", extra: ["-showOnboarding", "-AppleLanguages", "(pl)",
+                                                                            "-AppleLocale", "pl_PL"])
+        expectVisible(app, "Zaplanuj")
+        snap(app, "polish-onboarding")
+        app.buttons["onboarding.skip"].firstMatch.tap()
+        app.tabBars.buttons.element(boundBy: 1).tap()
+        Thread.sleep(forTimeInterval: 1)
+        snap(app, "polish-tools")
+        app.tabBars.buttons.element(boundBy: 3).tap()
+        Thread.sleep(forTimeInterval: 1)
+        snap(app, "polish-settings")
+        app.terminate()
+
+        // Largest accessibility text size.
+        app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw",
+                     extra: ["-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXL"])
+        app.tabBars.buttons["Tools"].tap()
+        Thread.sleep(forTimeInterval: 1)
+        snap(app, "dynamic-type-tools")
+        openTool(app, "Sun", expecting: "Sunrise")
+        snap(app, "dynamic-type-sun")
+    }
+
+    /// Phase 10 accessibility pass: Xcode's accessibility audit on the main screens. Issues
+    /// are written to p10-accessibility-audit.txt next to the screenshots instead of failing
+    /// the run, so the list can be worked through.
+    func testPhase10AccessibilityAudit() throws {
+        phase = 10
+        let app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw", extra: ["-seedPlans"])
+        var report: [String] = []
+        func audit(_ screen: String) {
+            Thread.sleep(forTimeInterval: 1.5)
+            var count = 0
+            do {
+                try app.performAccessibilityAudit { issue in
+                    count += 1
+                    let element = issue.element.map { "\($0.elementType.rawValue) '\($0.label)' id=\($0.identifier)" } ?? "-"
+                    report.append("\(screen) | \(issue.auditType.rawValue) | \(issue.compactDescription) | \(element)")
+                    return true
+                }
+            } catch {
+                report.append("\(screen) | audit failed: \(error)")
+            }
+            report.append("\(screen) | \(count) issues")
+        }
+        app.tabBars.buttons["Planner"].tap()
+        waitFor(app, id: "planner.panel.pin")
+        audit("Planner")
+        app.tabBars.buttons["Tools"].tap()
+        audit("Tools")
+        openTool(app, "Sun", expecting: "Sunrise")
+        audit("Sun")
+        goBack(app)
+        openTool(app, "Meteor showers", expecting: "Showers in")
+        audit("Meteor showers")
+        app.tabBars.buttons["My Stuff"].tap()
+        audit("My Stuff")
+        app.tabBars.buttons["Settings"].tap()
+        audit("Settings")
+        let text = report.joined(separator: "\n") + "\n"
+        let attachment = XCTAttachment(string: text)
+        attachment.name = "p10-accessibility-audit"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        if let dir = ProcessInfo.processInfo.environment["SCREENSHOT_DIR"], !dir.isEmpty {
+            try? text.write(to: URL(fileURLWithPath: dir).appendingPathComponent("p10-accessibility-audit.txt"),
+                            atomically: true, encoding: .utf8)
+        }
+    }
+
     // MARK: Helpers
 
     /// Taps a place in the location sheet, scrolling the list first when the row sits under

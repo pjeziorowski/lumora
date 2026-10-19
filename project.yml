@@ -6,6 +6,7 @@ options:
   deploymentTarget:
     iOS: "17.0"
   createIntermediateGroups: true
+  developmentLanguage: en
 settings:
   base:
     SWIFT_VERSION: "6.0"
@@ -30,8 +31,15 @@ targets:
     platform: iOS
     sources:
       - App/Sources
+      - App/Shared
       - App/Resources
+    entitlements:
+      path: App/Lumora.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.pjeziorowski.lumora
     dependencies:
+      - target: LumoraWidgets
       - package: AstroCore
       - package: GeoCore
       - package: PlannerKit
@@ -53,6 +61,28 @@ targets:
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         TARGETED_DEVICE_FAMILY: "1"
         ENABLE_PREVIEWS: YES
+  LumoraWidgets:
+    type: app-extension
+    platform: iOS
+    sources:
+      - App/Widgets
+      - App/Shared
+    entitlements:
+      path: App/LumoraWidgets.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.pjeziorowski.lumora
+    dependencies:
+      - package: AstroCore
+      - package: PlannerKit
+      - sdk: WidgetKit.framework
+      - sdk: SwiftUI.framework
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.pjeziorowski.lumora.widgets
+        INFOPLIST_FILE: App/Widgets/Info.plist
+        TARGETED_DEVICE_FAMILY: "1"
+        SKIP_INSTALL: YES
   LumoraTests:
     type: bundle.unit-test
     platform: iOS
