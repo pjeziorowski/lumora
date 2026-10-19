@@ -142,23 +142,19 @@ private struct PhaseEventRow: View {
                     ForEach(badges, id: \.self) { badge in
                         Text(badge)
                             .font(.caption2.weight(.semibold))
+                            .lineLimit(1)
+                            .fixedSize()
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
                             .background(Color.accentColor.opacity(0.15), in: Capsule())
                     }
                 }
-                Text(format.dateAndTime(event.time))
+                Text(subtitle)
                     .font(.callout)
                     .monospacedDigit()
                     .foregroundStyle(.secondary)
             }
-            Spacer()
-            if event.quarter == .new || event.quarter == .full {
-                Text(distance)
-                    .font(.caption)
-                    .monospacedDigit()
-                    .foregroundStyle(.secondary)
-            }
+            Spacer(minLength: 0)
         }
         .accessibilityElement(children: .combine)
     }
@@ -172,6 +168,12 @@ private struct PhaseEventRow: View {
         }
         if event.isMonthlyBlueMoon || event.isSeasonalBlueMoon { list.append(String(localized: "Blue moon")) }
         return list
+    }
+
+    /// Date and time, plus the distance for new and full moons.
+    private var subtitle: String {
+        let when = format.dateAndTime(event.time)
+        return event.quarter == .new || event.quarter == .full ? "\(when) · \(distance)" : when
     }
 
     private var distance: String {
@@ -204,23 +206,26 @@ private struct MoonCalendarSection: View {
             Section {
                 MonthNavigator(title: format.monthTitle(year: month.year, month: month.month))
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 7), spacing: 8) {
-                    ForEach(Array(weekdaySymbols.enumerated()), id: \.offset) { _, symbol in
-                        Text(symbol)
-                            .font(.caption2.weight(.semibold))
-                            .foregroundStyle(.secondary)
-                            .accessibilityHidden(true)
-                    }
-                    ForEach(0..<month.leadingBlanks(firstWeekday: firstWeekday), id: \.self) { _ in
-                        Color.clear.frame(height: 1)
-                    }
-                    ForEach(month.days) { entry in
-                        Button {
-                            session.shift(days: entry.day.day - day.day)
-                        } label: {
-                            CalendarCell(entry: entry, selected: entry.day == day, southern: session.location.isSouthern)
+                    // One ForEach with unique ids: a lazy grid drops cells whose ids repeat
+                    // across sibling ForEach views (weekday 1 vs day 1).
+                    ForEach(cells(month)) { cell in
+                        switch cell {
+                        case let .weekday(_, symbol):
+                            Text(symbol)
+                                .font(.caption2.weight(.semibold))
+                                .foregroundStyle(.secondary)
+                                .accessibilityHidden(true)
+                        case .blank:
+                            Color.clear.frame(height: 1)
+                        case let .day(entry):
+                            Button {
+                                session.shift(days: entry.day.day - day.day)
+                            } label: {
+                                CalendarCell(entry: entry, selected: entry.day == day, southern: session.location.isSouthern)
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel(accessibilityText(entry))
                         }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel(accessibilityText(entry))
                     }
                 }
                 .padding(.vertical, 4)
@@ -235,6 +240,26 @@ private struct MoonCalendarSection: View {
                 }
             }
         }
+    }
+
+    private enum GridCell: Identifiable {
+        case weekday(Int, String)
+        case blank(Int)
+        case day(MoonCalendarDay)
+
+        var id: String {
+            switch self {
+            case let .weekday(index, _): "weekday-\(index)"
+            case let .blank(index): "blank-\(index)"
+            case let .day(entry): "day-\(entry.day.day)"
+            }
+        }
+    }
+
+    private func cells(_ month: MoonCalendarMonth) -> [GridCell] {
+        weekdaySymbols.enumerated().map { GridCell.weekday($0.offset, $0.element) }
+            + (0..<month.leadingBlanks(firstWeekday: firstWeekday)).map { GridCell.blank($0) }
+            + month.days.map { GridCell.day($0) }
     }
 
     /// Very short weekday names, rotated to start at the user's first weekday.

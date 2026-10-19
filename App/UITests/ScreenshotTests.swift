@@ -20,6 +20,7 @@ final class ScreenshotTests: XCTestCase {
         let app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw")
 
         app.tabBars.buttons["Tools"].tap()
+        expectVisible(app.buttons["Sun"].firstMatch)
         snap(app, "tools")
 
         app.buttons["Sun"].firstMatch.tap()
@@ -36,8 +37,8 @@ final class ScreenshotTests: XCTestCase {
             snap(app, name)
         }
 
-        app.buttons["pill.location"].tap()
-        expectVisible(app, "Location")
+        app.buttons["pill.location"].firstMatch.tap()
+        expectVisible(app.buttons["place.Tromsø"].firstMatch)
         snap(app, "location-picker")
         app.buttons["place.Tromsø"].firstMatch.tap()
 
@@ -58,8 +59,8 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "moon-day-tromso")
 
         // Sydney: southern hemisphere, the Moon's lit side is mirrored.
-        app.buttons["pill.location"].tap()
-        expectVisible(app, "Location")
+        app.buttons["pill.location"].firstMatch.tap()
+        expectVisible(app.buttons["place.Sydney"].firstMatch)
         app.buttons["place.Sydney"].firstMatch.tap()
         expectVisible(app, "Moonrise")
         snap(app, "moon-day-sydney")
@@ -173,9 +174,17 @@ final class ScreenshotTests: XCTestCase {
 
     /// Waits for any element whose label starts with `label` (rows combine label and value).
     private func expectVisible(_ app: XCUIApplication, _ label: String, file: StaticString = #filePath, line: UInt = #line) {
-        let element = app.descendants(matching: .any)
-            .matching(NSPredicate(format: "label BEGINSWITH[c] %@", label)).firstMatch
-        XCTAssertTrue(element.waitForExistence(timeout: 15), "Nothing labelled \(label)", file: file, line: line)
+        expectVisible(app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH[c] %@", label)).firstMatch,
+                      in: app, file: file, line: line)
+    }
+
+    private func expectVisible(_ element: XCUIElement, in app: XCUIApplication? = nil,
+                               file: StaticString = #filePath, line: UInt = #line) {
+        if !element.waitForExistence(timeout: 15) {
+            // Keep a picture of what was on screen instead of the missing element.
+            snap(app ?? XCUIApplication(), "FAILED-step")
+            XCTFail("Not found: \(element)", file: file, line: line)
+        }
         // Let async reports and charts finish drawing.
         Thread.sleep(forTimeInterval: 0.8)
     }

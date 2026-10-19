@@ -77,7 +77,7 @@ private struct SunDaySections: View {
                 if let noon = report.noon {
                     ValueRow("Solar noon", "\(format.time(noon.time)) · el \(Formatting.degrees(noon.altitude))")
                 }
-                ValueRow("Daylight", Formatting.duration(seconds: report.daylightSeconds))
+                ValueRow("Daylight", daylightText(report.daylightSeconds))
                 ValueRow("Change from yesterday", signedDuration(report.daylightChangeSeconds))
             }
             Section("At \(format.time(report.position.time))") {
@@ -332,7 +332,7 @@ private struct SeasonsSections: View {
                                 .font(.headline)
                             Text(format.dateAndTime(event.time))
                                 .monospacedDigit()
-                            Text("Daylight \(Formatting.duration(seconds: event.daylightSeconds))")
+                            Text("Daylight: \(daylightText(event.daylightSeconds))")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
