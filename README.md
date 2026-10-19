@@ -45,6 +45,7 @@ scripts/test-packages.sh        # prints ACCURACY lines for AstroCore and Planne
 - Phase 6 (target pin, geodetics and obstacle panels, Find, field and depth of field on the map) is done. See `docs/PHASE6_ACCURACY.md`.
 - Phase 7 (saved plans and places, My Stuff, sharing, JSON export and import, reminders, calendar) is done. See `docs/PHASE7_ACCURACY.md`.
 - Phase 8 (AR: Sun and Moon, Milky Way, night sky, lens frame and depth of field, time scrubbing, calibration) is done. See `docs/PHASE8_ACCURACY.md`.
+- Phase 9 (meteor showers with nightly rates, solar and lunar eclipses with local contacts and paths, Planner panels and map layers) is done. See `docs/PHASE9_ACCURACY.md`.
 - Settings: units, clock, coordinate format persist with `@AppStorage`.
 
 ## Licences

@@ -244,6 +244,20 @@ public enum Eclipses {
                                   latitude: latitude, longitude: longitude)
     }
 
+    /// The centre line of a total or annular eclipse: where the shadow axis meets the Earth,
+    /// every `stepMinutes` from four hours before to four hours after greatest eclipse.
+    public static func centralLine(of eclipse: GlobalSolarEclipse,
+                                   stepMinutes: Double = 2) -> [(time: AstroTime, latitude: Double, longitude: Double)] {
+        guard eclipse.latitude != nil else { return [] }
+        var points: [(AstroTime, Double, Double)] = []
+        for step in stride(from: -240.0, through: 240, by: stepMinutes) {
+            let t = eclipse.peak.addingDays(step / 1440)
+            let g = geoidIntersect(moonShadow(t))
+            if let lat = g.latitude, let lon = g.longitude { points.append((t, lat, lon)) }
+        }
+        return points
+    }
+
     /// Positive umbra radius: total; negative (antumbra): annular. The 14 m bias matches
     /// Espenak's classification, as in Astronomy Engine.
     static func kindFromUmbra(_ k: Double) -> EclipseKind { k > 0.014 ? .total : .annular }
