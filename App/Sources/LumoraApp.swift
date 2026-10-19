@@ -20,6 +20,11 @@ struct LumoraApp: App {
 
     init() {
         let session = LumoraApp.makePillSession(arguments: ProcessInfo.processInfo.arguments)
+        if ProcessInfo.processInfo.arguments.contains("-fixedDate") {
+            // Screenshot runs start uncalibrated.
+            UserDefaults.standard.removeObject(forKey: ARKeys.heading)
+            UserDefaults.standard.removeObject(forKey: ARKeys.pitch)
+        }
         _pillSession = State(initialValue: session)
         let planner = PlannerState(session: session, lookup: { latitude, longitude in
             await PlaceSearch.placeInfo(latitude: latitude, longitude: longitude)
