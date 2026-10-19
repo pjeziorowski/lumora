@@ -77,8 +77,9 @@ final class ARCamera {
     private(set) var running = false
 
     func start() async -> Bool {
-        guard AVCaptureDevice.authorizationStatus(for: .video) == .authorized
-            || (await AVCaptureDevice.requestAccess(for: .video)) else { return false }
+        var allowed = AVCaptureDevice.authorizationStatus(for: .video) == .authorized
+        if !allowed { allowed = await AVCaptureDevice.requestAccess(for: .video) }
+        guard allowed else { return false }
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
               let input = try? AVCaptureDeviceInput(device: device) else { return false }
         fieldOfView = Double(device.activeFormat.videoFieldOfView)
