@@ -1,14 +1,14 @@
 // Packages/PlannerKit/Sources/PlannerKit/Planner/PlannerPanels.swift
 //
 // The Planner's information panels as ready-to-display rows: pin, Sun, Moon, twilights
-// (Phase 3) and Milky Way (Phase 4); later phases append geodetics and so on. Times
+// (Phase 3), Milky Way (Phase 4), geodetics and obstacle (Phase 6). Times
 // are shown in the pin's zone unless the user switches to device time.
 
 import AstroCore
 import Foundation
 
 public enum PlannerPanelKind: String, Sendable, Hashable, CaseIterable, Identifiable {
-    case pin, sun, moon, twilights, milkyWay
+    case pin, sun, moon, twilights, milkyWay, geodetics, obstacle
     public var id: String { rawValue }
 
     public var title: String {
@@ -18,6 +18,8 @@ public enum PlannerPanelKind: String, Sendable, Hashable, CaseIterable, Identifi
         case .moon: "Moon"
         case .twilights: "Twilights"
         case .milkyWay: "Milky Way"
+        case .geodetics: "Geodetics"
+        case .obstacle: "Obstacle"
         }
     }
 }
@@ -58,8 +60,9 @@ public struct PlannerDisplayOptions: Sendable, Hashable {
 }
 
 public enum PlannerPanels {
+    /// - Parameter obstacle: the target pin's report (panels 6 and 7), nil without a target.
     public static func panel(_ kind: PlannerPanelKind, snapshot s: PlannerSnapshot, instant: Date,
-                             options o: PlannerDisplayOptions) -> PlannerPanel {
+                             options o: PlannerDisplayOptions, obstacle: ObstacleReport? = nil) -> PlannerPanel {
         let zone = o.useDeviceTimeZone ? o.deviceTimeZone : s.location.timeZone
         func time(_ d: Date) -> String { Formatting.clockTime(d, timeZone: zone, style: o.clock) }
         func event(_ e: SkyEvent) -> String { "\(time(e.time)) · \(Formatting.azimuth(e.azimuth))" }
@@ -152,12 +155,71 @@ public enum PlannerPanels {
                 PanelRow("Moon", "\(Int((s.moon.illumination * 100).rounded()))% lit, \(s.moon.position.isUp ? "up" : "down")"),
                 PanelRow("Arc", s.galacticCenter.isUp ? "\(orientation.label), \(Formatting.degrees(s.arcTilt, decimals: 0))" : "—"),
             ]
+        case .geodetics:
+            rows = geodeticsRows(obstacle?.geodetics, sun: s.sun, moon: s.moon.position, units: o.units)
+        case .obstacle:
+            rows = obstacleRows(obstacle, units: o.units, time: time)
         }
         return PlannerPanel(kind: kind, rows: rows)
     }
 
-    public static func all(snapshot: PlannerSnapshot, instant: Date, options: PlannerDisplayOptions) -> [PlannerPanel] {
-        PlannerPanelKind.allCases.map { panel($0, snapshot: snapshot, instant: instant, options: options) }
+    public static func all(snapshot: PlannerSnapshot, instant: Date, options: PlannerDisplayOptions,
+                           obstacle: ObstacleReport? = nil) -> [PlannerPanel] {
+        PlannerPanelKind.allCases.map { panel($0, snapshot: snapshot, instant: instant, options: options, obstacle: obstacle) }
+    }
+
+    static let noTarget = [PanelRow("Target pin", "None"), PanelRow("Add one", "Map options → Target pin")]
+
+    static func geodeticsRows(_ g: GeodeticsReport?, sun: BodyNow, moon: BodyNow, units: UnitSystem) -> [PanelRow] {
+        guard let g else { return noTarget }
+        func height(_ m: Double) -> String { Formatting.height(meters: m, units: units) }
+        func signed(_ m: Double) -> String { (m >= 0 ? "+" : "−") + height(abs(m)) }
+        func offset(_ body: BodyNow) -> String {
+            let d = BodyFinder.wrap(body.azimuth - g.bearing)
+            let side = abs(d) < 0.05 ? "on the line" : String(format: "%.1f° %@", abs(d), d < 0 ? "left" : "right")
+            return "\(Formatting.azimuth(body.azimuth)), \(side)"
+        }
+        return [
+            PanelRow("Distance", Formatting.distance(meters: g.distance, units: units)),
+            PanelRow("Bearing", Formatting.azimuth(g.bearing, decimals: 2)),
+            PanelRow("Back bearing", Formatting.azimuth(g.backBearing, decimals: 2)),
+            PanelRow("Eye level", height(g.observerHeight)),
+            PanelRow("Target ground", g.targetGround.map(height) ?? "Unknown (sea level used)"),
+            PanelRow("Height difference", g.heightDifference.map(signed) ?? "—"),
+            PanelRow("Apparent angle", Formatting.degrees(g.groundAngle, decimals: 2)),
+            PanelRow("Curvature + refraction", "−" + height(g.curvatureDrop)),
+            PanelRow("Sun now", offset(sun)),
+            PanelRow("Moon now", offset(moon)),
+        ]
+    }
+
+    static func obstacleRows(_ r: ObstacleReport?, units: UnitSystem, time: (Date) -> String) -> [PanelRow] {
+        guard let r else { return noTarget }
+        let g = r.geodetics
+        func height(_ m: Double) -> String { Formatting.height(meters: m, units: units) }
+        var rows = [
+            PanelRow("Object height", height(g.objectHeight)),
+            PanelRow("Top of object", "\(height(g.topHeight)) above sea level"),
+            PanelRow("Angle to top", Formatting.degrees(g.topAngle, decimals: 2)),
+        ]
+        for body in [FindBody.sun, .moon] {
+            let list = r.alignments.filter { $0.body == body }
+            let name = body == .sun ? "Sun" : "Moon"
+            if list.isEmpty {
+                rows.append(PanelRow("\(name) on the line", "Not today (above the horizon)"))
+                continue
+            }
+            for (i, a) in list.enumerated() {
+                let suffix = list.count > 1 ? " \(i + 1)" : ""
+                let verdict = a.clearance >= 0
+                    ? String(format: "clears by %.2f°", a.clearance) : String(format: "hidden by %.2f°", -a.clearance)
+                let elevation = Formatting.degrees(a.elevation, decimals: 2)
+                rows.append(PanelRow("\(name) on the line\(suffix)", "\(time(a.time)) · el \(elevation) · \(verdict)"))
+                rows.append(PanelRow("Height for \(name.lowercased()) on top\(suffix)",
+                                     a.heightForAlignment > 0 ? height(a.heightForAlignment) : "Below the target's ground"))
+            }
+        }
+        return rows
     }
 
     /// "Sun 21 Jun 20:30"
