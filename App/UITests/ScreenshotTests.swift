@@ -308,6 +308,53 @@ final class ScreenshotTests: XCTestCase {
         app.buttons["Cancel"].firstMatch.tap()
     }
 
+    /// Phase 6: target pin, geodetics and obstacle panels, Find, field and depth of field on the map.
+    func testPhase6Geodetics() throws {
+        continueAfterFailure = false
+        phase = 6
+        // 29 May 2026, 19:30 EDT in Lower Manhattan; the target is a 60 m tower 4 km away
+        // in Jersey City along the Manhattanhenge azimuth (299.1°).
+        let app = launch(date: "2026-05-29T23:30:00Z", place: "New York", camera: "sony-a7r-iv",
+                         extra: ["-target", "40.73029,-74.04748", "-objectHeight", "60"])
+        app.tabBars.buttons["Planner"].tap()
+        waitFor(app, id: "planner.panel.pin")
+        app.buttons["planner.panelTab.geodetics"].tap()
+        waitFor(app, id: "planner.panel.geodetics")
+        expectVisible(app, "Distance")
+        settleMap(seconds: 4)
+        snap(app, "planner-geodetics-panel")
+        app.buttons["planner.panelTab.obstacle"].tap()
+        expectVisible(app, "Angle to top")
+        snap(app, "planner-obstacle-panel")
+
+        // Find: the Sun on the target's bearing with its disc on the horizon.
+        app.buttons["planner.find"].tap()
+        expectVisible(app.buttons["find.search"].firstMatch, in: app)
+        snap(app, "find-form-target-bearing")
+        app.buttons["find.search"].firstMatch.tap()
+        let result = app.buttons["find.result"].firstMatch
+        expectVisible(result, in: app)
+        snap(app, "find-results-manhattanhenge")
+        result.tap()
+        settleMap()
+        snap(app, "planner-find-result-sun-on-target-line")
+
+        // Field and depth of field drawn along the target's bearing.
+        app.buttons["planner.options"].tap()
+        app.descendants(matching: .any)["planner.targetOptions"].firstMatch.tap()
+        let fov = app.switches["planner.optics.fov"].firstMatch
+        expectVisible(fov, in: app)
+        fov.tap()
+        app.switches["planner.optics.dof"].firstMatch.tap()
+        snap(app, "planner-target-optics-sheet")
+        app.buttons["Done"].firstMatch.tap()
+        settleMap()
+        snap(app, "planner-fov-dof-on-map")
+        app.buttons["planner.panelTab.geodetics"].tap()
+        settleMap(seconds: 1)
+        snap(app, "planner-fov-dof-geodetics")
+    }
+
     // MARK: Helpers
 
     /// Taps a place in the location sheet, scrolling the list first when the row sits under
@@ -380,10 +427,11 @@ final class ScreenshotTests: XCTestCase {
         Thread.sleep(forTimeInterval: seconds)
     }
 
-    private func launch(date: String, place: String, camera: String? = nil) -> XCUIApplication {
+    private func launch(date: String, place: String, camera: String? = nil, extra: [String] = []) -> XCUIApplication {
         let app = XCUIApplication()
         app.launchArguments += ["-fixedDate", date, "-place", place]
         if let camera { app.launchArguments += ["-camera", camera] }
+        app.launchArguments += extra
         app.launch()
         return app
     }
