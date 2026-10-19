@@ -36,10 +36,11 @@ struct PillHeader: View {
             }
             .accessibilityHint("Choose another place")
             .accessibilityIdentifier("pill.location")
+            // Attached to the row, not the Section: List spreads Section modifiers across rows.
+            .sheet(isPresented: $showingPicker) {
+                LocationPickerView()
+            }
             DateBar()
-        }
-        .sheet(isPresented: $showingPicker) {
-            LocationPickerView()
         }
     }
 
