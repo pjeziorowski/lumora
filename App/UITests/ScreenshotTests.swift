@@ -424,6 +424,67 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "export-all-share-sheet")
     }
 
+    func testPhase8AR() throws {
+        continueAfterFailure = false
+        phase = 8
+        // Warsaw at 20:30 on the June solstice, looking toward the sunset. The simulator has
+        // no camera or motion sensors, so the view direction comes from -arView and a drawn
+        // sky stands in for the camera.
+        var app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw", extra: ["-arView", "300,8,0"])
+        app.tabBars.buttons["Planner"].tap()
+        waitFor(app, id: "planner.panel.pin")
+        app.buttons["planner.ar"].tap()
+        expectVisible(app, "Az ")
+        Thread.sleep(forTimeInterval: 1.5)
+        snap(app, "planner-ar-sun-moon-sunset-warsaw")
+        let slider = app.sliders["ar.timeSlider"].firstMatch
+        slider.adjust(toNormalizedSliderPosition: 0.535)
+        Thread.sleep(forTimeInterval: 1.5)
+        snap(app, "ar-time-scrubbed-to-sunset")
+        app.buttons["ar.calibrate"].tap()
+        expectVisible(app, "Compass")
+        snap(app, "ar-calibration-sheet")
+        app.buttons["ar.calibration.align"].firstMatch.tap()
+        Thread.sleep(forTimeInterval: 1.5)
+        snap(app, "ar-aligned-on-sun")
+        app.buttons["Close"].firstMatch.tap()
+        app.terminate()
+
+        // New York at 23:30 in mid-July: the core over the southern horizon.
+        app = launch(date: "2026-07-15T03:30:00Z", place: "New York", extra: ["-arView", "165,18,0"])
+        app.tabBars.buttons["Tools"].tap()
+        openTool(app, "Milky Way AR", expecting: "Az ")
+        Thread.sleep(forTimeInterval: 1.5)
+        snap(app, "ar-milkyway-core-newyork")
+        app.buttons["Night"].firstMatch.tap()
+        Thread.sleep(forTimeInterval: 1.5)
+        snap(app, "ar-night-south-newyork")
+        app.terminate()
+
+        app = launch(date: "2026-07-15T03:30:00Z", place: "New York", extra: ["-arView", "0,30,0"])
+        app.tabBars.buttons["Tools"].tap()
+        openTool(app, "Night AR", expecting: "Az ")
+        Thread.sleep(forTimeInterval: 1.5)
+        snap(app, "ar-night-north-polaris-newyork")
+        app.terminate()
+
+        // Southern sky: the south celestial pole from Cape Town, no Polaris.
+        app = launch(date: "2026-07-15T19:00:00Z", place: "Cape Town", extra: ["-arView", "180,30,0"])
+        app.tabBars.buttons["Tools"].tap()
+        openTool(app, "Night AR", expecting: "Az ")
+        Thread.sleep(forTimeInterval: 1.5)
+        snap(app, "ar-night-south-pole-capetown")
+        app.terminate()
+
+        // Frame AR: a 50 mm frame on a Sony α7R IV, focused at 5 m, with the near limit, focus
+        // and far limit drawn on the ground.
+        app = launch(date: "2026-06-21T10:00:00Z", place: "Warsaw", camera: "sony-a7r-iv", extra: ["-arView", "200,-4,0"])
+        app.tabBars.buttons["Tools"].tap()
+        openTool(app, "Frame AR", expecting: "Az ")
+        Thread.sleep(forTimeInterval: 1.5)
+        snap(app, "ar-frame-50mm-dof")
+    }
+
     // MARK: Helpers
 
     /// Taps a place in the location sheet, scrolling the list first when the row sits under
@@ -472,6 +533,11 @@ final class ScreenshotTests: XCTestCase {
     private func openTool(_ app: XCUIApplication, _ name: String, expecting label: String,
                           file: StaticString = #filePath, line: UInt = #line) {
         let row = app.buttons[name].firstMatch
+        // Rows below the fold do not exist until the list scrolls to them.
+        for _ in 0..<4 where !row.waitForExistence(timeout: 2) {
+            app.swipeUp()
+            Thread.sleep(forTimeInterval: 0.5)
+        }
         expectVisible(row, in: app, file: file, line: line)
         let screen = app.windows.firstMatch.frame
         for _ in 0..<4 where row.frame.maxY > screen.maxY - 100 { app.swipeUp(); Thread.sleep(forTimeInterval: 0.5) }

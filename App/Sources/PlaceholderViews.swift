@@ -82,6 +82,28 @@ struct ToolsView: View {
                     Label("Cameras", systemImage: "camera")
                 }
             }
+            Section("Augmented reality") {
+                NavigationLink {
+                    SkyARView(mode: .sunMoon)
+                } label: {
+                    Label("Sun & Moon AR", systemImage: "sun.horizon")
+                }
+                NavigationLink {
+                    SkyARView(mode: .milkyWay)
+                } label: {
+                    Label("Milky Way AR", systemImage: "sparkles.rectangle.stack")
+                }
+                NavigationLink {
+                    SkyARView(mode: .night)
+                } label: {
+                    Label("Night AR", systemImage: "moon.stars.fill")
+                }
+                NavigationLink {
+                    SkyARView(mode: .frame)
+                } label: {
+                    Label("Frame AR", systemImage: "rectangle.dashed")
+                }
+            }
             Section("Coming later") {
                 ForEach(upcoming) { tool in
                     LabeledContent {

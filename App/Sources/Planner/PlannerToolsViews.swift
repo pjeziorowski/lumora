@@ -135,7 +135,8 @@ struct FindView: View {
                             NumberRow(label: "Target", value: $elevation, unit: "°", step: 0.1, range: -18...90, decimals: 1)
                             NumberRow(label: "Tolerance", value: $elevationTolerance, unit: "±°", step: 0.1, range: 0.1...45, decimals: 1)
                             if let obstacle = state.obstacle {
-                                Button("Use the angle to the target's top (\(Formatting.degrees(obstacle.geodetics.topAngle, decimals: 2)))") {
+                                let angle = Formatting.degrees(obstacle.geodetics.topAngle, decimals: 2)
+                                Button("Use the angle to the target's top (\(angle))") {
                                     elevation = (obstacle.geodetics.topAngle * 100).rounded() / 100
                                 }
                             }
