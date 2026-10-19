@@ -191,6 +191,7 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "milkyway-night-newyork")
         app.swipeUp()
         snap(app, "milkyway-night-newyork-hourly")
+        scrollToTop(app)
         app.segmentedControls.buttons["Year"].tap()
         expectVisible(app, "First core night")
         snap(app, "milkyway-year-newyork")
@@ -202,6 +203,7 @@ final class ScreenshotTests: XCTestCase {
             expectVisible(app, "Core visible")
             snap(app, "milkyway-best-night")
         }
+        scrollToTop(app)
 
         // Sydney: southern winter is the best season, the core passes high overhead.
         app.buttons["pill.location"].firstMatch.tap()
@@ -271,7 +273,7 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "star-trails-length")
         app.swipeUp()
         snap(app, "star-trails-sketch")
-        app.swipeDown()
+        scrollToTop(app)
         app.segmentedControls.buttons["Exposure time"].tap()
         snap(app, "star-trails-exposure-for-length")
         goBack(app)
@@ -355,6 +357,13 @@ final class ScreenshotTests: XCTestCase {
         for _ in 0..<4 where row.frame.maxY > screen.maxY - 100 { app.swipeUp(); Thread.sleep(forTimeInterval: 0.5) }
         row.tap()
         expectVisible(app, label, file: file, line: line)
+    }
+
+    /// Lists drop rows that scroll off screen, so segmented pickers at the top must be
+    /// scrolled back into view before tapping them.
+    private func scrollToTop(_ app: XCUIApplication) {
+        for _ in 0..<3 { app.swipeDown() }
+        Thread.sleep(forTimeInterval: 0.5)
     }
 
     private func goBack(_ app: XCUIApplication) {
