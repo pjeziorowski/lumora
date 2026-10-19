@@ -1,7 +1,8 @@
 // Packages/OpticsCore/Sources/OpticsCore/OpticsCore.swift
 //
-// Exposure, depth of field, field of view, spot stars, star trails and time-lapse math.
-// Phase 0 skeleton: the calculators land in Phase 5 (see PHOTOPILLS_REBUILD_BRIEF.md §5).
+// Exposure, depth of field, field of view, spot stars, star trails and time-lapse math
+// (PHOTOPILLS_REBUILD_BRIEF.md §2.7–2.12 and §3.2). Pure functions on millimetres,
+// seconds and degrees; no UI.
 
 import Foundation
 
