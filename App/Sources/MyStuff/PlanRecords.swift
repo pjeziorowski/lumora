@@ -57,24 +57,25 @@ final class PlaceRecord {
 }
 
 enum PlanLibrary {
-    /// Inserts or replaces plans and places from an archive; returns how many were added.
+    /// Applies an archive (`PlanArchive.merge` decides what is added or replaced) and
+    /// reschedules the reminders of imported plans; returns how many items changed.
     @MainActor @discardableResult
     static func importArchive(_ archive: PlanArchive, into context: ModelContext) throws -> Int {
         let plans = try context.fetch(FetchDescriptor<PlanRecord>())
         let places = try context.fetch(FetchDescriptor<PlaceRecord>())
-        for plan in archive.plans {
-            if let existing = plans.first(where: { $0.id == plan.id }) {
-                existing.update(plan)
-                existing.thumbnail = nil
-            } else {
-                context.insert(PlanRecord(plan))
-            }
+        let merge = archive.merge(intoPlans: Set(plans.map(\.id)), places: Set(places.map(\.id)))
+        for plan in merge.replaced {
+            guard let existing = plans.first(where: { $0.id == plan.id }) else { continue }
+            existing.update(plan)
+            existing.thumbnail = nil
         }
-        for place in archive.places where !places.contains(where: { $0.id == place.id }) {
-            context.insert(PlaceRecord(place))
-        }
+        for plan in merge.added { context.insert(PlanRecord(plan)) }
+        for place in merge.addedPlaces { context.insert(PlaceRecord(place)) }
         try context.save()
-        return archive.plans.count + archive.places.count
+        for plan in merge.added + merge.replaced {
+            Task { _ = await PlanReminders.schedule(plan) }
+        }
+        return merge.count
     }
 
     @MainActor

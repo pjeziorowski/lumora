@@ -17,7 +17,9 @@ struct ExposureView: View {
 
     var body: some View {
         let result = Exposure.equivalent(to: metered, fixed: target, solving: solving)
-        let longExposure = Exposure.withFilters(shutter: result.shutter, stops: filterStops)
+        // The filter applies to the shutter speed the camera will actually be set to.
+        let setShutter = solving == .shutter ? Exposure.nearest(result.shutter, on: Exposure.shutterScale) : result.shutter
+        let longExposure = Exposure.withFilters(shutter: setShutter, stops: filterStops)
         Form {
             Section {
                 ScalePicker(label: "Aperture", value: $metered.aperture, scale: Exposure.apertureScale, format: OpticsFormat.aperture)

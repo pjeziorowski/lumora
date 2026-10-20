@@ -62,6 +62,34 @@ public struct Plan: Sendable, Hashable, Codable, Identifiable {
     public var reminderDate: Date? {
         reminderMinutes.map { instant.addingTimeInterval(-Double($0) * 60) }
     }
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, notes, created, modified, location, instant, target, eyeHeight, mapOptics, cameraID, layers
+        case mapStyle, panel, reminderMinutes
+    }
+
+    /// Only id, name, location and instant are required, so plans stored by an older version
+    /// (with fewer fields) still open; anything missing takes its default.
+    public init(from decoder: any Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        let defaults = Plan(name: "", location: try c.decode(PillLocation.self, forKey: .location),
+                            instant: try c.decode(Date.self, forKey: .instant))
+        id = try c.decode(UUID.self, forKey: .id)
+        name = try c.decode(String.self, forKey: .name)
+        location = defaults.location
+        instant = defaults.instant
+        notes = try c.decodeIfPresent(String.self, forKey: .notes) ?? defaults.notes
+        created = try c.decodeIfPresent(Date.self, forKey: .created) ?? instant
+        modified = try c.decodeIfPresent(Date.self, forKey: .modified) ?? created
+        target = try c.decodeIfPresent(TargetPin.self, forKey: .target)
+        eyeHeight = try c.decodeIfPresent(Double.self, forKey: .eyeHeight) ?? defaults.eyeHeight
+        mapOptics = try c.decodeIfPresent(MapOptics.self, forKey: .mapOptics) ?? defaults.mapOptics
+        cameraID = try c.decodeIfPresent(String.self, forKey: .cameraID)
+        layers = try c.decodeIfPresent(PlannerLayers.self, forKey: .layers) ?? defaults.layers
+        mapStyle = try c.decodeIfPresent(PlannerMapStyle.self, forKey: .mapStyle) ?? defaults.mapStyle
+        panel = try c.decodeIfPresent(String.self, forKey: .panel) ?? defaults.panel
+        reminderMinutes = try c.decodeIfPresent(Int.self, forKey: .reminderMinutes)
+    }
 }
 
 /// A saved place (point of interest), independent of plans.
@@ -77,12 +105,22 @@ public struct SavedPlace: Sendable, Hashable, Codable, Identifiable {
         self.notes = notes
         self.created = created
     }
+
+    enum CodingKeys: String, CodingKey { case id, location, notes, created }
+
+    /// Notes and creation date are optional in stored data (older versions).
+    public init(from decoder: any Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(UUID.self, forKey: .id)
+        location = try c.decode(PillLocation.self, forKey: .location)
+        notes = try c.decodeIfPresent(String.self, forKey: .notes) ?? ""
+        created = try c.decodeIfPresent(Date.self, forKey: .created) ?? Date(timeIntervalSinceReferenceDate: 0)
+    }
 }
 
 /// JSON exchange format for plans and places. Versioned so later releases can migrate.
 public struct PlanArchive: Sendable, Hashable, Codable {
     public static let currentVersion = 1
-    public static let fileExtension = "lumoraplan"
 
     public var format = "lumora.plans"
     public var version = PlanArchive.currentVersion
@@ -108,6 +146,37 @@ public struct PlanArchive: Sendable, Hashable, Codable {
             try c.encode(date.timeIntervalSinceReferenceDate)
         }
         return try encoder.encode(self)
+    }
+
+    /// What importing this archive into a library changes. Plans are matched by id: an
+    /// imported plan replaces the stored one with the same id (the file is the newer copy);
+    /// places already stored are kept. Within the archive the last copy of an id wins for
+    /// plans and the first for places.
+    public struct Merge: Sendable, Hashable {
+        public var added: [Plan] = []
+        public var replaced: [Plan] = []
+        public var addedPlaces: [SavedPlace] = []
+        public var count: Int { added.count + replaced.count + addedPlaces.count }
+    }
+
+    public func merge(intoPlans existing: Set<UUID>, places existingPlaces: Set<UUID>) -> Merge {
+        var result = Merge()
+        var lastCopy: [UUID: Plan] = [:]
+        var order: [UUID] = []
+        for plan in plans {
+            if lastCopy[plan.id] == nil { order.append(plan.id) }
+            lastCopy[plan.id] = plan
+        }
+        for id in order {
+            guard let plan = lastCopy[id] else { continue }
+            if existing.contains(id) { result.replaced.append(plan) } else { result.added.append(plan) }
+        }
+        var seenPlaces = existingPlaces
+        for place in places where !seenPlaces.contains(place.id) {
+            seenPlaces.insert(place.id)
+            result.addedPlaces.append(place)
+        }
+        return result
     }
 
     public static func decode(_ data: Data) throws -> PlanArchive {
