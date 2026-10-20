@@ -191,6 +191,7 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "milkyway-night-newyork")
         app.swipeUp()
         snap(app, "milkyway-night-newyork-hourly")
+        scrollToTop(app)
         app.segmentedControls.buttons["Year"].tap()
         expectVisible(app, "First core night")
         snap(app, "milkyway-year-newyork")
@@ -199,9 +200,12 @@ final class ScreenshotTests: XCTestCase {
         let bestNight = app.buttons["milkyway.bestNight"].firstMatch
         if bestNight.waitForExistence(timeout: 5) {
             bestNight.tap()
+            Thread.sleep(forTimeInterval: 1)
+            scrollToTop(app)
             expectVisible(app, "Core visible")
             snap(app, "milkyway-best-night")
         }
+        scrollToTop(app)
 
         // Sydney: southern winter is the best season, the core passes high overhead.
         app.buttons["pill.location"].firstMatch.tap()
@@ -277,6 +281,13 @@ final class ScreenshotTests: XCTestCase {
         app.launchArguments += ["-fixedDate", date, "-place", place]
         app.launch()
         return app
+    }
+
+    /// Lists drop rows that scroll off screen, so segmented pickers at the top must be
+    /// scrolled back into view before tapping them.
+    private func scrollToTop(_ app: XCUIApplication) {
+        for _ in 0..<3 { app.swipeDown() }
+        Thread.sleep(forTimeInterval: 0.5)
     }
 
     /// Waits for any element whose label starts with `label` (rows combine label and value).
