@@ -21,7 +21,7 @@ struct PlannerPanelsView: View {
                         Label(kind.title, systemImage: kind.systemImage)
                             .labelStyle(.iconOnly)
                             .font(.subheadline.weight(.semibold))
-                            .frame(maxWidth: .infinity, minHeight: 30)
+                            .frame(maxWidth: .infinity, minHeight: 44)
                             .background(state.selectedPanel == kind ? Color.accentColor.opacity(0.2) : Color.clear,
                                         in: RoundedRectangle(cornerRadius: 8))
                     }

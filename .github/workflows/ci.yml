@@ -60,7 +60,7 @@ jobs:
           TOKEN: ${{ github.token }}
         run: |
           shopt -s nullglob
-          files=("$RUNNER_TEMP"/screenshots/*.png)
+          files=("$RUNNER_TEMP"/screenshots/*.png "$RUNNER_TEMP"/screenshots/*.txt)
           [ ${#files[@]} -gt 0 ] || exit 0
           dir=$(mktemp -d)
           cp "${files[@]}" "$dir"

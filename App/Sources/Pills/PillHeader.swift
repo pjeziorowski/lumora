@@ -54,31 +54,65 @@ struct PillHeader: View {
 /// Previous / next day, a date-and-time picker in the place's time zone, and "Now".
 struct DateBar: View {
     @Environment(PillSession.self) private var session
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     var body: some View {
-        @Bindable var session = session
-        HStack(spacing: 8) {
-            Button {
-                session.shift(days: -1)
-            } label: {
-                Image(systemName: "chevron.left")
+        // At accessibility text sizes the picker gets its own line so the date isn't clipped.
+        if typeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: 4) {
+                picker
+                HStack(spacing: 8) {
+                    previous
+                    next
+                    Spacer()
+                    now
+                }
             }
-            .accessibilityLabel("Previous day")
-            DatePicker("Date and time", selection: $session.instant)
-                .labelsHidden()
-                .environment(\.timeZone, session.timeZone)
-                .frame(maxWidth: .infinity)
-            Button {
-                session.shift(days: 1)
-            } label: {
-                Image(systemName: "chevron.right")
+            .buttonStyle(.borderless)
+        } else {
+            HStack(spacing: 8) {
+                previous
+                picker.frame(maxWidth: .infinity)
+                next
+                now
             }
-            .accessibilityLabel("Next day")
-            Button("Now") {
-                session.resetToNow()
-            }
-            .disabled(session.isToday && abs(session.instant.timeIntervalSinceNow) < 60)
+            .buttonStyle(.borderless)
         }
-        .buttonStyle(.borderless)
+    }
+
+    private var picker: some View {
+        @Bindable var session = session
+        return DatePicker("Date and time", selection: $session.instant)
+            .labelsHidden()
+            .environment(\.timeZone, session.timeZone)
+    }
+
+    private var previous: some View {
+        Button {
+            session.shift(days: -1)
+        } label: {
+            Image(systemName: "chevron.left")
+                .frame(minWidth: 44, minHeight: 44)
+                .contentShape(Rectangle())
+        }
+        .accessibilityLabel("Previous day")
+    }
+
+    private var next: some View {
+        Button {
+            session.shift(days: 1)
+        } label: {
+            Image(systemName: "chevron.right")
+                .frame(minWidth: 44, minHeight: 44)
+                .contentShape(Rectangle())
+        }
+        .accessibilityLabel("Next day")
+    }
+
+    private var now: some View {
+        Button("Now") {
+            session.resetToNow()
+        }
+        .disabled(session.isToday && abs(session.instant.timeIntervalSinceNow) < 60)
     }
 }

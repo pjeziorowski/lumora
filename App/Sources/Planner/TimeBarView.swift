@@ -13,6 +13,8 @@ struct TimeBarView: View {
     let zone: TimeZone
     let clock: ClockStyle
     @State private var showingDatePicker = false
+    /// The ruler grows with Dynamic Type so its hour labels keep room below the ticks.
+    @ScaledMetric(relativeTo: .caption2) private var rulerHeight: CGFloat = 44
 
     var body: some View {
         VStack(spacing: 8) {
@@ -21,6 +23,8 @@ struct TimeBarView: View {
                     state.shift(days: -1)
                 } label: {
                     Image(systemName: "chevron.left")
+                        .frame(minWidth: 44, minHeight: 44)
+                        .contentShape(Rectangle())
                 }
                 .accessibilityLabel("Previous day")
                 Button {
@@ -42,6 +46,8 @@ struct TimeBarView: View {
                     state.shift(days: 1)
                 } label: {
                     Image(systemName: "chevron.right")
+                        .frame(minWidth: 44, minHeight: 44)
+                        .contentShape(Rectangle())
                 }
                 .accessibilityLabel("Next day")
             }
@@ -49,7 +55,7 @@ struct TimeBarView: View {
             .padding(.horizontal)
 
             TimeRuler(state: state, zone: zone, clock: clock)
-                .frame(height: 44)
+                .frame(height: min(rulerHeight, 96))
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
@@ -120,6 +126,8 @@ struct TimeRuler: View {
     @State private var carry: CGFloat = 0
     /// Minutes per point of drag.
     private let minutesPerPoint: CGFloat = 1
+    /// Hour labels follow Dynamic Type.
+    @ScaledMetric(relativeTo: .caption2) private var labelSize: CGFloat = 10
 
     var body: some View {
         Canvas { context, size in
@@ -177,6 +185,16 @@ struct TimeRuler: View {
         // Hour ticks and labels.
         var cal = Calendar(identifier: .gregorian)
         cal.timeZone = zone
+        let resolver = context
+        func label(_ date: Date) -> GraphicsContext.ResolvedText {
+            resolver.resolve(Text(Formatting.clockTime(date, timeZone: zone, style: clock))
+                .font(.system(size: labelSize, weight: .medium).monospacedDigit())
+                .foregroundStyle(.white.opacity(0.85)))
+        }
+        // At large text sizes the labels are wider than an hour: label every second or third hour.
+        let hourWidth = 3600 / (Double(minutesPerPoint) * 60)
+        let widest = cal.date(bySettingHour: 22, minute: 0, second: 0, of: instant).map { label($0).measure(in: size).width } ?? 0
+        let labelEvery = max(1, Int((Double(widest) + 6) / hourWidth) + 1)
         var tick = cal.dateInterval(of: .hour, for: start)?.start ?? start
         while tick <= end {
             let tx = x(tick)
@@ -185,11 +203,8 @@ struct TimeRuler: View {
             let height = isHour ? size.height * 0.3 : size.height * 0.15
             context.fill(Path(CGRect(x: tx - 0.5, y: size.height * 0.45, width: 1, height: height)),
                          with: .color(.white.opacity(isHour ? 0.9 : 0.5)))
-            if isHour {
-                let label = Text(Formatting.clockTime(tick, timeZone: zone, style: clock))
-                    .font(.system(size: 10, weight: .medium).monospacedDigit())
-                    .foregroundStyle(.white.opacity(0.85))
-                context.draw(label, at: CGPoint(x: tx, y: size.height * 0.88))
+            if isHour, cal.component(.hour, from: tick) % labelEvery == 0 {
+                context.draw(label(tick), at: CGPoint(x: tx, y: size.height - 2), anchor: .bottom)
             }
             tick = tick.addingTimeInterval(15 * 60)
         }

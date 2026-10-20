@@ -1,0 +1,806 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "12-hour": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "12-godzinny"
+          }
+        }
+      }
+    },
+    "24-hour": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "24-godzinny"
+          }
+        }
+      }
+    },
+    "About": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informacje"
+          }
+        }
+      }
+    },
+    "Astronomy calculations are ported from Astronomy Engine by Don Cross (MIT licence).": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obliczenia astronomiczne pochodzą z biblioteki Astronomy Engine Dona Crossa (licencja MIT)."
+          }
+        }
+      }
+    },
+    "Augmented reality": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rozszerzona rzeczywistość"
+          }
+        }
+      }
+    },
+    "Camera": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparat"
+          }
+        }
+      }
+    },
+    "Cameras": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparaty"
+          }
+        }
+      }
+    },
+    "Clock": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zegar"
+          }
+        }
+      }
+    },
+    "Continue": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dalej"
+          }
+        }
+      }
+    },
+    "Coordinates": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Współrzędne"
+          }
+        }
+      }
+    },
+    "Coverage": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokrycie"
+          }
+        }
+      }
+    },
+    "Decimal degrees": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stopnie dziesiętne"
+          }
+        }
+      }
+    },
+    "Default camera": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domyślny aparat"
+          }
+        }
+      }
+    },
+    "Degrees, minutes, seconds": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stopnie, minuty, sekundy"
+          }
+        }
+      }
+    },
+    "Depth of field": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Głębia ostrości"
+          }
+        }
+      }
+    },
+    "Eclipses": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaćmienia"
+          }
+        }
+      }
+    },
+    "Events": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zjawiska"
+          }
+        }
+      }
+    },
+    "Exposure": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekspozycja"
+          }
+        }
+      }
+    },
+    "Field of view": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pole widzenia"
+          }
+        }
+      }
+    },
+    "Frame AR": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kadr AR"
+          }
+        }
+      }
+    },
+    "Home Screen": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran główny"
+          }
+        }
+      }
+    },
+    "Imperial": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imperialne"
+          }
+        }
+      }
+    },
+    "Know where the Sun, Moon and Milky Way will be, anywhere and at any time, and work out the shot before you leave.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdź, gdzie będą Słońce, Księżyc i Droga Mleczna, w dowolnym miejscu i czasie, i zaplanuj ujęcie przed wyjściem."
+          }
+        }
+      }
+    },
+    "Light now and the next sunrise, sunset, golden and blue hour.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Światło teraz oraz najbliższy wschód, zachód, złota i niebieska godzina."
+          }
+        }
+      }
+    },
+    "Lock Screen": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran blokady"
+          }
+        }
+      }
+    },
+    "Meteor showers": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roje meteorów"
+          }
+        }
+      }
+    },
+    "Metric": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Metryczne"
+          }
+        }
+      }
+    },
+    "Milky Way": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Droga Mleczna"
+          }
+        }
+      }
+    },
+    "Milky Way AR": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Droga Mleczna AR"
+          }
+        }
+      }
+    },
+    "Moon": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Księżyc"
+          }
+        }
+      }
+    },
+    "My Stuff": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moje"
+          }
+        }
+      }
+    },
+    "Next eclipses": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Najbliższe zaćmienia"
+          }
+        }
+      }
+    },
+    "Next plan": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Najbliższy plan"
+          }
+        }
+      }
+    },
+    "Night AR": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nocne niebo AR"
+          }
+        }
+      }
+    },
+    "Not visible here": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niewidoczne tutaj"
+          }
+        }
+      }
+    },
+    "Now planning for": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planujesz dla"
+          }
+        }
+      }
+    },
+    "Open Lumora to choose a place.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz Lumorę, by wybrać miejsce."
+          }
+        }
+      }
+    },
+    "Peak night": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noc maksimum"
+          }
+        }
+      }
+    },
+    "Photography": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografia"
+          }
+        }
+      }
+    },
+    "Pick how distances and times are shown. You can change these in Settings.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybierz, jak pokazywać odległości i godziny. Możesz to zmienić w Ustawieniach."
+          }
+        }
+      }
+    },
+    "Plan the light": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaplanuj światło"
+          }
+        }
+      }
+    },
+    "Planner": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planer"
+          }
+        }
+      }
+    },
+    "Plans and favourite places, shareable as a file.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plany i ulubione miejsca, do udostępnienia jako plik."
+          }
+        }
+      }
+    },
+    "Plans and widgets": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plany i widżety"
+          }
+        }
+      }
+    },
+    "Save a moment from the Planner as a plan, with a reminder and a calendar event. Add widgets to see the light and your next plan at a glance.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapisz chwilę z Planera jako plan, z przypomnieniem i wydarzeniem w kalendarzu. Dodaj widżety, by od razu widzieć światło i najbliższy plan."
+          }
+        }
+      }
+    },
+    "See the paths over the camera view where you stand.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zobacz ścieżki na obrazie z aparatu tam, gdzie stoisz."
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia"
+          }
+        }
+      }
+    },
+    "Shower": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rój"
+          }
+        }
+      }
+    },
+    "Showers in %@": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roje w %@"
+          }
+        }
+      }
+    },
+    "Skip": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pomiń"
+          }
+        }
+      }
+    },
+    "Spot stars": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gwiazdy bez smug"
+          }
+        }
+      }
+    },
+    "Star trails": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ślady gwiazd"
+          }
+        }
+      }
+    },
+    "Start planning": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zacznij planować"
+          }
+        }
+      }
+    },
+    "Sun": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słońce"
+          }
+        }
+      }
+    },
+    "Sun & Moon AR": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słońce i Księżyc AR"
+          }
+        }
+      }
+    },
+    "Sun, Moon and core directions on a map, with the time bar and panels.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kierunki Słońca, Księżyca i centrum Galaktyki na mapie, z osią czasu i panelami."
+          }
+        }
+      }
+    },
+    "Sun, Moon, Milky Way and next plan, on the Home and Lock Screen.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słońce, Księżyc, Droga Mleczna i najbliższy plan na ekranie głównym i blokady."
+          }
+        }
+      }
+    },
+    "Sun, Moon, Milky Way, meteor showers, eclipses and photography calculators.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słońce, Księżyc, Droga Mleczna, roje meteorów, zaćmienia i kalkulatory fotograficzne."
+          }
+        }
+      }
+    },
+    "The Moon's phase and its next rise or set.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faza Księżyca i jego najbliższy wschód lub zachód."
+          }
+        }
+      }
+    },
+    "Through the night": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W ciągu nocy"
+          }
+        }
+      }
+    },
+    "Time lapse": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poklatkowy"
+          }
+        }
+      }
+    },
+    "Times and directions are worked out for one place. Use where you are now, or choose any place from the place bar later.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Godziny i kierunki są liczone dla jednego miejsca. Użyj bieżącej lokalizacji albo wybierz dowolne miejsce później z paska miejsca."
+          }
+        }
+      }
+    },
+    "Times are always shown in the planned place's own time zone.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Godziny są zawsze podawane w strefie czasowej planowanego miejsca."
+          }
+        }
+      }
+    },
+    "To add a widget, touch and hold the Home Screen or Lock Screen, tap Edit, then Add Widgets, and choose Lumora. Widgets use the place selected here.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aby dodać widżet, przytrzymaj ekran główny lub ekran blokady, stuknij Edytuj, potem Dodaj widżety i wybierz Lumorę. Widżety używają wybranego tu miejsca."
+          }
+        }
+      }
+    },
+    "Tonight": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dziś w nocy"
+          }
+        }
+      }
+    },
+    "Tools": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Narzędzia"
+          }
+        }
+      }
+    },
+    "Units": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jednostki"
+          }
+        }
+      }
+    },
+    "Units and time": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jednostki i czas"
+          }
+        }
+      }
+    },
+    "Use my location": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Użyj mojej lokalizacji"
+          }
+        }
+      }
+    },
+    "Version": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wersja"
+          }
+        }
+      }
+    },
+    "Visible here": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widoczne tutaj"
+          }
+        }
+      }
+    },
+    "When the galactic core is up in a dark sky tonight.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiedy dziś centrum Galaktyki jest nad horyzontem na ciemnym niebie."
+          }
+        }
+      }
+    },
+    "Widget": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widżet"
+          }
+        }
+      }
+    },
+    "Widgets": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widżety"
+          }
+        }
+      }
+    },
+    "Your location stays on this iPhone. Lumora has no account and sends nothing about you anywhere.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Twoja lokalizacja zostaje na tym iPhonie. Lumora nie ma kont i nigdzie nie wysyła danych o Tobie."
+          }
+        }
+      }
+    },
+    "Your next saved plan and the light it expects.": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Twój najbliższy zapisany plan i oczekiwane światło."
+          }
+        }
+      }
+    },
+    "Your place": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Twoje miejsce"
+          }
+        }
+      }
+    },
+    "in %lld min": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "za %lld min"
+          }
+        }
+      }
+    },
+    "in %lldd %lldh": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "za %lld d %lld h"
+          }
+        }
+      }
+    },
+    "in %lldh %@m": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "za %lld h %@ min"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

@@ -39,6 +39,14 @@ struct SettingsView: View {
                 }
                 .accessibilityIdentifier("settings.camera")
             }
+            Section("Widgets") {
+                NavigationLink {
+                    WidgetGalleryView()
+                } label: {
+                    Label("Widgets", systemImage: "square.grid.2x2")
+                }
+                .accessibilityIdentifier("settings.widgets")
+            }
             Section("About") {
                 LabeledContent("Version", value: Bundle.main.shortVersion)
                 Text("Astronomy calculations are ported from Astronomy Engine by Don Cross (MIT licence).")

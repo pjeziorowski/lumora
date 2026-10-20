@@ -55,6 +55,10 @@ struct PlannerView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            // Six buttons leave no room for the title; the tab bar already says "Planner".
+            ToolbarItem(placement: .principal) {
+                Color.clear.frame(width: 1, height: 1).accessibilityHidden(true)
+            }
             ToolbarItem(placement: .topBarLeading) {
                 Button {
                     showingSearch = true
