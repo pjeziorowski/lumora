@@ -376,7 +376,8 @@ final class ScreenshotTests: XCTestCase {
         manhattan.press(forDuration: 1.2)
         expectVisible(app, "Share as text")
         snap(app, "plan-context-menu")
-        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.06)).tap()
+        // Tap the blurred background below the menu to close it.
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.85)).tap()
         Thread.sleep(forTimeInterval: 1)
 
         // Swipe to duplicate.
