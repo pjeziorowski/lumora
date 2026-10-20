@@ -47,7 +47,7 @@ struct RootView: View {
     @ViewBuilder
     private func content(for tab: AppTab) -> some View {
         switch tab {
-        case .planner: PlannerPlaceholderView()
+        case .planner: PlannerView()
         case .pills: ToolsView()
         case .myStuff: PlaceholderView(message: "Saved plans, places and cameras arrive in Phase 7.")
         case .settings: SettingsView()
@@ -56,6 +56,8 @@ struct RootView: View {
 }
 
 #Preview {
-    RootView()
-        .environment(PillSession(defaults: nil))
+    let session = PillSession(defaults: nil)
+    return RootView()
+        .environment(session)
+        .environment(PlannerState(session: session))
 }

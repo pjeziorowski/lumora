@@ -43,6 +43,8 @@ public final class PillSession {
 
     public var timeZone: TimeZone { location.timeZone }
     public var day: LocalDay { LocalDay(containing: instant, timeZone: timeZone) }
+    /// The session's "now" (fixed in screenshots and tests).
+    public var now: Date { clock() }
     public var isToday: Bool { day == LocalDay(containing: clock(), timeZone: timeZone) }
 
     /// Switches place, keeping the same wall-clock date and time at the new place.
@@ -58,6 +60,25 @@ public final class PillSession {
         recents.insert(newLocation, at: 0)
         if recents.count > Self.maxRecents { recents.removeLast(recents.count - Self.maxRecents) }
         persist()
+    }
+
+    /// Moves the place without adding it to the recents (the Planner pin being dragged or
+    /// renamed once its time zone resolves). Keeps the wall-clock time, like `select`.
+    public func move(to newLocation: PillLocation) {
+        guard newLocation != location else { return }
+        var oldCal = Calendar(identifier: .gregorian)
+        oldCal.timeZone = timeZone
+        let wall = oldCal.dateComponents([.year, .month, .day, .hour, .minute, .second], from: instant)
+        location = newLocation
+        var newCal = Calendar(identifier: .gregorian)
+        newCal.timeZone = newLocation.timeZone
+        if let moved = newCal.date(from: wall) { instant = moved }
+        persist()
+    }
+
+    /// Moves the instant by `minutes` (the Planner time bar).
+    public func scrub(minutes: Double) {
+        instant = instant.addingTimeInterval(minutes * 60)
     }
 
     /// Moves by whole local days, keeping the wall-clock time (DST-safe).

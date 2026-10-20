@@ -6,6 +6,7 @@
 // an actor boundary.
 
 import CoreLocation
+import GeoCore
 import MapKit
 import PlannerKit
 
@@ -59,6 +60,15 @@ enum PlaceSearch {
             timeZoneIdentifier: placemark?.timeZone?.identifier
                 ?? PillLocation.nauticalTimeZone(longitude: longitude).identifier
         )
+    }
+
+    /// Name and time zone for a dropped Planner pin; nil when offline or over the sea.
+    /// PlannerKit caches the result per ~1 km cell.
+    static func placeInfo(latitude: Double, longitude: Double) async -> PlaceInfo? {
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        guard let placemark = try? await CLGeocoder().reverseGeocodeLocation(location).first else { return nil }
+        return PlaceInfo(name: placemark.locality ?? placemark.name ?? placemark.administrativeArea,
+                         timeZoneIdentifier: placemark.timeZone?.identifier)
     }
 
     /// One location fix, asking for permission if needed. Gives up after `timeout` seconds.

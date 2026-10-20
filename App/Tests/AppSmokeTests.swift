@@ -2,6 +2,8 @@
 
 import AstroCore
 import Foundation
+import GeoCore
+import MapKit
 import PlannerKit
 import SwiftUI
 import Testing
@@ -12,10 +14,26 @@ struct AppSmokeTests {
         #expect(AppTab.allCases.count == 4)
     }
 
-    @Test func demoLocationsHaveValidTimeZones() {
-        for location in DemoLocation.all {
-            #expect(TimeZone(identifier: location.timeZoneID) != nil)
-        }
+}
+
+@MainActor
+struct PlannerMapTests {
+    /// A line from a pin just west of the antimeridian to a point just east of it stays
+    /// short on the map instead of wrapping round the world.
+    @Test func mapPointsUnwrapAcrossAntimeridian() {
+        let pin = MKMapPoint(CLLocationCoordinate2D(latitude: -16.8, longitude: 179.99))
+        let east = PlannerMapView.Coordinator.mapPoint(GeoPoint(latitude: -16.8, longitude: 180.05), near: pin)
+        let west = PlannerMapView.Coordinator.mapPoint(GeoPoint(latitude: -16.8, longitude: -179.95), near: pin)
+        let world = MKMapSize.world.width
+        #expect(abs(east.x - pin.x) < world / 1000)
+        #expect(abs(west.x - pin.x) < world / 1000)
+        #expect(east.x > pin.x)
+    }
+
+    @Test func polarPointsStayOnTheMap() {
+        let pin = MKMapPoint(CLLocationCoordinate2D(latitude: 85, longitude: 0))
+        let pole = PlannerMapView.Coordinator.mapPoint(GeoPoint(latitude: 90, longitude: 0), near: pin)
+        #expect(pole.x.isFinite && pole.y.isFinite)
     }
 }
 
