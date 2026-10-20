@@ -52,7 +52,9 @@ private struct PlansList: View {
     @Environment(\.modelContext) private var context
     @Environment(PlannerState.self) private var planner
     @Environment(AppNavigation.self) private var navigation
+    @Environment(CameraStore.self) private var cameras
     @AppStorage(SettingsKeys.clockStyle) private var clock: ClockStyle = .twentyFourHour
+    @AppStorage(PlannerOpticsKeys.camera) private var opticsCameraID = ""
     @Query(sort: \PlanRecord.instant) private var records: [PlanRecord]
     @State private var importing = false
     @State private var message: String?
@@ -123,16 +125,20 @@ private struct PlansList: View {
 
     private func open(_ record: PlanRecord) {
         guard let plan = record.plan else { return }
+        // The map's field and depth of field use the plan's camera when it still exists.
+        if let id = plan.cameraID, cameras.camera(id: id) != nil { opticsCameraID = id }
         navigation.tab = .planner
         Task { await planner.apply(plan) }
     }
 
     private func duplicate(_ record: PlanRecord) {
         guard let plan = record.plan else { return }
-        let copy = PlanRecord(plan.duplicated())
+        let duplicate = plan.duplicated()
+        let copy = PlanRecord(duplicate)
         copy.thumbnail = record.thumbnail
         context.insert(copy)
         try? context.save()
+        Task { _ = await PlanReminders.schedule(duplicate) }
     }
 
     private func delete(_ record: PlanRecord) {
@@ -224,7 +230,7 @@ private struct PlacesList: View {
                     if let place = record.place {
                         Button {
                             navigation.tab = .planner
-                            planner.select(place.location)
+                            Task { await planner.select(place.location) }
                         } label: {
                             VStack(alignment: .leading, spacing: 3) {
                                 Text(place.location.name).font(.headline).foregroundStyle(.primary)

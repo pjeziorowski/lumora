@@ -88,7 +88,7 @@ public final class PillSession {
         if let moved = cal.date(byAdding: .day, value: days, to: instant) { instant = moved }
     }
 
-    /// Jumps to the first day of the month `months` away, keeping the wall-clock time.
+    /// Moves by `months` calendar months, keeping the day of month (clamped) and the wall-clock time.
     public func shift(months: Int) {
         var cal = Calendar(identifier: .gregorian)
         cal.timeZone = timeZone

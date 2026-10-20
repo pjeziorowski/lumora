@@ -33,6 +33,14 @@ pass. Tests: `Packages/PlannerKit/Tests/PlannerKitTests/ARTests.swift`; screensh
 | Southern sky: south pole, no Polaris; midnight sun at 78°N: path never below the horizon | pass |
 | Sun marker equals AstroCore's position | exact |
 
+## Lens frame
+
+The frame mode draws the selected camera and focal length as the rectangle
+`ARProjector.lensFrame` returns (2·focal·tan(angle/2) per side, centred). The sensor is
+taken in the orientation the phone is held, so a landscape screen shows a landscape frame
+(`lensFrameFollowsOrientation`: 50 mm full frame at a 491 pt focal is 235.8 × 353.5 pt
+upright and the same swapped sideways).
+
 ## The ~2° outdoor criterion
 
 Phone compasses are typically off by several degrees and the horizon by about a degree, so

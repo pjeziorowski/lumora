@@ -35,6 +35,7 @@ public struct PlannerEvents: Sendable, Hashable {
         hasher.combine(night)
     }
 
+    /// Stops searching early, returning what it has, when the calling task is cancelled.
     public static func compute(location: PillLocation, instant: Date) -> PlannerEvents {
         let zone = location.timeZone
         let night = MeteorShowerCalendar.night(containing: instant, timeZone: zone)
@@ -55,7 +56,7 @@ public struct PlannerEvents: Sendable, Hashable {
         var central: EclipseSummary?
         var line: [GeoPoint] = []
         var t = AstroTime(start)
-        for _ in 0..<8 {
+        for _ in 0..<8 where !Task.isCancelled {
             guard let e = Eclipses.nextGlobalSolarEclipse(after: t) else { break }
             if e.latitude != nil, e.kind == .total || e.kind == .annular {
                 central = EclipseCalendar.summary(e, observer: location.observer)
@@ -119,7 +120,7 @@ public struct PlannerEvents: Sendable, Hashable {
             return rows
         }
         var rows = [PanelRow("Next here", next.title), PanelRow("Date", Self.date(next.peak, zone: zone))]
-        let shown = next.contacts.filter { next.body == .sun || next.kind == .penumbral || !$0.label.hasPrefix("Penumbral") }
+        let shown = next.contacts.filter { next.body == .sun || next.kind == .penumbral || !$0.phase.isPenumbral }
         for contact in shown {
             rows.append(PanelRow(contact.label, "\(time(contact.time)) · \(Formatting.degrees(contact.altitude, decimals: 0))"))
         }

@@ -1,7 +1,7 @@
 # Phase 9 acceptance: meteor showers and eclipses
 
-Measured with `scripts/test-packages.sh` (Swift 6.1.3, Linux x86-64). AstroCore: 42 tests
-pass; PlannerKit: 83 tests pass. Tests: `Packages/AstroCore/Tests/AstroCoreTests/EclipseTests.swift`,
+Measured with `scripts/test-packages.sh` (Swift 6.1.3, Linux x86-64). AstroCore: 43 tests
+pass; PlannerKit: 92 tests pass. Tests: `Packages/AstroCore/Tests/AstroCoreTests/EclipseTests.swift`,
 `MeteorShowerTests.swift` and `Packages/PlannerKit/Tests/PlannerKitTests/EventsTests.swift`;
 screenshots from `App/UITests/ScreenshotTests.swift` (`testPhase9Events`).
 
@@ -17,7 +17,8 @@ shadow cone edge touches the Moon or the observer.
 | Lunar contacts P1, U1, U2, greatest, U3, U4, P4 for the total lunar eclipses of 2019 Jan 21, 2022 Nov 08, 2025 Mar 14 (NASA/GSFC, F. Espenak) | max 39 s |
 | Solar greatest eclipse time and place, 1999 Aug 11, 2017 Aug 21, 2024 Apr 08, 2026 Aug 12 (NASA; TD → UT with NASA's ΔT) | time max 10 s, place max 0.049° |
 | Lunar eclipse kinds 2017–2022, solar kinds (annular 2019 Dec 26, partial 2025 Mar 29) | all match NASA |
-| Dallas 2024 Apr 08: total, totality 3 m 40 s – 4 m 05 s, greatest near 18:42:37 UT | pass |
+| Local C1, C2, C3, C4 for 2024 Apr 08 at Dallas, Waco and Carbondale (total) and Houston and El Paso (partial, plus maximum, magnitude and obscuration) (F. Espenak, *Observer's Handbook 2024*, RASC, Tables 5 and 6) | time max 5 s, magnitude and obscuration max 0.001 |
+| Dallas 2024 Apr 08: total, totality 3 m 40 s – 4 m 05 s, maximum within 1 min of mid-totality (18:42:38 UT, from Espenak's C2 and C3) | pass |
 | Warsaw 2026 Aug 12: partial, magnitude 0.86, the Sun sets during the eclipse | pass |
 | Centre line 2017 Aug 21 crosses the Oregon coast at ≈44.6° N about 17:16 UT and South Carolina at ≈33° N | within 0.6° and 3 min |
 

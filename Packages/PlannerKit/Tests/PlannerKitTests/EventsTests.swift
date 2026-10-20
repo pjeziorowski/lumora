@@ -58,10 +58,23 @@ struct EventsTests {
         let august = list[2]
         #expect(august.visibleHere && august.kind == .total && august.localKind == .partial)
         #expect(august.contacts.first?.label == "Partial begins")
+        #expect(august.contacts.map(\.phase) == [.partialBegin, .greatest, .partialEnd])
+        // Contacts are told apart by phase, not by their English label.
+        let lunar = try #require(list.first { $0.body == .moon })
+        #expect(lunar.contacts.first?.phase.isPenumbral == true && Set(lunar.contacts.map(\.id)).count == lunar.contacts.count)
         #expect((august.magnitude ?? 0) > 0.8)
         // The 3 Mar total lunar eclipse is seen from New York before dawn.
         let ny = EclipseCalendar.upcoming(location: newYork, from: utc("2026-02-20T00:00:00Z"), count: 1)
         #expect(ny.first?.title == "Total lunar eclipse" && ny.first?.visibleHere == true)
+    }
+
+    @Test func cancelledEventsStopEarly() async {
+        let task = Task.detached { () -> PlannerEvents in
+            withUnsafeCurrentTask { $0?.cancel() }
+            return PlannerEvents.compute(location: self.warsaw, instant: self.utc("2026-08-12T20:00:00Z"))
+        }
+        let events = await task.value
+        #expect(events.visibleEclipses.isEmpty && events.nextCentral == nil && events.centralLine.isEmpty)
     }
 
     @MainActor

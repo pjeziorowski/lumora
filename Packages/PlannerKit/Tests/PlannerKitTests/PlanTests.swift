@@ -44,6 +44,51 @@ struct PlanTests {
         #expect(throws: PlanArchive.ImportError.newerVersion(99)) { try PlanArchive.decode(future) }
     }
 
+    @Test func importMergesById() {
+        let stored = Self.sample()
+        var newer = stored
+        newer.name = "Renamed"
+        newer.instant = stored.instant.addingTimeInterval(3600)
+        let fresh = Plan(name: "Fresh", location: PillLocation.samples[0], instant: Date(timeIntervalSince1970: 0))
+        let place = SavedPlace(location: PillLocation.samples[4])
+        let other = SavedPlace(location: PillLocation.samples[3])
+        // The archive repeats ids: the last copy of a plan wins, the first of a place.
+        let archive = PlanArchive(plans: [stored, fresh, newer], places: [place, other, place])
+        let merge = archive.merge(intoPlans: [stored.id], places: [place.id])
+        #expect(merge.replaced == [newer])
+        #expect(merge.added == [fresh])
+        #expect(merge.addedPlaces == [other])
+        #expect(merge.count == 3)
+        // Empty archive or empty library.
+        #expect(PlanArchive(plans: []).merge(intoPlans: [stored.id], places: []).count == 0)
+        let intoEmpty = archive.merge(intoPlans: [], places: [])
+        #expect(intoEmpty.added.map(\.name) == ["Renamed", "Fresh"] && intoEmpty.addedPlaces.count == 2)
+    }
+
+    @Test func olderStoredPlansStillDecode() throws {
+        // A plan and place as an earlier build might have stored them: only the core keys.
+        let json = """
+        {"id":"6A8E2C1D-3B4F-4E5A-9C7D-1E2F3A4B5C6D","name":"Old plan","instant":800000000,
+         "location":{"name":"Warsaw","latitude":52.2297,"longitude":21.0122,"elevation":100,
+                     "timeZoneIdentifier":"Europe/Warsaw"}}
+        """
+        let plan = try JSONDecoder().decode(Plan.self, from: Data(json.utf8))
+        #expect(plan.name == "Old plan" && plan.location.name == "Warsaw")
+        #expect(plan.instant == Date(timeIntervalSinceReferenceDate: 800_000_000))
+        #expect(plan.eyeHeight == 1.7 && plan.layers == .all && plan.mapStyle == .standard)
+        #expect(plan.panel == PlannerPanelKind.pin.rawValue && plan.target == nil && plan.reminderMinutes == nil)
+        #expect(plan.created == plan.instant && plan.modified == plan.instant)
+        let placeJSON = """
+        {"id":"0B1C2D3E-4F50-4617-8293-A4B5C6D7E8F9","location":{"name":"Tromsø","latitude":69.6496,
+         "longitude":18.956,"elevation":0,"timeZoneIdentifier":"Europe/Oslo"}}
+        """
+        let place = try JSONDecoder().decode(SavedPlace.self, from: Data(placeJSON.utf8))
+        #expect(place.notes.isEmpty && place.location.name == "Tromsø")
+        // A full plan still decodes to itself through the explicit decoder.
+        let sample = Self.sample()
+        #expect(try JSONDecoder().decode(Plan.self, from: JSONEncoder().encode(sample)) == sample)
+    }
+
     @Test func duplicateAndReminder() {
         let plan = Self.sample()
         let copy = plan.duplicated(now: Date(timeIntervalSince1970: 1000))

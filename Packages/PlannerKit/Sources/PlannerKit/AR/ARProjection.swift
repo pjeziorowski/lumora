@@ -10,6 +10,7 @@
 // user, so the back camera looks along −z.
 
 import Foundation
+import OpticsCore
 
 /// A direction or point in the local east-north-up frame.
 public struct ARVector: Sendable, Hashable {
@@ -128,6 +129,11 @@ public enum ARScreenOrientation: String, Sendable, Hashable, Codable, CaseIterab
     /// Interface landscape-right (device top to the left): right = −y, up = +x.
     case landscapeRight
 
+    public var isLandscape: Bool { self == .landscapeLeft || self == .landscapeRight }
+
+    /// How the camera's sensor is held when the screen has this orientation.
+    public var sensorOrientation: Orientation { isLandscape ? .landscape : .portrait }
+
     func axes(_ a: ARAttitude) -> (right: ARVector, up: ARVector) {
         switch self {
         case .portrait: (a.x, a.y)
@@ -161,6 +167,20 @@ public struct ARCalibration: Sendable, Hashable, Codable {
 }
 
 /// A point on the preview in points from the top-left corner.
+public struct ARScreenRect: Sendable, Hashable {
+    public var x: Double
+    public var y: Double
+    public var width: Double
+    public var height: Double
+
+    public init(x: Double, y: Double, width: Double, height: Double) {
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+    }
+}
+
 public struct ARScreenPoint: Sendable, Hashable {
     public var x: Double
     public var y: Double
@@ -197,6 +217,7 @@ public enum ARLens {
 
 /// Projects world directions onto the preview with a pinhole model.
 public struct ARProjector: Sendable {
+    public let orientation: ARScreenOrientation
     public let forward: ARVector
     public let right: ARVector
     public let up: ARVector
@@ -206,6 +227,7 @@ public struct ARProjector: Sendable {
 
     public init(attitude: ARAttitude, orientation: ARScreenOrientation = .portrait, calibration: ARCalibration = .none,
                 focal: Double, width: Double, height: Double) {
+        self.orientation = orientation
         let axes = orientation.axes(attitude)
         var f = (attitude.z * -1).normalized
         var r = axes.right.normalized
@@ -244,6 +266,14 @@ public struct ARProjector: Sendable {
         guard level.length > 1e-9 else { return 0 }
         let r0 = level.normalized
         return atan2(r0.cross(right).dot(forward), r0.dot(right)) * 180 / .pi
+    }
+
+    /// The rectangle a lens covering these angles (degrees, across the screen and up it)
+    /// fills, centred on screen: 2·focal·tan(angle/2) on each side.
+    public func lensFrame(horizontalFieldOfView h: Double, verticalFieldOfView v: Double) -> ARScreenRect {
+        let w = 2 * focal * tan(h / 2 * .pi / 180)
+        let hh = 2 * focal * tan(v / 2 * .pi / 180)
+        return ARScreenRect(x: width / 2 - w / 2, y: height / 2 - hh / 2, width: w, height: hh)
     }
 
     public var horizontalFieldOfView: Double { ARLens.fieldOfView(size: width, focal: focal) }

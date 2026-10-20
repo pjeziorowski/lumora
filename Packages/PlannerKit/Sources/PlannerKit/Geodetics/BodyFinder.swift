@@ -7,7 +7,10 @@
 // Method: the body is sampled every 5 minutes; crossings of the target azimuth (and of the
 // target elevation) are bracketed and refined by bisection to under a second. A crossing
 // is a match when the other coordinate is within its tolerance. Matches closer than an hour
-// are merged, keeping the one with the smallest normalised error.
+// are merged, keeping the one with the smallest normalised error. Azimuth steps of 90° or
+// more between samples are taken as the ±180° wrap, not a crossing; a body passing within
+// about 1° of the zenith can turn that fast in 5 minutes, so such a crossing may be missed.
+// The search stops early (returning no matches) when its task is cancelled.
 
 import AstroCore
 import Foundation
@@ -86,6 +89,7 @@ public enum BodyFinder {
         var t = query.start
         var prev = sample(query, at: t, observer: observer)
         while t < end {
+            if Task.isCancelled { return [] }
             let next = min(t.addingTimeInterval(step), end)
             let cur = sample(query, at: next, observer: observer)
             if let a0 = prev.az, let a1 = cur.az, a0 * a1 <= 0, a0 != a1, abs(a1 - a0) < 90 {

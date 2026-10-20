@@ -82,11 +82,12 @@ final class ARCamera {
         guard allowed else { return false }
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
               let input = try? AVCaptureDeviceInput(device: device) else { return false }
-        fieldOfView = Double(device.activeFormat.videoFieldOfView)
         session.beginConfiguration()
         session.sessionPreset = .photo
         if session.canAddInput(input) { session.addInput(input) }
         session.commitConfiguration()
+        // Read after the preset is committed, so it describes the format being streamed.
+        fieldOfView = Double(device.activeFormat.videoFieldOfView)
         let session = session
         await Task.detached { session.startRunning() }.value
         running = true

@@ -200,7 +200,9 @@ public struct LunarYear: Sendable, Hashable {
                 quarter: q.quarter, time: q.time.date, distanceKm: distance,
                 size: principal ? MoonSize.classify(distanceKm: distance, rule: rule) : .regular,
                 isMonthlyBlueMoon: monthlyBlue.contains(q.time.ut),
-                isSeasonalBlueMoon: q.quarter == .full && seasonalBlue.contains { abs($0.ut - q.time.ut) < 1e-6 })
+                // Two independent phase searches agree to the root tolerance (0.1 s), so
+                // match within a minute rather than by exact time.
+                isSeasonalBlueMoon: q.quarter == .full && seasonalBlue.contains { abs($0.ut - q.time.ut) < 60.0 / 86_400 })
         }
         return LunarYear(year: year, phases: phases, apsides: Lunar.apsides(from: start, to: end))
     }

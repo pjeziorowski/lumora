@@ -112,10 +112,11 @@ struct DistanceRow: View {
 
     var body: some View {
         let factor = units == .metric ? 1000.0 : 304.8
+        let range = 0.01...100_000.0
         NumberRow(label: label, value: Binding(
             get: { (millimetres / factor * 100).rounded() / 100 },
-            set: { millimetres = max(1, $0) * factor }
-        ), unit: units == .metric ? "m" : "ft", step: units == .metric ? 0.5 : 1, range: 0.01...100_000, decimals: 2)
+            set: { millimetres = min(max(range.lowerBound, $0), range.upperBound) * factor }
+        ), unit: units == .metric ? "m" : "ft", step: units == .metric ? 0.5 : 1, range: range, decimals: 2)
     }
 }
 

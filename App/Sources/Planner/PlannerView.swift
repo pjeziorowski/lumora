@@ -133,7 +133,7 @@ struct PlannerView: View {
             }
         }
         .sheet(isPresented: $showingSearch) {
-            LocationPickerView { place in state.select(place) }
+            LocationPickerView { place in Task { await state.select(place) } }
         }
         .sheet(isPresented: $showingTargetSheet) {
             PlannerTargetSheet()
@@ -216,7 +216,7 @@ struct PlannerView: View {
         Task {
             defer { locating = false }
             do {
-                state.select(try await PlaceSearch.currentLocation())
+                await state.select(try await PlaceSearch.currentLocation())
             } catch {
                 locationError = error.localizedDescription
             }

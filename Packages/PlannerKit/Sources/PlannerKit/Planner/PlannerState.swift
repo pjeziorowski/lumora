@@ -105,7 +105,8 @@ public final class PlannerState {
     public func refresh() {
         let request = Request(location: session.location, instant: session.instant, thresholds: session.thresholds)
         if let snapshot, snapshot.location == request.location,
-           abs(snapshot.instant.timeIntervalSince(request.instant)) < 30, pending == nil {
+           abs(snapshot.instant.timeIntervalSince(request.instant)) < 30, pending == nil, worker == nil {
+            // An in-flight computation for another instant would overwrite this snapshot.
             return
         }
         pending = request
@@ -140,10 +141,17 @@ public final class PlannerState {
     // MARK: Place
 
     /// A place chosen from search or the picker: recentres the map.
-    public func select(_ location: PillLocation) {
+    /// A place without a known elevation (0) gets its ground elevation looked up, as a
+    /// dropped pin does, so the observer height does not depend on how the place was chosen.
+    public func select(_ location: PillLocation) async {
+        pinGeneration += 1
+        let generation = pinGeneration
+        resolvingPin = false
         session.select(location)
         recenterToken += 1
         refresh()
+        guard location.elevation == 0 else { return }
+        await applyGroundElevation(latitude: location.latitude, longitude: location.longitude, generation: generation)
     }
 
     /// The pin was dropped or dragged on the map. The place moves at once (with a cached
@@ -154,6 +162,8 @@ public final class PlannerState {
         let lon = Geodesy.normalizeLongitude(longitude)
         pinGeneration += 1
         let generation = pinGeneration
+        // A superseded lookup never clears the badge itself.
+        resolvingPin = false
         let fallbackName = Formatting.coordinate(latitude: lat, longitude: lon, style: .decimal)
         let cached = await placeLookup.cached(latitude: lat, longitude: lon)
         guard generation == pinGeneration else { return }
@@ -170,8 +180,13 @@ public final class PlannerState {
                                           timeZoneIdentifier: resolved.timeZoneIdentifier))
             refresh()
         }
-        // Ground elevation of the new spot (the observer stands on it).
-        guard let ground = await elevations.elevation(latitude: lat, longitude: lon), generation == pinGeneration else { return }
+        await applyGroundElevation(latitude: lat, longitude: lon, generation: generation)
+    }
+
+    /// Ground elevation of the observer's spot, applied unless the place changed meanwhile.
+    private func applyGroundElevation(latitude: Double, longitude: Double, generation: Int) async {
+        guard let ground = await elevations.elevation(latitude: latitude, longitude: longitude),
+              generation == pinGeneration else { return }
         var placed = session.location
         placed.elevation = ground
         session.move(to: placed)
@@ -240,7 +255,8 @@ public final class PlannerState {
         eventsTask?.cancel()
         let instant = session.instant
         eventsTask = Task {
-            let result = await Task.detached(priority: .utility) { PlannerEvents.compute(location: location, instant: instant) }.value
+            let compute = Task.detached(priority: .utility) { PlannerEvents.compute(location: location, instant: instant) }
+            let result = await withTaskCancellationHandler { await compute.value } onCancel: { compute.cancel() }
             guard !Task.isCancelled, self.eventsKey == EventsKey(location: location, night: night) else { return }
             self.events = result
             self.eventsTask = nil
@@ -289,10 +305,12 @@ public final class PlannerState {
 
     // MARK: Find
 
-    /// Runs a Find search for the current place off the main actor.
+    /// Runs a Find search for the current place off the main actor. Cancelling the calling
+    /// task stops the search (it then returns no matches).
     public func find(_ query: FindQuery) async -> [FindMatch] {
         let observer = session.location.observer
-        return await Task.detached(priority: .userInitiated) { BodyFinder.find(query, observer: observer) }.value
+        let search = Task.detached(priority: .userInitiated) { BodyFinder.find(query, observer: observer) }
+        return await withTaskCancellationHandler { await search.value } onCancel: { search.cancel() }
     }
 
     /// Moves the Planner to a Find result.

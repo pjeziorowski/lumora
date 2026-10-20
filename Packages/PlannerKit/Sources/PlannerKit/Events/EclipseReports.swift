@@ -9,11 +9,19 @@ import Foundation
 import GeoCore
 
 public struct EclipseContact: Sendable, Hashable, Identifiable {
+    /// Which contact this is; logic uses this, never the display label.
+    public enum Phase: String, Sendable, Hashable {
+        case penumbralBegin, partialBegin, centralBegin, greatest, centralEnd, partialEnd, penumbralEnd
+
+        public var isPenumbral: Bool { self == .penumbralBegin || self == .penumbralEnd }
+    }
+
+    public let phase: Phase
     public let label: String
     public let time: Date
     /// Altitude of the eclipsed body (Sun or Moon) in degrees.
     public let altitude: Double
-    public var id: String { label }
+    public var id: Phase { phase }
 }
 
 public struct EclipseSummary: Sendable, Hashable, Identifiable {
@@ -61,12 +69,12 @@ public enum EclipseCalendar {
         var lunar: [EclipseSummary] = []
         var solar: [EclipseSummary] = []
         var t = AstroTime(start)
-        while lunar.count < count, let e = Eclipses.nextLunarEclipse(after: t) {
+        while lunar.count < count, !Task.isCancelled, let e = Eclipses.nextLunarEclipse(after: t) {
             lunar.append(summary(e, observer: observer))
             t = e.peak.addingDays(10)
         }
         t = AstroTime(start)
-        while solar.count < count, let e = Eclipses.nextGlobalSolarEclipse(after: t) {
+        while solar.count < count, !Task.isCancelled, let e = Eclipses.nextGlobalSolarEclipse(after: t) {
             solar.append(summary(e, observer: observer))
             t = e.peak.addingDays(10)
         }
@@ -80,15 +88,16 @@ public enum EclipseCalendar {
     }
 
     static func summary(_ e: LunarEclipse, observer: Observer) -> EclipseSummary {
-        let labelled: [(String, AstroTime?)] = [
-            ("Penumbral begins", e.penumbralBegin), ("Partial begins", e.partialBegin), ("Total begins", e.totalBegin),
-            ("Greatest", e.peak), ("Total ends", e.totalEnd), ("Partial ends", e.partialEnd), ("Penumbral ends", e.penumbralEnd),
+        let labelled: [(EclipseContact.Phase, String, AstroTime?)] = [
+            (.penumbralBegin, "Penumbral begins", e.penumbralBegin), (.partialBegin, "Partial begins", e.partialBegin),
+            (.centralBegin, "Total begins", e.totalBegin), (.greatest, "Greatest", e.peak), (.centralEnd, "Total ends", e.totalEnd),
+            (.partialEnd, "Partial ends", e.partialEnd), (.penumbralEnd, "Penumbral ends", e.penumbralEnd),
         ]
-        let contacts = labelled.compactMap { label, time in
-            time.map { EclipseContact(label: label, time: $0.date, altitude: moonAltitude($0, observer)) }
+        let contacts = labelled.compactMap { phase, label, time in
+            time.map { EclipseContact(phase: phase, label: label, time: $0.date, altitude: moonAltitude($0, observer)) }
         }
         // Visible when the Moon is up during the umbral phase (or any of a penumbral one).
-        let phase = e.kind == .penumbral ? contacts : contacts.filter { !$0.label.hasPrefix("Penumbral") }
+        let phase = e.kind == .penumbral ? contacts : contacts.filter { !$0.phase.isPenumbral }
         let visible = phase.contains { $0.altitude > 0 } || moonUpBetween(phase, observer)
         return EclipseSummary(body: .moon, kind: e.kind, peak: e.peak.date, visibleHere: visible, contacts: contacts,
                               magnitude: nil, obscuration: e.obscuration, greatestPoint: nil, localKind: nil)
@@ -101,13 +110,14 @@ public enum EclipseCalendar {
             return EclipseSummary(body: .sun, kind: e.kind, peak: e.peak.date, visibleHere: false, contacts: [],
                                   magnitude: nil, obscuration: nil, greatestPoint: greatest, localKind: nil)
         }
-        let labelled: [(String, EclipseEvent?)] = [
-            ("Partial begins", local.partialBegin), ("\(local.kind == .annular ? "Annular" : "Total") begins", local.totalBegin),
-            ("Greatest", local.peak), ("\(local.kind == .annular ? "Annular" : "Total") ends", local.totalEnd),
-            ("Partial ends", local.partialEnd),
+        let central = local.kind == .annular ? "Annular" : "Total"
+        let labelled: [(EclipseContact.Phase, String, EclipseEvent?)] = [
+            (.partialBegin, "Partial begins", local.partialBegin), (.centralBegin, "\(central) begins", local.totalBegin),
+            (.greatest, "Greatest", local.peak), (.centralEnd, "\(central) ends", local.totalEnd),
+            (.partialEnd, "Partial ends", local.partialEnd),
         ]
-        let contacts = labelled.compactMap { label, event in
-            event.map { EclipseContact(label: label, time: $0.time.date, altitude: $0.altitude) }
+        let contacts = labelled.compactMap { phase, label, event in
+            event.map { EclipseContact(phase: phase, label: label, time: $0.time.date, altitude: $0.altitude) }
         }
         return EclipseSummary(body: .sun, kind: e.kind, peak: local.peak.time.date, visibleHere: true, contacts: contacts,
                               magnitude: local.magnitude, obscuration: local.obscuration, greatestPoint: greatest,

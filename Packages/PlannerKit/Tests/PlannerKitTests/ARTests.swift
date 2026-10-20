@@ -11,6 +11,7 @@
 
 import AstroCore
 import Foundation
+import OpticsCore
 import Testing
 @testable import PlannerKit
 
@@ -120,6 +121,25 @@ struct ARTests {
         let full = ARLens.focalPoints(cameraFieldOfView: 60, width: 300, height: 400)
         #expect(abs(ARLens.fieldOfView(size: 400, focal: full) - 60) < 1e-9)
         #expect(abs(ARLens.fieldOfView(size: 300, focal: full) - 2 * atan(tan(30 * Double.pi / 180) * 0.75) * 180 / .pi) < 1e-9)
+    }
+
+    @Test func lensFrameFollowsOrientation() {
+        // 50 mm on full frame covers 27.0° × 39.6° held upright (portrait), 39.6° × 27.0°
+        // held sideways. At a 491 pt focal length the frame is 2·491·tan(angle/2) per side.
+        func frame(_ screen: ARScreenOrientation, width: Double, height: Double) -> ARScreenRect {
+            let fov = FieldOfView.compute(sensor: .fullFrame, focalLength: 50, distance: 5000,
+                                          orientation: screen.sensorOrientation)
+            let p = ARProjector(attitude: ARAttitude(azimuth: 180, elevation: 10), orientation: screen, focal: 491, width: width, height: height)
+            return p.lensFrame(horizontalFieldOfView: fov.horizontal, verticalFieldOfView: fov.vertical)
+        }
+        let portrait = frame(.portrait, width: 393, height: 680)
+        #expect(abs(portrait.width - 235.8) < 0.5 && abs(portrait.height - 353.5) < 0.5)
+        #expect(abs(portrait.x + portrait.width / 2 - 196.5) < 1e-9 && abs(portrait.y + portrait.height / 2 - 340) < 1e-9)
+        for screen in [ARScreenOrientation.landscapeLeft, .landscapeRight] {
+            let landscape = frame(screen, width: 852, height: 393)
+            #expect(abs(landscape.width - portrait.height) < 1e-9 && abs(landscape.height - portrait.width) < 1e-9)
+        }
+        #expect(ARScreenOrientation.portraitUpsideDown.sensorOrientation == .portrait)
     }
 
     @Test func nightFeatures() {
