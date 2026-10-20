@@ -18,7 +18,7 @@ Each calculator family is checked against at least two independent public source
 | Field of view | Canon EF 50mm f/1.8 STM and EF 85mm f/1.8 USM specifications (H, V, diagonal) | Nikon AF-S 85mm f/1.8G and ZEISS Milvus 1.4/50 specifications; standard 50/24 mm angles | 4 lenses × 3 angles | 1.0° (makers round to whole degrees) |
 | Exposure value | ISO 2720 / sunny-16 (f/1 1 s = 0; f/16 1/125 ≈ 15) | Wikipedia "Exposure value", Table 1 | 7 aperture/shutter pairs + ISO offset | 0.17 EV (marked f-numbers are rounded) |
 | NPF | Light Stalking, "NPF rule" (D750, 24 mm f/2.8: 11.54 s) | Fstoppers, NPF article (5D Mark IV and α7R IV, 16 mm f/2.8: 16.2 s, 13.1 s) | 3 bodies | 0.06 s (the article truncates) |
-| NPF accurate | Light Stalking: the accurate mode comes out at about half the simple rule (11.02 → 5.51 s) | — (no second published value found; formula as in the NPF rule's full form) | 1 case | ratio 0.47 vs 0.5 |
+| NPF accurate | Light Stalking: the accurate mode comes out at about half the simple rule (11.02 → 5.51 s) | — (no second published value found; formula: F. Michaud's full NPF rule, Société Astronomique du Havre) | 1 case | ratio 0.47 vs 0.5 |
 | 500 rule | Light Stalking (24 mm ≈ 21 s) | astrophotography.utils.com formula t = 500/(f × crop) | 2 | exact |
 | ND filters | factor 2^stops (1/30 s + 10 stops = 34 s) | brand factors and optical densities (ND1000 = 3.0) | 22 filters | 0.01 stop |
 | Star trails | sidereal day 86 164 s (IERS) | star-trail.utils.com: 15°/h rotation | full circle, 30 s | 2 s per day |

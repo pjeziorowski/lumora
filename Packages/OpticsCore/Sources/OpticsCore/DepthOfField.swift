@@ -46,7 +46,8 @@ public struct DoFResult: Sendable, Hashable {
     /// Sharp zone in front of and behind the subject.
     public let inFront: Double
     public var behind: Double { far - subject }
-    let subject: Double
+    /// The focus distance used, after clamping beyond the focal length.
+    public let subject: Double
     /// In front : behind, as a fraction in front (0.5 = even split; 0 when behind is infinite).
     public var frontFraction: Double { far.isInfinite ? 0 : inFront / total }
 }

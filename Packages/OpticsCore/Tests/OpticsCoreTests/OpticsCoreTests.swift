@@ -25,7 +25,8 @@
 //  [FS] Fstoppers, "Using the NPF rule for photographing night skies": EOS 5D Mark IV
 //       (36 mm, 6720 px → 5.36 µm) at 16 mm f/2.8 → 16.2 s; α7R IV (3.75 µm) → 13.1 s.
 //       Light Stalking reports the accurate NPF mode of a popular calculator at half the
-//       simple rule (11.02 s → 5.51 s).
+//       simple rule (11.02 s → 5.51 s). The accurate form's coefficients (16.856, 0.0997,
+//       13.713) are Frédéric Michaud's full NPF rule (Société Astronomique du Havre).
 // DOFMaster and the brief use the Greenleaf thin-lens formulas implemented here; other
 // calculators drop the "+ f" term, which the tests bound to within 1% at normal distances.
 
@@ -138,7 +139,8 @@ struct DepthOfFieldTests {
 
     @Test func zeissMilvusTable() {
         // The table's infinity row (f/1.4 sharp from 60 m) fixes the true focal length the
-        // tables use: f = √(60 000 · 1.4 · 0.033) = 52.65 mm. Distances are measured from the
+        // tables use: f = √(60 000 · 1.4 · 0.033) = 52.65 mm. That one fitted parameter comes
+        // from a cell outside the matrix below, so the 20 compared cells stay independent. Distances are measured from the
         // image plane, so convert to object distance and add the image distance back.
         let f = (60_000 * 1.4 * 0.033).squareRoot()
         #expect(abs(f - 52.65) < 0.01)
@@ -164,7 +166,7 @@ struct DepthOfFieldTests {
         #expect(DepthOfField.objectDistance(fromImagePlane: 150, focalLength: 50) == 100)
         // Focus inside the focal length is clamped to just beyond it: limits stay positive.
         let r = DepthOfField.compute(DoFInput(focalLength: 100, aperture: 4, distance: 10, coc: 0.03))
-        #expect(r.near > 0 && r.far > r.near && r.near <= 101)
+        #expect(r.near > 0 && r.far > r.near && r.near <= 101 && r.subject == 101)
         // Macro: 100 mm at 0.3 m keeps a few millimetres of depth.
         let macro = DepthOfField.compute(DoFInput(focalLength: 100, aperture: 8, distance: 300, coc: 0.03))
         #expect(macro.total > 1 && macro.total < 5)
@@ -284,6 +286,7 @@ struct NightSkyTests {
         let accurate = SpotStars.npfAccurate(aperture: 2.8, pixelPitchMicrons: 5.97, focalLength: 24)
         // [FS]/Light Stalking: the accurate rule comes out at about half the simple one.
         #expect(abs(accurate / equator - 0.5) < 0.05)
+        // Regression pin (the formula's own output, not a published value).
         #expect(abs(accurate - 5.48) < 0.01)
         #expect(SpotStars.npf(aperture: 2.8, pixelPitchMicrons: 5.97, focalLength: 24, declination: 90).isFinite)
     }
