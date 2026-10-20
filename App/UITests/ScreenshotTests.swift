@@ -447,7 +447,7 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "ar-calibration-sheet")
         app.buttons["ar.calibration.align"].firstMatch.tap()
         Thread.sleep(forTimeInterval: 1.5)
-        snap(app, "ar-aligned-on-sun")
+        snap(app, "ar-aligned-on-moon")
         app.buttons["Close"].firstMatch.tap()
         app.terminate()
 
@@ -517,8 +517,11 @@ final class ScreenshotTests: XCTestCase {
         openRow(app, app.buttons["meteors.PER"].firstMatch)
         expectVisible(app, "Best time")
         snap(app, "meteor-perseids-night-warsaw")
-        goBack(app)
-        goBack(app)
+        app.terminate()
+
+        // The eclipse list starts at the session day, so open it on the morning of the eclipse.
+        app = launch(date: "2026-08-12T10:00:00Z", place: "Warsaw")
+        app.tabBars.buttons["Tools"].tap()
         openTool(app, "Eclipses", expecting: "Next eclipses")
         snap(app, "eclipses-list-warsaw")
         let rows = app.buttons.matching(identifier: "eclipse.row")

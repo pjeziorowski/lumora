@@ -36,6 +36,8 @@ enum LumoraWidgetKind: String, CaseIterable, Identifiable, Sendable {
 /// Everything one widget entry needs.
 struct LumoraWidgetContent: Sendable {
     var clock: ClockStyle = .twentyFourHour
+    /// The moment the entry shows, so countdowns stay right in the app's fixed-date gallery.
+    var instant = Date.now
     var sun: SunWidgetSnapshot?
     var moon: MoonWidgetSnapshot?
     var milkyWay: MilkyWayWidgetSnapshot?
@@ -52,6 +54,14 @@ private func shortDate(_ date: Date, _ zone: TimeZone) -> String {
     var style = Date.FormatStyle(date: .abbreviated, time: .omitted)
     style.timeZone = zone
     return date.formatted(style.weekday(.abbreviated))
+}
+
+/// "in 2d 5h" or "in 3h 07m", counted from the entry's moment.
+private func countdown(to date: Date, from now: Date) -> String {
+    let seconds = max(0, date.timeIntervalSince(now))
+    let hours = Int(seconds / 3600)
+    if hours >= 24 { return String(localized: "in \(hours / 24)d \(hours % 24)h") }
+    return String(localized: "in \(Formatting.duration(seconds: seconds))")
 }
 
 /// The face for one kind and family.
@@ -389,7 +399,8 @@ private struct PlanFace: View {
                         Text("\(p.light) · Sun \(Formatting.degrees(p.sunAltitude, decimals: 0)) at "
                              + Formatting.azimuth(p.sunAzimuth, decimals: 0))
                             .font(.caption2).opacity(0.85)
-                        Text(p.instant, style: .relative).font(.caption2).opacity(0.85)
+                        Text(countdown(to: p.instant, from: content.instant))
+                            .font(.caption2).opacity(0.85)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -419,7 +430,7 @@ extension LumoraWidgetContent {
     /// Snapshots for one kind at one instant (the extension's timeline and the app's gallery).
     static func compute(kind: LumoraWidgetKind, location: PillLocation?, instant: Date, clock: ClockStyle,
                         plans: [WidgetPlan], milkyWay: MilkyWayWidgetSnapshot? = nil) -> LumoraWidgetContent {
-        var content = LumoraWidgetContent(clock: clock)
+        var content = LumoraWidgetContent(clock: clock, instant: instant)
         if kind == .nextPlan {
             content.plan = WidgetPlan.next(plans, after: instant)
             return content

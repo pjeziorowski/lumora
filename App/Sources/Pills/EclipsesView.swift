@@ -84,7 +84,11 @@ struct EclipseGlyph: View {
             case .annular:
                 context.fill(Path(ellipseIn: disc.insetBy(dx: d * 0.12, dy: d * 0.12)), with: .color(shadow))
             case .partial:
-                context.fill(Path(ellipseIn: disc.offsetBy(dx: d * 0.45, dy: -d * 0.2)), with: .color(shadow.opacity(0.85)))
+                // The bite stays inside the disc.
+                context.drawLayer { layer in
+                    layer.clip(to: Path(ellipseIn: disc))
+                    layer.fill(Path(ellipseIn: disc.offsetBy(dx: d * 0.45, dy: -d * 0.2)), with: .color(shadow.opacity(0.85)))
+                }
             case .penumbral:
                 context.fill(Path(ellipseIn: disc), with: .color(.black.opacity(0.25)))
             }

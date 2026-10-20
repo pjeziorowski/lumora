@@ -90,8 +90,10 @@ private struct LockScreenSample: View {
                 .lineLimit(1)
                 .frame(maxWidth: .infinity)
             HStack(spacing: 14) {
+                // AccessoryWidgetBackground draws nothing outside WidgetKit, so stand in for it here.
                 LumoraWidgetFace(kind: kind, content: content, family: .accessoryCircular)
                     .frame(width: 72, height: 72)
+                    .background(Circle().fill(.white.opacity(0.18)))
                 LumoraWidgetFace(kind: kind, content: content, family: .accessoryRectangular)
                     .frame(width: 172, height: 72)
             }
