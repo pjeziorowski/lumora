@@ -229,7 +229,7 @@ private struct PlacesList: View {
                     if let place = record.place {
                         Button {
                             navigation.tab = .planner
-                            planner.select(place.location)
+                            Task { await planner.select(place.location) }
                         } label: {
                             VStack(alignment: .leading, spacing: 3) {
                                 Text(place.location.name).font(.headline).foregroundStyle(.primary)
