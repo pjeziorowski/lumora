@@ -34,6 +34,8 @@ public final class PlannerState {
     public var mapStyle: PlannerMapStyle = .standard
     public var selectedPanel: PlannerPanelKind = .pin
     public var useDeviceTimeZone = false
+    /// Bodies drawn on the map.
+    public var layers: PlannerLayers = .all
     /// Bumped when the place changes from outside the map (search, picker), so the map
     /// recentres on the pin. Dragging the pin does not bump it.
     public private(set) var recenterToken = 0
