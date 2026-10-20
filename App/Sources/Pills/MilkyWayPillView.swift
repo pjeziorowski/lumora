@@ -25,24 +25,30 @@ struct MilkyWayPillView: View {
     @Environment(PillSession.self) private var session
     @AppStorage(SettingsKeys.clockStyle) private var clock: ClockStyle = .twentyFourHour
     @State private var screen: Screen = .night
+    private static let top = "milkyway.top"
 
     var body: some View {
         let format = PillFormat(timeZone: session.timeZone, clock: clock)
-        List {
-            PillHeader()
-            Section {
-                Picker("View", selection: $screen) {
-                    ForEach(Screen.allCases) { Text($0.title).tag($0) }
+        ScrollViewReader { proxy in
+            List {
+                PillHeader()
+                Section {
+                    Picker("View", selection: $screen) {
+                        ForEach(Screen.allCases) { Text($0.title).tag($0) }
+                    }
+                    .pickerStyle(.segmented)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
+                    .accessibilityIdentifier("milkyway.screen")
+                    .id(Self.top)
                 }
-                .pickerStyle(.segmented)
-                .listRowBackground(Color.clear)
-                .listRowInsets(EdgeInsets())
-                .accessibilityIdentifier("milkyway.screen")
+                switch screen {
+                case .night: MilkyWayNightSections(format: format)
+                case .year: MilkyWayYearSections(format: format) { screen = .night }
+                }
             }
-            switch screen {
-            case .night: MilkyWayNightSections(format: format)
-            case .year: MilkyWayYearSections(format: format) { screen = .night }
-            }
+            // Picking a best night switches to Night: show it from the top.
+            .onChange(of: screen) { withAnimation { proxy.scrollTo(Self.top, anchor: .top) } }
         }
         .navigationTitle("Milky Way")
         .navigationBarTitleDisplayMode(.inline)
