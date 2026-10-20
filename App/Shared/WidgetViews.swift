@@ -78,7 +78,7 @@ struct LumoraWidgetFace: View {
             case .sun: SunFace(snapshot: content.sun, clock: content.clock, family: family)
             case .moon: MoonFace(snapshot: content.moon, clock: content.clock, family: family)
             case .milkyWay: MilkyWayFace(snapshot: content.milkyWay, clock: content.clock, family: family)
-            case .nextPlan: PlanFace(plan: content.plan, clock: content.clock, family: family)
+            case .nextPlan: PlanFace(plan: content.plan, clock: content.clock, now: content.instant, family: family)
             }
         }
     }
@@ -364,6 +364,7 @@ private struct MilkyWayFace: View {
 private struct PlanFace: View {
     let plan: WidgetPlan?
     let clock: ClockStyle
+    let now: Date
     let family: WidgetFamily
 
     var body: some View {
@@ -399,7 +400,7 @@ private struct PlanFace: View {
                         Text("\(p.light) · Sun \(Formatting.degrees(p.sunAltitude, decimals: 0)) at "
                              + Formatting.azimuth(p.sunAzimuth, decimals: 0))
                             .font(.caption2).opacity(0.85)
-                        Text(countdown(to: p.instant, from: content.instant))
+                        Text(countdown(to: p.instant, from: now))
                             .font(.caption2).opacity(0.85)
                     }
                 }
