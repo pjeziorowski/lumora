@@ -96,7 +96,8 @@ public final class PlannerState {
     public func refresh() {
         let request = Request(location: session.location, instant: session.instant, thresholds: session.thresholds)
         if let snapshot, snapshot.location == request.location,
-           abs(snapshot.instant.timeIntervalSince(request.instant)) < 30, pending == nil {
+           abs(snapshot.instant.timeIntervalSince(request.instant)) < 30, pending == nil, worker == nil {
+            // An in-flight computation for another instant would overwrite this snapshot.
             return
         }
         pending = request
@@ -143,6 +144,8 @@ public final class PlannerState {
         let lon = Geodesy.normalizeLongitude(longitude)
         pinGeneration += 1
         let generation = pinGeneration
+        // A superseded lookup never clears the badge itself.
+        resolvingPin = false
         let fallbackName = Formatting.coordinate(latitude: lat, longitude: lon, style: .decimal)
         let cached = await placeLookup.cached(latitude: lat, longitude: lon)
         guard generation == pinGeneration else { return }

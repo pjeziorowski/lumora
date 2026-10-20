@@ -89,7 +89,7 @@ struct DepthOfFieldView: View {
     @ViewBuilder
     private func results(_ r: DoFResult) -> some View {
         Section {
-            DoFDiagram(result: r, distance: distance)
+            DoFDiagram(result: r, distance: r.subject)
                 .frame(height: 70)
                 .padding(.vertical, 6)
             ResultRow(label: "Near limit", value: OpticsFormat.length(mm: r.near, units: units))
