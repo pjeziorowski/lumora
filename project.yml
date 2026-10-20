@@ -47,6 +47,7 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.photography
         INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "Lumora uses your location to compute Sun and Moon times where you are."
+        INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription: "Lumora adds your saved plans to your calendar when you ask it to."
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         TARGETED_DEVICE_FAMILY: "1"

@@ -1,5 +1,6 @@
 // App/Sources/SettingsView.swift
 
+import CameraCatalog
 import PlannerKit
 import SwiftUI
 
@@ -13,6 +14,7 @@ struct SettingsView: View {
     @AppStorage(SettingsKeys.unitSystem) private var units: UnitSystem = .metric
     @AppStorage(SettingsKeys.clockStyle) private var clock: ClockStyle = .twentyFourHour
     @AppStorage(SettingsKeys.coordinateStyle) private var coordinates: CoordinateStyle = .decimal
+    @Environment(CameraStore.self) private var cameras
 
     var body: some View {
         Form {
@@ -27,6 +29,15 @@ struct SettingsView: View {
             Picker("Coordinates", selection: $coordinates) {
                 Text("Decimal degrees").tag(CoordinateStyle.decimal)
                 Text("Degrees, minutes, seconds").tag(CoordinateStyle.degreesMinutesSeconds)
+            }
+            Section("Camera") {
+                NavigationLink {
+                    CameraManagerView()
+                        .navigationTitle("Default camera")
+                } label: {
+                    LabeledContent("Default camera", value: cameras.defaultCamera.name)
+                }
+                .accessibilityIdentifier("settings.camera")
             }
             Section("About") {
                 LabeledContent("Version", value: Bundle.main.shortVersion)

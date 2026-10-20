@@ -4,6 +4,7 @@ import CameraCatalog
 import Foundation
 import GeoCore
 import PlannerKit
+import SwiftData
 import SwiftUI
 
 @main
@@ -13,6 +14,9 @@ struct LumoraApp: App {
     @State private var plannerState: PlannerState
     /// Custom cameras, favourites and the default camera used by the photography tools.
     @State private var cameraStore: CameraStore
+    @State private var navigation = AppNavigation()
+    /// Saved plans and places; in memory (and optionally seeded) for screenshot runs.
+    private let container: ModelContainer
 
     init() {
         let session = LumoraApp.makePillSession(arguments: ProcessInfo.processInfo.arguments)
@@ -25,6 +29,7 @@ struct LumoraApp: App {
         LumoraApp.applyTarget(arguments: ProcessInfo.processInfo.arguments, to: planner)
         _plannerState = State(initialValue: planner)
         _cameraStore = State(initialValue: LumoraApp.makeCameraStore(arguments: ProcessInfo.processInfo.arguments))
+        container = LumoraApp.makeContainer(arguments: ProcessInfo.processInfo.arguments, now: session.instant)
     }
 
     var body: some Scene {
@@ -33,7 +38,28 @@ struct LumoraApp: App {
                 .environment(pillSession)
                 .environment(plannerState)
                 .environment(cameraStore)
+                .environment(navigation)
+                .modelContainer(container)
         }
+    }
+
+    /// The plan store. Screenshot runs (`-fixedDate`) use memory only; `-seedPlans` adds the
+    /// example plans and places.
+    @MainActor
+    static func makeContainer(arguments: [String], now: Date) -> ModelContainer {
+        let schema = Schema([PlanRecord.self, PlaceRecord.self])
+        let configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: arguments.contains("-fixedDate"))
+        let container: ModelContainer
+        if let stored = try? ModelContainer(for: schema, configurations: [configuration]) {
+            container = stored
+        } else if let memory = try? ModelContainer(for: schema, configurations: [ModelConfiguration(isStoredInMemoryOnly: true)]) {
+            // A store that cannot be opened must not stop the app; plans are then kept for this run only.
+            container = memory
+        } else {
+            fatalError("Could not create the plan store")
+        }
+        if arguments.contains("-seedPlans") { PlanLibrary.seed(container.mainContext, now: now) }
+        return container
     }
 
     /// Normally restores the saved place and uses the real clock. The screenshot UI tests pass
