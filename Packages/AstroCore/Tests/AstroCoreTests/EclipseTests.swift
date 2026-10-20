@@ -5,7 +5,8 @@
 // times P1, U1, U2, greatest, U3, U4, P4 in UT), and the time and place of greatest eclipse
 // for four total solar eclipses (NASA "Total Solar Eclipse of 1999 Aug 11 / 2017 Aug 21 /
 // 2024 Apr 08 / 2026 Aug 12"; NASA quotes greatest eclipse in TD, converted to UT with the
-// ΔT NASA gives on the same page).
+// ΔT NASA gives on the same page). Local contacts C1–C4, maximum, magnitude and obscuration
+// for five US cities on 2024 Apr 08 come from Espenak's Observer's Handbook tables (local2024).
 
 import Foundation
 import Testing
@@ -107,15 +108,80 @@ struct EclipseTests {
         #expect(partial.kind == .partial && partial.latitude == nil)
     }
 
+    struct LocalGolden {
+        let city: String
+        let observer: Observer
+        /// C1, C2, C3, C4 in UT; C2 and C3 are nil for a partial eclipse.
+        let contacts: [String?]
+        /// Maximum eclipse in UT, magnitude and obscuration, given only for partial-eclipse cities.
+        let peak: (String, Double, Double)?
+    }
+
+    // Fred Espenak, "Eclipses During 2024", Observer's Handbook 2024 (Royal Astronomical
+    // Society of Canada), Table 5 "Local Circumstances for Cities in the Path of Totality on
+    // 2024 Apr 08 (USA)" and Table 6 "… for the Partial Eclipse on 2024 Apr 08 (USA)",
+    // https://www.eclipsewise.com/oh/oh-tables/ec2024-Tab05.pdf and ec2024-Tab06.pdf.
+    // The tables give local daylight time; converted here to UT (CDT = UT−5, MDT = UT−6).
+    // City coordinates are the usual city-centre values; Espenak does not print his.
+    static let local2024 = [
+        LocalGolden(city: "Dallas", observer: Observer(latitude: 32.7767, longitude: -96.7970, height: 140),
+                    contacts: ["2024-04-08T17:23:18Z", "2024-04-08T18:40:44Z", "2024-04-08T18:44:32Z", "2024-04-08T20:02:40Z"],
+                    peak: nil),
+        LocalGolden(city: "Waco", observer: Observer(latitude: 31.5493, longitude: -97.1467, height: 140),
+                    contacts: ["2024-04-08T17:20:30Z", "2024-04-08T18:38:02Z", "2024-04-08T18:42:14Z", "2024-04-08T20:00:43Z"],
+                    peak: nil),
+        LocalGolden(city: "Carbondale", observer: Observer(latitude: 37.7273, longitude: -89.2168, height: 120),
+                    contacts: ["2024-04-08T17:43:02Z", "2024-04-08T18:59:17Z", "2024-04-08T19:03:26Z", "2024-04-08T20:18:11Z"],
+                    peak: nil),
+        LocalGolden(city: "Houston", observer: Observer(latitude: 29.7604, longitude: -95.3698, height: 15),
+                    contacts: ["2024-04-08T17:20:02Z", nil, nil, "2024-04-08T20:01:11Z"],
+                    peak: ("2024-04-08T18:40:14Z", 0.943, 0.940)),
+        LocalGolden(city: "El Paso", observer: Observer(latitude: 31.7619, longitude: -106.4850, height: 1140),
+                    contacts: ["2024-04-08T17:09:23Z", nil, nil, "2024-04-08T19:44:30Z"],
+                    peak: ("2024-04-08T18:25:30Z", 0.846, 0.818))
+    ]
+
+    @Test func localContactsMatchEspenak() throws {
+        var worstTime = 0.0, worstMagnitude = 0.0, worstObscuration = 0.0
+        for golden in Self.local2024 {
+            let e = try #require(Eclipses.nextLocalSolarEclipse(after: AstroTime(year: 2024, month: 4, day: 1),
+                                                                observer: golden.observer))
+            let found: [EclipseEvent?] = [e.partialBegin, e.totalBegin, e.totalEnd, e.partialEnd]
+            #expect((e.kind == .total) == (golden.contacts[1] != nil), "\(golden.city)")
+            for (expected, event) in zip(golden.contacts, found) {
+                guard let expected else {
+                    #expect(event == nil, "\(golden.city)")
+                    continue
+                }
+                let event = try #require(event, "\(golden.city)")
+                let diff = abs(event.time.date.timeIntervalSince(Self.utc(expected)))
+                #expect(diff <= 60, "\(golden.city) contact \(expected): off by \(diff) s")
+                worstTime = max(worstTime, diff)
+            }
+            if let (peak, magnitude, obscuration) = golden.peak {
+                let diff = abs(e.peak.time.date.timeIntervalSince(Self.utc(peak)))
+                #expect(diff <= 60, "\(golden.city) maximum: off by \(diff) s")
+                #expect(abs(e.magnitude - magnitude) <= 0.005, "\(golden.city) magnitude \(e.magnitude)")
+                #expect(abs(e.obscuration - obscuration) <= 0.005, "\(golden.city) obscuration \(e.obscuration)")
+                worstTime = max(worstTime, diff)
+                worstMagnitude = max(worstMagnitude, abs(e.magnitude - magnitude))
+                worstObscuration = max(worstObscuration, abs(e.obscuration - obscuration))
+            }
+        }
+        print("ACCURACY | local solar contacts vs Espenak 2024, 5 cities: time max \(Int(worstTime.rounded())) s, "
+              + "magnitude max \(String(format: "%.3f", worstMagnitude)), obscuration max \(String(format: "%.3f", worstObscuration))")
+    }
+
     @Test func localCircumstances() throws {
-        // Dallas, 2024 Apr 08: total, about four minutes of totality around 18:42 UT.
+        // Dallas, 2024 Apr 08: total. Espenak's Table 5 (see local2024) gives 3m49s of totality,
+        // 18:40:44 to 18:44:32 UT, so mid-totality at 18:42:38 UT.
         let dallas = Observer(latitude: 32.7767, longitude: -96.7970, height: 140)
         let e = try #require(Eclipses.nextLocalSolarEclipse(after: AstroTime(year: 2024, month: 1, day: 1), observer: dallas))
         #expect(e.kind == .total)
         let begin = try #require(e.totalBegin), end = try #require(e.totalEnd)
         let totality = end.time.date.timeIntervalSince(begin.time.date)
         #expect(totality > 220 && totality < 245)
-        #expect(e.peak.time.date.timeIntervalSince(Self.utc("2024-04-08T18:42:37Z")) < 60)
+        #expect(abs(e.peak.time.date.timeIntervalSince(Self.utc("2024-04-08T18:42:38Z"))) < 60)
         #expect(e.partialBegin.time < begin.time && end.time < e.partialEnd.time)
         // Warsaw, 2026 Aug 12: partial, the Sun setting during the eclipse.
         let warsaw = Observer(latitude: 52.2297, longitude: 21.0122, height: 100)

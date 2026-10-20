@@ -255,7 +255,8 @@ public final class PlannerState {
         eventsTask?.cancel()
         let instant = session.instant
         eventsTask = Task {
-            let result = await Task.detached(priority: .utility) { PlannerEvents.compute(location: location, instant: instant) }.value
+            let compute = Task.detached(priority: .utility) { PlannerEvents.compute(location: location, instant: instant) }
+            let result = await withTaskCancellationHandler { await compute.value } onCancel: { compute.cancel() }
             guard !Task.isCancelled, self.eventsKey == EventsKey(location: location, night: night) else { return }
             self.events = result
             self.eventsTask = nil
