@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ExposureView: View {
     @State private var metered = ExposureSettings(aperture: 8, shutter: 1.0 / 125, iso: 100)
-    @State private var target = ExposureSettings(aperture: 2.8, shutter: 1.0 / 125, iso: 100)
+    @State private var target = ExposureSettings(aperture: 11, shutter: 1.0 / 125, iso: 100)
     @State private var solving: Exposure.Unknown = .shutter
     @State private var filterStops = 10.0
     @State private var timer = CountdownTimer()
