@@ -1,0 +1,127 @@
+Planner | 4 | Hit area is too small | 9 'Sun' id=planner.panelTab.sun
+Planner | 4 | Hit area is too small | 9 'Moon' id=planner.panelTab.moon
+Planner | 4 | Hit area is too small | 9 'Twilights' id=planner.panelTab.twilights
+Planner | 4 | Hit area is too small | 9 'Milky Way' id=planner.panelTab.milkyWay
+Planner | 4 | Hit area is too small | 9 'Geodetics' id=planner.panelTab.geodetics
+Planner | 4 | Hit area is too small | 9 'Obstacle' id=planner.panelTab.obstacle
+Planner | 4 | Hit area is too small | 9 'Meteors' id=planner.panelTab.meteors
+Planner | 4 | Hit area is too small | 9 'Eclipses' id=planner.panelTab.eclipse
+Planner | 4 | Hit area is too small | 42 'Legal' id=
+Planner | 131072 | Text clipped | 48 'Sun, Jun 21, 2026 · UTC+2' id=
+Planner | 1 | Contrast failed | 48 'Sun, Jun 21, 2026 · UTC+2' id=
+Planner | 1 | Contrast failed | 48 'Place' id=
+Planner | 1 | Contrast nearly passed | 48 'Coordinates' id=
+Planner | 1 | Contrast nearly passed | 48 'Elevation' id=
+Planner | 1 | Contrast nearly passed | 48 'Time zone' id=
+Planner | 1 | Contrast nearly passed | 48 'Pin time' id=
+Planner | 1 | Contrast nearly passed | 48 'Device time' id=
+Planner | 17 issues
+Tools | 1 | Contrast nearly passed | 48 'EVENTS' id=
+Tools | 1 | Contrast nearly passed | -
+Tools | 1 | Contrast failed | -
+Tools | 65536 | Dynamic Type font sizes are partially unsupported | 48 'Cameras' id=
+Tools | 65536 | Dynamic Type font sizes are partially unsupported | 48 'Time lapse' id=
+Tools | 131072 | Text clipped | -
+Tools | 131072 | Text clipped | 48 'Cameras' id=
+Tools | 131072 | Text clipped | 48 'Time lapse' id=
+Tools | 8 issues
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | 48 '12:38 · el 61.2°' id=
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | -
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | 48 'Solar noon' id=
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | 9 'Now' id=
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | -
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast failed | 48 '52.22970° N, 21.01220° E · UTC+2' id=
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | 48 '12:38 · el 61.2°' id=
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast failed | -
+Sun | 1 | Contrast failed | -
+Sun | 1 | Contrast failed | 48 'Distance' id=
+Sun | 40 issues
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 1 | Contrast nearly passed | 48 'SHOWERS IN 2026' id=
+Meteor showers | 1 | Contrast failed | 48 '52.22970° N, 21.01220° E · UTC+2' id=
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 35 issues
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 131072 | Text clipped | -
+My Stuff | 131072 | Text clipped | -
+My Stuff | 131072 | Text clipped | -
+My Stuff | 1 | Contrast nearly passed | 48 'May 29, 2026 · 20:12' id=
+My Stuff | 1 | Contrast nearly passed | 48 'New York' id=
+My Stuff | 1 | Contrast nearly passed | 48 'Jun 21, 2026 · 20:45' id=
+My Stuff | 1 | Contrast nearly passed | 48 'Warsaw' id=
+My Stuff | 1 | Contrast nearly passed | 48 'Jul 14, 2026 · 23:30' id=
+My Stuff | 1 | Contrast nearly passed | 48 'Cape Town' id=
+My Stuff | 14 issues
+Settings | 1 | Contrast nearly passed | 48 'CAMERA' id=
+Settings | 1 | Contrast nearly passed | -
+Settings | 1 | Contrast nearly passed | -
+Settings | 1 | Contrast nearly passed | 48 'Astronomy calculations are ported from Astronomy Engine by Don Cross (MIT licence).' id=
+Settings | 65536 | Dynamic Type font sizes are partially unsupported | 48 'Astronomy calculations are ported from Astronomy Engine by Don Cross (MIT licence).' id=
+Settings | 131072 | Text clipped | 48 'Decimal degrees' id=
+Settings | 131072 | Text clipped | 48 '24-hour' id=
+Settings | 7 issues
