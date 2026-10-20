@@ -349,8 +349,8 @@ final class ScreenshotTests: XCTestCase {
         app.descendants(matching: .any)["planner.targetOptions"].firstMatch.tap()
         let fov = app.switches["planner.optics.fov"].firstMatch
         expectVisible(fov, in: app)
-        flip(fov)
-        flip(app.switches["planner.optics.dof"].firstMatch)
+        turnOn(fov, in: app)
+        turnOn(app.switches["planner.optics.dof"].firstMatch, in: app)
         snap(app, "planner-target-optics-sheet")
         app.buttons["Done"].firstMatch.tap()
         settleMap()
@@ -485,6 +485,19 @@ final class ScreenshotTests: XCTestCase {
     private func scrollToTop(_ app: XCUIApplication) {
         for _ in 0..<3 { app.swipeDown() }
         Thread.sleep(forTimeInterval: 0.5)
+    }
+
+    /// Scrolls a toggle clear of the home indicator, then flips it until it reads on.
+    private func turnOn(_ toggle: XCUIElement, in app: XCUIApplication, file: StaticString = #filePath, line: UInt = #line) {
+        let screen = app.windows.firstMatch.frame
+        for _ in 0..<4 where toggle.frame.maxY > screen.maxY - 90 {
+            app.swipeUp()
+            Thread.sleep(forTimeInterval: 0.5)
+        }
+        for _ in 0..<3 where toggle.value as? String != "1" {
+            flip(toggle)
+        }
+        XCTAssertEqual(toggle.value as? String, "1", "Toggle did not turn on", file: file, line: line)
     }
 
     private func flip(_ toggle: XCUIElement) {

@@ -105,6 +105,7 @@ struct FindView: View {
     @State private var start = Date()
     @State private var days = 90.0
     @State private var searching = false
+    @State private var searchTask: Task<Void, Never>?
     @State private var results: [FindMatch]?
     private static let resultsID = "find.results"
 
@@ -147,6 +148,7 @@ struct FindView: View {
                     }
                     Section("Dates") {
                         DatePicker("From", selection: $start, displayedComponents: .date)
+                            .environment(\.timeZone, state.session.timeZone)
                         NumberRow(label: "Days", value: $days, step: 30, range: 1...730)
                     }
                     Section {
@@ -190,6 +192,7 @@ struct FindView: View {
                 ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } }
             }
             .onAppear(perform: prefill)
+            .onDisappear { searchTask?.cancel() }
         }
     }
 
@@ -208,8 +211,11 @@ struct FindView: View {
         let query = FindQuery(body: findBody, azimuth: useAzimuth ? azimuth : nil, azimuthTolerance: azimuthTolerance,
                               elevation: useElevation ? elevation : nil, elevationTolerance: elevationTolerance,
                               start: start, end: start.addingTimeInterval(days * 86_400))
-        Task {
-            results = await state.find(query)
+        searchTask?.cancel()
+        searchTask = Task {
+            let found = await state.find(query)
+            guard !Task.isCancelled else { return }
+            results = found
             searching = false
         }
     }

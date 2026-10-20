@@ -173,6 +173,21 @@ struct PlannerTests {
         #expect(!bands.contains { $0.phase == .night && $0.start >= snap.day.day.start && $0.end <= snap.day.day.end })
     }
 
+    // Warsaw DST days (EU rule, timeanddate.com): 29 Mar 2026 is 23 h, 25 Oct 2026 is 25 h.
+    @Test(arguments: [("2026-03-29T10:00:00Z", 23.0), ("2026-10-25T10:00:00Z", 25.0)])
+    func dstDaysKeepBandsAndJumpsContiguous(iso: String, hours: Double) {
+        let snap = Self.snapshot(Self.warsaw, iso)
+        let day = snap.day
+        #expect(day.day.end.timeIntervalSince(day.day.start) == hours * 3600)
+        let bands = day.lightBands
+        #expect(bands.first?.start == day.day.start.addingTimeInterval(-12 * 3600))
+        #expect(bands.last?.end == day.day.end.addingTimeInterval(12 * 3600))
+        for (a, b) in zip(bands, bands.dropFirst()) { #expect(a.end == b.start) }
+        #expect(day.sunRises.count == 1 && day.sunSets.count == 1)
+        let rise = day.sunRises[0].time
+        #expect(rise > day.day.start && rise < day.day.end)
+    }
+
     // MARK: Jumps
 
     @Test func jumpsCycleThroughTheDay() {
@@ -284,6 +299,37 @@ struct PlannerStateTests {
         #expect(state.snapshot?.instant == PlannerTests.instant("2026-06-21T17:00:00Z"))
         // At most the first request, one in flight and the latest: never all 300.
         #expect(await engine.snapshotComputations <= 3)
+    }
+
+    @Test func scrubBackDuringComputationKeepsLatestInstant() async {
+        let state = PlannerState(session: Self.session("2026-06-21T12:00:00Z"))
+        state.refresh()
+        await state.settle()
+        state.scrub(minutes: 1)
+        await Task.yield()  // let the worker take the request and start computing
+        state.scrub(minutes: -1)
+        await state.settle()
+        #expect(state.snapshot?.instant == PlannerTests.instant("2026-06-21T12:00:00Z"))
+    }
+
+    @Test func supersededLookupClearsTheResolvingBadge() async {
+        // The slow lookup signals when it starts, so the test never spins waiting for it.
+        let (started, signal) = AsyncStream<Void>.makeStream()
+        let state = PlannerState(session: Self.session("2026-06-21T12:00:00Z"), lookup: { lat, _ in
+            if lat > 50 {
+                signal.yield()
+                try? await Task.sleep(nanoseconds: 300_000_000)
+            }
+            return PlaceInfo(name: lat > 50 ? "Far" : "Near", timeZoneIdentifier: "Europe/Warsaw")
+        })
+        await state.movePin(latitude: 40, longitude: 20)  // resolved and cached
+        let slow = Task { await state.movePin(latitude: 60, longitude: 20) }
+        for await _ in started { break }
+        #expect(state.resolvingPin)
+        await state.movePin(latitude: 40, longitude: 20)  // cache hit supersedes the slow lookup
+        await slow.value
+        #expect(!state.resolvingPin)
+        #expect(state.session.location.name == "Near")
     }
 
     @Test func droppedPinResolvesNameAndZone() async {

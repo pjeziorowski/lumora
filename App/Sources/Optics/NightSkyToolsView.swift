@@ -120,7 +120,7 @@ struct StarTrailsView: View {
                 ResultRow(label: "On the sensor", value: String(format: "%.2f mm", r.lengthMM))
                 ResultRow(label: "In pixels", value: r.lengthPixels.map { String(format: "%.0f px", $0) } ?? "—")
                 ResultRow(label: "Of frame width", value: String(format: "%.1f %%", r.fractionOfWidth * 100))
-                TrailSketch(degrees: 15.041 * seconds / 3600)
+                TrailSketch(degrees: StarTrails.siderealRate * seconds / 3600)
                     .frame(height: 200)
                     .padding(.vertical, 6)
             } header: {
