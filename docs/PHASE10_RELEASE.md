@@ -1,6 +1,6 @@
 # Phase 10: widgets, polish, release
 
-PlannerKit: 88 tests pass (`scripts/test-packages.sh`, Swift 6.1.3, Linux x86-64), including
+PlannerKit: 98 tests pass (`scripts/test-packages.sh`, Swift 6.1.3, Linux x86-64), including
 `Packages/PlannerKit/Tests/PlannerKitTests/WidgetTests.swift`. Screenshots and the
 accessibility audit come from `App/UITests/ScreenshotTests.swift` (`testPhase10WidgetsAndPolish`,
 `testPhase10AccessibilityAudit`).
