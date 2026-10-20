@@ -23,6 +23,7 @@ struct PlannerView: View {
     @State private var showingTargetSheet = false
     @State private var showingFind = false
     @State private var showingSave = false
+    @State private var showingAR = false
 
     var body: some View {
         @Bindable var state = state
@@ -68,6 +69,14 @@ struct PlannerView: View {
                     Label("Find", systemImage: "scope")
                 }
                 .accessibilityIdentifier("planner.find")
+            }
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    showingAR = true
+                } label: {
+                    Label("AR", systemImage: "camera.viewfinder")
+                }
+                .accessibilityIdentifier("planner.ar")
             }
             ToolbarItemGroup(placement: .topBarTrailing) {
                 Button {
@@ -128,6 +137,11 @@ struct PlannerView: View {
         }
         .sheet(isPresented: $showingSave) {
             SavePlanSheet()
+        }
+        .fullScreenCover(isPresented: $showingAR) {
+            NavigationStack {
+                SkyARView(mode: state.selectedPanel == .milkyWay ? .milkyWay : .sunMoon, showsClose: true)
+            }
         }
         .alert("Location unavailable", isPresented: Binding(get: { locationError != nil }, set: { if !$0 { locationError = nil } })) {
             Button("OK", role: .cancel) {}
