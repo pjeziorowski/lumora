@@ -313,13 +313,19 @@ struct PlannerStateTests {
     }
 
     @Test func supersededLookupClearsTheResolvingBadge() async {
+        // The slow lookup signals when it starts, so the test never spins waiting for it.
+        let (started, signal) = AsyncStream<Void>.makeStream()
         let state = PlannerState(session: Self.session("2026-06-21T12:00:00Z"), lookup: { lat, _ in
-            if lat > 50 { try? await Task.sleep(nanoseconds: 300_000_000) }
+            if lat > 50 {
+                signal.yield()
+                try? await Task.sleep(nanoseconds: 300_000_000)
+            }
             return PlaceInfo(name: lat > 50 ? "Far" : "Near", timeZoneIdentifier: "Europe/Warsaw")
         })
         await state.movePin(latitude: 40, longitude: 20)  // resolved and cached
         let slow = Task { await state.movePin(latitude: 60, longitude: 20) }
-        while !state.resolvingPin { await Task.yield() }
+        for await _ in started { break }
+        #expect(state.resolvingPin)
         await state.movePin(latitude: 40, longitude: 20)  // cache hit supersedes the slow lookup
         await slow.value
         #expect(!state.resolvingPin)
