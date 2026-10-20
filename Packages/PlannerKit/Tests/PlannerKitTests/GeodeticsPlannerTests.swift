@@ -119,4 +119,28 @@ struct GeodeticsPlannerTests {
         state.show(matches[0])
         #expect(session.instant == matches[0].time)
     }
+
+    @Test func selectedPlaceGetsGroundElevation() async {
+        let session = PillSession(defaults: nil, fallback: Self.manhattan) { PlannerTests.instant("2026-05-30T00:00:00Z") }
+        let state = PlannerState(session: session, elevation: { _, _ in 61.5 })
+        // A searched place arrives without an elevation: it is looked up, as for a dropped pin.
+        let searched = PillLocation(name: "Searched", latitude: 40.8, longitude: -73.95, timeZoneIdentifier: "America/New_York")
+        await state.select(searched)
+        #expect(state.session.location.elevation == 61.5)
+        #expect(state.session.location.name == "Searched")
+        // A place with a known elevation keeps it.
+        let known = PillLocation(name: "Known", latitude: 40.7, longitude: -74, elevation: 10, timeZoneIdentifier: "America/New_York")
+        await state.select(known)
+        #expect(state.session.location.elevation == 10)
+    }
+
+    @Test func cancelledFindStops() async {
+        let session = PillSession(defaults: nil, fallback: Self.manhattan) { PlannerTests.instant("2026-05-30T00:00:00Z") }
+        let state = PlannerState(session: session)
+        let query = FindQuery(body: .moon, azimuth: 120, elevation: nil, start: PlannerTests.instant("2026-01-01T00:00:00Z"),
+                              end: PlannerTests.instant("2027-12-31T00:00:00Z"))
+        let search = Task { await state.find(query) }
+        search.cancel()
+        #expect(await search.value.isEmpty)
+    }
 }
