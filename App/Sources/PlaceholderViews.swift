@@ -15,17 +15,6 @@ struct PlaceholderView: View {
 }
 
 struct ToolsView: View {
-    private struct Upcoming: Identifiable {
-        let name: LocalizedStringKey
-        let systemImage: String
-        let phase: String
-        var id: String { systemImage }
-    }
-
-    private let upcoming: [Upcoming] = [
-        Upcoming(name: "Meteor showers", systemImage: "moon.stars", phase: "Phase 9"),
-    ]
-
     var body: some View {
         List {
             Section {
@@ -43,6 +32,18 @@ struct ToolsView: View {
                     MilkyWayPillView()
                 } label: {
                     Label("Milky Way", systemImage: "sparkles")
+                }
+            }
+            Section("Events") {
+                NavigationLink {
+                    MeteorShowersView()
+                } label: {
+                    Label("Meteor showers", systemImage: "moon.stars")
+                }
+                NavigationLink {
+                    EclipsesView()
+                } label: {
+                    Label("Eclipses", systemImage: "circle.lefthalf.filled")
                 }
             }
             Section("Photography") {
@@ -102,15 +103,6 @@ struct ToolsView: View {
                     SkyARView(mode: .frame)
                 } label: {
                     Label("Frame AR", systemImage: "rectangle.dashed")
-                }
-            }
-            Section("Coming later") {
-                ForEach(upcoming) { tool in
-                    LabeledContent {
-                        Text(tool.phase).foregroundStyle(.secondary)
-                    } label: {
-                        Label(tool.name, systemImage: tool.systemImage)
-                    }
                 }
             }
         }

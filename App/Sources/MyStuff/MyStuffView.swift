@@ -71,6 +71,7 @@ private struct PlansList: View {
                 } label: {
                     PlanRow(record: record, clock: clock)
                 }
+                .tint(.primary)
                 .accessibilityIdentifier("plan.row")
                 .swipeActions(edge: .trailing) {
                     Button(role: .destructive) { delete(record) } label: { Label("Delete", systemImage: "trash") }
@@ -239,6 +240,7 @@ private struct PlacesList: View {
                                 if !place.notes.isEmpty { Text(place.notes).font(.caption).foregroundStyle(.secondary) }
                             }
                         }
+                        .tint(.primary)
                         .swipeActions {
                             Button(role: .destructive) {
                                 context.delete(record)
