@@ -58,9 +58,10 @@ enum PlanReminders {
         content.title = plan.name.isEmpty ? String(localized: "Plan") : plan.name
         content.body = String(localized: "Starts in \(plan.reminderMinutes ?? 0) minutes at \(plan.location.name).")
         content.sound = .default
-        let parts = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fire)
+        // An interval, not calendar components, so a change of device time zone cannot move it.
         let request = UNNotificationRequest(identifier: plan.id.uuidString, content: content,
-                                            trigger: UNCalendarNotificationTrigger(dateMatching: parts, repeats: false))
+                                            trigger: UNTimeIntervalNotificationTrigger(timeInterval: fire.timeIntervalSinceNow,
+                                                                                       repeats: false))
         return (try? await center.add(request)) != nil
     }
 
