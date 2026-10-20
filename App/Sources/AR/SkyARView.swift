@@ -68,7 +68,7 @@ struct SkyARView: View {
                     SimulatedSky(projector: projector, sunElevation: sky?.sunElevation ?? 30)
                 }
                 if let sky {
-                    AROverlay(projector: projector, sky: sky, frame: mode == .frame ? lensFrame : nil)
+                    AROverlay(projector: projector, sky: sky, frame: mode == .frame ? lensFrame(projector.orientation) : nil)
                         .allowsHitTesting(false)
                 }
                 Crosshair()
@@ -102,9 +102,12 @@ struct SkyARView: View {
         }
         .task(id: SkyKey(location: session.location, instant: instant, mode: mode, clock: clock, focus: focusLines)) {
             let key = SkyKey(location: session.location, instant: instant, mode: mode, clock: clock, focus: focusLines)
-            sky = await Task.detached(priority: .userInitiated) {
+            let next = await Task.detached(priority: .userInitiated) {
                 ARSky.compute(location: key.location, instant: key.instant, mode: key.mode, clock: key.clock, focus: key.focus)
             }.value
+            // A newer key restarted this task: keep the newer sky.
+            guard !Task.isCancelled else { return }
+            sky = next
         }
         .task {
             motion.start()
@@ -149,9 +152,10 @@ struct SkyARView: View {
         return ARFocusLines(near: r.near / 1000, focus: focusMetres, far: r.isFarInfinite ? nil : r.far / 1000)
     }
 
-    private var lensFrame: LensFrame {
+    /// The selected lens held the way the phone is held (landscape screen, landscape frame).
+    private func lensFrame(_ screen: ARScreenOrientation) -> LensFrame {
         let fov = FieldOfView.compute(sensor: lensCamera.sensor, focalLength: focalLength, distance: focusMetres * 1000,
-                                      orientation: .portrait)
+                                      orientation: screen.sensorOrientation)
         return LensFrame(horizontal: fov.horizontal, vertical: fov.vertical,
                          label: "\(lensCamera.name) · \(Int(focalLength)) mm")
     }
@@ -329,9 +333,8 @@ private struct AROverlay: View {
     }
 
     private func drawFrame(_ frame: LensFrame, in context: inout GraphicsContext) {
-        let w = 2 * projector.focal * tan(frame.horizontal / 2 * .pi / 180)
-        let h = 2 * projector.focal * tan(frame.vertical / 2 * .pi / 180)
-        let rect = CGRect(x: projector.width / 2 - w / 2, y: projector.height / 2 - h / 2, width: w, height: h)
+        let r = projector.lensFrame(horizontalFieldOfView: frame.horizontal, verticalFieldOfView: frame.vertical)
+        let rect = CGRect(x: r.x, y: r.y, width: r.width, height: r.height)
         // Darken what the lens will not see.
         var outside = Path(CGRect(x: 0, y: 0, width: projector.width, height: projector.height))
         outside.addRect(rect)
@@ -451,10 +454,10 @@ struct ARCalibrationSheet: View {
             Form {
                 Section {
                     LabeledContent("Compass", value: String(format: "%+.1f°", heading))
-                    Slider(value: $heading, in: -30...30, step: 0.1) { Text("Compass") }
+                    Slider(value: $heading, in: -180...180, step: 0.1) { Text("Compass") }
                         .accessibilityIdentifier("ar.calibration.heading")
                     LabeledContent("Horizon", value: String(format: "%+.1f°", pitch))
-                    Slider(value: $pitch, in: -10...10, step: 0.1) { Text("Horizon") }
+                    Slider(value: $pitch, in: -30...30, step: 0.1) { Text("Horizon") }
                 } footer: {
                     Text("Compass turns the overlay left or right; horizon raises or lowers it. "
                          + "Line up the green horizon or a known object.")
