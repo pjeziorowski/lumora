@@ -178,6 +178,8 @@ struct SkyARView: View {
         }
         .padding(10)
         .background(.black.opacity(0.45), in: RoundedRectangle(cornerRadius: 12))
+        // Controls sit on the camera image, so they always use dark-mode colours.
+        .environment(\.colorScheme, .dark)
         .padding(.horizontal, 12)
         .padding(.top, 6)
     }
@@ -226,6 +228,7 @@ struct SkyARView: View {
         .tint(.orange)
         .padding(12)
         .background(.black.opacity(0.45), in: RoundedRectangle(cornerRadius: 12))
+        .environment(\.colorScheme, .dark)
         .padding(.horizontal, 12)
         .padding(.bottom, 8)
     }
@@ -291,7 +294,12 @@ private struct AROverlay: View {
             if let stroke { context.stroke(Path(ellipseIn: rect), with: .color(stroke), lineWidth: 1.5) }
         }
         func label(_ text: String, dy: CGFloat, font: Font = .caption2, color: Color = .white) {
-            context.draw(Text(text).font(font).foregroundStyle(color), at: CGPoint(x: p.x, y: p.y + dy))
+            // Slide labels in from the screen edges so they are never cut off.
+            let resolved = context.resolve(Text(text).font(font).foregroundStyle(color))
+            let half = resolved.measure(in: CGSize(width: 400, height: 100)).width / 2 + 4
+            let bounds = context.clipBoundingRect
+            let x = min(max(p.x, bounds.minX + half), max(bounds.minX + half, bounds.maxX - half))
+            context.draw(resolved, at: CGPoint(x: x, y: p.y + dy))
         }
         switch marker.kind {
         case .sun:

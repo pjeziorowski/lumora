@@ -21,6 +21,8 @@ struct TimeBarView: View {
                     state.shift(days: -1)
                 } label: {
                     Image(systemName: "chevron.left")
+                        .frame(minWidth: 44, minHeight: 44)
+                        .contentShape(Rectangle())
                 }
                 .accessibilityLabel("Previous day")
                 Button {
@@ -42,6 +44,8 @@ struct TimeBarView: View {
                     state.shift(days: 1)
                 } label: {
                     Image(systemName: "chevron.right")
+                        .frame(minWidth: 44, minHeight: 44)
+                        .contentShape(Rectangle())
                 }
                 .accessibilityLabel("Next day")
             }
