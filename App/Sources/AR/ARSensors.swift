@@ -51,8 +51,7 @@ final class ARMotion {
         manager.deviceMotionUpdateInterval = 1.0 / 30
         manager.startDeviceMotionUpdates(using: frame, to: .main) { [weak self] motion, _ in
             guard let m = motion?.attitude.rotationMatrix else { return }
-            let attitude = ARAttitude.fromCoreMotion(m11: m.m11, m12: m.m12, m13: m.m13, m21: m.m21, m22: m.m22, m23: m.m23,
-                                                     m31: m.m31, m32: m.m32, m33: m.m33)
+            let attitude = ARAttitude.fromCoreMotion([m.m11, m.m12, m.m13, m.m21, m.m22, m.m23, m.m31, m.m32, m.m33])
             MainActor.assumeIsolated { self?.attitude = attitude }
         }
     }

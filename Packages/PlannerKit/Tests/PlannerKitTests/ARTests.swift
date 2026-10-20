@@ -36,17 +36,17 @@ struct ARTests {
 
     @Test func coreMotionConvention() {
         // Identity: face up, right edge north, so the back camera looks straight down.
-        let flat = ARAttitude.fromCoreMotion(m11: 1, m12: 0, m13: 0, m21: 0, m22: 1, m23: 0, m31: 0, m32: 0, m33: 1)
+        let flat = ARAttitude.fromCoreMotion([1, 0, 0, 0, 1, 0, 0, 0, 1])
         #expect(abs(projector(flat).viewElevation + 90) < 1e-9)
         // Upright in portrait looking north: x = east, y = up, z = south, written in the
         // reference frame (north, west, up) as the matrix rows.
-        let north = ARAttitude.fromCoreMotion(m11: 0, m12: -1, m13: 0, m21: 0, m22: 0, m23: 1, m31: -1, m32: 0, m33: 0)
+        let north = ARAttitude.fromCoreMotion([0, -1, 0, 0, 0, 1, -1, 0, 0])
         let p = projector(north)
         #expect(abs(ARAngles.signed(p.viewAzimuth)) < 1e-9)
         #expect(abs(p.viewElevation) < 1e-9)
         #expect(abs(p.roll) < 1e-9)
         // The same phone turned to face east: x = south, y = up, z = west.
-        let east = ARAttitude.fromCoreMotion(m11: -1, m12: 0, m13: 0, m21: 0, m22: 0, m23: 1, m31: 0, m32: 1, m33: 0)
+        let east = ARAttitude.fromCoreMotion([-1, 0, 0, 0, 0, 1, 0, 1, 0])
         #expect(abs(projector(east).viewAzimuth - 90) < 1e-9)
     }
 
