@@ -106,77 +106,83 @@ struct FindView: View {
     @State private var days = 90.0
     @State private var searching = false
     @State private var results: [FindMatch]?
+    private static let resultsID = "find.results"
 
     var body: some View {
         NavigationStack {
-            Form {
-                Section {
-                    Picker("Body", selection: $findBody) {
-                        ForEach(FindBody.allCases) { Text($0.title).tag($0) }
-                    }
-                    .pickerStyle(.segmented)
-                    .accessibilityIdentifier("find.body")
-                }
-                Section {
-                    Toggle("Azimuth", isOn: $useAzimuth)
-                    if useAzimuth {
-                        NumberRow(label: "Target", value: $azimuth, unit: "°", step: 0.1, range: 0...359.9, decimals: 1)
-                        NumberRow(label: "Tolerance", value: $azimuthTolerance, unit: "±°", step: 0.1, range: 0.1...45, decimals: 1)
-                        if let line = state.targetLine {
-                            Button("Use the target's bearing (\(Formatting.azimuth(line.initialBearing)))") {
-                                azimuth = (line.initialBearing * 10).rounded() / 10
-                            }
-                        }
-                    }
-                    Toggle("Elevation", isOn: $useElevation)
-                    if useElevation {
-                        NumberRow(label: "Target", value: $elevation, unit: "°", step: 0.1, range: -18...90, decimals: 1)
-                        NumberRow(label: "Tolerance", value: $elevationTolerance, unit: "±°", step: 0.1, range: 0.1...45, decimals: 1)
-                        if let obstacle = state.obstacle {
-                            Button("Use the angle to the target's top (\(Formatting.degrees(obstacle.geodetics.topAngle, decimals: 2)))") {
-                                elevation = (obstacle.geodetics.topAngle * 100).rounded() / 100
-                            }
-                        }
-                    }
-                } header: {
-                    Text("Position")
-                } footer: {
-                    Text("Elevation is the apparent (refracted) height above the horizon; 0.5° puts the Sun's disc just on it.")
-                }
-                Section("Dates") {
-                    DatePicker("From", selection: $start, displayedComponents: .date)
-                    NumberRow(label: "Days", value: $days, step: 30, range: 1...730)
-                }
-                Section {
-                    Button {
-                        search()
-                    } label: {
-                        HStack {
-                            Text("Find")
-                            if searching { Spacer(); ProgressView() }
-                        }
-                    }
-                    .disabled(searching || (!useAzimuth && !useElevation))
-                    .accessibilityIdentifier("find.search")
-                }
-                if let results {
+            ScrollViewReader { proxy in
+                Form {
                     Section {
-                        if results.isEmpty {
-                            Text("No moments match. Widen a tolerance or the date range.").foregroundStyle(.secondary)
+                        Picker("Body", selection: $findBody) {
+                            ForEach(FindBody.allCases) { Text($0.title).tag($0) }
                         }
-                        ForEach(results) { match in
-                            Button {
-                                state.show(match)
-                                dismiss()
-                            } label: {
-                                MatchRow(match: match, zone: state.session.timeZone, clock: clock)
+                        .pickerStyle(.segmented)
+                        .accessibilityIdentifier("find.body")
+                    }
+                    Section {
+                        Toggle("Azimuth", isOn: $useAzimuth)
+                        if useAzimuth {
+                            NumberRow(label: "Target", value: $azimuth, unit: "°", step: 0.1, range: 0...359.9, decimals: 1)
+                            NumberRow(label: "Tolerance", value: $azimuthTolerance, unit: "±°", step: 0.1, range: 0.1...45, decimals: 1)
+                            if let line = state.targetLine {
+                                Button("Use the target's bearing (\(Formatting.azimuth(line.initialBearing)))") {
+                                    azimuth = (line.initialBearing * 10).rounded() / 10
+                                }
                             }
-                            .accessibilityIdentifier("find.result")
+                        }
+                        Toggle("Elevation", isOn: $useElevation)
+                        if useElevation {
+                            NumberRow(label: "Target", value: $elevation, unit: "°", step: 0.1, range: -18...90, decimals: 1)
+                            NumberRow(label: "Tolerance", value: $elevationTolerance, unit: "±°", step: 0.1, range: 0.1...45, decimals: 1)
+                            if let obstacle = state.obstacle {
+                                Button("Use the angle to the target's top (\(Formatting.degrees(obstacle.geodetics.topAngle, decimals: 2)))") {
+                                    elevation = (obstacle.geodetics.topAngle * 100).rounded() / 100
+                                }
+                            }
                         }
                     } header: {
-                        Text("\(results.count) matches")
+                        Text("Position")
+                    } footer: {
+                        Text("Elevation is the apparent (refracted) height above the horizon; 0.5° puts the Sun's disc just on it.")
+                    }
+                    Section("Dates") {
+                        DatePicker("From", selection: $start, displayedComponents: .date)
+                        NumberRow(label: "Days", value: $days, step: 30, range: 1...730)
+                    }
+                    Section {
+                        Button {
+                            search()
+                        } label: {
+                            HStack {
+                                Text("Find")
+                                if searching { Spacer(); ProgressView() }
+                            }
+                        }
+                        .disabled(searching || (!useAzimuth && !useElevation))
+                        .accessibilityIdentifier("find.search")
+                    }
+                    if let results {
+                        Section {
+                            if results.isEmpty {
+                                Text("No moments match. Widen a tolerance or the date range.").foregroundStyle(.secondary)
+                            }
+                            ForEach(results) { match in
+                                Button {
+                                    state.show(match)
+                                    dismiss()
+                                } label: {
+                                    MatchRow(match: match, zone: state.session.timeZone, clock: clock)
+                                }
+                                .accessibilityIdentifier("find.result")
+                            }
+                        } header: {
+                            Text("\(results.count) matches")
+                        }
+                        .id(Self.resultsID)
                     }
                 }
+                // Results appear below the form: bring them into view.
+                .onChange(of: results?.count) { if results != nil { withAnimation { proxy.scrollTo(Self.resultsID, anchor: .top) } } }
             }
             .navigationTitle("Find")
             .navigationBarTitleDisplayMode(.inline)
