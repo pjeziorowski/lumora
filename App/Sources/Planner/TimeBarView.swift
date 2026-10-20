@@ -204,7 +204,7 @@ struct TimeRuler: View {
             context.fill(Path(CGRect(x: tx - 0.5, y: size.height * 0.45, width: 1, height: height)),
                          with: .color(.white.opacity(isHour ? 0.9 : 0.5)))
             if isHour, cal.component(.hour, from: tick) % labelEvery == 0 {
-                context.draw(label(tick), at: CGPoint(x: tx, y: size.height * 0.88))
+                context.draw(label(tick), at: CGPoint(x: tx, y: size.height - 2), anchor: .bottom)
             }
             tick = tick.addingTimeInterval(15 * 60)
         }
