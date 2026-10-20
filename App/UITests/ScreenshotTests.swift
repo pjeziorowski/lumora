@@ -447,7 +447,7 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "ar-calibration-sheet")
         app.buttons["ar.calibration.align"].firstMatch.tap()
         Thread.sleep(forTimeInterval: 1.5)
-        snap(app, "ar-aligned-on-sun")
+        snap(app, "ar-aligned-on-moon")
         app.buttons["Close"].firstMatch.tap()
         app.terminate()
 
