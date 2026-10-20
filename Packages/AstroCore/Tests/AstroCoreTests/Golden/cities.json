@@ -1,0 +1,6244 @@
+{
+ "source": "Skyfield 1.55 + JPL DE421; USNO rise/set definitions (aa.usno.navy.mil/faq/RST_defs)",
+ "generator": "Tools/golden/generate_golden.py",
+ "rows": [
+  {
+   "city": "Warsaw",
+   "latitude": 52.2297,
+   "longitude": 21.0122,
+   "timeZone": "Europe/Warsaw",
+   "localDate": "2025-03-20",
+   "sunRise": [
+    "2025-03-20T04:38:20Z"
+   ],
+   "sunSet": [
+    "2025-03-20T16:49:20Z"
+   ],
+   "moonRise": [
+    "2025-03-19T23:07:29Z"
+   ],
+   "moonSet": [
+    "2025-03-20T06:15:37Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-03-20T04:04:32Z"
+     ],
+     "dusk": [
+      "2025-03-20T17:23:15Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-03-20T03:24:34Z"
+     ],
+     "dusk": [
+      "2025-03-20T18:03:24Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-03-20T02:42:51Z"
+     ],
+     "dusk": [
+      "2025-03-20T18:45:21Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 37.683,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 23.7437,
+     "altitudeAirless": -35.5022,
+     "altitudeRefracted": -35.5022,
+     "distanceKm": 148970582.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 144.3611,
+     "altitudeAirless": 4.1731,
+     "altitudeRefracted": 4.3564,
+     "distanceKm": 402554.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T00:00:00Z",
+     "fraction": 0.7333
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 105.3828,
+     "altitudeAirless": 11.5506,
+     "altitudeRefracted": 11.6284,
+     "distanceKm": 148976232.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 221.2648,
+     "altitudeAirless": 0.7815,
+     "altitudeRefracted": 1.1661,
+     "distanceKm": 402304.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T06:00:00Z",
+     "fraction": 0.71194
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 203.7574,
+     "altitudeAirless": 35.3922,
+     "altitudeRefracted": 35.4155,
+     "distanceKm": 148984467.2
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 288.7985,
+     "altitudeAirless": -47.8814,
+     "altitudeRefracted": -47.8814,
+     "distanceKm": 406462.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T12:00:00Z",
+     "fraction": 0.69001
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 285.4722,
+     "altitudeAirless": -11.4985,
+     "altitudeRefracted": -11.4985,
+     "distanceKm": 149000115.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 66.702,
+     "altitudeAirless": -51.0356,
+     "altitudeRefracted": -51.0356,
+     "distanceKm": 405926.1
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T18:00:00Z",
+     "fraction": 0.66757
+    }
+   ]
+  },
+  {
+   "city": "Warsaw",
+   "latitude": 52.2297,
+   "longitude": 21.0122,
+   "timeZone": "Europe/Warsaw",
+   "localDate": "2025-06-21",
+   "sunRise": [
+    "2025-06-21T02:14:25Z"
+   ],
+   "sunSet": [
+    "2025-06-21T19:01:09Z"
+   ],
+   "moonRise": [
+    "2025-06-20T23:07:16Z"
+   ],
+   "moonSet": [
+    "2025-06-21T14:26:22Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-06-21T01:24:55Z"
+     ],
+     "dusk": [
+      "2025-06-21T19:50:39Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-06-21T00:04:19Z"
+     ],
+     "dusk": [
+      "2025-06-21T21:11:13Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [],
+     "dusk": []
+    }
+   },
+   "sunAltitudeAtLocalNoon": 60.313,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 19.2639,
+     "altitudeAirless": -12.2239,
+     "altitudeRefracted": -12.2239,
+     "distanceKm": 152022120.6
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 77.3185,
+     "altitudeAirless": 6.7704,
+     "altitudeRefracted": 6.8962,
+     "distanceKm": 365377.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T00:00:00Z",
+     "fraction": 0.25909
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 90.7397,
+     "altitudeAirless": 30.7809,
+     "altitudeRefracted": 30.8086,
+     "distanceKm": 152020188.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 166.5535,
+     "altitudeAirless": 51.9453,
+     "altitudeRefracted": 51.9583,
+     "distanceKm": 360521.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T06:00:00Z",
+     "fraction": 0.23373
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 216.4819,
+     "altitudeAirless": 57.2046,
+     "altitudeRefracted": 57.2153,
+     "distanceKm": 152020725.8
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 271.5209,
+     "altitudeAirless": 19.3982,
+     "altitudeRefracted": 19.4446,
+     "distanceKm": 362851.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T12:00:00Z",
+     "fraction": 0.20922
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 300.0975,
+     "altitudeAirless": 6.733,
+     "altitudeRefracted": 6.8593,
+     "distanceKm": 152027937.1
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 345.0607,
+     "altitudeAirless": -19.2583,
+     "altitudeRefracted": -19.2583,
+     "distanceKm": 366595.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T18:00:00Z",
+     "fraction": 0.18564
+    }
+   ]
+  },
+  {
+   "city": "Warsaw",
+   "latitude": 52.2297,
+   "longitude": 21.0122,
+   "timeZone": "Europe/Warsaw",
+   "localDate": "2025-09-22",
+   "sunRise": [
+    "2025-09-22T04:22:06Z"
+   ],
+   "sunSet": [
+    "2025-09-22T16:34:05Z"
+   ],
+   "moonRise": [
+    "2025-09-22T04:57:06Z"
+   ],
+   "moonSet": [
+    "2025-09-22T16:31:34Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-09-22T03:48:11Z"
+     ],
+     "dusk": [
+      "2025-09-22T17:07:54Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-09-22T03:08:00Z"
+     ],
+     "dusk": [
+      "2025-09-22T17:47:54Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-09-22T02:26:00Z"
+     ],
+     "dusk": [
+      "2025-09-22T18:29:39Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 37.558,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 27.9111,
+     "altitudeAirless": -34.0919,
+     "altitudeRefracted": -34.0919,
+     "distanceKm": 150175772.4
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 27.0079,
+     "altitudeAirless": -36.9633,
+     "altitudeRefracted": -36.9633,
+     "distanceKm": 401444.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T00:00:00Z",
+     "fraction": 0.00039
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 108.2874,
+     "altitudeAirless": 13.9088,
+     "altitudeRefracted": 13.9738,
+     "distanceKm": 150160251.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 107.0572,
+     "altitudeAirless": 8.1704,
+     "altitudeRefracted": 8.2774,
+     "distanceKm": 397419.1
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T06:00:00Z",
+     "fraction": 0.00189
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 208.101,
+     "altitudeAirless": 34.458,
+     "altitudeRefracted": 34.4821,
+     "distanceKm": 150147745.8
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 199.4905,
+     "altitudeAirless": 30.7813,
+     "altitudeRefracted": 30.809,
+     "distanceKm": 395790.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T12:00:00Z",
+     "fraction": 0.00462
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 288.447,
+     "altitudeAirless": -13.7722,
+     "altitudeRefracted": -13.7722,
+     "distanceKm": 150142435.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 277.5788,
+     "altitudeAirless": -14.1885,
+     "altitudeRefracted": -14.1885,
+     "distanceKm": 401316.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T18:00:00Z",
+     "fraction": 0.00853
+    }
+   ]
+  },
+  {
+   "city": "Warsaw",
+   "latitude": 52.2297,
+   "longitude": 21.0122,
+   "timeZone": "Europe/Warsaw",
+   "localDate": "2025-12-21",
+   "sunRise": [
+    "2025-12-21T06:43:02Z"
+   ],
+   "sunSet": [
+    "2025-12-21T14:25:09Z"
+   ],
+   "moonRise": [
+    "2025-12-21T08:22:26Z"
+   ],
+   "moonSet": [
+    "2025-12-21T15:11:55Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-12-21T06:01:45Z"
+     ],
+     "dusk": [
+      "2025-12-21T15:06:27Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-12-21T05:17:42Z"
+     ],
+     "dusk": [
+      "2025-12-21T15:50:29Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-12-21T04:36:11Z"
+     ],
+     "dusk": [
+      "2025-12-21T16:32:00Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 14.118,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 37.9937,
+     "altitudeAirless": -56.8426,
+     "altitudeRefracted": -56.8426,
+     "distanceKm": 147186428.6
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 20.6479,
+     "altitudeAirless": -64.5613,
+     "altitudeRefracted": -64.5613,
+     "distanceKm": 407306.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T00:00:00Z",
+     "fraction": 0.00955
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 120.8254,
+     "altitudeAirless": -6.2298,
+     "altitudeRefracted": -6.2298,
+     "distanceKm": 147179138.2
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 112.3189,
+     "altitudeAirless": -18.0453,
+     "altitudeRefracted": -18.0453,
+     "distanceKm": 402887.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T06:00:00Z",
+     "fraction": 0.01439
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 200.0787,
+     "altitudeAirless": 12.0356,
+     "altitudeRefracted": 12.1104,
+     "distanceKm": 147174512.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 183.3784,
+     "altitudeAirless": 10.1698,
+     "altitudeRefracted": 10.2575,
+     "distanceKm": 399156.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T12:00:00Z",
+     "fraction": 0.02041
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 271.4366,
+     "altitudeAirless": -31.3201,
+     "altitudeRefracted": -31.3201,
+     "distanceKm": 147176604.4
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 253.7533,
+     "altitudeAirless": -21.5415,
+     "altitudeRefracted": -21.5415,
+     "distanceKm": 401990.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T18:00:00Z",
+     "fraction": 0.02759
+    }
+   ]
+  },
+  {
+   "city": "Warsaw",
+   "latitude": 52.2297,
+   "longitude": 21.0122,
+   "timeZone": "Europe/Warsaw",
+   "localDate": "2026-03-20",
+   "sunRise": [
+    "2026-03-20T04:38:54Z"
+   ],
+   "sunSet": [
+    "2026-03-20T16:48:55Z"
+   ],
+   "moonRise": [
+    "2026-03-20T04:50:04Z"
+   ],
+   "moonSet": [
+    "2026-03-20T19:07:25Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-03-20T04:05:06Z"
+     ],
+     "dusk": [
+      "2026-03-20T17:22:50Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-03-20T03:25:09Z"
+     ],
+     "dusk": [
+      "2026-03-20T18:02:58Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-03-20T02:43:30Z"
+     ],
+     "dusk": [
+      "2026-03-20T18:44:52Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 37.59,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 23.75,
+     "altitudeAirless": -35.5983,
+     "altitudeRefracted": -35.5983,
+     "distanceKm": 148965414.1
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 10.1982,
+     "altitudeAirless": -30.8746,
+     "altitudeRefracted": -30.8746,
+     "distanceKm": 373497.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T00:00:00Z",
+     "fraction": 0.01221
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 105.4241,
+     "altitudeAirless": 11.4633,
+     "altitudeRefracted": 11.5416,
+     "distanceKm": 148970766.8
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 89.1861,
+     "altitudeAirless": 9.6737,
+     "altitudeRefracted": 9.7655,
+     "distanceKm": 368476.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T06:00:00Z",
+     "fraction": 0.01934
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 203.7063,
+     "altitudeAirless": 35.3055,
+     "altitudeRefracted": 35.3288,
+     "distanceKm": 148978683.4
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 184.3441,
+     "altitudeAirless": 47.5411,
+     "altitudeRefracted": 47.5563,
+     "distanceKm": 364279.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T12:00:00Z",
+     "fraction": 0.02812
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 285.3996,
+     "altitudeAirless": -11.5632,
+     "altitudeRefracted": -11.5632,
+     "distanceKm": 148993996.1
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 277.4043,
+     "altitudeAirless": 8.6059,
+     "altitudeRefracted": 8.708,
+     "distanceKm": 367496.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T18:00:00Z",
+     "fraction": 0.03853
+    }
+   ]
+  },
+  {
+   "city": "Warsaw",
+   "latitude": 52.2297,
+   "longitude": 21.0122,
+   "timeZone": "Europe/Warsaw",
+   "localDate": "2026-06-21",
+   "sunRise": [
+    "2026-06-21T02:14:23Z"
+   ],
+   "sunSet": [
+    "2026-06-21T19:01:07Z"
+   ],
+   "moonRise": [
+    "2026-06-21T10:11:22Z"
+   ],
+   "moonSet": [
+    "2026-06-20T22:09:42Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-06-21T01:24:53Z"
+     ],
+     "dusk": [
+      "2026-06-21T19:50:36Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-06-21T00:04:18Z"
+     ],
+     "dusk": [
+      "2026-06-21T21:11:11Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [],
+     "dusk": []
+    }
+   },
+   "sunAltitudeAtLocalNoon": 60.315,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 19.2732,
+     "altitudeAirless": -12.2227,
+     "altitudeRefracted": -12.2227,
+     "distanceKm": 152018632.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 297.3648,
+     "altitudeAirless": -16.7986,
+     "altitudeRefracted": -16.7986,
+     "distanceKm": 384943.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T00:00:00Z",
+     "fraction": 0.40606
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 90.748,
+     "altitudeAirless": 30.7868,
+     "altitudeRefracted": 30.8145,
+     "distanceKm": 152016281.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 33.8792,
+     "altitudeAirless": -31.8764,
+     "altitudeRefracted": -31.8764,
+     "distanceKm": 387974.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T06:00:00Z",
+     "fraction": 0.4322
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 216.4976,
+     "altitudeAirless": 57.201,
+     "altitudeRefracted": 57.2116,
+     "distanceKm": 152016407.5
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 110.9692,
+     "altitudeAirless": 14.6465,
+     "altitudeRefracted": 14.7082,
+     "distanceKm": 384437.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T12:00:00Z",
+     "fraction": 0.45831
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 300.1054,
+     "altitudeAirless": 6.7279,
+     "altitudeRefracted": 6.8544,
+     "distanceKm": 152023214.4
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 208.0671,
+     "altitudeAirless": 32.0313,
+     "altitudeRefracted": 32.0576,
+     "distanceKm": 384108.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T18:00:00Z",
+     "fraction": 0.48431
+    }
+   ]
+  },
+  {
+   "city": "Warsaw",
+   "latitude": 52.2297,
+   "longitude": 21.0122,
+   "timeZone": "Europe/Warsaw",
+   "localDate": "2026-09-23",
+   "sunRise": [
+    "2026-09-23T04:23:22Z"
+   ],
+   "sunSet": [
+    "2026-09-23T16:32:18Z"
+   ],
+   "moonRise": [
+    "2026-09-23T15:27:23Z"
+   ],
+   "moonSet": [
+    "2026-09-23T00:07:10Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-09-23T03:49:28Z"
+     ],
+     "dusk": [
+      "2026-09-23T17:06:05Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-09-23T03:09:22Z"
+     ],
+     "dusk": [
+      "2026-09-23T17:46:01Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-09-23T02:27:30Z"
+     ],
+     "dusk": [
+      "2026-09-23T18:27:37Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 37.27,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 28.0906,
+     "altitudeAirless": -34.3561,
+     "altitudeRefracted": -34.3561,
+     "distanceKm": 150136719.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 239.3852,
+     "altitudeAirless": 0.0845,
+     "altitudeRefracted": 0.5544,
+     "distanceKm": 395443.1
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T00:00:00Z",
+     "fraction": 0.85824
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 108.5199,
+     "altitudeAirless": 13.7066,
+     "altitudeRefracted": 13.7726,
+     "distanceKm": 150121019.0
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 317.4465,
+     "altitudeAirless": -48.1022,
+     "altitudeRefracted": -48.1022,
+     "distanceKm": 399213.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T06:00:00Z",
+     "fraction": 0.8752
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 208.0746,
+     "altitudeAirless": 34.1558,
+     "altitudeRefracted": 34.1802,
+     "distanceKm": 150108364.3
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 73.9501,
+     "altitudeAirless": -31.3879,
+     "altitudeRefracted": -31.3879,
+     "distanceKm": 396713.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T12:00:00Z",
+     "fraction": 0.89131
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 288.3256,
+     "altitudeAirless": -14.0513,
+     "altitudeRefracted": -14.0513,
+     "distanceKm": 150102923.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 145.2856,
+     "altitudeAirless": 17.114,
+     "altitudeRefracted": 17.1668,
+     "distanceKm": 390411.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T18:00:00Z",
+     "fraction": 0.90652
+    }
+   ]
+  },
+  {
+   "city": "Warsaw",
+   "latitude": 52.2297,
+   "longitude": 21.0122,
+   "timeZone": "Europe/Warsaw",
+   "localDate": "2026-12-21",
+   "sunRise": [
+    "2026-12-21T06:42:54Z"
+   ],
+   "sunSet": [
+    "2026-12-21T14:25:02Z"
+   ],
+   "moonRise": [
+    "2026-12-21T11:38:25Z"
+   ],
+   "moonSet": [
+    "2026-12-21T03:41:04Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-12-21T06:01:37Z"
+     ],
+     "dusk": [
+      "2026-12-21T15:06:20Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-12-21T05:17:34Z"
+     ],
+     "dusk": [
+      "2026-12-21T15:50:22Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-12-21T04:36:04Z"
+     ],
+     "dusk": [
+      "2026-12-21T16:31:53Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 14.118,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 38.0371,
+     "altitudeAirless": -56.8295,
+     "altitudeRefracted": -56.8295,
+     "distanceKm": 147178938.8
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 266.962,
+     "altitudeAirless": 29.1714,
+     "altitudeRefracted": 29.2009,
+     "distanceKm": 363898.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T00:00:00Z",
+     "fraction": 0.86567
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 120.8468,
+     "altitudeAirless": -6.2127,
+     "altitudeRefracted": -6.2127,
+     "distanceKm": 147171477.7
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 336.3809,
+     "altitudeAirless": -12.9639,
+     "altitudeRefracted": -12.9639,
+     "distanceKm": 367080.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T06:00:00Z",
+     "fraction": 0.88491
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 200.1063,
+     "altitudeAirless": 12.0305,
+     "altitudeRefracted": 12.1054,
+     "distanceKm": 147166707.8
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 53.5755,
+     "altitudeAirless": 1.6916,
+     "altitudeRefracted": 1.9954,
+     "distanceKm": 364165.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T12:00:00Z",
+     "fraction": 0.90297
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 271.4613,
+     "altitudeAirless": -31.3379,
+     "altitudeRefracted": -31.3379,
+     "distanceKm": 147168676.5
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 125.989,
+     "altitudeAirless": 52.3796,
+     "altitudeRefracted": 52.3924,
+     "distanceKm": 358112.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T18:00:00Z",
+     "fraction": 0.91975
+    }
+   ]
+  },
+  {
+   "city": "Reykjavik",
+   "latitude": 64.1466,
+   "longitude": -21.9426,
+   "timeZone": "Atlantic/Reykjavik",
+   "localDate": "2025-03-20",
+   "sunRise": [
+    "2025-03-20T07:27:46Z"
+   ],
+   "sunSet": [
+    "2025-03-20T19:44:06Z"
+   ],
+   "moonRise": [],
+   "moonSet": [],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-03-20T06:40:04Z"
+     ],
+     "dusk": [
+      "2025-03-20T20:32:05Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-03-20T05:41:50Z"
+     ],
+     "dusk": [
+      "2025-03-20T21:30:49Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-03-20T04:35:36Z"
+     ],
+     "dusk": [
+      "2025-03-20T22:38:06Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 23.564,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 333.8382,
+     "altitudeAirless": -23.6594,
+     "altitudeRefracted": -23.6594,
+     "distanceKm": 148969436.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 107.7261,
+     "altitudeAirless": -20.3724,
+     "altitudeRefracted": -20.3724,
+     "distanceKm": 405249.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T00:00:00Z",
+     "fraction": 0.7333
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 68.3711,
+     "altitudeAirless": -10.1838,
+     "altitudeRefracted": -10.1838,
+     "distanceKm": 148978642.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 183.7543,
+     "altitudeAirless": -1.0199,
+     "altitudeRefracted": -1.0199,
+     "distanceKm": 402503.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T06:00:00Z",
+     "fraction": 0.71194
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 153.8988,
+     "altitudeAirless": 23.5638,
+     "altitudeRefracted": 23.6015,
+     "distanceKm": 148985612.4
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 258.7129,
+     "altitudeAirless": -25.0243,
+     "altitudeRefracted": -25.0243,
+     "distanceKm": 404406.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T12:00:00Z",
+     "fraction": 0.69001
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 248.4457,
+     "altitudeAirless": 10.2532,
+     "altitudeRefracted": 10.3402,
+     "distanceKm": 148997702.6
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 357.1891,
+     "altitudeAirless": -53.4666,
+     "altitudeRefracted": -53.4666,
+     "distanceKm": 406095.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T18:00:00Z",
+     "fraction": 0.66757
+    }
+   ]
+  },
+  {
+   "city": "Reykjavik",
+   "latitude": 64.1466,
+   "longitude": -21.9426,
+   "timeZone": "Atlantic/Reykjavik",
+   "localDate": "2025-06-21",
+   "sunRise": [
+    "2025-06-21T02:55:13Z"
+   ],
+   "sunSet": [
+    "2025-06-21T00:03:50Z"
+   ],
+   "moonRise": [
+    "2025-06-21T01:11:22Z"
+   ],
+   "moonSet": [
+    "2025-06-21T18:44:58Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [],
+     "dusk": []
+    },
+    "nautical": {
+     "dawn": [],
+     "dusk": []
+    },
+    "astronomical": {
+     "dawn": [],
+     "dusk": []
+    }
+   },
+   "sunAltitudeAtLocalNoon": 46.703,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 339.5525,
+     "altitudeAirless": -0.6903,
+     "altitudeRefracted": -0.0951,
+     "distanceKm": 152020846.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 40.5374,
+     "altitudeAirless": -6.7163,
+     "altitudeRefracted": -6.7163,
+     "distanceKm": 366879.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T00:00:00Z",
+     "fraction": 0.25909
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 60.0899,
+     "altitudeAirless": 11.8583,
+     "altitudeRefracted": 11.9342,
+     "distanceKm": 152022146.4
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 119.4683,
+     "altitudeAirless": 29.2132,
+     "altitudeRefracted": 29.2427,
+     "distanceKm": 362413.1
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T06:00:00Z",
+     "fraction": 0.23373
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 149.3368,
+     "altitudeAirless": 46.7029,
+     "altitudeRefracted": 46.7186,
+     "distanceKm": 152021446.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 223.9214,
+     "altitudeAirless": 36.1479,
+     "altitudeRefracted": 36.1705,
+     "distanceKm": 361217.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T12:00:00Z",
+     "fraction": 0.20922
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 260.5303,
+     "altitudeAirless": 30.6969,
+     "altitudeRefracted": 30.7247,
+     "distanceKm": 152025423.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 306.3044,
+     "altitudeAirless": 2.5522,
+     "altitudeRefracted": 2.8019,
+     "distanceKm": 364197.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T18:00:00Z",
+     "fraction": 0.18564
+    }
+   ]
+  },
+  {
+   "city": "Reykjavik",
+   "latitude": 64.1466,
+   "longitude": -21.9426,
+   "timeZone": "Atlantic/Reykjavik",
+   "localDate": "2025-09-22",
+   "sunRise": [
+    "2025-09-22T07:11:21Z"
+   ],
+   "sunSet": [
+    "2025-09-22T19:27:45Z"
+   ],
+   "moonRise": [
+    "2025-09-22T08:09:34Z"
+   ],
+   "moonSet": [
+    "2025-09-22T19:04:33Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-09-22T06:23:23Z"
+     ],
+     "dusk": [
+      "2025-09-22T20:15:28Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-09-22T05:24:39Z"
+     ],
+     "dusk": [
+      "2025-09-22T21:13:42Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-09-22T04:17:22Z"
+     ],
+     "dusk": [
+      "2025-09-22T22:19:57Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 24.273,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 337.8754,
+     "altitudeAirless": -23.8758,
+     "altitudeRefracted": -23.8758,
+     "distanceKm": 150174778.2
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 336.1072,
+     "altitudeAirless": -26.2905,
+     "altitudeRefracted": -26.2905,
+     "distanceKm": 400425.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T00:00:00Z",
+     "fraction": 0.00039
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 71.6669,
+     "altitudeAirless": -8.449,
+     "altitudeRefracted": -8.449,
+     "distanceKm": 150162727.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 69.4899,
+     "altitudeAirless": -13.8354,
+     "altitudeRefracted": -13.8354,
+     "distanceKm": 399858.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T06:00:00Z",
+     "fraction": 0.00189
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 157.8508,
+     "altitudeAirless": 24.2728,
+     "altitudeRefracted": 24.3092,
+     "distanceKm": 150148733.3
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 152.1257,
+     "altitudeAirless": 17.7378,
+     "altitudeRefracted": 17.7887,
+     "distanceKm": 397104.1
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T12:00:00Z",
+     "fraction": 0.00462
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 251.7932,
+     "altitudeAirless": 8.6127,
+     "altitudeRefracted": 8.7147,
+     "distanceKm": 150139956.3
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 241.3012,
+     "altitudeAirless": 5.7726,
+     "altitudeRefracted": 5.916,
+     "distanceKm": 399103.1
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T18:00:00Z",
+     "fraction": 0.00853
+    }
+   ]
+  },
+  {
+   "city": "Reykjavik",
+   "latitude": 64.1466,
+   "longitude": -21.9426,
+   "timeZone": "Atlantic/Reykjavik",
+   "localDate": "2025-12-21",
+   "sunRise": [
+    "2025-12-21T11:22:30Z"
+   ],
+   "sunSet": [
+    "2025-12-21T15:29:27Z"
+   ],
+   "moonRise": [],
+   "moonSet": [],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-12-21T10:03:09Z"
+     ],
+     "dusk": [
+      "2025-12-21T16:48:48Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-12-21T08:54:00Z"
+     ],
+     "dusk": [
+      "2025-12-21T17:57:57Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-12-21T07:53:59Z"
+     ],
+     "dusk": [
+      "2025-12-21T18:57:58Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 0.819,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 330.6145,
+     "altitudeAirless": -46.9192,
+     "altitudeRefracted": -46.9192,
+     "distanceKm": 147185746.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 314.1208,
+     "altitudeAirless": -48.3388,
+     "altitudeRefracted": -48.3388,
+     "distanceKm": 406297.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T00:00:00Z",
+     "fraction": 0.00955
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 81.4365,
+     "altitudeAirless": -30.2868,
+     "altitudeRefracted": -30.2868,
+     "distanceKm": 147181668.1
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 69.1736,
+     "altitudeAirless": -40.4043,
+     "altitudeRefracted": -40.4043,
+     "distanceKm": 405067.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T06:00:00Z",
+     "fraction": 0.01439
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 160.3592,
+     "altitudeAirless": 0.8187,
+     "altitudeRefracted": 1.1994,
+     "distanceKm": 147175752.6
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 145.3575,
+     "altitudeAirless": -6.7357,
+     "altitudeRefracted": -6.7357,
+     "distanceKm": 401032.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T12:00:00Z",
+     "fraction": 0.02041
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 240.8362,
+     "altitudeAirless": -12.1945,
+     "altitudeRefracted": -12.1945,
+     "distanceKm": 147174631.1
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 222.0411,
+     "altitudeAirless": -8.4761,
+     "altitudeRefracted": -8.4761,
+     "distanceKm": 400578.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T18:00:00Z",
+     "fraction": 0.02759
+    }
+   ]
+  },
+  {
+   "city": "Reykjavik",
+   "latitude": 64.1466,
+   "longitude": -21.9426,
+   "timeZone": "Atlantic/Reykjavik",
+   "localDate": "2026-03-20",
+   "sunRise": [
+    "2026-03-20T07:28:37Z"
+   ],
+   "sunSet": [
+    "2026-03-20T19:43:24Z"
+   ],
+   "moonRise": [
+    "2026-03-20T07:13:40Z"
+   ],
+   "moonSet": [
+    "2026-03-20T22:58:16Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-03-20T06:40:56Z"
+     ],
+     "dusk": [
+      "2026-03-20T20:31:21Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-03-20T05:42:48Z"
+     ],
+     "dusk": [
+      "2026-03-20T21:30:00Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-03-20T04:36:46Z"
+     ],
+     "dusk": [
+      "2026-03-20T22:37:03Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 23.468,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 333.7983,
+     "altitudeAirless": -23.7484,
+     "altitudeRefracted": -23.7484,
+     "distanceKm": 148964268.9
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 325.0369,
+     "altitudeAirless": -15.1138,
+     "altitudeRefracted": -15.1138,
+     "distanceKm": 371874.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T00:00:00Z",
+     "fraction": 0.01221
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 68.3924,
+     "altitudeAirless": -10.2778,
+     "altitudeRefracted": -10.2778,
+     "distanceKm": 148973178.0
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 52.6165,
+     "altitudeAirless": -7.8866,
+     "altitudeRefracted": -7.8866,
+     "distanceKm": 370427.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T06:00:00Z",
+     "fraction": 0.01934
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 153.8981,
+     "altitudeAirless": 23.4677,
+     "altitudeRefracted": 23.5055,
+     "distanceKm": 148979830.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 133.4163,
+     "altitudeAirless": 28.6357,
+     "altitudeRefracted": 28.6659,
+     "distanceKm": 365913.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T12:00:00Z",
+     "fraction": 0.02812
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 248.3891,
+     "altitudeAirless": 10.1749,
+     "altitudeRefracted": 10.2625,
+     "distanceKm": 148991585.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 234.5218,
+     "altitudeAirless": 27.7794,
+     "altitudeRefracted": 27.8107,
+     "distanceKm": 365483.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T18:00:00Z",
+     "fraction": 0.03853
+    }
+   ]
+  },
+  {
+   "city": "Reykjavik",
+   "latitude": 64.1466,
+   "longitude": -21.9426,
+   "timeZone": "Atlantic/Reykjavik",
+   "localDate": "2026-06-21",
+   "sunRise": [
+    "2026-06-21T02:55:12Z"
+   ],
+   "sunSet": [
+    "2026-06-21T00:03:46Z"
+   ],
+   "moonRise": [
+    "2026-06-21T13:13:36Z"
+   ],
+   "moonSet": [
+    "2026-06-21T01:11:17Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [],
+     "dusk": []
+    },
+    "nautical": {
+     "dawn": [],
+     "dusk": []
+    },
+    "astronomical": {
+     "dawn": [],
+     "dusk": []
+    }
+   },
+   "sunAltitudeAtLocalNoon": 46.705,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 339.5615,
+     "altitudeAirless": -0.6926,
+     "altitudeRefracted": -0.097,
+     "distanceKm": 152017358.4
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 260.7344,
+     "altitudeAirless": 6.9709,
+     "altitudeRefracted": 7.0936,
+     "distanceKm": 382316.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T00:00:00Z",
+     "fraction": 0.40606
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 60.0987,
+     "altitudeAirless": 11.8618,
+     "altitudeRefracted": 11.9376,
+     "distanceKm": 152018239.8
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 344.2588,
+     "altitudeAirless": -24.2771,
+     "altitudeRefracted": -24.2771,
+     "distanceKm": 387222.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T06:00:00Z",
+     "fraction": 0.4322
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 149.3499,
+     "altitudeAirless": 46.7052,
+     "altitudeRefracted": 46.7208,
+     "distanceKm": 152017127.3
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 74.5465,
+     "altitudeAirless": -8.2361,
+     "altitudeRefracted": -8.2361,
+     "distanceKm": 386967.1
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T12:00:00Z",
+     "fraction": 0.45831
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 260.5401,
+     "altitudeAirless": 30.6929,
+     "altitudeRefracted": 30.7207,
+     "distanceKm": 152020700.7
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 158.6033,
+     "altitudeAirless": 21.924,
+     "altitudeRefracted": 21.9647,
+     "distanceKm": 385102.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T18:00:00Z",
+     "fraction": 0.48431
+    }
+   ]
+  },
+  {
+   "city": "Reykjavik",
+   "latitude": 64.1466,
+   "longitude": -21.9426,
+   "timeZone": "Atlantic/Reykjavik",
+   "localDate": "2026-09-23",
+   "sunRise": [
+    "2026-09-23T07:13:32Z"
+   ],
+   "sunSet": [
+    "2026-09-23T19:25:04Z"
+   ],
+   "moonRise": [
+    "2026-09-23T19:07:24Z"
+   ],
+   "moonSet": [
+    "2026-09-23T02:01:08Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-09-23T06:25:38Z"
+     ],
+     "dusk": [
+      "2026-09-23T20:12:42Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-09-23T05:27:10Z"
+     ],
+     "dusk": [
+      "2026-09-23T21:10:41Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-09-23T04:20:35Z"
+     ],
+     "dusk": [
+      "2026-09-23T22:16:17Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 23.992,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 337.8937,
+     "altitudeAirless": -24.1783,
+     "altitudeRefracted": -24.1783,
+     "distanceKm": 150135731.5
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 200.5276,
+     "altitudeAirless": 5.9412,
+     "altitudeRefracted": 6.0813,
+     "distanceKm": 394789.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T00:00:00Z",
+     "fraction": 0.85824
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 71.8517,
+     "altitudeAirless": -8.6907,
+     "altitudeRefracted": -8.6907,
+     "distanceKm": 150123499.7
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 279.6741,
+     "altitudeAirless": -23.4201,
+     "altitudeRefracted": -23.4201,
+     "distanceKm": 396976.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T06:00:00Z",
+     "fraction": 0.8752
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 157.9756,
+     "altitudeAirless": 23.992,
+     "altitudeRefracted": 24.0289,
+     "distanceKm": 150109352.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 20.0768,
+     "altitudeAirless": -40.2199,
+     "altitudeRefracted": -40.2199,
+     "distanceKm": 397520.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T12:00:00Z",
+     "fraction": 0.89131
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 251.7304,
+     "altitudeAirless": 8.3161,
+     "altitudeRefracted": 8.4214,
+     "distanceKm": 150100446.9
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 107.6871,
+     "altitudeAirless": -7.4877,
+     "altitudeRefracted": -7.4877,
+     "distanceKm": 393121.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T18:00:00Z",
+     "fraction": 0.90652
+    }
+   ]
+  },
+  {
+   "city": "Reykjavik",
+   "latitude": 64.1466,
+   "longitude": -21.9426,
+   "timeZone": "Atlantic/Reykjavik",
+   "localDate": "2026-12-21",
+   "sunRise": [
+    "2026-12-21T11:22:21Z"
+   ],
+   "sunSet": [
+    "2026-12-21T15:29:21Z"
+   ],
+   "moonRise": [
+    "2026-12-21T12:32:11Z"
+   ],
+   "moonSet": [
+    "2026-12-21T08:41:33Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-12-21T10:03:00Z"
+     ],
+     "dusk": [
+      "2026-12-21T16:48:42Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-12-21T08:53:52Z"
+     ],
+     "dusk": [
+      "2026-12-21T17:57:50Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-12-21T07:53:51Z"
+     ],
+     "dusk": [
+      "2026-12-21T18:57:51Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 0.824,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 330.6538,
+     "altitudeAirless": -46.9234,
+     "altitudeRefracted": -46.9234,
+     "distanceKm": 147178258.1
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 213.8184,
+     "altitudeAirless": 43.4753,
+     "altitudeRefracted": 43.4928,
+     "distanceKm": 362628.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T00:00:00Z",
+     "fraction": 0.86567
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 81.4634,
+     "altitudeAirless": -30.2725,
+     "altitudeRefracted": -30.2725,
+     "distanceKm": 147174008.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 299.1645,
+     "altitudeAirless": 10.3178,
+     "altitudeRefracted": 10.4043,
+     "distanceKm": 364501.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T06:00:00Z",
+     "fraction": 0.88491
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 160.3861,
+     "altitudeAirless": 0.8244,
+     "altitudeRefracted": 1.2045,
+     "distanceKm": 147167946.4
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 16.7662,
+     "altitudeAirless": -2.0866,
+     "altitudeRefracted": -2.0866,
+     "distanceKm": 364588.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T12:00:00Z",
+     "fraction": 0.90297
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 240.8622,
+     "altitudeAirless": -12.2052,
+     "altitudeRefracted": -12.2052,
+     "distanceKm": 147166702.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 91.7472,
+     "altitudeAirless": 27.3831,
+     "altitudeRefracted": 27.4149,
+     "distanceKm": 360211.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T18:00:00Z",
+     "fraction": 0.91975
+    }
+   ]
+  },
+  {
+   "city": "Tromso",
+   "latitude": 69.6492,
+   "longitude": 18.9553,
+   "timeZone": "Europe/Oslo",
+   "localDate": "2025-03-20",
+   "sunRise": [
+    "2025-03-20T04:42:50Z"
+   ],
+   "sunSet": [
+    "2025-03-20T17:02:27Z"
+   ],
+   "moonRise": [],
+   "moonSet": [],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-03-20T03:42:41Z"
+     ],
+     "dusk": [
+      "2025-03-20T18:03:04Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-03-20T02:26:17Z"
+     ],
+     "dusk": [
+      "2025-03-20T19:20:34Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-03-20T00:44:07Z"
+     ],
+     "dusk": [
+      "2025-03-20T21:06:55Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 20.366,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 18.1601,
+     "altitudeAirless": -19.5667,
+     "altitudeRefracted": -19.5667,
+     "distanceKm": 148969012.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 142.1669,
+     "altitudeAirless": -10.4064,
+     "altitudeRefracted": -10.4064,
+     "distanceKm": 404174.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T00:00:00Z",
+     "fraction": 0.7333
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 106.1034,
+     "altitudeAirless": 5.8186,
+     "altitudeRefracted": 5.9611,
+     "distanceKm": 148976863.6
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 220.4296,
+     "altitudeAirless": -11.7661,
+     "altitudeRefracted": -11.7661,
+     "distanceKm": 403695.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T06:00:00Z",
+     "fraction": 0.71194
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 198.1876,
+     "altitudeAirless": 19.4586,
+     "altitudeRefracted": 19.5049,
+     "distanceKm": 148986038.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 301.4665,
+     "altitudeAirless": -39.5507,
+     "altitudeRefracted": -39.5507,
+     "distanceKm": 405784.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T12:00:00Z",
+     "fraction": 0.69001
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 286.1713,
+     "altitudeAirless": -5.7439,
+     "altitudeRefracted": -5.7439,
+     "distanceKm": 148999481.2
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 48.8029,
+     "altitudeAirless": -42.5546,
+     "altitudeRefracted": -42.5546,
+     "distanceKm": 405272.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T18:00:00Z",
+     "fraction": 0.66757
+    }
+   ]
+  },
+  {
+   "city": "Tromso",
+   "latitude": 69.6492,
+   "longitude": 18.9553,
+   "timeZone": "Europe/Oslo",
+   "localDate": "2025-06-21",
+   "sunRise": [],
+   "sunSet": [],
+   "moonRise": [
+    "2025-06-21T20:49:27Z"
+   ],
+   "moonSet": [
+    "2025-06-21T17:08:23Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [],
+     "dusk": []
+    },
+    "nautical": {
+     "dawn": [],
+     "dusk": []
+    },
+    "astronomical": {
+     "dawn": [],
+     "dusk": []
+    }
+   },
+   "sunAltitudeAtLocalNoon": 43.28,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 16.9854,
+     "altitudeAirless": 4.0335,
+     "altitudeRefracted": 4.2213,
+     "distanceKm": 152020319.8
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 78.289,
+     "altitudeAirless": 9.4977,
+     "altitudeRefracted": 9.5911,
+     "distanceKm": 365077.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T00:00:00Z",
+     "fraction": 0.25909
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 98.8,
+     "altitudeAirless": 28.3052,
+     "altitudeRefracted": 28.3358,
+     "distanceKm": 152020428.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 167.574,
+     "altitudeAirless": 34.5295,
+     "altitudeRefracted": 34.5535,
+     "distanceKm": 361913.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T06:00:00Z",
+     "fraction": 0.23373
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 203.2441,
+     "altitudeAirless": 42.4933,
+     "altitudeRefracted": 42.5114,
+     "distanceKm": 152021779.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 263.1462,
+     "altitudeAirless": 19.5927,
+     "altitudeRefracted": 19.6386,
+     "distanceKm": 362831.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T12:00:00Z",
+     "fraction": 0.20922
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 295.2791,
+     "altitudeAirless": 15.7684,
+     "altitudeRefracted": 15.8258,
+     "distanceKm": 152026950.7
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 343.884,
+     "altitudeAirless": -2.2578,
+     "altitudeRefracted": -2.2578,
+     "distanceKm": 364734.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T18:00:00Z",
+     "fraction": 0.18564
+    }
+   ]
+  },
+  {
+   "city": "Tromso",
+   "latitude": 69.6492,
+   "longitude": 18.9553,
+   "timeZone": "Europe/Oslo",
+   "localDate": "2025-09-22",
+   "sunRise": [
+    "2025-09-22T04:24:55Z"
+   ],
+   "sunSet": [
+    "2025-09-22T16:46:34Z"
+   ],
+   "moonRise": [
+    "2025-09-22T05:23:21Z"
+   ],
+   "moonSet": [
+    "2025-09-22T16:07:37Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-09-22T03:24:15Z"
+     ],
+     "dusk": [
+      "2025-09-22T17:46:46Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-09-22T02:06:34Z"
+     ],
+     "dusk": [
+      "2025-09-22T19:03:22Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-09-22T00:19:10Z"
+     ],
+     "dusk": [
+      "2025-09-22T20:46:28Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 20.209,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 21.9649,
+     "altitudeAirless": -18.6856,
+     "altitudeRefracted": -18.6856,
+     "distanceKm": 150174239.2
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 20.8307,
+     "altitudeAirless": -21.5334,
+     "altitudeRefracted": -21.5334,
+     "distanceKm": 399937.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T00:00:00Z",
+     "fraction": 0.00039
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 109.5132,
+     "altitudeAirless": 7.2718,
+     "altitudeRefracted": 7.3902,
+     "distanceKm": 150160978.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 106.98,
+     "altitudeAirless": 2.0629,
+     "altitudeRefracted": 2.3412,
+     "distanceKm": 398095.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T06:00:00Z",
+     "fraction": 0.00189
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 202.0659,
+     "altitudeAirless": 19.0715,
+     "altitudeRefracted": 19.1188,
+     "distanceKm": 150149272.1
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 195.0027,
+     "altitudeAirless": 14.3244,
+     "altitudeRefracted": 14.3875,
+     "distanceKm": 397467.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T12:00:00Z",
+     "fraction": 0.00462
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 289.6227,
+     "altitudeAirless": -7.0973,
+     "altitudeRefracted": -7.0973,
+     "distanceKm": 150141704.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 279.2677,
+     "altitudeAirless": -10.6291,
+     "altitudeRefracted": -10.6291,
+     "distanceKm": 400927.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T18:00:00Z",
+     "fraction": 0.00853
+    }
+   ]
+  },
+  {
+   "city": "Tromso",
+   "latitude": 69.6492,
+   "longitude": 18.9553,
+   "timeZone": "Europe/Oslo",
+   "localDate": "2025-12-21",
+   "sunRise": [],
+   "sunSet": [],
+   "moonRise": [],
+   "moonSet": [],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-12-21T08:31:24Z"
+     ],
+     "dusk": [
+      "2025-12-21T12:53:15Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-12-21T06:46:51Z"
+     ],
+     "dusk": [
+      "2025-12-21T14:37:48Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-12-21T05:28:28Z"
+     ],
+     "dusk": [
+      "2025-12-21T15:56:11Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": -3.144,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 24.4487,
+     "altitudeAirless": -42.3579,
+     "altitudeRefracted": -42.3579,
+     "distanceKm": 147185385.2
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 10.4402,
+     "altitudeAirless": -48.2089,
+     "altitudeRefracted": -48.2089,
+     "distanceKm": 406287.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T00:00:00Z",
+     "fraction": 0.00955
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 116.142,
+     "altitudeAirless": -15.4719,
+     "altitudeRefracted": -15.4719,
+     "distanceKm": 147180148.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 104.4125,
+     "altitudeAirless": -24.5,
+     "altitudeRefracted": -24.5,
+     "distanceKm": 403561.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T06:00:00Z",
+     "fraction": 0.01439
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 197.7998,
+     "altitudeAirless": -4.1309,
+     "altitudeRefracted": -4.1309,
+     "distanceKm": 147176304.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 181.4862,
+     "altitudeAirless": -7.1973,
+     "altitudeRefracted": -7.1973,
+     "distanceKm": 401083.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T12:00:00Z",
+     "fraction": 0.02041
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 279.6456,
+     "altitudeAirless": -28.6094,
+     "altitudeRefracted": -28.6094,
+     "distanceKm": 147176342.7
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 259.0215,
+     "altitudeAirless": -24.6758,
+     "altitudeRefracted": -24.6758,
+     "distanceKm": 402314.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T18:00:00Z",
+     "fraction": 0.02759
+    }
+   ]
+  },
+  {
+   "city": "Tromso",
+   "latitude": 69.6492,
+   "longitude": 18.9553,
+   "timeZone": "Europe/Oslo",
+   "localDate": "2026-03-20",
+   "sunRise": [
+    "2026-03-20T04:43:55Z"
+   ],
+   "sunSet": [
+    "2026-03-20T17:01:30Z"
+   ],
+   "moonRise": [
+    "2026-03-20T04:09:00Z"
+   ],
+   "moonSet": [
+    "2026-03-20T20:42:52Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-03-20T03:43:49Z"
+     ],
+     "dusk": [
+      "2026-03-20T18:02:05Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-03-20T02:27:36Z"
+     ],
+     "dusk": [
+      "2026-03-20T19:19:22Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-03-20T00:46:19Z"
+     ],
+     "dusk": [
+      "2026-03-20T21:04:41Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 20.272,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 18.1512,
+     "altitudeAirless": -19.6626,
+     "altitudeRefracted": -19.6626,
+     "distanceKm": 148963845.9
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 6.9554,
+     "altitudeAirless": -13.9062,
+     "altitudeRefracted": -13.9062,
+     "distanceKm": 371743.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T00:00:00Z",
+     "fraction": 0.01221
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 106.1172,
+     "altitudeAirless": 5.7234,
+     "altitudeRefracted": 5.8677,
+     "distanceKm": 148971399.0
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 90.5157,
+     "altitudeAirless": 8.7056,
+     "altitudeRefracted": 8.8067,
+     "distanceKm": 368582.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T06:00:00Z",
+     "fraction": 0.01934
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 198.1567,
+     "altitudeAirless": 19.367,
+     "altitudeRefracted": 19.4134,
+     "distanceKm": 148980255.9
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 181.0146,
+     "altitudeAirless": 29.9979,
+     "altitudeRefracted": 30.0265,
+     "distanceKm": 365781.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T12:00:00Z",
+     "fraction": 0.02812
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 286.1215,
+     "altitudeAirless": -5.8263,
+     "altitudeRefracted": -5.8263,
+     "distanceKm": 148993364.4
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 272.2551,
+     "altitudeAirless": 11.099,
+     "altitudeRefracted": 11.1798,
+     "distanceKm": 367223.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T18:00:00Z",
+     "fraction": 0.03853
+    }
+   ]
+  },
+  {
+   "city": "Tromso",
+   "latitude": 69.6492,
+   "longitude": 18.9553,
+   "timeZone": "Europe/Oslo",
+   "localDate": "2026-06-21",
+   "sunRise": [],
+   "sunSet": [],
+   "moonRise": [
+    "2026-06-21T10:17:49Z"
+   ],
+   "moonSet": [
+    "2026-06-20T22:37:11Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [],
+     "dusk": []
+    },
+    "nautical": {
+     "dawn": [],
+     "dusk": []
+    },
+    "astronomical": {
+     "dawn": [],
+     "dusk": []
+    }
+   },
+   "sunAltitudeAtLocalNoon": 43.281,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 16.9947,
+     "altitudeAirless": 4.0338,
+     "altitudeRefracted": 4.2215,
+     "distanceKm": 152016831.9
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 298.5579,
+     "altitudeAirless": -7.7239,
+     "altitudeRefracted": -7.7239,
+     "distanceKm": 383952.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T00:00:00Z",
+     "fraction": 0.40606
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 98.8099,
+     "altitudeAirless": 28.3083,
+     "altitudeRefracted": 28.3389,
+     "distanceKm": 152016521.4
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 27.7083,
+     "altitudeAirless": -17.4826,
+     "altitudeRefracted": -17.4826,
+     "distanceKm": 386511.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T06:00:00Z",
+     "fraction": 0.4322
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 203.2565,
+     "altitudeAirless": 42.492,
+     "altitudeRefracted": 42.5101,
+     "distanceKm": 152017461.5
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 112.4928,
+     "altitudeAirless": 7.1926,
+     "altitudeRefracted": 7.3121,
+     "distanceKm": 385249.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T12:00:00Z",
+     "fraction": 0.45831
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 295.2883,
+     "altitudeAirless": 15.7656,
+     "altitudeRefracted": 15.823,
+     "distanceKm": 152022227.8
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 202.3111,
+     "altitudeAirless": 16.557,
+     "altitudeRefracted": 16.6116,
+     "distanceKm": 385664.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T18:00:00Z",
+     "fraction": 0.48431
+    }
+   ]
+  },
+  {
+   "city": "Tromso",
+   "latitude": 69.6492,
+   "longitude": 18.9553,
+   "timeZone": "Europe/Oslo",
+   "localDate": "2026-09-23",
+   "sunRise": [
+    "2026-09-23T04:27:51Z"
+   ],
+   "sunSet": [
+    "2026-09-23T16:43:07Z"
+   ],
+   "moonRise": [
+    "2026-09-23T17:08:58Z"
+   ],
+   "moonSet": [],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-09-23T03:27:21Z"
+     ],
+     "dusk": [
+      "2026-09-23T17:43:10Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-09-23T02:10:19Z"
+     ],
+     "dusk": [
+      "2026-09-23T18:59:11Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-09-23T00:26:07Z"
+     ],
+     "dusk": [
+      "2026-09-23T20:39:33Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 19.918,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 22.0749,
+     "altitudeAirless": -18.9702,
+     "altitudeRefracted": -18.9702,
+     "distanceKm": 150135191.7
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 238.4044,
+     "altitudeAirless": -8.0951,
+     "altitudeRefracted": -8.0951,
+     "distanceKm": 396352.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T00:00:00Z",
+     "fraction": 0.85824
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 109.6739,
+     "altitudeAirless": 7.0142,
+     "altitudeRefracted": 7.1362,
+     "distanceKm": 150121752.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 324.3775,
+     "altitudeAirless": -34.0221,
+     "altitudeRefracted": -34.0221,
+     "distanceKm": 398020.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T06:00:00Z",
+     "fraction": 0.8752
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 202.0945,
+     "altitudeAirless": 18.7698,
+     "altitudeRefracted": 18.8178,
+     "distanceKm": 150109894.5
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 63.2884,
+     "altitudeAirless": -25.9601,
+     "altitudeRefracted": -25.9601,
+     "distanceKm": 396178.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T12:00:00Z",
+     "fraction": 0.89131
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 289.5882,
+     "altitudeAirless": -7.3983,
+     "altitudeRefracted": -7.3983,
+     "distanceKm": 150102195.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 145.1761,
+     "altitudeAirless": 2.1613,
+     "altitudeRefracted": 2.4334,
+     "distanceKm": 392045.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T18:00:00Z",
+     "fraction": 0.90652
+    }
+   ]
+  },
+  {
+   "city": "Tromso",
+   "latitude": 69.6492,
+   "longitude": 18.9553,
+   "timeZone": "Europe/Oslo",
+   "localDate": "2026-12-21",
+   "sunRise": [],
+   "sunSet": [],
+   "moonRise": [],
+   "moonSet": [],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-12-21T08:31:15Z"
+     ],
+     "dusk": [
+      "2026-12-21T12:53:09Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-12-21T06:46:42Z"
+     ],
+     "dusk": [
+      "2026-12-21T14:37:42Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-12-21T05:28:19Z"
+     ],
+     "dusk": [
+      "2026-12-21T15:56:05Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": -3.143,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 24.4844,
+     "altitudeAirless": -42.3515,
+     "altitudeRefracted": -42.3515,
+     "distanceKm": 147177895.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 255.3553,
+     "altitudeAirless": 27.452,
+     "altitudeRefracted": 27.4837,
+     "distanceKm": 364065.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T00:00:00Z",
+     "fraction": 0.86567
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 116.1679,
+     "altitudeAirless": -15.461,
+     "altitudeRefracted": -15.461,
+     "distanceKm": 147172488.7
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 334.9851,
+     "altitudeAirless": 3.3132,
+     "altitudeRefracted": 3.5273,
+     "distanceKm": 365276.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T06:00:00Z",
+     "fraction": 0.88491
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 197.8273,
+     "altitudeAirless": -4.1328,
+     "altitudeRefracted": -4.1328,
+     "distanceKm": 147168498.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 53.6915,
+     "altitudeAirless": 11.2836,
+     "altitudeRefracted": 11.3631,
+     "distanceKm": 363106.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T12:00:00Z",
+     "fraction": 0.90297
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 279.6752,
+     "altitudeAirless": -28.6189,
+     "altitudeRefracted": -28.6189,
+     "distanceKm": 147168414.0
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 137.4205,
+     "altitudeAirless": 39.7537,
+     "altitudeRefracted": 39.7736,
+     "distanceKm": 359074.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T18:00:00Z",
+     "fraction": 0.91975
+    }
+   ]
+  },
+  {
+   "city": "Sydney",
+   "latitude": -33.8688,
+   "longitude": 151.2093,
+   "timeZone": "Australia/Sydney",
+   "localDate": "2025-03-20",
+   "sunRise": [
+    "2025-03-19T19:58:08Z"
+   ],
+   "sunSet": [
+    "2025-03-20T08:06:36Z"
+   ],
+   "moonRise": [
+    "2025-03-20T11:03:23Z"
+   ],
+   "moonSet": [
+    "2025-03-20T01:14:57Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-03-19T19:33:12Z"
+     ],
+     "dusk": [
+      "2025-03-20T08:31:30Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-03-19T19:04:05Z"
+     ],
+     "dusk": [
+      "2025-03-20T09:00:33Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-03-19T18:34:39Z"
+     ],
+     "dusk": [
+      "2025-03-20T09:29:55Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 53.201,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 46.9066,
+     "altitudeAirless": 45.6934,
+     "altitudeRefracted": 45.7096,
+     "distanceKm": 148962302.3
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 248.5049,
+     "altitudeAirless": 12.6173,
+     "altitudeRefracted": 12.6888,
+     "distanceKm": 401652.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T00:00:00Z",
+     "fraction": 0.7333
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 288.2311,
+     "altitudeAirless": 25.0702,
+     "altitudeRefracted": 25.1054,
+     "distanceKm": 148974806.6
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 182.7817,
+     "altitudeAirless": -30.9455,
+     "altitudeRefracted": -30.9455,
+     "distanceKm": 405713.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T06:00:00Z",
+     "fraction": 0.71194
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 226.7776,
+     "altitudeAirless": -45.6398,
+     "altitudeRefracted": -45.6398,
+     "distanceKm": 148992734.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 115.2816,
+     "altitudeAirless": 9.2015,
+     "altitudeRefracted": 9.2976,
+     "distanceKm": 400699.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T12:00:00Z",
+     "fraction": 0.69001
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 108.1209,
+     "altitudeAirless": -25.1053,
+     "altitudeRefracted": -25.1053,
+     "distanceKm": 149001550.8
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 50.3797,
+     "altitudeAirless": 79.7097,
+     "altitudeRefracted": 79.7127,
+     "distanceKm": 394720.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T18:00:00Z",
+     "fraction": 0.66757
+    }
+   ]
+  },
+  {
+   "city": "Sydney",
+   "latitude": -33.8688,
+   "longitude": 151.2093,
+   "timeZone": "Australia/Sydney",
+   "localDate": "2025-06-21",
+   "sunRise": [
+    "2025-06-20T21:00:00Z"
+   ],
+   "sunSet": [
+    "2025-06-21T06:53:51Z"
+   ],
+   "moonRise": [
+    "2025-06-20T15:56:41Z"
+   ],
+   "moonSet": [
+    "2025-06-21T03:05:30Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-06-20T20:32:16Z"
+     ],
+     "dusk": [
+      "2025-06-21T07:21:35Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-06-20T20:01:01Z"
+     ],
+     "dusk": [
+      "2025-06-21T07:52:49Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-06-20T19:30:32Z"
+     ],
+     "dusk": [
+      "2025-06-21T08:23:18Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 32.686,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 29.9829,
+     "altitudeAirless": 26.3028,
+     "altitudeRefracted": 26.3361,
+     "distanceKm": 152017915.4
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 319.1501,
+     "altitudeAirless": 30.962,
+     "altitudeRefracted": 30.9895,
+     "distanceKm": 362846.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T00:00:00Z",
+     "fraction": 0.25909
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 305.9243,
+     "altitudeAirless": 8.6514,
+     "altitudeRefracted": 8.753,
+     "distanceKm": 152022474.7
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 265.6385,
+     "altitudeAirless": -35.5188,
+     "altitudeRefracted": -35.5188,
+     "distanceKm": 369232.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T06:00:00Z",
+     "fraction": 0.23373
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 255.5147,
+     "altitudeAirless": -62.4141,
+     "altitudeRefracted": -62.4141,
+     "distanceKm": 152031734.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 116.4776,
+     "altitudeAirless": -59.7784,
+     "altitudeRefracted": -59.7784,
+     "distanceKm": 370510.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T12:00:00Z",
+     "fraction": 0.20922
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 84.2733,
+     "altitudeAirless": -36.4512,
+     "altitudeRefracted": -36.4512,
+     "distanceKm": 152032457.8
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 60.4934,
+     "altitudeAirless": 8.3217,
+     "altitudeRefracted": 8.4269,
+     "distanceKm": 363540.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T18:00:00Z",
+     "fraction": 0.18564
+    }
+   ]
+  },
+  {
+   "city": "Sydney",
+   "latitude": -33.8688,
+   "longitude": 151.2093,
+   "timeZone": "Australia/Sydney",
+   "localDate": "2025-09-22",
+   "sunRise": [
+    "2025-09-21T19:45:00Z"
+   ],
+   "sunSet": [
+    "2025-09-22T07:51:24Z"
+   ],
+   "moonRise": [
+    "2025-09-21T19:45:22Z"
+   ],
+   "moonSet": [
+    "2025-09-22T08:15:56Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-09-21T19:20:08Z"
+     ],
+     "dusk": [
+      "2025-09-22T08:16:19Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-09-21T18:51:06Z"
+     ],
+     "dusk": [
+      "2025-09-22T08:45:24Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-09-21T18:21:47Z"
+     ],
+     "dusk": [
+      "2025-09-22T09:14:47Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 55.748,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 42.1821,
+     "altitudeAirless": 47.4714,
+     "altitudeRefracted": 47.4866,
+     "distanceKm": 150167484.1
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 45.3668,
+     "altitudeAirless": 47.6137,
+     "altitudeRefracted": 47.6288,
+     "distanceKm": 392896.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T00:00:00Z",
+     "fraction": 0.00039
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 286.0059,
+     "altitudeAirless": 22.0,
+     "altitudeRefracted": 22.0405,
+     "distanceKm": 150159394.8
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 285.682,
+     "altitudeAirless": 26.1534,
+     "altitudeRefracted": 26.1869,
+     "distanceKm": 395524.1
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T06:00:00Z",
+     "fraction": 0.00189
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 222.4595,
+     "altitudeAirless": -47.8306,
+     "altitudeRefracted": -47.8306,
+     "distanceKm": 150156093.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 225.8903,
+     "altitudeAirless": -41.1385,
+     "altitudeRefracted": -41.1385,
+     "distanceKm": 403274.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T12:00:00Z",
+     "fraction": 0.00462
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 105.8007,
+     "altitudeAirless": -22.0928,
+     "altitudeRefracted": -22.0928,
+     "distanceKm": 150143315.8
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 116.8723,
+     "altitudeAirless": -25.9299,
+     "altitudeRefracted": -25.9299,
+     "distanceKm": 402554.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T18:00:00Z",
+     "fraction": 0.00853
+    }
+   ]
+  },
+  {
+   "city": "Sydney",
+   "latitude": -33.8688,
+   "longitude": 151.2093,
+   "timeZone": "Australia/Sydney",
+   "localDate": "2025-12-21",
+   "sunRise": [
+    "2025-12-20T18:40:45Z"
+   ],
+   "sunSet": [
+    "2025-12-21T09:05:31Z"
+   ],
+   "moonRise": [
+    "2025-12-20T19:06:49Z"
+   ],
+   "moonSet": [
+    "2025-12-21T10:19:32Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-12-20T18:11:35Z"
+     ],
+     "dusk": [
+      "2025-12-21T09:34:41Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-12-20T17:35:41Z"
+     ],
+     "dusk": [
+      "2025-12-21T10:10:35Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-12-20T16:56:21Z"
+     ],
+     "dusk": [
+      "2025-12-21T10:49:55Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 74.386,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 74.5567,
+     "altitudeAirless": 63.198,
+     "altitudeRefracted": 63.2064,
+     "distanceKm": 147175402.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 90.3941,
+     "altitudeAirless": 54.8585,
+     "altitudeRefracted": 54.8701,
+     "distanceKm": 396332.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T00:00:00Z",
+     "fraction": 0.00955
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 263.796,
+     "altitudeAirless": 35.6521,
+     "altitudeRefracted": 35.6752,
+     "distanceKm": 147174745.3
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 266.4554,
+     "altitudeAirless": 48.6637,
+     "altitudeRefracted": 48.6783,
+     "distanceKm": 396163.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T06:00:00Z",
+     "fraction": 0.01439
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 209.1654,
+     "altitudeAirless": -26.6725,
+     "altitudeRefracted": -26.6725,
+     "distanceKm": 147178734.6
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 221.8991,
+     "altitudeAirless": -16.2323,
+     "altitudeRefracted": -16.2323,
+     "distanceKm": 402098.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T12:00:00Z",
+     "fraction": 0.02041
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 125.3751,
+     "altitudeAirless": -8.0668,
+     "altitudeRefracted": -8.0668,
+     "distanceKm": 147174201.7
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 141.7306,
+     "altitudeAirless": -19.4928,
+     "altitudeRefracted": -19.4928,
+     "distanceKm": 401799.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T18:00:00Z",
+     "fraction": 0.02759
+    }
+   ]
+  },
+  {
+   "city": "Sydney",
+   "latitude": -33.8688,
+   "longitude": 151.2093,
+   "timeZone": "Australia/Sydney",
+   "localDate": "2026-03-20",
+   "sunRise": [
+    "2026-03-19T19:57:57Z"
+   ],
+   "sunSet": [
+    "2026-03-20T08:06:56Z"
+   ],
+   "moonRise": [
+    "2026-03-19T20:55:41Z"
+   ],
+   "moonSet": [
+    "2026-03-20T08:33:47Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-03-19T19:33:01Z"
+     ],
+     "dusk": [
+      "2026-03-20T08:31:50Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-03-19T19:03:54Z"
+     ],
+     "dusk": [
+      "2026-03-20T09:00:53Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-03-19T18:34:27Z"
+     ],
+     "dusk": [
+      "2026-03-20T09:30:15Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 53.282,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 47.01,
+     "altitudeAirless": 45.7571,
+     "altitudeRefracted": 45.7732,
+     "distanceKm": 148957120.4
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 51.1875,
+     "altitudeAirless": 32.68,
+     "altitudeRefracted": 32.7057,
+     "distanceKm": 366764.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T00:00:00Z",
+     "fraction": 0.01221
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 288.1617,
+     "altitudeAirless": 25.1431,
+     "altitudeRefracted": 25.1782,
+     "distanceKm": 148969324.1
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 305.5941,
+     "altitudeAirless": 27.9678,
+     "altitudeRefracted": 27.9988,
+     "distanceKm": 366557.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T06:00:00Z",
+     "fraction": 0.01934
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 226.7177,
+     "altitudeAirless": -45.5532,
+     "altitudeRefracted": -45.5532,
+     "distanceKm": 148986935.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 252.7071,
+     "altitudeAirless": -42.0219,
+     "altitudeRefracted": -42.0219,
+     "distanceKm": 373252.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T12:00:00Z",
+     "fraction": 0.02812
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 108.216,
+     "altitudeAirless": -25.0626,
+     "altitudeRefracted": -25.0626,
+     "distanceKm": 148995420.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 111.0938,
+     "altitudeAirless": -48.196,
+     "altitudeRefracted": -48.196,
+     "distanceKm": 373230.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T18:00:00Z",
+     "fraction": 0.03853
+    }
+   ]
+  },
+  {
+   "city": "Sydney",
+   "latitude": -33.8688,
+   "longitude": 151.2093,
+   "timeZone": "Australia/Sydney",
+   "localDate": "2026-06-21",
+   "sunRise": [
+    "2026-06-20T20:59:57Z"
+   ],
+   "sunSet": [
+    "2026-06-21T06:53:48Z"
+   ],
+   "moonRise": [
+    "2026-06-21T01:24:58Z"
+   ],
+   "moonSet": [
+    "2026-06-21T13:38:52Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-06-20T20:32:13Z"
+     ],
+     "dusk": [
+      "2026-06-21T07:21:32Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-06-20T20:00:58Z"
+     ],
+     "dusk": [
+      "2026-06-21T07:52:47Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-06-20T19:30:30Z"
+     ],
+     "dusk": [
+      "2026-06-21T08:23:16Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 32.687,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 29.9741,
+     "altitudeAirless": 26.3076,
+     "altitudeRefracted": 26.3409,
+     "distanceKm": 152014427.0
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 97.9725,
+     "altitudeAirless": -18.059,
+     "altitudeRefracted": -18.059,
+     "distanceKm": 385073.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T00:00:00Z",
+     "fraction": 0.40606
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 305.9177,
+     "altitudeAirless": 8.6449,
+     "altitudeRefracted": 8.7466,
+     "distanceKm": 152018569.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 33.7867,
+     "altitudeAirless": 48.6727,
+     "altitudeRefracted": 48.6873,
+     "distanceKm": 379817.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T06:00:00Z",
+     "fraction": 0.4322
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 255.505,
+     "altitudeAirless": -62.4222,
+     "altitudeRefracted": -62.4222,
+     "distanceKm": 152027416.4
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 283.9108,
+     "altitudeAirless": 18.7327,
+     "altitudeRefracted": 18.7808,
+     "distanceKm": 384004.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T12:00:00Z",
+     "fraction": 0.45831
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 84.2677,
+     "altitudeAirless": -36.443,
+     "altitudeRefracted": -36.443,
+     "distanceKm": 152027733.8
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 220.6361,
+     "altitudeAirless": -47.3969,
+     "altitudeRefracted": -47.3969,
+     "distanceKm": 392213.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T18:00:00Z",
+     "fraction": 0.48431
+    }
+   ]
+  },
+  {
+   "city": "Sydney",
+   "latitude": -33.8688,
+   "longitude": 151.2093,
+   "timeZone": "Australia/Sydney",
+   "localDate": "2026-09-23",
+   "sunRise": [
+    "2026-09-22T19:43:57Z"
+   ],
+   "sunSet": [
+    "2026-09-23T07:51:56Z"
+   ],
+   "moonRise": [
+    "2026-09-23T04:24:45Z"
+   ],
+   "moonSet": [
+    "2026-09-22T17:41:42Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-09-22T19:19:04Z"
+     ],
+     "dusk": [
+      "2026-09-23T08:16:51Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-09-22T18:50:01Z"
+     ],
+     "dusk": [
+      "2026-09-23T08:45:57Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-09-22T18:20:40Z"
+     ],
+     "dusk": [
+      "2026-09-23T09:15:23Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 56.038,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 42.3457,
+     "altitudeAirless": 47.7536,
+     "altitudeRefracted": 47.7687,
+     "distanceKm": 150128385.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 162.549,
+     "altitudeAirless": -37.679,
+     "altitudeRefracted": -37.679,
+     "distanceKm": 399391.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T00:00:00Z",
+     "fraction": 0.85824
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 285.708,
+     "altitudeAirless": 22.125,
+     "altitudeRefracted": 22.1653,
+     "distanceKm": 150120127.8
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 97.3515,
+     "altitudeAirless": 17.6457,
+     "altitudeRefracted": 17.6969,
+     "distanceKm": 392511.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T06:00:00Z",
+     "fraction": 0.8752
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 222.1323,
+     "altitudeAirless": -47.6225,
+     "altitudeRefracted": -47.6225,
+     "distanceKm": 150116669.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 334.4912,
+     "altitudeAirless": 68.9818,
+     "altitudeRefracted": 68.9882,
+     "distanceKm": 387469.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T12:00:00Z",
+     "fraction": 0.89131
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 106.0122,
+     "altitudeAirless": -21.8619,
+     "altitudeRefracted": -21.8619,
+     "distanceKm": 150103750.0
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 255.236,
+     "altitudeAirless": 1.4527,
+     "altitudeRefracted": 1.7749,
+     "distanceKm": 392140.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T18:00:00Z",
+     "fraction": 0.90652
+    }
+   ]
+  },
+  {
+   "city": "Sydney",
+   "latitude": -33.8688,
+   "longitude": 151.2093,
+   "timeZone": "Australia/Sydney",
+   "localDate": "2026-12-21",
+   "sunRise": [
+    "2026-12-20T18:40:38Z"
+   ],
+   "sunSet": [
+    "2026-12-21T09:05:23Z"
+   ],
+   "moonRise": [
+    "2026-12-21T06:05:50Z"
+   ],
+   "moonSet": [
+    "2026-12-20T15:29:22Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-12-20T18:11:28Z"
+     ],
+     "dusk": [
+      "2026-12-21T09:34:33Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-12-20T17:35:35Z"
+     ],
+     "dusk": [
+      "2026-12-21T10:10:28Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-12-20T16:56:15Z"
+     ],
+     "dusk": [
+      "2026-12-21T10:49:48Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 74.404,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 74.523,
+     "altitudeAirless": 63.2205,
+     "altitudeRefracted": 63.2289,
+     "distanceKm": 147167911.8
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 122.1691,
+     "altitudeAirless": -69.8737,
+     "altitudeRefracted": -69.8737,
+     "distanceKm": 373023.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T00:00:00Z",
+     "fraction": 0.86567
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 263.7833,
+     "altitudeAirless": 35.6268,
+     "altitudeRefracted": 35.6499,
+     "distanceKm": 147167089.0
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 63.0524,
+     "altitudeAirless": -1.8629,
+     "altitudeRefracted": -1.8629,
+     "distanceKm": 365828.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T06:00:00Z",
+     "fraction": 0.88491
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 209.1385,
+     "altitudeAirless": -26.6857,
+     "altitudeRefracted": -26.6857,
+     "distanceKm": 147170930.3
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 347.6294,
+     "altitudeAirless": 30.6369,
+     "altitudeRefracted": 30.6647,
+     "distanceKm": 361091.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T12:00:00Z",
+     "fraction": 0.90297
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 125.3557,
+     "altitudeAirless": -8.047,
+     "altitudeRefracted": -8.047,
+     "distanceKm": 147166269.9
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 286.9616,
+     "altitudeAirless": -20.4611,
+     "altitudeRefracted": -20.4611,
+     "distanceKm": 365355.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T18:00:00Z",
+     "fraction": 0.91975
+    }
+   ]
+  },
+  {
+   "city": "Quito",
+   "latitude": -0.1807,
+   "longitude": -78.4678,
+   "timeZone": "America/Guayaquil",
+   "localDate": "2025-03-20",
+   "sunRise": [
+    "2025-03-20T11:17:54Z"
+   ],
+   "sunSet": [
+    "2025-03-20T23:24:24Z"
+   ],
+   "moonRise": [
+    "2025-03-21T04:15:05Z"
+   ],
+   "moonSet": [
+    "2025-03-20T15:49:10Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-03-20T10:57:15Z"
+     ],
+     "dusk": [
+      "2025-03-20T23:45:04Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-03-20T10:33:15Z"
+     ],
+     "dusk": [
+      "2025-03-21T00:09:04Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-03-20T10:09:15Z"
+     ],
+     "dusk": [
+      "2025-03-21T00:33:03Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 84.698,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 269.8183,
+     "altitudeAirless": -9.6572,
+     "altitudeRefracted": -9.6572,
+     "distanceKm": 148967940.2
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 126.0075,
+     "altitudeAirless": -43.921,
+     "altitudeRefracted": -43.921,
+     "distanceKm": 407482.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T00:00:00Z",
+     "fraction": 0.7333
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 91.3573,
+     "altitudeAirless": -80.3238,
+     "altitudeRefracted": -80.3238,
+     "distanceKm": 148983799.8
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 121.4278,
+     "altitudeAirless": 32.658,
+     "altitudeRefracted": 32.6838,
+     "distanceKm": 398979.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T06:00:00Z",
+     "fraction": 0.71194
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 89.9196,
+     "altitudeAirless": 9.6897,
+     "altitudeRefracted": 9.7814,
+     "distanceKm": 148987096.3
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 228.8403,
+     "altitudeAirless": 46.8995,
+     "altitudeRefracted": 46.915,
+     "distanceKm": 397079.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T12:00:00Z",
+     "fraction": 0.69001
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 271.9301,
+     "altitudeAirless": 80.2832,
+     "altitudeRefracted": 80.2861,
+     "distanceKm": 148992554.7
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 238.9343,
+     "altitudeAirless": -28.4897,
+     "altitudeRefracted": -28.4897,
+     "distanceKm": 403995.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T18:00:00Z",
+     "fraction": 0.66757
+    }
+   ]
+  },
+  {
+   "city": "Quito",
+   "latitude": -0.1807,
+   "longitude": -78.4678,
+   "timeZone": "America/Guayaquil",
+   "localDate": "2025-06-21",
+   "sunRise": [
+    "2025-06-21T11:12:24Z"
+   ],
+   "sunSet": [
+    "2025-06-21T23:19:08Z"
+   ],
+   "moonRise": [
+    "2025-06-21T07:15:11Z"
+   ],
+   "moonSet": [
+    "2025-06-21T19:40:26Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-06-21T10:49:52Z"
+     ],
+     "dusk": [
+      "2025-06-21T23:41:40Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-06-21T10:23:39Z"
+     ],
+     "dusk": [
+      "2025-06-22T00:07:53Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-06-21T09:57:19Z"
+     ],
+     "dusk": [
+      "2025-06-22T00:34:13Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 66.072,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 293.8056,
+     "altitudeAirless": -10.245,
+     "altitudeRefracted": -10.245,
+     "distanceKm": 152021887.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 313.7882,
+     "altitudeAirless": -70.3111,
+     "altitudeRefracted": -70.3111,
+     "distanceKm": 372175.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T00:00:00Z",
+     "fraction": 0.25909
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 24.063,
+     "altitudeAirless": -64.3744,
+     "altitudeRefracted": -64.3744,
+     "distanceKm": 152029196.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 73.9169,
+     "altitudeAirless": -18.2475,
+     "altitudeRefracted": -18.2475,
+     "distanceKm": 367513.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T06:00:00Z",
+     "fraction": 0.23373
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 66.1377,
+     "altitudeAirless": 10.0692,
+     "altitudeRefracted": 10.1577,
+     "distanceKm": 152024970.6
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 49.6813,
+     "altitudeAirless": 62.6352,
+     "altitudeRefracted": 62.6438,
+     "distanceKm": 359339.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T12:00:00Z",
+     "fraction": 0.20922
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 336.2908,
+     "altitudeAirless": 64.0542,
+     "altitudeRefracted": 64.0623,
+     "distanceKm": 152022938.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 289.996,
+     "altitudeAirless": 22.1217,
+     "altitudeRefracted": 22.162,
+     "distanceKm": 362076.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T18:00:00Z",
+     "fraction": 0.18564
+    }
+   ]
+  },
+  {
+   "city": "Quito",
+   "latitude": -0.1807,
+   "longitude": -78.4678,
+   "timeZone": "America/Guayaquil",
+   "localDate": "2025-09-22",
+   "sunRise": [
+    "2025-09-22T11:03:11Z"
+   ],
+   "sunSet": [
+    "2025-09-22T23:09:40Z"
+   ],
+   "moonRise": [
+    "2025-09-22T11:31:12Z"
+   ],
+   "moonSet": [
+    "2025-09-22T23:50:49Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-09-22T10:42:32Z"
+     ],
+     "dusk": [
+      "2025-09-22T23:30:19Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-09-22T10:18:32Z"
+     ],
+     "dusk": [
+      "2025-09-22T23:54:19Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-09-22T09:54:32Z"
+     ],
+     "dusk": [
+      "2025-09-23T00:18:19Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 88.379,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 270.2625,
+     "altitudeAirless": -13.3325,
+     "altitudeRefracted": -13.3325,
+     "distanceKm": 150173659.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 268.3772,
+     "altitudeAirless": -12.9035,
+     "altitudeRefracted": -12.9035,
+     "distanceKm": 399010.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T00:00:00Z",
+     "fraction": 0.00039
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 89.896,
+     "altitudeAirless": -76.6492,
+     "altitudeRefracted": -76.6492,
+     "distanceKm": 150167993.2
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 108.6266,
+     "altitudeAirless": -80.0878,
+     "altitudeRefracted": -80.0878,
+     "distanceKm": 404660.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T06:00:00Z",
+     "fraction": 0.00189
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 89.8517,
+     "altitudeAirless": 13.3705,
+     "altitudeRefracted": 13.4381,
+     "distanceKm": 150149887.7
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 94.4967,
+     "altitudeAirless": 6.1694,
+     "altitudeRefracted": 6.3053,
+     "distanceKm": 398366.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T12:00:00Z",
+     "fraction": 0.00462
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 270.7811,
+     "altitudeAirless": 76.603,
+     "altitudeRefracted": 76.607,
+     "distanceKm": 150134709.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 218.6644,
+     "altitudeAirless": 82.5083,
+     "altitudeRefracted": 82.5104,
+     "distanceKm": 393476.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T18:00:00Z",
+     "fraction": 0.00853
+    }
+   ]
+  },
+  {
+   "city": "Quito",
+   "latitude": -0.1807,
+   "longitude": -78.4678,
+   "timeZone": "America/Guayaquil",
+   "localDate": "2025-12-21",
+   "sunRise": [
+    "2025-12-21T11:08:06Z"
+   ],
+   "sunSet": [
+    "2025-12-21T23:16:13Z"
+   ],
+   "moonRise": [
+    "2025-12-21T12:23:59Z"
+   ],
+   "moonSet": [
+    "2025-12-22T00:49:23Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-12-21T10:45:33Z"
+     ],
+     "dusk": [
+      "2025-12-21T23:38:46Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-12-21T10:19:19Z"
+     ],
+     "dusk": [
+      "2025-12-22T00:05:00Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-12-21T09:52:57Z"
+     ],
+     "dusk": [
+      "2025-12-22T00:31:21Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 66.555,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 246.0618,
+     "altitudeAirless": -10.9709,
+     "altitudeRefracted": -10.9709,
+     "distanceKm": 147182304.2
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 242.4926,
+     "altitudeAirless": -1.2652,
+     "altitudeRefracted": -1.2652,
+     "distanceKm": 401649.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T00:00:00Z",
+     "fraction": 0.00955
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 154.5036,
+     "altitudeAirless": -63.6545,
+     "altitudeRefracted": -63.6545,
+     "distanceKm": 147184173.7
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 185.1211,
+     "altitudeAirless": -63.0021,
+     "altitudeRefracted": -63.0021,
+     "distanceKm": 406641.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T06:00:00Z",
+     "fraction": 0.01439
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 113.8704,
+     "altitudeAirless": 11.0554,
+     "altitudeRefracted": 11.1364,
+     "distanceKm": 147174636.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 116.7687,
+     "altitudeAirless": -5.9827,
+     "altitudeRefracted": -5.9827,
+     "distanceKm": 400965.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T12:00:00Z",
+     "fraction": 0.02041
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 205.6989,
+     "altitudeAirless": 64.0048,
+     "altitudeRefracted": 64.0129,
+     "distanceKm": 147167562.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 162.4029,
+     "altitudeAirless": 62.2978,
+     "altitudeRefracted": 62.3065,
+     "distanceKm": 394045.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T18:00:00Z",
+     "fraction": 0.02759
+    }
+   ]
+  },
+  {
+   "city": "Quito",
+   "latitude": -0.1807,
+   "longitude": -78.4678,
+   "timeZone": "America/Guayaquil",
+   "localDate": "2026-03-20",
+   "sunRise": [
+    "2026-03-20T11:17:59Z"
+   ],
+   "sunSet": [
+    "2026-03-20T23:24:29Z"
+   ],
+   "moonRise": [
+    "2026-03-20T12:27:50Z"
+   ],
+   "moonSet": [
+    "2026-03-21T00:51:34Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-03-20T10:57:19Z"
+     ],
+     "dusk": [
+      "2026-03-20T23:45:09Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-03-20T10:33:19Z"
+     ],
+     "dusk": [
+      "2026-03-21T00:09:08Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-03-20T10:09:20Z"
+     ],
+     "dusk": [
+      "2026-03-21T00:33:08Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 84.684,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 269.7226,
+     "altitudeAirless": -9.6381,
+     "altitudeRefracted": -9.6381,
+     "distanceKm": 148962761.1
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 277.2575,
+     "altitudeAirless": -0.4243,
+     "altitudeRefracted": 0.124,
+     "distanceKm": 370245.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T00:00:00Z",
+     "fraction": 0.01221
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 91.9221,
+     "altitudeAirless": -80.3399,
+     "altitudeRefracted": -80.3399,
+     "distanceKm": 148978325.0
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 338.0354,
+     "altitudeAirless": -80.7605,
+     "altitudeRefracted": -80.7605,
+     "distanceKm": 375892.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T06:00:00Z",
+     "fraction": 0.01934
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 90.0153,
+     "altitudeAirless": 9.671,
+     "altitudeRefracted": 9.7628,
+     "distanceKm": 148981306.7
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 79.449,
+     "altitudeAirless": -7.4424,
+     "altitudeRefracted": -7.4424,
+     "distanceKm": 369786.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T12:00:00Z",
+     "fraction": 0.02812
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 271.3748,
+     "altitudeAirless": 80.3051,
+     "altitudeRefracted": 80.308,
+     "distanceKm": 148986428.4
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 37.4306,
+     "altitudeAirless": 74.2122,
+     "altitudeRefracted": 74.2168,
+     "distanceKm": 362358.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T18:00:00Z",
+     "fraction": 0.03853
+    }
+   ]
+  },
+  {
+   "city": "Quito",
+   "latitude": -0.1807,
+   "longitude": -78.4678,
+   "timeZone": "America/Guayaquil",
+   "localDate": "2026-06-21",
+   "sunRise": [
+    "2026-06-21T11:12:22Z"
+   ],
+   "sunSet": [
+    "2026-06-21T23:19:05Z"
+   ],
+   "moonRise": [
+    "2026-06-21T17:03:34Z"
+   ],
+   "moonSet": [],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-06-21T10:49:50Z"
+     ],
+     "dusk": [
+      "2026-06-21T23:41:38Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-06-21T10:23:36Z"
+     ],
+     "dusk": [
+      "2026-06-22T00:07:51Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-06-21T09:57:16Z"
+     ],
+     "dusk": [
+      "2026-06-22T00:34:11Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 66.074,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 293.8056,
+     "altitudeAirless": -10.2543,
+     "altitudeRefracted": -10.2543,
+     "distanceKm": 152018400.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 278.8165,
+     "altitudeAirless": 67.6898,
+     "altitudeRefracted": 67.6966,
+     "distanceKm": 377234.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T00:00:00Z",
+     "fraction": 0.40606
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 24.0825,
+     "altitudeAirless": -64.3706,
+     "altitudeRefracted": -64.3706,
+     "distanceKm": 152025289.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 271.6078,
+     "altitudeAirless": -19.9438,
+     "altitudeRefracted": -19.9438,
+     "distanceKm": 386765.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T06:00:00Z",
+     "fraction": 0.4322
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 66.1369,
+     "altitudeAirless": 10.0784,
+     "altitudeRefracted": 10.1669,
+     "distanceKm": 152020651.1
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 90.4394,
+     "altitudeAirless": -73.8395,
+     "altitudeRefracted": -73.8395,
+     "distanceKm": 392225.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T12:00:00Z",
+     "fraction": 0.45831
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 336.272,
+     "altitudeAirless": 64.0497,
+     "altitudeRefracted": 64.0578,
+     "distanceKm": 152018215.0
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 91.4684,
+     "altitudeAirless": 12.8964,
+     "altitudeRefracted": 12.9664,
+     "distanceKm": 386063.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T18:00:00Z",
+     "fraction": 0.48431
+    }
+   ]
+  },
+  {
+   "city": "Quito",
+   "latitude": -0.1807,
+   "longitude": -78.4678,
+   "timeZone": "America/Guayaquil",
+   "localDate": "2026-09-23",
+   "sunRise": [
+    "2026-09-23T11:02:55Z"
+   ],
+   "sunSet": [
+    "2026-09-23T23:09:24Z"
+   ],
+   "moonRise": [
+    "2026-09-23T20:59:01Z"
+   ],
+   "moonSet": [
+    "2026-09-23T08:36:03Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-09-23T10:42:16Z"
+     ],
+     "dusk": [
+      "2026-09-23T23:30:04Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-09-23T10:18:16Z"
+     ],
+     "dusk": [
+      "2026-09-23T23:54:03Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-09-23T09:54:16Z"
+     ],
+     "dusk": [
+      "2026-09-24T00:18:03Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 88.455,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 269.9584,
+     "altitudeAirless": -13.3979,
+     "altitudeRefracted": -13.3979,
+     "distanceKm": 150134589.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 118.2795,
+     "altitudeAirless": 50.8208,
+     "altitudeRefracted": 50.8343,
+     "distanceKm": 390548.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T00:00:00Z",
+     "fraction": 0.85824
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 91.1704,
+     "altitudeAirless": -76.5801,
+     "altitudeRefracted": -76.5801,
+     "distanceKm": 150128737.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 250.0012,
+     "altitudeAirless": 35.4614,
+     "altitudeRefracted": 35.4846,
+     "distanceKm": 390753.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T06:00:00Z",
+     "fraction": 0.8752
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 90.1554,
+     "altitudeAirless": 13.4376,
+     "altitudeRefracted": 13.5049,
+     "distanceKm": 150110471.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 247.6338,
+     "altitudeAirless": -47.7459,
+     "altitudeRefracted": -47.7459,
+     "distanceKm": 398128.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T12:00:00Z",
+     "fraction": 0.89131
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 269.5074,
+     "altitudeAirless": 76.5377,
+     "altitudeRefracted": 76.5416,
+     "distanceKm": 150095169.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 108.5056,
+     "altitudeAirless": -42.477,
+     "altitudeRefracted": -42.477,
+     "distanceKm": 396626.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T18:00:00Z",
+     "fraction": 0.90652
+    }
+   ]
+  },
+  {
+   "city": "Quito",
+   "latitude": -0.1807,
+   "longitude": -78.4678,
+   "timeZone": "America/Guayaquil",
+   "localDate": "2026-12-21",
+   "sunRise": [
+    "2026-12-21T11:07:58Z"
+   ],
+   "sunSet": [
+    "2026-12-21T23:16:06Z"
+   ],
+   "moonRise": [
+    "2026-12-21T20:55:39Z"
+   ],
+   "moonSet": [
+    "2026-12-21T08:23:03Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-12-21T10:45:26Z"
+     ],
+     "dusk": [
+      "2026-12-21T23:38:38Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-12-21T10:19:11Z"
+     ],
+     "dusk": [
+      "2026-12-22T00:04:53Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-12-21T09:52:50Z"
+     ],
+     "dusk": [
+      "2026-12-22T00:31:14Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 66.559,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 246.0617,
+     "altitudeAirless": -10.998,
+     "altitudeRefracted": -10.998,
+     "distanceKm": 147174818.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 52.4039,
+     "altitudeAirless": 52.0444,
+     "altitudeRefracted": 52.0573,
+     "distanceKm": 361992.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T00:00:00Z",
+     "fraction": 0.86567
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 154.4475,
+     "altitudeAirless": -63.6433,
+     "altitudeRefracted": -63.6433,
+     "distanceKm": 147176514.5
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 296.9538,
+     "altitudeAirless": 30.6747,
+     "altitudeRefracted": 30.7025,
+     "distanceKm": 362391.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T06:00:00Z",
+     "fraction": 0.88491
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 113.8713,
+     "altitudeAirless": 11.0828,
+     "altitudeRefracted": 11.1637,
+     "distanceKm": 147166828.3
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 305.1018,
+     "altitudeAirless": -46.8712,
+     "altitudeRefracted": -46.8712,
+     "distanceKm": 369025.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T12:00:00Z",
+     "fraction": 0.90297
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 205.7553,
+     "altitudeAirless": 63.9924,
+     "altitudeRefracted": 64.0005,
+     "distanceKm": 147159633.9
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 58.6761,
+     "altitudeAirless": -38.2558,
+     "altitudeRefracted": -38.2558,
+     "distanceKm": 367096.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T18:00:00Z",
+     "fraction": 0.91975
+    }
+   ]
+  },
+  {
+   "city": "Honolulu",
+   "latitude": 21.3069,
+   "longitude": -157.8583,
+   "timeZone": "Pacific/Honolulu",
+   "localDate": "2025-03-20",
+   "sunRise": [
+    "2025-03-20T16:34:58Z"
+   ],
+   "sunSet": [
+    "2025-03-21T04:42:39Z"
+   ],
+   "moonRise": [],
+   "moonSet": [
+    "2025-03-20T20:29:28Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-03-20T16:12:47Z"
+     ],
+     "dusk": [
+      "2025-03-21T05:04:51Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-03-20T15:46:59Z"
+     ],
+     "dusk": [
+      "2025-03-21T05:30:41Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-03-20T15:21:06Z"
+     ],
+     "dusk": [
+      "2025-03-21T05:56:36Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 66.891,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 225.2548,
+     "altitudeAirless": 60.812,
+     "altitudeRefracted": 60.8212,
+     "distanceKm": 148961299.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T00:00:00Z",
+     "azimuth": 256.0777,
+     "altitudeAirless": -54.8096,
+     "altitudeRefracted": -54.8096,
+     "distanceKm": 408276.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T00:00:00Z",
+     "fraction": 0.7333
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 277.5998,
+     "altitudeAirless": -18.864,
+     "altitudeRefracted": -18.864,
+     "distanceKm": 148979574.7
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T06:00:00Z",
+     "azimuth": 105.761,
+     "altitudeAirless": -46.4078,
+     "altitudeRefracted": -46.4078,
+     "distanceKm": 407047.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T06:00:00Z",
+     "fraction": 0.71194
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 45.4479,
+     "altitudeAirless": -60.8646,
+     "altitudeRefracted": -60.8646,
+     "distanceKm": 148993743.1
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T12:00:00Z",
+     "azimuth": 135.7684,
+     "altitudeAirless": 24.61,
+     "altitudeRefracted": 24.6459,
+     "distanceKm": 399053.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T12:00:00Z",
+     "fraction": 0.69001
+    },
+    {
+     "body": "sun",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 97.5196,
+     "altitudeAirless": 18.931,
+     "altitudeRefracted": 18.9786,
+     "distanceKm": 148996771.6
+    },
+    {
+     "body": "moon",
+     "utc": "2025-03-20T18:00:00Z",
+     "azimuth": 221.9959,
+     "altitudeAirless": 25.8679,
+     "altitudeRefracted": 25.9018,
+     "distanceKm": 398160.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-03-20T18:00:00Z",
+     "fraction": 0.66757
+    }
+   ]
+  },
+  {
+   "city": "Honolulu",
+   "latitude": 21.3069,
+   "longitude": -157.8583,
+   "timeZone": "Pacific/Honolulu",
+   "localDate": "2025-06-21",
+   "sunRise": [
+    "2025-06-21T15:50:26Z"
+   ],
+   "sunSet": [
+    "2025-06-22T05:16:19Z"
+   ],
+   "moonRise": [
+    "2025-06-21T12:16:08Z"
+   ],
+   "moonSet": [
+    "2025-06-22T01:44:26Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-06-21T15:25:34Z"
+     ],
+     "dusk": [
+      "2025-06-22T05:41:11Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-06-21T14:55:55Z"
+     ],
+     "dusk": [
+      "2025-06-22T06:10:50Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-06-21T14:25:08Z"
+     ],
+     "dusk": [
+      "2025-06-22T06:41:37Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 81.996,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 280.1634,
+     "altitudeAirless": 69.8346,
+     "altitudeRefracted": 69.8406,
+     "distanceKm": 152014770.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T00:00:00Z",
+     "azimuth": 281.5617,
+     "altitudeAirless": 7.7846,
+     "altitudeRefracted": 7.8962,
+     "distanceKm": 365262.1
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T00:00:00Z",
+     "fraction": 0.25909
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 300.0801,
+     "altitudeAirless": -9.8714,
+     "altitudeRefracted": -9.8714,
+     "distanceKm": 152024544.6
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T06:00:00Z",
+     "azimuth": 348.3601,
+     "altitudeAirless": -53.204,
+     "altitudeRefracted": -53.204,
+     "distanceKm": 370659.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T06:00:00Z",
+     "fraction": 0.23373
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 26.4787,
+     "altitudeAirless": -40.5282,
+     "altitudeRefracted": -40.5282,
+     "distanceKm": 152030238.1
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T12:00:00Z",
+     "azimuth": 70.4734,
+     "altitudeAirless": -4.2913,
+     "altitudeRefracted": -4.2913,
+     "distanceKm": 365441.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T12:00:00Z",
+     "fraction": 0.20922
+    },
+    {
+     "body": "sun",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 73.8155,
+     "altitudeAirless": 27.3898,
+     "altitudeRefracted": 27.4216,
+     "distanceKm": 152025744.5
+    },
+    {
+     "body": "moon",
+     "utc": "2025-06-21T18:00:00Z",
+     "azimuth": 100.7569,
+     "altitudeAirless": 76.4282,
+     "altitudeRefracted": 76.4322,
+     "distanceKm": 358326.1
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-06-21T18:00:00Z",
+     "fraction": 0.18564
+    }
+   ]
+  },
+  {
+   "city": "Honolulu",
+   "latitude": 21.3069,
+   "longitude": -157.8583,
+   "timeZone": "Pacific/Honolulu",
+   "localDate": "2025-09-22",
+   "sunRise": [
+    "2025-09-22T16:20:23Z"
+   ],
+   "sunSet": [
+    "2025-09-23T04:27:08Z"
+   ],
+   "moonRise": [
+    "2025-09-22T17:06:59Z"
+   ],
+   "moonSet": [
+    "2025-09-23T05:03:26Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-09-22T15:58:11Z"
+     ],
+     "dusk": [
+      "2025-09-23T04:49:18Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-09-22T15:32:22Z"
+     ],
+     "dusk": [
+      "2025-09-23T05:15:06Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-09-22T15:06:27Z"
+     ],
+     "dusk": [
+      "2025-09-23T05:40:58Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 67.849,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 231.1113,
+     "altitudeAirless": 58.5799,
+     "altitudeRefracted": 58.59,
+     "distanceKm": 150166744.0
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T00:00:00Z",
+     "azimuth": 226.8567,
+     "altitudeAirless": 57.7002,
+     "altitudeRefracted": 57.7106,
+     "distanceKm": 392226.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T00:00:00Z",
+     "fraction": 0.00039
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 279.3715,
+     "altitudeAirless": -22.1555,
+     "altitudeRefracted": -22.1555,
+     "distanceKm": 150164193.2
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T06:00:00Z",
+     "azimuth": 274.6325,
+     "altitudeAirless": -20.7228,
+     "altitudeRefracted": -20.7228,
+     "distanceKm": 400590.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T06:00:00Z",
+     "fraction": 0.00189
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 50.6179,
+     "altitudeAirless": -58.2743,
+     "altitudeRefracted": -58.2743,
+     "distanceKm": 150156789.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T12:00:00Z",
+     "azimuth": 48.0598,
+     "altitudeAirless": -66.3252,
+     "altitudeRefracted": -66.3252,
+     "distanceKm": 404936.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T12:00:00Z",
+     "fraction": 0.00462
+    },
+    {
+     "body": "sun",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 99.1865,
+     "altitudeAirless": 22.2718,
+     "altitudeRefracted": 22.3119,
+     "distanceKm": 150138496.3
+    },
+    {
+     "body": "moon",
+     "utc": "2025-09-22T18:00:00Z",
+     "azimuth": 101.2664,
+     "altitudeAirless": 10.9869,
+     "altitudeRefracted": 11.0685,
+     "distanceKm": 398534.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-09-22T18:00:00Z",
+     "fraction": 0.00853
+    }
+   ]
+  },
+  {
+   "city": "Honolulu",
+   "latitude": 21.3069,
+   "longitude": -157.8583,
+   "timeZone": "Pacific/Honolulu",
+   "localDate": "2025-12-21",
+   "sunRise": [
+    "2025-12-21T17:04:43Z"
+   ],
+   "sunSet": [
+    "2025-12-22T03:54:56Z"
+   ],
+   "moonRise": [
+    "2025-12-21T18:38:45Z"
+   ],
+   "moonSet": [
+    "2025-12-22T05:34:44Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2025-12-21T16:40:27Z"
+     ],
+     "dusk": [
+      "2025-12-22T04:19:12Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2025-12-21T16:12:42Z"
+     ],
+     "dusk": [
+      "2025-12-22T04:46:57Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2025-12-21T15:45:19Z"
+     ],
+     "dusk": [
+      "2025-12-22T05:14:20Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 44.668,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 207.5266,
+     "altitudeAirless": 40.1106,
+     "altitudeRefracted": 40.1303,
+     "distanceKm": 147176973.6
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T00:00:00Z",
+     "azimuth": 192.8895,
+     "altitudeAirless": 39.3178,
+     "altitudeRefracted": 39.338,
+     "distanceKm": 397478.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T00:00:00Z",
+     "fraction": 0.00955
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 254.0335,
+     "altitudeAirless": -28.2568,
+     "altitudeRefracted": -28.2568,
+     "distanceKm": 147181471.9
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T06:00:00Z",
+     "azimuth": 246.6946,
+     "altitudeAirless": -17.1599,
+     "altitudeRefracted": -17.1599,
+     "distanceKm": 402797.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T06:00:00Z",
+     "fraction": 0.01439
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 100.0977,
+     "altitudeAirless": -69.0188,
+     "altitudeRefracted": -69.0188,
+     "distanceKm": 147181811.3
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T12:00:00Z",
+     "azimuth": 141.2704,
+     "altitudeAirless": -83.1858,
+     "altitudeRefracted": -83.1858,
+     "distanceKm": 406678.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T12:00:00Z",
+     "fraction": 0.02041
+    },
+    {
+     "body": "sun",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 120.4713,
+     "altitudeAirless": 10.5696,
+     "altitudeRefracted": 10.6542,
+     "distanceKm": 147172119.7
+    },
+    {
+     "body": "moon",
+     "utc": "2025-12-21T18:00:00Z",
+     "azimuth": 115.0428,
+     "altitudeAirless": -8.6281,
+     "altitudeRefracted": -8.6281,
+     "distanceKm": 400604.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2025-12-21T18:00:00Z",
+     "fraction": 0.02759
+    }
+   ]
+  },
+  {
+   "city": "Honolulu",
+   "latitude": 21.3069,
+   "longitude": -157.8583,
+   "timeZone": "Pacific/Honolulu",
+   "localDate": "2026-03-20",
+   "sunRise": [
+    "2026-03-20T16:35:11Z"
+   ],
+   "sunSet": [
+    "2026-03-21T04:42:35Z"
+   ],
+   "moonRise": [
+    "2026-03-20T17:36:44Z"
+   ],
+   "moonSet": [
+    "2026-03-21T06:46:10Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-03-20T16:13:01Z"
+     ],
+     "dusk": [
+      "2026-03-21T05:04:47Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-03-20T15:47:13Z"
+     ],
+     "dusk": [
+      "2026-03-21T05:30:36Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-03-20T15:21:20Z"
+     ],
+     "dusk": [
+      "2026-03-21T05:56:32Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 66.797,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 225.0981,
+     "altitudeAirless": 60.7535,
+     "altitudeRefracted": 60.7627,
+     "distanceKm": 148956126.0
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T00:00:00Z",
+     "azimuth": 216.0323,
+     "altitudeAirless": 72.6446,
+     "altitudeRefracted": 72.6498,
+     "distanceKm": 364159.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T00:00:00Z",
+     "fraction": 0.01221
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 277.5001,
+     "altitudeAirless": -18.8827,
+     "altitudeRefracted": -18.8827,
+     "distanceKm": 148974101.5
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T06:00:00Z",
+     "azimuth": 280.8647,
+     "altitudeAirless": -4.2563,
+     "altitudeRefracted": -4.2563,
+     "distanceKm": 370019.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T06:00:00Z",
+     "fraction": 0.01934
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 45.5475,
+     "altitudeAirless": -60.9477,
+     "altitudeRefracted": -60.9477,
+     "distanceKm": 148987955.8
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T12:00:00Z",
+     "azimuth": 7.5582,
+     "altitudeAirless": -58.4547,
+     "altitudeRefracted": -58.4547,
+     "distanceKm": 374439.7
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T12:00:00Z",
+     "fraction": 0.02812
+    },
+    {
+     "body": "sun",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 97.6038,
+     "altitudeAirless": 18.8771,
+     "altitudeRefracted": 18.9249,
+     "distanceKm": 148990651.3
+    },
+    {
+     "body": "moon",
+     "utc": "2026-03-20T18:00:00Z",
+     "azimuth": 79.0752,
+     "altitudeAirless": 4.3234,
+     "altitudeRefracted": 4.5021,
+     "distanceKm": 367968.1
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-03-20T18:00:00Z",
+     "fraction": 0.03853
+    }
+   ]
+  },
+  {
+   "city": "Honolulu",
+   "latitude": 21.3069,
+   "longitude": -157.8583,
+   "timeZone": "Pacific/Honolulu",
+   "localDate": "2026-06-21",
+   "sunRise": [
+    "2026-06-21T15:50:23Z"
+   ],
+   "sunSet": [
+    "2026-06-22T05:16:17Z"
+   ],
+   "moonRise": [
+    "2026-06-21T22:34:48Z"
+   ],
+   "moonSet": [
+    "2026-06-21T10:08:55Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-06-21T15:25:31Z"
+     ],
+     "dusk": [
+      "2026-06-22T05:41:09Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-06-21T14:55:53Z"
+     ],
+     "dusk": [
+      "2026-06-22T06:10:47Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-06-21T14:25:05Z"
+     ],
+     "dusk": [
+      "2026-06-22T06:41:34Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 82.005,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 280.1603,
+     "altitudeAirless": 69.8254,
+     "altitudeRefracted": 69.8315,
+     "distanceKm": 152011282.5
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T00:00:00Z",
+     "azimuth": 99.6376,
+     "altitudeAirless": 30.3152,
+     "altitudeRefracted": 30.3434,
+     "distanceKm": 379883.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T00:00:00Z",
+     "fraction": 0.40606
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 300.0842,
+     "altitudeAirless": -9.8797,
+     "altitudeRefracted": -9.8797,
+     "distanceKm": 152020639.3
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T06:00:00Z",
+     "azimuth": 239.6272,
+     "altitudeAirless": 54.4601,
+     "altitudeRefracted": 54.4719,
+     "distanceKm": 379426.0
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T06:00:00Z",
+     "fraction": 0.4322
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 26.4896,
+     "altitudeAirless": -40.524,
+     "altitudeRefracted": -40.524,
+     "distanceKm": 152025919.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T12:00:00Z",
+     "azimuth": 280.5557,
+     "altitudeAirless": -25.8831,
+     "altitudeRefracted": -25.8831,
+     "distanceKm": 388845.8
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T12:00:00Z",
+     "fraction": 0.45831
+    },
+    {
+     "body": "sun",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 73.8173,
+     "altitudeAirless": 27.399,
+     "altitudeRefracted": 27.4308,
+     "distanceKm": 152021020.4
+    },
+    {
+     "body": "moon",
+     "utc": "2026-06-21T18:00:00Z",
+     "azimuth": 53.4098,
+     "altitudeAirless": -59.4925,
+     "altitudeRefracted": -59.4925,
+     "distanceKm": 393021.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-06-21T18:00:00Z",
+     "fraction": 0.48431
+    }
+   ]
+  },
+  {
+   "city": "Honolulu",
+   "latitude": 21.3069,
+   "longitude": -157.8583,
+   "timeZone": "Pacific/Honolulu",
+   "localDate": "2026-09-23",
+   "sunRise": [
+    "2026-09-23T16:20:35Z"
+   ],
+   "sunSet": [
+    "2026-09-24T04:26:24Z"
+   ],
+   "moonRise": [
+    "2026-09-24T02:45:30Z"
+   ],
+   "moonSet": [
+    "2026-09-23T13:39:23Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-09-23T15:58:23Z"
+     ],
+     "dusk": [
+      "2026-09-24T04:48:35Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-09-23T15:32:34Z"
+     ],
+     "dusk": [
+      "2026-09-24T05:14:22Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-09-23T15:06:41Z"
+     ],
+     "dusk": [
+      "2026-09-24T05:40:13Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 67.58,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 230.7896,
+     "altitudeAirless": 58.3279,
+     "altitudeRefracted": 58.3381,
+     "distanceKm": 150127681.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T00:00:00Z",
+     "azimuth": 98.7473,
+     "altitudeAirless": -29.3242,
+     "altitudeRefracted": -29.3242,
+     "distanceKm": 398595.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T00:00:00Z",
+     "fraction": 0.85824
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 279.1059,
+     "altitudeAirless": -22.3325,
+     "altitudeRefracted": -22.3325,
+     "distanceKm": 150124957.2
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T06:00:00Z",
+     "azimuth": 142.2677,
+     "altitudeAirless": 43.3154,
+     "altitudeRefracted": 43.3329,
+     "distanceKm": 390078.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T06:00:00Z",
+     "fraction": 0.8752
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 51.1124,
+     "altitudeAirless": -58.4308,
+     "altitudeRefracted": -58.4308,
+     "distanceKm": 150117389.8
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T12:00:00Z",
+     "azimuth": 243.6413,
+     "altitudeAirless": 20.0531,
+     "altitudeRefracted": 20.0979,
+     "distanceKm": 391193.5
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T12:00:00Z",
+     "fraction": 0.89131
+    },
+    {
+     "body": "sun",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 99.5083,
+     "altitudeAirless": 22.2164,
+     "altitudeRefracted": 22.2566,
+     "distanceKm": 150098959.9
+    },
+    {
+     "body": "moon",
+     "utc": "2026-09-23T18:00:00Z",
+     "azimuth": 278.5138,
+     "altitudeAirless": -58.3867,
+     "altitudeRefracted": -58.3867,
+     "distanceKm": 397764.6
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-09-23T18:00:00Z",
+     "fraction": 0.90652
+    }
+   ]
+  },
+  {
+   "city": "Honolulu",
+   "latitude": 21.3069,
+   "longitude": -157.8583,
+   "timeZone": "Pacific/Honolulu",
+   "localDate": "2026-12-21",
+   "sunRise": [
+    "2026-12-21T17:04:35Z"
+   ],
+   "sunSet": [
+    "2026-12-22T03:54:49Z"
+   ],
+   "moonRise": [
+    "2026-12-22T01:42:05Z"
+   ],
+   "moonSet": [
+    "2026-12-21T14:35:46Z"
+   ],
+   "twilight": {
+    "civil": {
+     "dawn": [
+      "2026-12-21T16:40:19Z"
+     ],
+     "dusk": [
+      "2026-12-22T04:19:05Z"
+     ]
+    },
+    "nautical": {
+     "dawn": [
+      "2026-12-21T16:12:35Z"
+     ],
+     "dusk": [
+      "2026-12-22T04:46:50Z"
+     ]
+    },
+    "astronomical": {
+     "dawn": [
+      "2026-12-21T15:45:12Z"
+     ],
+     "dusk": [
+      "2026-12-22T05:14:13Z"
+     ]
+    }
+   },
+   "sunAltitudeAtLocalNoon": 44.673,
+   "samples": [
+    {
+     "body": "sun",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 207.5592,
+     "altitudeAirless": 40.0999,
+     "altitudeRefracted": 40.1195,
+     "distanceKm": 147169485.5
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T00:00:00Z",
+     "azimuth": 62.1171,
+     "altitudeAirless": -10.7644,
+     "altitudeRefracted": -10.7644,
+     "distanceKm": 368187.4
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T00:00:00Z",
+     "fraction": 0.86567
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 254.0422,
+     "altitudeAirless": -28.2831,
+     "altitudeRefracted": -28.2831,
+     "distanceKm": 147173815.9
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T06:00:00Z",
+     "azimuth": 82.1108,
+     "altitudeAirless": 67.3454,
+     "altitudeRefracted": 67.3523,
+     "distanceKm": 359794.9
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T06:00:00Z",
+     "fraction": 0.88491
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 100.0923,
+     "altitudeAirless": -68.9914,
+     "altitudeRefracted": -68.9914,
+     "distanceKm": 147174004.6
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T12:00:00Z",
+     "azimuth": 285.0852,
+     "altitudeAirless": 31.8731,
+     "altitudeRefracted": 31.8997,
+     "distanceKm": 360993.3
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T12:00:00Z",
+     "fraction": 0.90297
+    },
+    {
+     "body": "sun",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 120.4842,
+     "altitudeAirless": 10.5941,
+     "altitudeRefracted": 10.6785,
+     "distanceKm": 147164187.4
+    },
+    {
+     "body": "moon",
+     "utc": "2026-12-21T18:00:00Z",
+     "azimuth": 324.8099,
+     "altitudeAirless": -35.8693,
+     "altitudeRefracted": -35.8693,
+     "distanceKm": 366891.2
+    },
+    {
+     "body": "moonIllumination",
+     "utc": "2026-12-21T18:00:00Z",
+     "fraction": 0.91975
+    }
+   ]
+  }
+ ]
+}

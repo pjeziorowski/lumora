@@ -1,0 +1,3 @@
+* text=auto
+*.swift diff=swift
+Packages/AstroCore/Tests/AstroCoreTests/Golden/* linguist-generated=true -diff
