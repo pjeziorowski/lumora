@@ -6,12 +6,26 @@
 //  [BA] Bob Atkins, "Depth of field" (bobatkins.com): 24 mm f/8 hyperfocal 2.88 m, near
 //       limit 1.44 m when focused there; 50 mm f/11 at 3 m has ~0.7 m in front, ~1.4 m
 //       behind; Airy disc 2.7 µm at f/2, 30 µm at f/22, 43 µm at f/32; 8×10 in print at
-//       10 in allows 0.2 mm blur, 0.025 mm on a 35 mm frame enlarged 8×.
+//       10 in allows 0.2 mm blur, 0.025 mm on a 35 mm frame enlarged 8×; at f/16 and 1:10 a
+//       50 mm lens has 17% more depth behind than in front (200 mm: 4%), at 1:50 233% of the
+//       front depth (200 mm: 22% more), and at f/5.6 1:50 32% (200 mm: 7%).
 //  [LS] Light Stalking, "NPF rule": Nikon D750 (35.9 mm, 6016 px) pitch 5.97 µm; 24 mm
 //       f/2.8 gives NPF 11.54 s and 500/24 ≈ 21 s.
 //  [EV] Standard EV table (ISO 2720 / "sunny 16"): f/1 1 s = EV 0; f/16 1/125 ≈ EV 15.
 //  [FoV] Published angles for a 50 mm lens on 36 × 24 mm: 39.6° × 27.0°, diagonal 46.8°;
 //       24 mm: diagonal 84.1°.
+//  [Z]  ZEISS Milvus 1.4/50 datasheet (zeiss.com, datasheet-zeiss-milvus-1450.pdf): depth of
+//       field table for 24 × 36 mm, c = 0.033 mm, engraved (image-plane) distances; angular
+//       field 46° / 39° / 26° (diagonal / horizontal / vertical).
+//  [C]  Canon specifications (canon-europe.com): EF 50mm f/1.8 STM angle of view 40°, 27°,
+//       46° (horizontal, vertical, diagonal); EF 85mm f/1.8 USM 24°, 16°, 28°30′.
+//  [N]  Nikon, AF-S NIKKOR 85mm f/1.8G (imaging.nikon.com): picture angle 28°30′ (FX).
+//  [WEV] Wikipedia, "Exposure value", Table 1: f/5.6 1/250 = EV 13, f/2.8 1/60 = 9,
+//       f/11 1/30 = 12, f/4 1 s = 4, f/22 1/500 = 18.
+//  [FS] Fstoppers, "Using the NPF rule for photographing night skies": EOS 5D Mark IV
+//       (36 mm, 6720 px → 5.36 µm) at 16 mm f/2.8 → 16.2 s; α7R IV (3.75 µm) → 13.1 s.
+//       Light Stalking reports the accurate NPF mode of a popular calculator at half the
+//       simple rule (11.02 s → 5.51 s).
 // DOFMaster and the brief use the Greenleaf thin-lens formulas implemented here; other
 // calculators drop the "+ f" term, which the tests bound to within 1% at normal distances.
 
@@ -25,6 +39,13 @@ struct ExposureTests {
         #expect(abs(Exposure.ev(aperture: 16, shutter: 1.0 / 125, iso: 100) - 15) < 0.05)
         // ISO 400 needs two stops less light: EV100 drops by 2.
         #expect(abs(Exposure.ev(aperture: 8, shutter: 1.0 / 60, iso: 400) - (Exposure.ev(aperture: 8, shutter: 1.0 / 60, iso: 100) - 2)) < 1e-12)
+    }
+
+    @Test func wikipediaEVTable() {
+        // [WEV] Table 1 is in whole EVs; the marked f-numbers are rounded, so allow 0.2 EV.
+        for (n, t, ev) in [(5.6, 1.0 / 250, 13.0), (2.8, 1.0 / 60, 9), (11, 1.0 / 30, 12), (4, 1, 4), (22, 1.0 / 500, 18)] {
+            #expect(abs(Exposure.ev(aperture: n, shutter: t, iso: 100) - ev) < 0.2)
+        }
     }
 
     @Test func equivalentExposureKeepsEV() {
@@ -83,6 +104,13 @@ struct DepthOfFieldTests {
         let s = DepthOfField.compute(DoFInput(focalLength: 50, aperture: 11, distance: 3000, coc: 0.025))
         #expect(abs(s.inFront - 735) < 10 && abs(s.behind - 1441) < 10)
         #expect(abs(s.behind / s.inFront - 1.96) < 0.05)
+        // Extra depth behind vs in front at magnification m (s = f(1 + 1/m)), c = 0.025 mm:
+        // f/16 1:10 → 50 mm 17%, 200 mm 4%; f/16 1:50 → 233% and 22%; f/5.6 1:50 → 32% and 7%.
+        for (f, n, m, extra) in [(50.0, 16.0, 0.1, 0.17), (200, 16, 0.1, 0.04), (50, 16, 0.02, 1.33),
+                                 (200, 16, 0.02, 0.22), (50, 5.6, 0.02, 0.32), (200, 5.6, 0.02, 0.07)] {
+            let r = DepthOfField.compute(DoFInput(focalLength: f, aperture: n, distance: f * (1 + 1 / m), coc: 0.025))
+            #expect(abs(r.behind / r.inFront - 1 - extra) < 0.01)
+        }
     }
 
     @Test func greenleafIdentities() {
@@ -97,6 +125,49 @@ struct DepthOfFieldTests {
             let ha = f * f / (n * 0.03)
             #expect(abs(r.near - ha * s / (ha + s)) / r.near < 0.01)
         }
+    }
+
+    /// [Z] ZEISS Milvus 1.4/50: (engraved distance m, f-number) → (near m, far m).
+    static let milvus50: [(Double, Double, Double, Double)] = [
+        (5, 1.4, 4.627, 5.439), (5, 2.8, 4.308, 5.965), (5, 8, 3.433, 9.351), (5, 16, 2.626, 83),
+        (3, 1.4, 2.865, 3.148), (3, 2.8, 2.743, 3.313), (3, 8, 2.369, 4.118), (3, 16, 1.964, 6.639),
+        (2, 1.4, 1.941, 2.063), (2, 2.8, 1.886, 2.129), (2, 8, 1.708, 2.423), (2, 16, 1.493, 3.089),
+        (1, 1.4, 0.987, 1.014), (1, 2.8, 0.974, 1.028), (1, 8, 0.929, 1.084), (1, 16, 0.869, 1.186),
+        (0.5, 1.4, 0.497, 0.503), (0.5, 2.8, 0.495, 0.505), (0.5, 8, 0.486, 0.515), (0.5, 16, 0.473, 0.532),
+    ]
+
+    @Test func zeissMilvusTable() {
+        // The table's infinity row (f/1.4 sharp from 60 m) fixes the true focal length the
+        // tables use: f = √(60 000 · 1.4 · 0.033) = 52.65 mm. Distances are measured from the
+        // image plane, so convert to object distance and add the image distance back.
+        let f = (60_000 * 1.4 * 0.033).squareRoot()
+        #expect(abs(f - 52.65) < 0.01)
+        for (engraved, n, near, far) in Self.milvus50 {
+            let d = engraved * 1000
+            let s = DepthOfField.objectDistance(fromImagePlane: d, focalLength: f)
+            let r = DepthOfField.compute(DoFInput(focalLength: f, aperture: n, distance: s, coc: 0.033))
+            let offset = d - s
+            #expect(abs((r.near + offset) / 1000 - near) / near < 0.01, "near \(engraved) m f/\(n)")
+            // Far limits grow without bound near the hyperfocal distance; compare in reciprocal
+            // (dioptre) terms, 1% of the focus distance's reciprocal.
+            #expect(abs(d / (r.far + offset) - d / (far * 1000)) < 0.01, "far \(engraved) m f/\(n)")
+        }
+        // Nominal 50 mm with lens-to-subject distances (other calculators) stays within 6%.
+        let nominal = DepthOfField.compute(DoFInput(focalLength: 50, aperture: 8, distance: 3000, coc: 0.033))
+        #expect(abs(nominal.near / 2369 - 1) < 0.06)
+    }
+
+    @Test func objectDistanceAndCloseFocus() {
+        // 50 mm focused 1 m from the image plane: s ≈ 947.2 mm, image distance 52.8 mm.
+        let s = DepthOfField.objectDistance(fromImagePlane: 1000, focalLength: 50)
+        #expect(abs(s + s * 50 / (s - 50) - 1000) < 1e-9)
+        #expect(DepthOfField.objectDistance(fromImagePlane: 150, focalLength: 50) == 100)
+        // Focus inside the focal length is clamped to just beyond it: limits stay positive.
+        let r = DepthOfField.compute(DoFInput(focalLength: 100, aperture: 4, distance: 10, coc: 0.03))
+        #expect(r.near > 0 && r.far > r.near && r.near <= 101)
+        // Macro: 100 mm at 0.3 m keeps a few millimetres of depth.
+        let macro = DepthOfField.compute(DoFInput(focalLength: 100, aperture: 8, distance: 300, coc: 0.03))
+        #expect(macro.total > 1 && macro.total < 5)
     }
 
     @Test func teleconverter() {
@@ -152,6 +223,22 @@ struct FieldOfViewTests {
         #expect(abs(d24 - 84.1) < 0.05)
     }
 
+    @Test func manufacturerSpecs() {
+        // [C], [N], [Z]: whole degrees (or 30′), nominal focal length; agree within 1°.
+        let specs: [(focal: Double, horizontal: Double?, vertical: Double?, diagonal: Double)] = [
+            (50, 40, 27, 46),       // Canon EF 50mm f/1.8 STM
+            (85, 24, 16, 28.5),     // Canon EF 85mm f/1.8 USM
+            (85, nil, nil, 28.5),   // Nikon AF-S 85mm f/1.8G
+            (50, 39, 26, 46),       // ZEISS Milvus 1.4/50
+        ]
+        for spec in specs {
+            let r = FieldOfView.compute(sensor: .fullFrame, focalLength: spec.focal, distance: 10_000)
+            #expect(abs(r.diagonal - spec.diagonal) <= 1)
+            if let h = spec.horizontal { #expect(abs(r.horizontal - h) <= 1) }
+            if let v = spec.vertical { #expect(abs(r.vertical - v) <= 1) }
+        }
+    }
+
     @Test func portraitAndCrop() {
         let apsc = Sensor(widthMM: 23.5, heightMM: 15.6, pixelsWide: 6000, pixelsHigh: 4000)
         #expect(abs(apsc.cropFactor - 1.53) < 0.01)
@@ -182,14 +269,22 @@ struct NightSkyTests {
         #expect(abs(SpotStars.rule(constant: 600, focalLength: 24, cropFactor: 1) - 25) < 1e-12)
     }
 
+    @Test func fstoppersNPF() {
+        // [FS] Two bodies on a 16 mm f/2.8; the article truncates to 0.1 s.
+        let mark4 = Sensor(widthMM: 36, heightMM: 24, pixelsWide: 6720, pixelsHigh: 4480)
+        #expect(abs(mark4.pixelPitchMicrons! - 5.36) < 0.005)
+        #expect(abs(SpotStars.npf(aperture: 2.8, pixelPitchMicrons: mark4.pixelPitchMicrons!, focalLength: 16) - 16.2) < 0.05)
+        #expect(abs(SpotStars.npf(aperture: 2.8, pixelPitchMicrons: 3.75, focalLength: 16) - 13.1) < 0.1)
+    }
+
     @Test func npfDeclinationAndAccurate() {
         let equator = SpotStars.npf(aperture: 2.8, pixelPitchMicrons: 5.97, focalLength: 24)
         let sixty = SpotStars.npf(aperture: 2.8, pixelPitchMicrons: 5.97, focalLength: 24, declination: 60)
         #expect(abs(sixty - 2 * equator) < 1e-9)
         let accurate = SpotStars.npfAccurate(aperture: 2.8, pixelPitchMicrons: 5.97, focalLength: 24)
-        // (16.856·2.8 + 0.0997·24 + 13.713·5.97) / 24
-        #expect(abs(accurate - (16.856 * 2.8 + 0.0997 * 24 + 13.713 * 5.97) / 24) < 1e-12)
-        #expect(accurate < equator)
+        // [FS]/Light Stalking: the accurate rule comes out at about half the simple one.
+        #expect(abs(accurate / equator - 0.5) < 0.05)
+        #expect(abs(accurate - 5.48) < 0.01)
         #expect(SpotStars.npf(aperture: 2.8, pixelPitchMicrons: 5.97, focalLength: 24, declination: 90).isFinite)
     }
 

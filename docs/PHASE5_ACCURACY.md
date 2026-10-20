@@ -1,6 +1,6 @@
 # Phase 5 acceptance: photography calculators
 
-Measured with `scripts/test-packages.sh` (Swift 6.1.3, Linux x86-64). OpticsCore: 20 tests,
+Measured with `scripts/test-packages.sh` (Swift 6.1.3, Linux x86-64). OpticsCore: 26 tests,
 CameraCatalog: 5 tests. Tests: `Packages/OpticsCore/Tests/OpticsCoreTests/OpticsCoreTests.swift`,
 `Packages/CameraCatalog/Tests/CameraCatalogTests/CameraCatalogTests.swift`; screenshots from
 `App/UITests/ScreenshotTests.swift` (`testPhase5Optics`). All arithmetic lives in OpticsCore;
@@ -8,21 +8,25 @@ the app screens only lay results out.
 
 ## Against published values
 
-| Calculator | Case | Published | Lumora | Source |
+Each calculator family is checked against at least two independent public sources
+(retrieved 2026-10-20). Details and exact inputs are in the test file header.
+
+| Calculator | Source 1 | Source 2 | Matrix | Worst agreement |
 |---|---|---|---|---|
-| Hyperfocal | 50 mm f/8, c 0.03 mm | 10 417 mm (f²/Nc) | 10 467 mm (f²/Nc + f), 0.5% | Wikipedia "Hyperfocal distance" |
-| Hyperfocal | 24 mm f/8, c 0.025 mm | 2.88 m, near limit 1.44 m | 2.904 m, 1.452 m (within 1%) | Bob Atkins, "Depth of field" |
-| Depth of field | 50 mm f/11 at 3 m, c 0.025 mm | ~0.7 m in front, ~1.4 m behind | 0.735 m / 1.441 m | Bob Atkins |
-| Airy disc | f/2, f/22, f/32 (550 nm) | 2.7, 30, 43 µm | 2.68, 29.5, 42.9 µm | Bob Atkins |
-| Print CoC | 8× enlargement, 25 cm, 5 lp/mm | 0.025 mm | 0.025 mm | Bob Atkins |
-| NPF | D750 (5.97 µm), 24 mm f/2.8 | 11.54 s | 11.55 s | Light Stalking, "NPF rule" |
-| 500 rule | 24 mm full frame | ≈ 21 s | 20.8 s | Light Stalking |
-| Field of view | 50 mm on 36 × 24 mm | 39.6° × 27.0°, diag 46.8° | 39.60° × 26.99°, 46.79° | standard lens tables |
-| Field of view | 24 mm diagonal | 84.1° | 84.06° | standard lens tables |
-| Exposure value | f/1 1 s; f/16 1/125 | EV 0; ≈ EV 15 | EV 0; EV 15.0 | ISO 2720 EV table |
-| ND filters | 1/30 s + 10 stops | 34 s | 34.1 s | factor 2^10 = 1024 |
-| Star trails | full circle | 86 164 s (sidereal day) | 86 164 s | sidereal rate 15.041″/s |
-| Camera specs | D750, α7R IV, X-T5 pixel pitch | 5.97, 3.76, 3.04 µm | same | manufacturers' specifications |
+| Depth of field | Bob Atkins, "Depth of field" (24 mm f/8 hyperfocal 2.88 m; 50 mm f/11 at 3 m; behind/front ratios at 1:10 and 1:50 for 50 and 200 mm at f/5.6 and f/16) | ZEISS Milvus 1.4/50 datasheet DoF table (c 0.033 mm) | 5 distances (0.5–5 m) × 4 f-numbers (1.4–16) from ZEISS, 8 cases from Bob Atkins | near 0.7%; far 1% of focus distance in reciprocal terms (5 m f/16, close to the hyperfocal) |
+| Hyperfocal | Wikipedia, "Hyperfocal distance" (50 mm f/8: 10 417 mm) | Bob Atkins (24 mm f/8: 2.88 m, near 1.44 m) | 2 cases + Greenleaf identities at 3 lenses | 0.5% (the "+ f" term) |
+| Field of view | Canon EF 50mm f/1.8 STM and EF 85mm f/1.8 USM specifications (H, V, diagonal) | Nikon AF-S 85mm f/1.8G and ZEISS Milvus 1.4/50 specifications; standard 50/24 mm angles | 4 lenses × 3 angles | 1.0° (makers round to whole degrees) |
+| Exposure value | ISO 2720 / sunny-16 (f/1 1 s = 0; f/16 1/125 ≈ 15) | Wikipedia "Exposure value", Table 1 | 7 aperture/shutter pairs + ISO offset | 0.17 EV (marked f-numbers are rounded) |
+| NPF | Light Stalking, "NPF rule" (D750, 24 mm f/2.8: 11.54 s) | Fstoppers, NPF article (5D Mark IV and α7R IV, 16 mm f/2.8: 16.2 s, 13.1 s) | 3 bodies | 0.06 s (the article truncates) |
+| NPF accurate | Light Stalking: the accurate mode comes out at about half the simple rule (11.02 → 5.51 s) | — (no second published value found; formula as in the NPF rule's full form) | 1 case | ratio 0.47 vs 0.5 |
+| 500 rule | Light Stalking (24 mm ≈ 21 s) | astrophotography.utils.com formula t = 500/(f × crop) | 2 | exact |
+| ND filters | factor 2^stops (1/30 s + 10 stops = 34 s) | brand factors and optical densities (ND1000 = 3.0) | 22 filters | 0.01 stop |
+| Star trails | sidereal day 86 164 s (IERS) | star-trail.utils.com: 15°/h rotation | full circle, 30 s | 2 s per day |
+| Diffraction / print CoC | Bob Atkins (Airy 2.7/30/43 µm; 0.025 mm at 8×) | brief §3.2 formula 2.44·λ·N | 3 apertures | 0.5 µm |
+
+Time lapse has no published calculator to compare with; it is plain arithmetic (photos,
+clip length, frame rate, interval and memory) and each of the four unknowns is solved back
+from the other three in the tests.
 
 ## Formulas
 
@@ -50,6 +54,10 @@ ignores case, accents and "α"/"a".
 ## Edge cases
 
 - Distance at or beyond the hyperfocal: far limit is infinity, total is infinity.
+- Focus at or inside the focal length is clamped to 1 mm beyond it, so near and far stay
+  positive; the distance fields accept 1 cm (macro) upward.
+- Lens barrels engrave distance from the image plane; `objectDistance(fromImagePlane:)`
+  converts for comparison with maker tables.
 - Pole declination (±90°) does not divide by zero; equator gives the shortest time.
 - Time-lapse interval shorter than exposure plus write time, clips under 2 s and runs
   longer than one battery are warned about.

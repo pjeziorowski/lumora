@@ -5,7 +5,8 @@
 //   H = f² / (N·c) + f
 //   near = s(H − f) / (H + s − 2f)
 //   far  = s(H − f) / (H − s), infinite when s ≥ H
-// All lengths in millimetres. A teleconverter multiplies focal length and f-number.
+// All lengths in millimetres. A teleconverter multiplies focal length and f-number. A lens
+// cannot focus at or inside its focal length, so shorter distances are clamped to 1 mm beyond it.
 // Advanced mode adds diffraction (Airy disc 2.44·λ·N against the pixel pitch) and a
 // circle of confusion derived from print size, viewing distance and visual acuity.
 
@@ -14,7 +15,8 @@ import Foundation
 public struct DoFInput: Sendable, Hashable, Codable {
     public var focalLength: Double
     public var aperture: Double
-    /// Focus distance from the sensor plane, mm.
+    /// Focus distance from the lens (the thin-lens object distance), mm. Lens barrels engrave
+    /// distance from the image plane; `objectDistance(fromImagePlane:focalLength:)` converts.
     public var distance: Double
     /// Circle of confusion, mm.
     public var coc: Double
@@ -54,10 +56,20 @@ public enum DepthOfField {
         f * f / (n * c) + f
     }
 
+    /// Closest focus distance accepted beyond the focal length, mm.
+    public static let minimumFocusMargin = 1.0
+
+    /// Thin-lens object distance for a subject `distance` mm from the image plane
+    /// (s + s·f/(s − f) = distance). Below 4f no real focus exists and 2f is returned.
+    public static func objectDistance(fromImagePlane distance: Double, focalLength f: Double) -> Double {
+        guard distance > 4 * f else { return 2 * f }
+        return (distance + (distance * distance - 4 * distance * f).squareRoot()) / 2
+    }
+
     public static func compute(_ input: DoFInput) -> DoFResult {
         let f = input.effectiveFocalLength
         let n = input.effectiveAperture
-        let s = input.distance
+        let s = max(input.distance, f + minimumFocusMargin)
         let h = hyperfocal(focalLength: f, aperture: n, coc: input.coc)
         let near = s * (h - f) / (h + s - 2 * f)
         let far = s >= h ? Double.infinity : s * (h - f) / (h - s)
