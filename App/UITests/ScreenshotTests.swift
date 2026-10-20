@@ -349,8 +349,8 @@ final class ScreenshotTests: XCTestCase {
         app.descendants(matching: .any)["planner.targetOptions"].firstMatch.tap()
         let fov = app.switches["planner.optics.fov"].firstMatch
         expectVisible(fov, in: app)
-        fov.tap()
-        app.switches["planner.optics.dof"].firstMatch.tap()
+        flip(fov)
+        flip(app.switches["planner.optics.dof"].firstMatch)
         snap(app, "planner-target-optics-sheet")
         app.buttons["Done"].firstMatch.tap()
         settleMap()
@@ -420,6 +420,11 @@ final class ScreenshotTests: XCTestCase {
     private func scrollToTop(_ app: XCUIApplication) {
         for _ in 0..<3 { app.swipeDown() }
         Thread.sleep(forTimeInterval: 0.5)
+    }
+
+    private func flip(_ toggle: XCUIElement) {
+        toggle.coordinate(withNormalizedOffset: CGVector(dx: 0.93, dy: 0.5)).tap()
+        Thread.sleep(forTimeInterval: 0.4)
     }
 
     private func goBack(_ app: XCUIApplication) {
