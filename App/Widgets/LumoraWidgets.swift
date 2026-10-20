@@ -2,8 +2,8 @@
 //
 // The widget extension: Sun, Moon, Milky Way and Next plan widgets for the home screen and
 // the lock screen. The place, clock style and upcoming plans come from the app through the
-// shared app-group store (PlannerKit.WidgetStore); timelines hold an entry every 30 minutes
-// for six hours.
+// shared app-group store (PlannerKit.WidgetStore); timelines last six hours, with an entry
+// every 30 minutes (every 5 for the plan countdown) and one just after each event shown.
 
 import PlannerKit
 import SwiftUI
@@ -18,29 +18,44 @@ struct LumoraProvider: TimelineProvider {
     let kind: LumoraWidgetKind
 
     func placeholder(in context: Context) -> LumoraEntry {
-        entries(from: Date(), count: 1, sample: true)[0]
+        entries(at: [Date()], sample: true)[0]
     }
 
     func getSnapshot(in context: Context, completion: @escaping (LumoraEntry) -> Void) {
-        completion(entries(from: Date(), count: 1, sample: context.isPreview)[0])
+        completion(entries(at: [Date()], sample: context.isPreview)[0])
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<LumoraEntry>) -> Void) {
         let now = Date()
-        let list = entries(from: now, count: 13, sample: false)
-        completion(Timeline(entries: list, policy: .after(now.addingTimeInterval(6 * 3600))))
+        let list = entries(at: dates(from: now), sample: false)
+        completion(Timeline(entries: list, policy: .after(now.addingTimeInterval(WidgetTimeline.span))))
     }
 
-    /// Entries every 30 minutes from `start`. The gallery preview uses a sample place.
-    private func entries(from start: Date, count: Int, sample: Bool) -> [LumoraEntry] {
+    private func dates(from start: Date) -> [Date] {
+        let shared = WidgetStore.shared
+        switch kind {
+        case .sun:
+            let events = WidgetStore.location(in: shared).map { WidgetTimeline.sunEvents(location: $0, from: start) } ?? []
+            return WidgetTimeline.dates(from: start, step: 1800, events: events)
+        case .nextPlan:
+            return WidgetTimeline.dates(from: start, step: 300, events: WidgetStore.plans(in: shared).map(\.instant))
+        case .moon, .milkyWay:
+            return WidgetTimeline.dates(from: start, step: 1800)
+        }
+    }
+
+    /// One entry per date. The gallery preview uses a sample place.
+    private func entries(at dates: [Date], sample: Bool) -> [LumoraEntry] {
         let shared = WidgetStore.shared
         let location = WidgetStore.location(in: shared) ?? (sample ? PillLocation.samples[0] : nil)
         let clock = WidgetStore.clock(in: shared)
         let plans = WidgetStore.plans(in: shared)
-        // The core window changes once a night: compute it once for the whole timeline.
-        let milkyWay = kind == .milkyWay ? location.map { MilkyWayWidgetSnapshot.compute(location: $0, instant: start) } : nil
-        return (0..<count).map { i in
-            let date = start.addingTimeInterval(Double(i) * 1800)
+        // The core window changes once a night: compute it again only when the shown one ends.
+        var milkyWay: MilkyWayWidgetSnapshot?
+        return dates.map { date in
+            if kind == .milkyWay, let location, milkyWay?.isStale(at: date) ?? true {
+                milkyWay = MilkyWayWidgetSnapshot.compute(location: location, instant: date)
+            }
             return LumoraEntry(date: date, content: .compute(kind: kind, location: location, instant: date, clock: clock,
                                                              plans: plans, milkyWay: milkyWay))
         }

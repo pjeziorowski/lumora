@@ -53,6 +53,28 @@ struct WidgetTests {
         // within the search, so the widget says so instead of naming a night.
         let winter = MilkyWayWidgetSnapshot.compute(location: newYork, instant: utc("2026-12-15T03:00:00Z"), searchNights: 7)
         #expect(winter.window == nil && !winter.isTonight)
+        // The timeline computes the window again only once the shown one has ended.
+        #expect(!summer.isStale(at: summer.instant) && summer.isStale(at: window.end))
+        #expect(!winter.isStale(at: utc("2027-01-01T00:00:00Z")))
+    }
+
+    @Test func timelineHasAnEntryAfterEachEvent() throws {
+        // 21 June 2026, 20:30 Warsaw: sunset 21:01, then the blue hour and twilight within 6 h.
+        let start = utc("2026-06-21T18:30:00Z")
+        let events = WidgetTimeline.sunEvents(location: warsaw, from: start)
+        let sunset = try #require(SunWidgetSnapshot.compute(location: warsaw, instant: start).next)
+        #expect(sunset.kind == .sunset && events.first == sunset.time)
+        #expect(events == events.sorted() && events.allSatisfy { $0 >= start && $0 < start.addingTimeInterval(6 * 3600) })
+        // Past the snapshot's soonest four: the next morning's events follow within the span.
+        let fromEvening = WidgetTimeline.sunEvents(location: warsaw, from: start, span: 12 * 3600)
+        #expect(fromEvening.count > 4 && fromEvening.contains { $0 > utc("2026-06-22T00:00:00Z") })
+        let dates = WidgetTimeline.dates(from: start, step: 1800, events: events)
+        #expect(dates.first == start && dates.last == start.addingTimeInterval(6 * 3600))
+        #expect(dates.count == 13 + events.count && dates == dates.sorted())
+        #expect(dates.contains(sunset.time.addingTimeInterval(1)))
+        // An event outside the span adds nothing; one on a step adds a separate entry after it.
+        #expect(WidgetTimeline.dates(from: start, step: 1800, events: [start.addingTimeInterval(7 * 3600)]).count == 13)
+        #expect(WidgetTimeline.dates(from: start, step: 300, events: [start.addingTimeInterval(600)]).count == 74)
     }
 
     @Test func storeRoundTripsAndPicksTheNextPlan() throws {

@@ -56,12 +56,14 @@ private func shortDate(_ date: Date, _ zone: TimeZone) -> String {
     return date.formatted(style.weekday(.abbreviated))
 }
 
-/// "in 2d 5h" or "in 3h 07m", counted from the entry's moment.
+/// "in 2d 5h", "in 3h 07m" or "in 15 min", counted from the entry's moment. Whole minutes
+/// only: entries are minutes apart, so seconds would be wrong for most of each entry.
 private func countdown(to date: Date, from now: Date) -> String {
-    let seconds = max(0, date.timeIntervalSince(now))
-    let hours = Int(seconds / 3600)
+    let minutes = Int((max(0, date.timeIntervalSince(now)) / 60).rounded(.up))
+    let hours = minutes / 60
     if hours >= 24 { return String(localized: "in \(hours / 24)d \(hours % 24)h") }
-    return String(localized: "in \(Formatting.duration(seconds: seconds))")
+    if hours >= 1 { return String(localized: "in \(hours)h \(String(format: "%02d", minutes % 60))m") }
+    return String(localized: "in \(minutes) min")
 }
 
 /// The face for one kind and family.

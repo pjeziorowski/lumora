@@ -609,6 +609,11 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "dynamic-type-tools")
         openTool(app, "Sun", expecting: "Sunrise")
         snap(app, "dynamic-type-sun")
+        // The time ruler's hour labels scale too, thinned out so they do not overlap.
+        app.tabBars.buttons["Planner"].tap()
+        waitFor(app, id: "planner.panel.pin")
+        settleMap()
+        snap(app, "dynamic-type-planner")
     }
 
     /// Phase 10 accessibility pass: Xcode's accessibility audit on the main screens. Issues

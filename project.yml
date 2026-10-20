@@ -67,6 +67,7 @@ targets:
     sources:
       - App/Widgets
       - App/Shared
+      - App/Resources/Localizable.xcstrings
     entitlements:
       path: App/LumoraWidgets.entitlements
       properties:

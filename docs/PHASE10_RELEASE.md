@@ -20,7 +20,11 @@ small and medium, Lock Screen circular, rectangular and inline.
 - The numbers come from `PlannerKit/Widgets/WidgetSnapshots.swift`, built on the same reports
   as the Sun, Moon and Milky Way tools, so a widget never disagrees with the app (checked in
   `WidgetTests`: the Sun widget's next sunset equals the Sun tool's sunset to the second).
-- Times are in the place's time zone. Timelines hold an entry every 30 minutes for 6 hours.
+- Times are in the place's time zone. Timelines last 6 hours, with an entry every 30 minutes
+  (every 5 minutes for the Next plan countdown, which shows whole minutes) and one just after
+  each event a widget names, so a passed sunset or plan never lingers
+  (`PlannerKit/Widgets/WidgetTimeline.swift`, tested in `WidgetTests`). The Milky Way window
+  is computed again once the shown one has ended.
 - The app shares the selected place, clock style and upcoming plans through the app group
   `group.com.pjeziorowski.lumora` (`WidgetStore`). The group needs a signing team; unsigned
   simulator builds fall back to "Open Lumora to choose a place."
@@ -41,13 +45,27 @@ location"), units and clock, and plans and widgets. It is shown once (`onboardin
   `p10-accessibility-audit.txt` instead of failing, so they can be worked through.
 - Charts have accessibility labels; the Moon disc and eclipse glyphs are decorative and
   hidden, with the row they sit in carrying the label; rows combine label and value.
-- Screenshots at the largest accessibility text size check that the Tools list and the Sun
-  tool still read.
+- Screenshots at the largest accessibility text size check that the Tools list, the Sun tool
+  and the Planner still read. The Planner's time ruler grows with the text size and labels
+  every second or third hour when the labels no longer fit an hour apart.
+
+### Audit triage
+
+The audit at the default text size reports about 140 issues on six screens. What they are and
+what was decided:
+
+| Issue | Where | Decision |
+|---|---|---|
+| Contrast failed or nearly passed | Secondary labels (coordinates, list values, section headers) in system lists | Accepted: these use the system `.secondary` style on grouped backgrounds, which follows Increase Contrast. Revisit if a custom palette is introduced. |
+| Dynamic Type partially unsupported | List cells in Sun, Meteor showers, My Stuff, Settings | Accepted: the cells use text styles and scale (see the accessibility-size screenshots); the audit flags fixed-size SF Symbols and chart axes inside them. |
+| Text clipped | Long dates in the Planner header and Sun tool, Settings pickers | Accepted at the default size, where the text truncates with an ellipsis and VoiceOver reads it whole; at accessibility sizes the header stacks instead. |
+| Hit area too small | The nine Planner panel tabs (about 37 × 44 pt on a 6.1-inch iPhone); the map's Legal link | Accepted: the panels also page by swipe and each tab is a labelled VoiceOver button; the Legal link is drawn by MapKit. A scrolling tab bar would fix it at the cost of hiding tabs. |
 
 ## Localization
 
 `App/Resources/Localizable.xcstrings` is the string catalog (source English) with a Polish
-translation of the tabs, Tools list, Settings, onboarding, widgets and event screens. SwiftUI
+translation of the tabs, Tools list, Settings, onboarding, widgets and event screens. The catalog
+is compiled into both the app and the widget extension. SwiftUI
 literals are catalog keys, so Xcode adds new strings to the catalog when the project is built
 in Xcode. Planner panel rows and pill values are built in PlannerKit as English strings and are
 not localized yet.

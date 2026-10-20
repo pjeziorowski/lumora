@@ -770,6 +770,36 @@
           }
         }
       }
+    },
+    "in %lld min": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "za %lld min"
+          }
+        }
+      }
+    },
+    "in %lldd %lldh": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "za %lld d %lld h"
+          }
+        }
+      }
+    },
+    "in %lldh %@m": {
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "za %lld h %@ min"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
