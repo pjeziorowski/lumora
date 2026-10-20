@@ -14,7 +14,7 @@ Packages/               Local SPM packages, no UIKit/SwiftUI imports
   OpticsCore/           Exposure, DoF, FoV, spot stars, star trails, time lapse (Phase 5)
   GeoCore/              Geodesy, elevation, time zones (Phases 3 and 6)
   CameraCatalog/        Camera bodies JSON (Phase 5)
-  PlannerKit/           Planner state, formatting, day summaries
+  PlannerKit/           Pill and planner state, Sun/Moon reports, formatting
 Tools/golden/           Scripts that regenerate golden test data
 project.yml             XcodeGen spec (the .xcodeproj is generated, not committed)
 ```
@@ -32,12 +32,13 @@ open Lumora.xcodeproj           # run the "Lumora" scheme; ⌘U runs app + packa
 Packages only (macOS or Linux, Swift 6.0+):
 
 ```sh
-scripts/test-packages.sh        # prints ACCURACY lines for AstroCore
+scripts/test-packages.sh        # prints ACCURACY lines for AstroCore and PlannerKit
 ```
 
 ## Status
 
 - Phase 0 (skeleton) and Phase 1 (AstroCore) are done. See `docs/PHASE1_ACCURACY.md`.
+- Phase 2 (Sun and Moon tools, shared location and date picker) is done. See `docs/PHASE2_ACCURACY.md`.
 - Settings: units, clock, coordinate format persist with `@AppStorage`.
 
 ## Licences

@@ -14,33 +14,47 @@ struct PlaceholderView: View {
     }
 }
 
-struct ToolsPlaceholderView: View {
-    private struct Tool: Identifiable {
+struct ToolsView: View {
+    private struct Upcoming: Identifiable {
         let name: LocalizedStringKey
         let systemImage: String
         let phase: String
         var id: String { systemImage }
     }
 
-    private let tools: [Tool] = [
-        Tool(name: "Sun", systemImage: "sun.max", phase: "Phase 2"),
-        Tool(name: "Moon", systemImage: "moon", phase: "Phase 2"),
-        Tool(name: "Milky Way", systemImage: "sparkles", phase: "Phase 4"),
-        Tool(name: "Exposure", systemImage: "camera.aperture", phase: "Phase 5"),
-        Tool(name: "Depth of field", systemImage: "scope", phase: "Phase 5"),
-        Tool(name: "Field of view", systemImage: "viewfinder", phase: "Phase 5"),
-        Tool(name: "Spot stars", systemImage: "star", phase: "Phase 5"),
-        Tool(name: "Star trails", systemImage: "circle.dashed", phase: "Phase 5"),
-        Tool(name: "Time lapse", systemImage: "timer", phase: "Phase 5"),
-        Tool(name: "Meteor showers", systemImage: "moon.stars", phase: "Phase 9"),
+    private let upcoming: [Upcoming] = [
+        Upcoming(name: "Milky Way", systemImage: "sparkles", phase: "Phase 4"),
+        Upcoming(name: "Exposure", systemImage: "camera.aperture", phase: "Phase 5"),
+        Upcoming(name: "Depth of field", systemImage: "scope", phase: "Phase 5"),
+        Upcoming(name: "Field of view", systemImage: "viewfinder", phase: "Phase 5"),
+        Upcoming(name: "Spot stars", systemImage: "star", phase: "Phase 5"),
+        Upcoming(name: "Star trails", systemImage: "circle.dashed", phase: "Phase 5"),
+        Upcoming(name: "Time lapse", systemImage: "timer", phase: "Phase 5"),
+        Upcoming(name: "Meteor showers", systemImage: "moon.stars", phase: "Phase 9"),
     ]
 
     var body: some View {
-        List(tools) { tool in
-            LabeledContent {
-                Text(tool.phase).foregroundStyle(.secondary)
-            } label: {
-                Label(tool.name, systemImage: tool.systemImage)
+        List {
+            Section {
+                NavigationLink {
+                    SunPillView()
+                } label: {
+                    Label("Sun", systemImage: "sun.max")
+                }
+                NavigationLink {
+                    MoonPillView()
+                } label: {
+                    Label("Moon", systemImage: "moon")
+                }
+            }
+            Section("Coming later") {
+                ForEach(upcoming) { tool in
+                    LabeledContent {
+                        Text(tool.phase).foregroundStyle(.secondary)
+                    } label: {
+                        Label(tool.name, systemImage: tool.systemImage)
+                    }
+                }
             }
         }
     }

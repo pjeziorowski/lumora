@@ -1,5 +1,6 @@
 // App/Sources/RootView.swift
 
+import PlannerKit
 import SwiftUI
 
 enum AppTab: String, CaseIterable, Hashable {
@@ -47,7 +48,7 @@ struct RootView: View {
     private func content(for tab: AppTab) -> some View {
         switch tab {
         case .planner: PlannerPlaceholderView()
-        case .pills: ToolsPlaceholderView()
+        case .pills: ToolsView()
         case .myStuff: PlaceholderView(message: "Saved plans, places and cameras arrive in Phase 7.")
         case .settings: SettingsView()
         }
@@ -56,4 +57,5 @@ struct RootView: View {
 
 #Preview {
     RootView()
+        .environment(PillSession(defaults: nil))
 }

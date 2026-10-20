@@ -18,6 +18,8 @@ jobs:
   app-ios:
     name: App + packages (iOS Simulator)
     runs-on: macos-15
+    permissions:
+      contents: write   # publishes simulator screenshots to a ci-screenshots/* branch
     steps:
       - uses: actions/checkout@v4
       - name: Install tools
@@ -32,8 +34,39 @@ jobs:
           # First available iPhone simulator, so the job survives runner image updates.
           UDID=$(xcrun simctl list devices available -j \
             | jq -r '[.devices | to_entries[] | select(.key | test("iOS")) | .value[] | select(.name | startswith("iPhone"))][0].udid')
-          xcodebuild test \
+          # Clean status bar for the screenshots.
+          xcrun simctl boot "$UDID" || true
+          xcrun simctl status_bar "$UDID" override --time 9:41 --batteryState charged --batteryLevel 100 \
+            --cellularBars 4 --wifiBars 3 || true
+          mkdir -p "$RUNNER_TEMP/screenshots"
+          TEST_RUNNER_SCREENSHOT_DIR="$RUNNER_TEMP/screenshots" xcodebuild test \
             -project Lumora.xcodeproj \
             -scheme Lumora \
             -destination "id=$UDID" \
             CODE_SIGNING_ALLOWED=NO | xcbeautify || exit 1
+      - name: Upload simulator screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: simulator-screenshots
+          path: ${{ runner.temp }}/screenshots
+          if-no-files-found: warn
+      - name: Publish screenshots to a branch
+        # Artifacts are hard to fetch from some environments, so the PNGs also go to
+        # ci-screenshots/<PR branch> (force-pushed each run, never merged).
+        if: always() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          BRANCH: ci-screenshots/${{ github.head_ref }}
+          TOKEN: ${{ github.token }}
+        run: |
+          shopt -s nullglob
+          files=("$RUNNER_TEMP"/screenshots/*.png)
+          [ ${#files[@]} -gt 0 ] || exit 0
+          dir=$(mktemp -d)
+          cp "${files[@]}" "$dir"
+          cd "$dir"
+          git init -q -b "$BRANCH"
+          git add .
+          git -c user.name="github-actions[bot]" -c user.email="github-actions[bot]@users.noreply.github.com" \
+            commit -qm "Simulator screenshots for ${{ github.event.pull_request.head.sha }}"
+          git push -qf "https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git" "HEAD:refs/heads/$BRANCH"
