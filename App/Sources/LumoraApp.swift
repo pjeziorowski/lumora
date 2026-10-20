@@ -2,6 +2,7 @@
 
 import CameraCatalog
 import Foundation
+import GeoCore
 import PlannerKit
 import SwiftUI
 
@@ -16,9 +17,13 @@ struct LumoraApp: App {
     init() {
         let session = LumoraApp.makePillSession(arguments: ProcessInfo.processInfo.arguments)
         _pillSession = State(initialValue: session)
-        _plannerState = State(initialValue: PlannerState(session: session) { latitude, longitude in
+        let planner = PlannerState(session: session, lookup: { latitude, longitude in
             await PlaceSearch.placeInfo(latitude: latitude, longitude: longitude)
+        }, elevation: { latitude, longitude in
+            await ElevationClient.elevation(latitude: latitude, longitude: longitude)
         })
+        LumoraApp.applyTarget(arguments: ProcessInfo.processInfo.arguments, to: planner)
+        _plannerState = State(initialValue: planner)
         _cameraStore = State(initialValue: LumoraApp.makeCameraStore(arguments: ProcessInfo.processInfo.arguments))
     }
 
@@ -55,5 +60,18 @@ struct LumoraApp: App {
             store.setDefault(camera)
         }
         return store
+    }
+
+    /// Screenshot runs can place the target pin with `-target <lat>,<lon>` and give the
+    /// object there a height with `-objectHeight <m>`.
+    static func applyTarget(arguments: [String], to planner: PlannerState) {
+        guard let index = arguments.firstIndex(of: "-target"), index + 1 < arguments.count else { return }
+        let parts = arguments[index + 1].split(separator: ",").compactMap { Double($0) }
+        guard parts.count == 2 else { return }
+        var height = 0.0
+        if let h = arguments.firstIndex(of: "-objectHeight"), h + 1 < arguments.count { height = Double(arguments[h + 1]) ?? 0 }
+        Task { @MainActor in
+            await planner.setTarget(GeoPoint(latitude: parts[0], longitude: parts[1]), objectHeight: height)
+        }
     }
 }

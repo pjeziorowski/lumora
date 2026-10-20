@@ -14,6 +14,10 @@ import GeoCore
 
 public enum OverlayBody: String, Sendable, Hashable, CaseIterable {
     case sun, moon, galacticCenter
+    /// Field and depth of field drawn from the pin (Phase 6).
+    case camera
+    /// The line to the target pin.
+    case target
 }
 
 public enum OverlayRole: String, Sendable, Hashable {
@@ -25,6 +29,13 @@ public enum OverlayRole: String, Sendable, Hashable {
     case pathUp
     /// Part of the daily path below the horizon.
     case pathDown
+    /// Field of view: the wedge's edges and its centre line.
+    case fovEdge
+    case fovCenter
+    /// Depth of field: near limit, focus distance and far limit arcs.
+    case dofNear
+    case focus
+    case dofFar
 }
 
 /// Which bodies the map draws.
