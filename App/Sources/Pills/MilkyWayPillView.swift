@@ -289,9 +289,15 @@ private struct MilkyWayYearSections: View {
 
     private func hours(_ value: Double) -> String { String(format: "%.1f h", value) }
 
-    private func monthName(_ month: Int) -> String {
-        Calendar(identifier: .gregorian).shortMonthSymbols[month - 1]
-    }
+    private func monthName(_ month: Int) -> String { shortMonthName(month) }
+}
+
+/// "Jun" for 6, in the user's language. A bare Gregorian calendar has no locale, so its
+/// symbols come out as "M06".
+private func shortMonthName(_ month: Int) -> String {
+    var calendar = Calendar(identifier: .gregorian)
+    calendar.locale = .autoupdatingCurrent
+    return calendar.shortMonthSymbols[month - 1]
 }
 
 private struct MonthChart: View {
@@ -299,7 +305,7 @@ private struct MonthChart: View {
 
     var body: some View {
         Chart(months) { month in
-            let name = Calendar(identifier: .gregorian).shortMonthSymbols[month.month - 1]
+            let name = shortMonthName(month.month)
             // Stacked: Moon-free hours, then the rest of the visible hours.
             BarMark(x: .value("Month", name), y: .value("Hours", month.moonFreeHours))
                 .foregroundStyle(by: .value("Kind", String(localized: "Moon-free")))
