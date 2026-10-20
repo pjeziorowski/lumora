@@ -1,0 +1,133 @@
+Planner | audit failed: Error Domain=com.apple.xcode.xctest.accessibilityAudit Code=-56 "Audit failed to complete in time" UserInfo={NSLocalizedDescription=Audit failed to complete in time}
+Planner | 0 issues
+Tools | 65536 | Dynamic Type font sizes are partially unsupported | -
+Tools | 65536 | Dynamic Type font sizes are partially unsupported | -
+Tools | 65536 | Dynamic Type font sizes are partially unsupported | -
+Tools | 65536 | Dynamic Type font sizes are partially unsupported | -
+Tools | 131072 | Text clipped | -
+Tools | 131072 | Text clipped | -
+Tools | 131072 | Text clipped | -
+Tools | 131072 | Text clipped | -
+Tools | 131072 | Text clipped | -
+Tools | 1 | Contrast nearly passed | 48 'EVENTS' id=
+Tools | 1 | Contrast nearly passed | -
+Tools | 1 | Contrast failed | -
+Tools | 1 | Contrast failed | -
+Tools | 13 issues
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | 9 'Now' id=
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | 48 'Solar noon' id=
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | 48 '12:38 · el 61.2°' id=
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are unsupported | -
+Sun | 65536 | Dynamic Type font sizes are partially unsupported | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 131072 | Text clipped | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast failed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | 48 '12:38 · el 61.2°' id=
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast nearly passed | -
+Sun | 1 | Contrast failed | -
+Sun | 1 | Contrast failed | -
+Sun | 1 | Contrast failed | 48 'Distance' id=
+Sun | 1 | Contrast failed | 48 '152.024 million km' id=
+Sun | 41 issues
+Meteor showers | 65536 | Dynamic Type font sizes are unsupported | -
+Meteor showers | 65536 | Dynamic Type font sizes are partially unsupported | 9 'Now' id=
+Meteor showers | 65536 | Dynamic Type font sizes are partially unsupported | -
+Meteor showers | 65536 | Dynamic Type font sizes are partially unsupported | -
+Meteor showers | 65536 | Dynamic Type font sizes are unsupported | -
+Meteor showers | 65536 | Dynamic Type font sizes are partially unsupported | -
+Meteor showers | 65536 | Dynamic Type font sizes are unsupported | -
+Meteor showers | 65536 | Dynamic Type font sizes are unsupported | -
+Meteor showers | 65536 | Dynamic Type font sizes are unsupported | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 131072 | Text clipped | -
+Meteor showers | 1 | Contrast nearly passed | 48 'SHOWERS IN 2026' id=
+Meteor showers | 1 | Contrast failed | 48 '52.22970° N, 21.01220° E · UTC+2' id=
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 1 | Contrast nearly passed | -
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 1 | Contrast failed | -
+Meteor showers | 44 issues
+My Stuff | 1 | Contrast nearly passed | -
+My Stuff | 1 | Contrast nearly passed | -
+My Stuff | 1 | Contrast nearly passed | -
+My Stuff | 1 | Contrast nearly passed | -
+My Stuff | 1 | Contrast nearly passed | -
+My Stuff | 1 | Contrast nearly passed | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 65536 | Dynamic Type font sizes are unsupported | -
+My Stuff | 131072 | Text clipped | -
+My Stuff | 131072 | Text clipped | -
+My Stuff | 131072 | Text clipped | -
+My Stuff | 131072 | Text clipped | -
+My Stuff | 131072 | Text clipped | -
+My Stuff | 131072 | Text clipped | -
+My Stuff | 21 issues
+Settings | 1 | Contrast nearly passed | 48 'CAMERA' id=
+Settings | 1 | Contrast nearly passed | -
+Settings | 1 | Contrast nearly passed | -
+Settings | 1 | Contrast nearly passed | 48 'Astronomy calculations are ported from Astronomy Engine by Don Cross (MIT licence).' id=
+Settings | 65536 | Dynamic Type font sizes are partially unsupported | 48 'Astronomy calculations are ported from Astronomy Engine by Don Cross (MIT licence).' id=
+Settings | 131072 | Text clipped | 48 '24-hour' id=
+Settings | 131072 | Text clipped | 48 'Decimal degrees' id=
+Settings | 7 issues
