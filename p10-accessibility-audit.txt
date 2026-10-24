@@ -1,0 +1,98 @@
+Planner | hit region | Hit area is too small | 42 'Legal' id= at (69,621 28x11) | The size of this element is too small for user to interact.
+Planner | dynamic type | Dynamic Type font sizes are partially unsupported | 48 'Sunrise' id= at (102,761 69x14) | User will not be able to change the font size of this element
+Planner | dynamic type | Dynamic Type font sizes are partially unsupported | 48 'Sun, Jun 21, 2026 · UTC+2' id= at (125,653 151x14) | User will not be able to change the font size of this element
+Planner | dynamic type | Dynamic Type font sizes are partially unsupported | 48 'Sunset' id= at (200,761 65x14) | User will not be able to change the font size of this element
+Planner | dynamic type | Dynamic Type font sizes are partially unsupported | 48 'Golden hour' id= at (296,761 95x14) | User will not be able to change the font size of this element
+Planner | dynamic type | Dynamic Type font sizes are partially unsupported | 48 'Now' id= at (27,761 47x14) | User will not be able to change the font size of this element
+Planner | dynamic type | Dynamic Type font sizes are partially unsupported | 48 '20:30' id= at (173,667 56x24) | User will not be able to change the font size of this element
+Planner | element description | Element has no description | - | This element is missing useful accessibility information.
+Planner | 8 issues
+Tools | contrast | Contrast failed | - | Contrast failed for element
+Tools | dynamic type | Dynamic Type font sizes are partially unsupported | - | User will not be able to change the font size of this element
+Tools | dynamic type | Dynamic Type font sizes are partially unsupported | - | User will not be able to change the font size of this element
+Tools | dynamic type | Dynamic Type font sizes are partially unsupported | - | User will not be able to change the font size of this element
+Tools | dynamic type | Dynamic Type font sizes are partially unsupported | - | User will not be able to change the font size of this element
+Tools | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Tools | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Tools | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Tools | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Tools | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Tools | 10 issues
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are partially unsupported | 48 'Solar noon' id= at (40,495 81x20) | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are partially unsupported | 48 '12:38 · el 61.2°' id= at (242,495 119x20) | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are partially unsupported | 9 'Now' id= at (346,217 34x20) | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Sun | contrast | Contrast failed | - | Contrast failed for element
+Sun | contrast | Contrast failed | - | Contrast failed for element
+Sun | contrast | Contrast failed | - | Contrast failed for element
+Sun | 34 issues
+Meteor showers | dynamic type | Dynamic Type font sizes are partially unsupported | 9 'Now' id= at (346,217 34x20) | User will not be able to change the font size of this element
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Meteor showers | contrast | Contrast failed | - | Contrast failed for element
+Meteor showers | contrast | Contrast failed | - | Contrast failed for element
+Meteor showers | contrast | Contrast failed | - | Contrast failed for element
+Meteor showers | 16 issues
+My Stuff | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+My Stuff | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+My Stuff | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+My Stuff | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+My Stuff | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+My Stuff | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+My Stuff | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+My Stuff | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+My Stuff | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+My Stuff | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+My Stuff | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+My Stuff | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+My Stuff | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+My Stuff | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+My Stuff | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+My Stuff | 15 issues
+Settings | contrast | Contrast failed | 48 'ABOUT' id= at (20,785 362x38) | Contrast failed for element
+Settings | contrast | Contrast failed | 48 'Version' id= at (40,835 57x20) | Contrast failed for element
+Settings | contrast | Contrast failed | 48 '0.1.0' id= at (321,835 40x20) | Contrast failed for element
+Settings | dynamic type | Dynamic Type font sizes are partially unsupported | - | User will not be able to change the font size of this element
+Settings | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Settings | dynamic type | Dynamic Type font sizes are partially unsupported | - | User will not be able to change the font size of this element
+Settings | dynamic type | Dynamic Type font sizes are unsupported | - | User will not be able to change the font size of this element
+Settings | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Settings | text clipped | Text clipped | - | Text of this element may be clipped at larger Dynamic Type sizes.
+Settings | 9 issues

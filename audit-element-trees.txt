@@ -1,0 +1,983 @@
+== Planner ==
+Attributes: Application, 0x103762710, pid: 16043, label: 'Lumora'
+Element subtree:
+ →Application, 0x103762710, pid: 16043, label: 'Lumora'
+    Window (Main), 0x103759fc0, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x10375dbf0, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x103760fb0, {{0.0, 0.0}, {402.0, 874.0}}
+          Other, 0x103761650, {{0.0, 0.0}, {402.0, 874.0}}
+            Other, 0x103751200, {{0.0, 0.0}, {402.0, 874.0}}
+              Other, 0x103762060, {{0.0, 0.0}, {402.0, 874.0}}
+                Other, 0x10375d8a0, {{0.0, 0.0}, {402.0, 874.0}}
+                  Other, 0x103761d10, {{0.0, 0.0}, {402.0, 874.0}}
+                    Other, 0x103759c60, {{0.0, 0.0}, {402.0, 874.0}}
+                      Other, 0x1037608b0, {{0.0, 0.0}, {402.0, 874.0}}
+                        Other, 0x10375e2c0, {{0.0, 0.0}, {402.0, 874.0}}
+                          Other, 0x103751fd0, {{0.0, 0.0}, {402.0, 874.0}}
+                            NavigationBar, 0x10375ed20, {{0.0, 56.3}, {402.0, 44.0}}, identifier: 'Planner'
+                              Button, 0x1037534e0, {{8.0, 56.3}, {44.7, 44.0}}, identifier: 'planner.search', label: 'Search places'
+                              Button, 0x103766510, {{60.7, 56.3}, {52.0, 44.0}}, identifier: 'planner.find', label: 'Find'
+                              Button, 0x10374f260, {{120.7, 56.3}, {48.3, 44.0}}, identifier: 'planner.ar', label: 'AR'
+                              Button, 0x1037623b0, {{240.0, 56.3}, {44.3, 44.0}}, identifier: 'planner.savePlan', label: 'Save plan'
+                              Button, 0x1048601b0, {{292.3, 56.3}, {47.3, 44.0}}, label: 'Current location'
+                              Button, 0x1048a1af0, {{347.7, 56.3}, {46.3, 44.0}}, identifier: 'planner.options', label: 'Map options'
+                              StaticText, 0x1048a8280, {{200.7, 78.0}, {1.0, 1.0}}, label: 'Planner'
+                                Other, 0x1048a86a0, {{200.7, 78.0}, {1.0, 1.0}}
+                                  Other, 0x104884f00, {{200.7, 78.0}, {1.0, 1.0}}
+                            Other, 0x10488f8f0, {{0.0, 0.0}, {402.0, 874.0}}
+                              Other, 0x1048a03d0, {{0.0, 0.0}, {402.0, 874.0}}
+                                Other, 0x1048a07f0, {{0.0, 0.0}, {402.0, 874.0}}
+                                  Other, 0x10489ffb0, {{0.0, 0.0}, {402.0, 874.0}}
+                                    ScrollView, 0x1048a72e0, {{0.0, 106.3}, {402.0, 44.0}}
+                                      Other, 0x1048a7400, {{0.0, 106.3}, {402.0, 44.0}}
+                                        Button, 0x1048a7520, {{0.0, 106.3}, {44.7, 44.0}}, identifier: 'planner.panelTab.pin', label: 'Pin', Selected
+                                        Button, 0x1048a7640, {{44.7, 106.3}, {44.7, 44.0}}, identifier: 'planner.panelTab.sun', label: 'Sun'
+                                        Button, 0x1048a7760, {{89.3, 106.3}, {44.7, 44.0}}, identifier: 'planner.panelTab.moon', label: 'Moon'
+                                        Button, 0x1048a7880, {{134.0, 106.3}, {44.7, 44.0}}, identifier: 'planner.panelTab.twilights', label: 'Twilights'
+                                        Button, 0x1048a79a0, {{178.7, 106.3}, {44.7, 44.0}}, identifier: 'planner.panelTab.milkyWay', label: 'Milky Way'
+                                        Button, 0x1048a7ac0, {{223.3, 106.3}, {44.7, 44.0}}, identifier: 'planner.panelTab.geodetics', label: 'Geodetics'
+                                        Button, 0x1048a7be0, {{268.0, 106.3}, {44.7, 44.0}}, identifier: 'planner.panelTab.obstacle', label: 'Obstacle'
+                                        Button, 0x1048a7d00, {{312.7, 106.3}, {44.7, 44.0}}, identifier: 'planner.panelTab.meteors', label: 'Meteors'
+                                        Button, 0x1048a7e20, {{357.3, 106.3}, {44.7, 44.0}}, identifier: 'planner.panelTab.eclipse', label: 'Eclipses'
+                                    CollectionView, 0x1048a7f40, {{0.0, 156.3}, {402.0, 180.0}}
+                                      Cell, 0x1048a9340, {{0.0, 156.3}, {402.0, 180.0}}
+                                        Other, 0x1048a9460, {{0.0, 156.3}, {402.0, 180.0}}
+                                          Other, 0x1048a9580, {{0.0, 156.3}, {402.0, 180.0}}
+                                            Other, 0x1048a96a0, {{0.0, 156.3}, {402.0, 180.0}}
+                                              Other, 0x1048a97c0, {{16.0, 157.7}, {370.0, 172.7}}
+                                                Image, 0x1048a98e0, {{17.3, 157.7}, {17.7, 20.3}}, identifier: 'planner.panel.pin', label: 'Remove Map Pin'
+                                                StaticText, 0x1048a9a00, {{17.3, 157.7}, {52.0, 21.0}}, identifier: 'planner.panel.pin', label: 'Pin'
+                                                ScrollView, 0x1048a9b20, {{16.0, 183.3}, {370.0, 147.0}}
+                                                  Other, 0x1048a9c40, {{16.0, 183.3}, {370.0, 123.0}}
+                                                    StaticText, 0x1048a9d60, {{16.0, 183.3}, {37.7, 18.0}}, label: 'Place'
+                                                    StaticText, 0x1048a9e80, {{332.3, 183.3}, {53.7, 18.0}}, label: 'Warsaw'
+                                                    StaticText, 0x1048a9fa0, {{16.0, 204.3}, {83.3, 18.0}}, label: 'Coordinates'
+                                                    StaticText, 0x1048aa0c0, {{199.0, 204.3}, {187.0, 18.0}}, label: '52.22970° N, 21.01220° E'
+                                                    StaticText, 0x1048aa1e0, {{16.0, 225.3}, {62.0, 18.0}}, label: 'Elevation'
+                                                    StaticText, 0x1048aa300, {{341.3, 225.3}, {44.7, 18.0}}, label: '100 m'
+                                                    StaticText, 0x1048aa420, {{16.0, 246.3}, {71.0, 18.0}}, label: 'Time zone'
+                                                    StaticText, 0x1048aa540, {{216.0, 246.3}, {170.0, 18.0}}, label: 'Europe/Warsaw (UTC+2)'
+                                                    StaticText, 0x1048aa660, {{16.0, 267.3}, {55.3, 18.0}}, label: 'Pin time'
+                                                    StaticText, 0x1048aa780, {{263.0, 267.3}, {123.0, 18.0}}, label: 'Sun 21 Jun 20:30'
+                                                    StaticText, 0x1048aa8a0, {{16.0, 288.3}, {80.7, 18.0}}, label: 'Device time'
+                                                    StaticText, 0x1048aa9c0, {{199.7, 288.3}, {186.3, 18.0}}, label: 'Sun 21 Jun 18:30 (UTC+0)'
+                                                  Other, 0x1048aaae0, {{353.0, 183.3}, {30.0, 147.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
+                                                    Other, 0x1048aac00, {{380.0, 320.3}, {3.0, 7.0}}
+                                                  Other, 0x1048aad20, {{353.0, 183.3}, {30.0, 147.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
+                                                    Other, 0x1048aae40, {{380.0, 320.3}, {3.0, 7.0}}
+                                      Other, 0x1048aaf60, {{369.0, 156.3}, {30.0, 180.0}}, label: 'Vertical scroll bar, 9 pages', value: 0%
+                                        Other, 0x1048ab080, {{396.0, 326.3}, {3.0, 7.0}}
+                                      Other, 0x1048ab1a0, {{369.0, 156.3}, {30.0, 180.0}}, label: 'Vertical scroll bar, 9 pages', value: 0%
+                                        Other, 0x1048ab2c0, {{396.0, 326.3}, {3.0, 7.0}}
+                                    Other, 0x1048ab3e0, {{0.0, 336.3}, {402.0, 306.3}}, identifier: 'planner.map'
+                                      Other, 0x1048ab500, {{187.0, 461.3}, {28.0, 28.0}}, label: 'Observer pin'
+                                        Image, 0x1048ab620, {{180.8, 457.3}, {40.5, 37.5}}, identifier: 'balloon_shadow'
+                                      Other, 0x1048ab740, {{275.0, 552.0}, {25.3, 29.0}}, label: 'Galactic core'
+                                      Other, 0x1048ab860, {{142.3, 539.7}, {25.3, 25.3}}, label: 'Moon'
+                                      Other, 0x1048ab980, {{95.7, 409.3}, {28.7, 28.7}}, label: 'Sun'
+                                      Other, 0x1048abaa0, {{0.0, 336.3}, {402.0, 306.3}}
+                                        Map, 0x1048abbc0, {{0.0, 336.3}, {402.0, 306.3}}
+                                          Other, 0x1048abce0, {{149.3, 395.1}, {30.0, 30.0}}, identifier: 'VKPointFeature', label: 'Warsaw'
+                                          Other, 0x1048abe00, {{-1.7, 427.5}, {30.0, 30.0}}, identifier: 'VKPointFeature', label: 'Wola'
+                                          Other, 0x1048abf20, {{186.0, 474.5}, {30.0, 30.0}}, identifier: 'VKPointFeature', label: 'Warsaw, Observer pin'
+                                          Other, 0x1048ac040, {{154.1, 479.6}, {30.0, 30.0}}, identifier: 'VKPointFeature', label: 'Warsaw Central'
+                                          Other, 0x1048ac160, {{178.6, 527.3}, {30.0, 30.0}}, identifier: 'VKPointFeature', label: 'Politechnika Warszawska'
+                                          Other, 0x1048ac280, {{88.9, 537.9}, {30.0, 30.0}}, identifier: 'VKPointFeature', label: 'Ochota'
+                                          Other, 0x1048ac3a0, {{259.6, 573.8}, {30.0, 30.0}}, identifier: 'VKPointFeature', label: 'Royal Baths Park'
+                                          Other, 0x1048ac4c0, {{140.2, 583.2}, {30.0, 30.0}}, identifier: 'VKPointFeature', label: 'Pole Mokotowskie'
+                                        Other, 0x1048ac5e0, {{0.0, 336.3}, {402.0, 306.3}}, identifier: 'AnnotationContainer'
+                                          Other, 0x1048ac700, {{187.0, 461.3}, {28.0, 28.0}}, label: 'Observer pin'
+                                            Image, 0x1048ac820, {{180.8, 457.3}, {40.5, 37.5}}, identifier: 'balloon_shadow'
+                                          Other, 0x1048ac940, {{275.0, 552.0}, {25.3, 29.0}}, label: 'Galactic core'
+                                          Other, 0x1048aca60, {{142.3, 539.7}, {25.3, 25.3}}, label: 'Moon'
+                                          Other, 0x1048acb80, {{95.7, 409.3}, {28.7, 28.7}}, label: 'Sun'
+                                      Link, 0x1048acca0, {{69.9, 621.7}, {28.6, 11.0}}, label: 'Legal'
+                                    Image, 0x1048acdc0, {{16.7, 350.7}, {9.7, 9.7}}, identifier: 'circle.fill', label: 'Circle'
+                                    StaticText, 0x1048acee0, {{32.0, 348.3}, {71.0, 14.3}}, label: 'Golden hour'
+                                    Button, 0x1048ad000, {{16.0, 650.7}, {44.0, 44.0}}, identifier: 'chevron.left', label: 'Previous day'
+                                    Button, 0x1048ad120, {{70.0, 653.7}, {262.0, 38.3}}, identifier: 'planner.time', label: 'Sun, Jun 21, 2026 · UTC+2, 20:30'
+                                      StaticText, 0x1048ad240, {{125.2, 653.5}, {151.7, 14.3}}, label: 'Sun, Jun 21, 2026 · UTC+2'
+                                      StaticText, 0x1048ad360, {{173.0, 667.8}, {56.0, 24.0}}, label: '20:30'
+                                    Button, 0x1048ad480, {{342.0, 650.7}, {44.0, 44.0}}, identifier: 'chevron.right', label: 'Next day'
+                                    Other, 0x1048ad5a0, {{0.0, 702.7}, {402.0, 44.0}}, identifier: 'planner.timebar', label: 'Time', value: 20:30
+                                    ScrollView, 0x1048ad6c0, {{0.0, 754.7}, {402.0, 28.3}}
+                                      Other, 0x1048ad7e0, {{0.0, 754.7}, {1006.7, 28.3}}
+                                        Button, 0x1048ad900, {{16.0, 755.3}, {68.0, 27.0}}, identifier: 'planner.jump.now', label: 'Now'
+                                          Image, 0x1048ada20, {{27.0, 762.3}, {12.3, 12.3}}, identifier: 'clock', label: 'Clock'
+                                          StaticText, 0x1048adb40, {{27.0, 761.9}, {47.0, 14.3}}, label: 'Now'
+                                        Button, 0x1048adc60, {{92.0, 754.7}, {90.0, 28.3}}, identifier: 'planner.jump.sunrise', label: 'Sunrise'
+                                          Image, 0x1048add80, {{102.7, 761.7}, {17.0, 14.3}}, identifier: 'sunrise', label: 'Sunrise'
+                                          StaticText, 0x1048adea0, {{102.7, 761.1}, {69.3, 14.9}}, label: 'Sunrise'
+                                        Button, 0x1048adfc0, {{190.0, 754.7}, {86.7, 28.3}}, identifier: 'planner.jump.sunset', label: 'Sunset'
+                                          Image, 0x1048ae0e0, {{200.7, 761.7}, {17.0, 14.3}}, identifier: 'sunset', label: 'Sunset'
+                                          StaticText, 0x1048ae200, {{200.7, 761.1}, {66.0, 14.9}}, label: 'Sunset'
+                                        Button, 0x1048ae320, {{284.7, 755.7}, {117.0, 26.3}}, identifier: 'planner.jump.goldenHour', label: 'Golden hour'
+                                          Image, 0x1048ae440, {{296.0, 763.7}, {15.3, 9.7}}, identifier: 'sun.horizon', label: 'sun.horizon'
+                                          StaticText, 0x1048ae560, {{296.0, 761.7}, {95.7, 14.3}}, label: 'Golden hour'
+                                        Button, 0x1048ae680, {{409.7, 755.3}, {100.0, 27.0}}, identifier: 'planner.jump.blueHour', label: 'Blue hour'
+                                          Image, 0x1048ae7a0, {{420.3, 762.3}, {16.0, 13.0}}, identifier: 'moon.haze', label: 'moon.haze'
+                                          StaticText, 0x1048ae8c0, {{420.3, 761.4}, {79.3, 14.3}}, label: 'Blue hour'
+                                        Button, 0x1048ae9e0, {{517.7, 755.3}, {96.0, 27.0}}, identifier: 'planner.jump.moonrise', label: 'Moonrise'
+                                          Image, 0x1048aeb00, {{528.7, 762.3}, {12.3, 12.3}}, identifier: 'moon.circle', label: 'Do Not Disturb'
+                                          StaticText, 0x1048aec20, {{528.7, 761.9}, {75.0, 14.3}}, label: 'Moonrise'
+                                        Button, 0x1048aed40, {{621.7, 754.7}, {92.3, 28.3}}, identifier: 'planner.jump.moonset', label: 'Moonset'
+                                          Image, 0x1048aee60, {{633.0, 761.7}, {12.0, 14.0}}, identifier: 'moon.zzz', label: 'Snooze'
+                                          StaticText, 0x1048aef80, {{633.0, 761.7}, {71.0, 15.2}}, label: 'Moonset'
+                                        Button, 0x1048af0a0, {{722.0, 755.0}, {131.0, 27.7}}, identifier: 'planner.jump.milkyWayStart', label: 'Milky Way from', Disabled
+                                          Image, 0x1048af1c0, {{733.3, 762.0}, {11.3, 13.7}}, identifier: 'sparkles', label: 'Sparkle', Disabled
+                                          StaticText, 0x1048af2e0, {{733.3, 762.0}, {109.7, 14.7}}, label: 'Milky Way from', Disabled
+                                        Button, 0x1048af400, {{861.0, 755.7}, {129.7, 26.3}}, identifier: 'planner.jump.milkyWayEnd', label: 'Milky Way until', Disabled
+                                          Image, 0x1048af520, {{872.3, 762.7}, {12.0, 12.0}}, identifier: 'sparkle', label: 'sparkle', Disabled
+                                          StaticText, 0x1048af640, {{872.3, 761.7}, {108.3, 14.3}}, label: 'Milky Way until', Disabled
+                TabBar, 0x1048af760, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Tab Bar'
+                  Button, 0x1048af880, {{2.0, 792.0}, {97.0, 48.0}}, identifier: 'map', label: 'Planner', Selected
+                    Image, 0x1048af9a0, {{35.7, 796.3}, {29.7, 26.3}}, identifier: 'map.fill', label: 'show map'
+                  Button, 0x1048afac0, {{103.0, 792.0}, {96.0, 48.0}}, identifier: 'square.grid.2x2', label: 'Tools'
+                  Button, 0x1048afbe0, {{203.0, 792.0}, {97.0, 48.0}}, identifier: 'folder', label: 'My Stuff'
+                  Button, 0x1048afd00, {{304.0, 792.0}, {96.0, 48.0}}, identifier: 'gearshape', label: 'Settings'
+Path to element:
+ →Application, 0x103762710, pid: 16043, label: 'Lumora'
+Query chain:
+ →Find: Target Application 'com.pjeziorowski.lumora'
+  Output: {
+    Application, 0x1037619c0, pid: 16043, label: 'Lumora'
+  }
+
+
+== Tools ==
+Attributes: Application, 0x103761d10, pid: 16043, label: 'Lumora'
+Element subtree:
+ →Application, 0x103761d10, pid: 16043, label: 'Lumora'
+    Window (Main), 0x10375dbf0, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x103751200, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x103762060, {{0.0, 0.0}, {402.0, 874.0}}
+          Other, 0x103761650, {{0.0, 0.0}, {402.0, 874.0}}
+            Other, 0x1036a4e60, {{0.0, 0.0}, {402.0, 874.0}}
+              Other, 0x103691720, {{0.0, 0.0}, {402.0, 874.0}}
+                Other, 0x1036a5ea0, {{0.0, 0.0}, {402.0, 874.0}}
+                  Other, 0x1036a7800, {{0.0, 0.0}, {402.0, 874.0}}
+                    Other, 0x1036a7920, {{0.0, 0.0}, {402.0, 874.0}}
+                      Other, 0x1036a7a40, {{0.0, 0.0}, {402.0, 874.0}}
+                        Other, 0x1036a7b60, {{0.0, 0.0}, {402.0, 874.0}}
+                          Other, 0x1036a7c80, {{0.0, 0.0}, {402.0, 874.0}}
+                            NavigationBar, 0x1036a7da0, {{0.0, 56.3}, {402.0, 96.0}}, identifier: 'Tools'
+                              StaticText, 0x1036a7ec0, {{16.0, 104.0}, {83.3, 40.7}}, label: 'Tools'
+                            Other, 0x1036a7fe0, {{0.0, 0.0}, {402.0, 874.0}}
+                              Other, 0x1036a8100, {{0.0, 0.0}, {402.0, 874.0}}
+                                Other, 0x1036a8220, {{0.0, 0.0}, {402.0, 874.0}}
+                                  Other, 0x1036a8340, {{0.0, 0.0}, {402.0, 874.0}}
+                                    CollectionView, 0x1036a8460, {{0.0, 0.0}, {402.0, 874.0}}
+                                      Other, 0x1036a8580, {{-20.0, -1595.7}, {442.0, 1897.7}}
+                                      Cell, 0x1036a86a0, {{20.0, 152.3}, {362.0, 44.0}}
+                                        Other, 0x1036a87c0, {{20.0, 152.3}, {362.0, 44.0}}
+                                          Other, 0x1036a88e0, {{20.0, 152.3}, {362.0, 44.0}}
+                                        Other, 0x1036a8a00, {{20.0, 152.3}, {362.0, 44.0}}
+                                          Other, 0x1036a8b20, {{20.0, 152.3}, {362.0, 44.0}}
+                                            Other, 0x1036a8c40, {{20.0, 152.3}, {362.0, 44.0}}
+                                              Button, 0x1036a8d60, {{20.0, 152.3}, {362.0, 44.0}}, label: 'Sun'
+                                                Image, 0x1036a8e80, {{42.3, 162.7}, {23.3, 23.3}}, identifier: 'sun.max', label: 'Brightness Higher'
+                                                StaticText, 0x1036a8fa0, {{42.3, 162.7}, {71.3, 23.3}}, label: 'Sun'
+                                                Image, 0x1036a90c0, {{354.3, 168.3}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Cell, 0x1036a91e0, {{20.0, 196.3}, {362.0, 44.0}}
+                                        Other, 0x1036a9300, {{20.0, 196.3}, {362.0, 44.0}}
+                                          Other, 0x1036a9420, {{20.0, 196.3}, {362.0, 44.0}}
+                                        Other, 0x1036a9540, {{20.0, 196.3}, {362.0, 44.0}}
+                                          Other, 0x1036a9660, {{20.0, 196.3}, {362.0, 44.0}}
+                                            Other, 0x1036a9780, {{20.0, 196.3}, {362.0, 44.0}}
+                                              Button, 0x1036a98a0, {{20.0, 196.3}, {362.0, 44.0}}, label: 'Moon'
+                                                Image, 0x1036a99c0, {{43.3, 207.3}, {21.3, 21.7}}, identifier: 'moon', label: 'Do Not Disturb'
+                                                StaticText, 0x1036a9ae0, {{43.3, 207.3}, {84.0, 21.7}}, label: 'Moon'
+                                                Image, 0x1036a9c00, {{354.3, 212.3}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x1036a9d20, {{84.0, 196.0}, {298.0, 0.3}}
+                                      Cell, 0x1036a9e40, {{20.0, 240.3}, {362.0, 44.0}}
+                                        Other, 0x1036a9f60, {{20.0, 240.3}, {362.0, 44.0}}
+                                          Other, 0x1036aa080, {{20.0, 240.3}, {362.0, 44.0}}
+                                        Other, 0x1036aa1a0, {{20.0, 240.3}, {362.0, 44.0}}
+                                          Other, 0x1036aa2c0, {{20.0, 240.3}, {362.0, 44.0}}
+                                            Other, 0x1036aa3e0, {{20.0, 240.3}, {362.0, 44.0}}
+                                              Button, 0x1036aa500, {{20.0, 240.3}, {362.0, 44.0}}, label: 'Milky Way'
+                                                Image, 0x1036aa620, {{44.0, 250.0}, {20.0, 24.7}}, identifier: 'sparkles', label: 'Sparkle'
+                                                StaticText, 0x1036aa740, {{44.0, 250.0}, {116.7, 24.7}}, label: 'Milky Way'
+                                                Image, 0x1036aa860, {{354.3, 256.3}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x1036aa980, {{84.0, 240.0}, {298.0, 0.3}}
+                                      Other, 0x1036aaaa0, {{-20.0, 302.0}, {442.0, 144.3}}
+                                      Cell, 0x1036aabc0, {{20.0, 302.0}, {362.0, 38.7}}
+                                        Other, 0x1036aace0, {{20.0, 302.0}, {362.0, 38.7}}
+                                        Other, 0x1036aae00, {{20.0, 302.0}, {362.0, 38.7}}
+                                          Other, 0x1036aaf20, {{20.0, 302.0}, {362.0, 38.7}}
+                                            Other, 0x1036ab040, {{20.0, 302.0}, {362.0, 38.7}}
+                                              StaticText, 0x1036ab160, {{20.0, 302.0}, {362.0, 38.7}}, label: 'EVENTS'
+                                      Cell, 0x1036ab280, {{20.0, 340.7}, {362.0, 44.0}}
+                                        Other, 0x1048601b0, {{20.0, 340.7}, {362.0, 44.0}}
+                                          Other, 0x1048a1af0, {{20.0, 340.7}, {362.0, 44.0}}
+                                        Other, 0x1048ad2e0, {{20.0, 340.7}, {362.0, 44.0}}
+                                          Other, 0x1048acec0, {{20.0, 340.7}, {362.0, 44.0}}
+                                            Other, 0x10489ffb0, {{20.0, 340.7}, {362.0, 44.0}}
+                                              Button, 0x104884f00, {{20.0, 340.7}, {362.0, 44.0}}, label: 'Meteor showers'
+                                                Image, 0x10488f8f0, {{45.0, 351.7}, {21.3, 22.0}}, identifier: 'moon.stars', label: 'Clear Night'
+                                                StaticText, 0x1048a03d0, {{45.0, 351.7}, {161.0, 22.0}}, label: 'Meteor showers'
+                                                Image, 0x1048a86a0, {{354.3, 356.7}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Cell, 0x1048a07f0, {{20.0, 384.7}, {362.0, 44.0}}
+                                        Other, 0x1048b13a0, {{20.0, 384.7}, {362.0, 44.0}}
+                                          Other, 0x1048a8280, {{20.0, 384.7}, {362.0, 44.0}}
+                                        Other, 0x1048ad920, {{20.0, 384.7}, {362.0, 44.0}}
+                                          Other, 0x1048ada40, {{20.0, 384.7}, {362.0, 44.0}}
+                                            Other, 0x1048adb60, {{20.0, 384.7}, {362.0, 44.0}}
+                                              Button, 0x1048adc80, {{20.0, 384.7}, {362.0, 44.0}}, label: 'Eclipses'
+                                                Image, 0x1048adda0, {{43.3, 395.7}, {21.7, 21.7}}, identifier: 'circle.lefthalf.filled', label: 'circle.lefthalf.filled'
+                                                StaticText, 0x1048adec0, {{43.3, 395.7}, {103.3, 21.7}}, label: 'Eclipses'
+                                                Image, 0x1048adfe0, {{354.3, 400.7}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x1048ae100, {{84.0, 384.3}, {298.0, 0.3}}
+                                      Other, 0x1048ae220, {{-20.0, 446.3}, {442.0, 364.3}}
+                                      Cell, 0x1048ae340, {{20.0, 446.3}, {362.0, 38.7}}
+                                        Other, 0x1048ae460, {{20.0, 446.3}, {362.0, 38.7}}
+                                        Other, 0x1048ae580, {{20.0, 446.3}, {362.0, 38.7}}
+                                          Other, 0x1048ae6a0, {{20.0, 446.3}, {362.0, 38.7}}
+                                            Other, 0x1048ae7c0, {{20.0, 446.3}, {362.0, 38.7}}
+                                              StaticText, 0x1048ae8e0, {{20.0, 446.3}, {362.0, 38.7}}, label: 'PHOTOGRAPHY'
+                                      Cell, 0x1048aea00, {{20.0, 485.0}, {362.0, 44.0}}
+                                        Other, 0x1048aeb20, {{20.0, 485.0}, {362.0, 44.0}}
+                                          Other, 0x1048aec40, {{20.0, 485.0}, {362.0, 44.0}}
+                                        Other, 0x1048aed60, {{20.0, 485.0}, {362.0, 44.0}}
+                                          Other, 0x1048aee80, {{20.0, 485.0}, {362.0, 44.0}}
+                                            Other, 0x1048aefa0, {{20.0, 485.0}, {362.0, 44.0}}
+                                              Button, 0x1048af0c0, {{20.0, 485.0}, {362.0, 44.0}}, label: 'Exposure'
+                                                Image, 0x1048af1e0, {{43.3, 496.0}, {21.7, 21.7}}, identifier: 'camera.aperture', label: 'camera.aperture'
+                                                StaticText, 0x1048af300, {{43.3, 496.0}, {111.7, 21.7}}, label: 'Exposure'
+                                                Image, 0x1048af420, {{354.3, 501.0}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Cell, 0x1048af540, {{20.0, 529.0}, {362.0, 44.0}}
+                                        Other, 0x1048af660, {{20.0, 529.0}, {362.0, 44.0}}
+                                          Other, 0x1048af780, {{20.0, 529.0}, {362.0, 44.0}}
+                                        Other, 0x1048af8a0, {{20.0, 529.0}, {362.0, 44.0}}
+                                          Other, 0x1048af9c0, {{20.0, 529.0}, {362.0, 44.0}}
+                                            Other, 0x1048afae0, {{20.0, 529.0}, {362.0, 44.0}}
+                                              Button, 0x1048afc00, {{20.0, 529.0}, {362.0, 44.0}}, label: 'Depth of field'
+                                                Image, 0x1048b2480, {{41.0, 538.0}, {26.0, 26.0}}, identifier: 'scope', label: 'scope'
+                                                StaticText, 0x1048b25a0, {{41.0, 538.0}, {146.3, 26.0}}, label: 'Depth of field'
+                                                Image, 0x1048b26c0, {{354.3, 545.0}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x1048b27e0, {{84.0, 528.7}, {298.0, 0.3}}
+                                      Cell, 0x1048b2900, {{20.0, 573.0}, {362.0, 44.0}}
+                                        Other, 0x1048b2a20, {{20.0, 573.0}, {362.0, 44.0}}
+                                          Other, 0x1048a72e0, {{20.0, 573.0}, {362.0, 44.0}}
+                                        Other, 0x1048a7400, {{20.0, 573.0}, {362.0, 44.0}}
+                                          Other, 0x1048a7520, {{20.0, 573.0}, {362.0, 44.0}}
+                                            Other, 0x1048a7640, {{20.0, 573.0}, {362.0, 44.0}}
+                                              Button, 0x1048a7760, {{20.0, 573.0}, {362.0, 44.0}}, label: 'Field of view'
+                                                Image, 0x1048a7880, {{43.7, 584.7}, {21.0, 21.0}}, identifier: 'viewfinder', label: 'Scan'
+                                                StaticText, 0x1048a79a0, {{43.7, 584.7}, {135.3, 21.0}}, label: 'Field of view'
+                                                Image, 0x1048a7ac0, {{354.3, 589.0}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x1048a7be0, {{84.0, 572.7}, {298.0, 0.3}}
+                                      Cell, 0x1048a7d00, {{20.0, 617.0}, {362.0, 44.0}}
+                                        Other, 0x1048a7e20, {{20.0, 617.0}, {362.0, 44.0}}
+                                          Other, 0x1048a7f40, {{20.0, 617.0}, {362.0, 44.0}}
+                                        Other, 0x1048b2f80, {{20.0, 617.0}, {362.0, 44.0}}
+                                          Other, 0x1048b30a0, {{20.0, 617.0}, {362.0, 44.0}}
+                                            Other, 0x1048b31c0, {{20.0, 617.0}, {362.0, 44.0}}
+                                              Button, 0x1048b32e0, {{20.0, 617.0}, {362.0, 44.0}}, label: 'Spot stars'
+                                                Image, 0x1048b3400, {{42.0, 627.7}, {24.0, 22.7}}, identifier: 'star', label: 'Favorite'
+                                                StaticText, 0x1048b3520, {{42.0, 627.7}, {119.7, 22.7}}, label: 'Spot stars'
+                                                Image, 0x1048b3640, {{354.3, 633.0}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x1048b3760, {{84.0, 616.7}, {298.0, 0.3}}
+                                      Cell, 0x1048b3880, {{20.0, 661.0}, {362.0, 44.0}}
+                                        Other, 0x1048b39a0, {{20.0, 661.0}, {362.0, 44.0}}
+                                          Other, 0x1048b3ac0, {{20.0, 661.0}, {362.0, 44.0}}
+                                        Other, 0x1048b3be0, {{20.0, 661.0}, {362.0, 44.0}}
+                                          Other, 0x1048b3d00, {{20.0, 661.0}, {362.0, 44.0}}
+                                            Other, 0x1048b3e20, {{20.0, 661.0}, {362.0, 44.0}}
+                                              Button, 0x1048b3f40, {{20.0, 661.0}, {362.0, 44.0}}, label: 'Star trails'
+                                                Image, 0x1048b4060, {{43.3, 672.0}, {21.7, 21.7}}, identifier: 'circle.dashed', label: 'Circular Selection'
+                                                StaticText, 0x1048b4180, {{43.3, 672.0}, {113.0, 21.7}}, label: 'Star trails'
+                                                Image, 0x1048b42a0, {{354.3, 677.0}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x1048b43c0, {{84.0, 660.7}, {298.0, 0.3}}
+                                      Cell, 0x1048b44e0, {{20.0, 705.0}, {362.0, 44.0}}
+                                        Other, 0x1048b4600, {{20.0, 705.0}, {362.0, 44.0}}
+                                          Other, 0x1048b4720, {{20.0, 705.0}, {362.0, 44.0}}
+                                        Other, 0x1048b4840, {{20.0, 705.0}, {362.0, 44.0}}
+                                          Other, 0x1048b4960, {{20.0, 705.0}, {362.0, 44.0}}
+                                            Other, 0x1048b4a80, {{20.0, 705.0}, {362.0, 44.0}}
+                                              Button, 0x1048b4ba0, {{20.0, 705.0}, {362.0, 44.0}}, label: 'Time lapse'
+                                                Image, 0x1048b4cc0, {{43.3, 716.0}, {21.7, 21.7}}, identifier: 'timer', label: 'Timer'
+                                                StaticText, 0x1048b4de0, {{43.3, 716.0}, {123.3, 21.7}}, label: 'Time lapse'
+                                                Image, 0x1048b4f00, {{354.3, 721.0}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x1048b5020, {{84.0, 704.7}, {298.0, 0.3}}
+                                      Cell, 0x1048b5140, {{20.0, 749.0}, {362.0, 44.0}}
+                                        Other, 0x1048b5260, {{20.0, 749.0}, {362.0, 44.0}}
+                                          Other, 0x1048b5380, {{20.0, 749.0}, {362.0, 44.0}}
+                                        Other, 0x1048b54a0, {{20.0, 749.0}, {362.0, 44.0}}
+                                          Other, 0x1048b55c0, {{20.0, 749.0}, {362.0, 44.0}}
+                                            Other, 0x1048b56e0, {{20.0, 749.0}, {362.0, 44.0}}
+                                              Button, 0x1048b5800, {{20.0, 749.0}, {362.0, 44.0}}, label: 'Cameras'
+                                                Image, 0x1048b5920, {{41.0, 761.0}, {26.3, 20.3}}, identifier: 'camera', label: 'Camera'
+                                                StaticText, 0x1048b5a40, {{41.0, 760.8}, {111.0, 20.5}}, label: 'Cameras'
+                                                Image, 0x1048b5b60, {{354.3, 765.0}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x1048b5c80, {{84.0, 748.7}, {298.0, 0.3}}
+                                      Other, 0x1048b5da0, {{-20.0, 810.7}, {442.0, 1982.7}}
+                                      Cell, 0x1048b6010, {{20.0, 810.7}, {362.0, 38.7}}
+                                        Other, 0x1048b6130, {{20.0, 810.7}, {362.0, 38.7}}
+                                        Other, 0x1048b6250, {{20.0, 810.7}, {362.0, 38.7}}
+                                          Other, 0x1048b6370, {{20.0, 810.7}, {362.0, 38.7}}
+                                            Other, 0x1048b6490, {{20.0, 810.7}, {362.0, 38.7}}
+                                              StaticText, 0x1048b65b0, {{20.0, 810.7}, {362.0, 38.7}}, label: 'AUGMENTED REALITY'
+                                      Cell, 0x1048b66d0, {{20.0, 849.3}, {362.0, 44.0}}
+                                        Other, 0x1048b67f0, {{20.0, 849.3}, {362.0, 44.0}}
+                                          Other, 0x1048b6910, {{20.0, 849.3}, {362.0, 44.0}}
+                                        Other, 0x1048b6a30, {{20.0, 849.3}, {362.0, 44.0}}
+                                          Other, 0x1048b6b50, {{20.0, 849.3}, {362.0, 44.0}}
+                                            Other, 0x1048b6c70, {{20.0, 849.3}, {362.0, 44.0}}
+                                              Button, 0x1048b6d90, {{20.0, 849.3}, {362.0, 44.0}}, label: 'Sun & Moon AR'
+                                                Image, 0x1048b6eb0, {{40.3, 862.7}, {27.7, 17.3}}, identifier: 'sun.horizon', label: 'sun.horizon'
+                                                StaticText, 0x1048b6fd0, {{40.3, 861.2}, {162.7, 20.3}}, label: 'Sun & Moon AR'
+                                                Image, 0x1048b70f0, {{354.3, 865.3}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x1048b7210, {{369.0, 106.0}, {30.0, 685.0}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                                        Other, 0x1048b7330, {{396.0, 109.0}, {3.0, 526.0}}
+                                      Other, 0x1048b7450, {{369.0, 106.0}, {30.0, 685.0}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                                        Other, 0x1048b7570, {{396.0, 109.0}, {3.0, 526.0}}
+                TabBar, 0x1048b7890, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Tab Bar'
+                  Button, 0x1048b79b0, {{2.0, 792.0}, {97.0, 48.0}}, identifier: 'map', label: 'Planner'
+                  Button, 0x1048b7ad0, {{103.0, 792.0}, {96.0, 48.0}}, identifier: 'square.grid.2x2', label: 'Tools', Selected
+                    Image, 0x1048b7bf0, {{137.0, 797.0}, {27.0, 25.0}}, identifier: 'square.grid.2x2.fill', label: 'grid 2x2'
+                  Button, 0x1048b7d10, {{203.0, 792.0}, {97.0, 48.0}}, identifier: 'folder', label: 'My Stuff'
+                  Button, 0x1048b7e30, {{304.0, 792.0}, {96.0, 48.0}}, identifier: 'gearshape', label: 'Settings'
+Path to element:
+ →Application, 0x103761d10, pid: 16043, label: 'Lumora'
+Query chain:
+ →Find: Target Application 'com.pjeziorowski.lumora'
+  Output: {
+    Application, 0x1048abfe0, pid: 16043, label: 'Lumora'
+  }
+
+
+== Sun ==
+Attributes: Application, 0x103777ec0, pid: 16043, label: 'Lumora'
+Element subtree:
+ →Application, 0x103777ec0, pid: 16043, label: 'Lumora'
+    Window (Main), 0x10375f0c0, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x10375e630, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x10377aec0, {{0.0, 0.0}, {402.0, 874.0}}
+          Other, 0x10375b5d0, {{0.0, 0.0}, {402.0, 874.0}}
+            Other, 0x10377ab30, {{0.0, 0.0}, {402.0, 874.0}}
+              Other, 0x103775550, {{0.0, 0.0}, {402.0, 874.0}}
+                Other, 0x10377a110, {{0.0, 0.0}, {402.0, 874.0}}
+                  Other, 0x10377b210, {{0.0, 0.0}, {402.0, 874.0}}
+                    Other, 0x103766c00, {{0.0, 0.0}, {402.0, 874.0}}
+                      Other, 0x103766890, {{0.0, 0.0}, {402.0, 874.0}}
+                        Other, 0x10377bc40, {{0.0, 0.0}, {402.0, 874.0}}
+                          Other, 0x10377c640, {{0.0, 0.0}, {402.0, 874.0}}
+                            NavigationBar, 0x10377c2d0, {{0.0, 56.3}, {402.0, 44.0}}, identifier: 'Sun'
+                              Button, 0x103764d50, {{0.0, 56.3}, {70.7, 44.0}}, label: 'Tools'
+                              StaticText, 0x1037572c0, {{185.7, 68.0}, {31.0, 20.3}}, label: 'Sun'
+                            Other, 0x1037580b0, {{0.0, 0.0}, {402.0, 874.0}}
+                              Other, 0x103754c80, {{0.0, 0.0}, {402.0, 874.0}}
+                                Other, 0x10377b8e0, {{0.0, 0.0}, {402.0, 874.0}}
+                                  Other, 0x1037634e0, {{0.0, 0.0}, {402.0, 874.0}}
+                                    CollectionView, 0x1037766c0, {{0.0, 0.0}, {402.0, 874.0}}
+                                      Other, 0x103777480, {{-20.0, -1647.7}, {442.0, 1925.3}}
+                                      Cell, 0x103777120, {{20.0, 135.3}, {362.0, 58.7}}
+                                        Other, 0x103779a50, {{20.0, 135.3}, {362.0, 58.7}}
+                                          Other, 0x103779dd0, {{20.0, 135.3}, {362.0, 58.7}}
+                                        Other, 0x103778590, {{20.0, 135.3}, {362.0, 58.7}}
+                                          Other, 0x1037751f0, {{20.0, 135.3}, {362.0, 58.7}}
+                                            Other, 0x103778210, {{20.0, 135.3}, {362.0, 58.7}}
+                                              Button, 0x1037777f0, {{20.0, 135.3}, {362.0, 58.7}}, identifier: 'pill.location', label: 'Warsaw, 52.22970° N, 21.01220° E · UTC+2'
+                                                Image, 0x103779020, {{41.7, 153.0}, {18.7, 23.3}}, identifier: 'mappin.and.ellipse', label: 'Remove Map Pin'
+                                                StaticText, 0x1037788f0, {{74.0, 146.3}, {63.0, 20.3}}, label: 'Warsaw'
+                                                StaticText, 0x103773a10, {{74.0, 168.7}, {195.3, 14.3}}, label: '52.22970° N, 21.01220° E · UTC+2'
+                                                Image, 0x103775fe0, {{355.0, 159.3}, {6.3, 10.7}}, identifier: 'chevron.right', label: 'Forward'
+                                      Cell, 0x103775c60, {{20.0, 194.0}, {362.0, 66.0}}
+                                        Other, 0x103774e80, {{20.0, 194.0}, {362.0, 66.0}}
+                                          Other, 0x103774b20, {{20.0, 194.0}, {362.0, 66.0}}
+                                        Other, 0x1037740f0, {{20.0, 194.0}, {362.0, 66.0}}
+                                          Other, 0x103773d90, {{20.0, 194.0}, {362.0, 66.0}}
+                                            Other, 0x103774460, {{20.0, 194.0}, {362.0, 66.0}}
+                                              Button, 0x1037747b0, {{21.7, 205.0}, {44.0, 44.0}}, identifier: 'chevron.left', label: 'Previous day'
+                                              DatePicker, 0x10377bf90, {{73.7, 209.0}, {212.7, 36.0}}, label: 'Date and time'
+                                                Button, 0x1037649d0, {{73.7, 209.0}, {212.7, 36.0}}, label: 'Date and Time Picker', value: 8:30 PM, Jun 21, 2...
+                                                  Button, 0x10377b590, {{73.7, 209.0}, {122.3, 36.0}}, label: 'Jun 21, 2026'
+                                                  Button, 0x103766510, {{200.0, 209.0}, {86.3, 36.0}}, label: '8:30 PM'
+                                              Button, 0x1037619c0, {{294.3, 205.0}, {44.0, 44.0}}, identifier: 'chevron.right', label: 'Next day'
+                                              Button, 0x103759c60, {{346.3, 217.0}, {34.3, 20.3}}, label: 'Now'
+                                      Other, 0x103763880, {{74.0, 193.7}, {308.0, 0.3}}
+                                      Other, 0x103762a70, {{-20.0, 277.7}, {442.0, 79.3}}
+                                      Cell, 0x103764630, {{20.0, 295.3}, {362.0, 44.0}}
+                                        Other, 0x103763180, {{20.0, 295.3}, {362.0, 44.0}}
+                                          Other, 0x1037642e0, {{20.0, 295.3}, {362.0, 44.0}}
+                                            Other, 0x10374f260, {{20.0, 295.3}, {362.0, 44.0}}
+                                        Other, 0x1037534e0, {{20.0, 295.3}, {362.0, 44.0}}
+                                          Other, 0x1037623b0, {{20.0, 295.3}, {362.0, 44.0}}
+                                            Other, 0x103760fb0, {{20.0, 295.3}, {362.0, 44.0}}
+                                              SegmentedControl, 0x103759fc0, {{20.0, 295.3}, {362.0, 44.0}}
+                                                Button, 0x10375d8a0, {{20.0, 302.0}, {71.0, 32.0}}, label: 'Day', Selected
+                                                Button, 0x10375e2c0, {{92.0, 302.0}, {72.0, 32.0}}, label: 'Twilight'
+                                                Button, 0x10375ed20, {{165.0, 302.0}, {71.0, 32.0}}, label: 'Graph'
+                                                Button, 0x1037608b0, {{237.0, 302.0}, {72.0, 32.0}}, label: 'Month'
+                                                Button, 0x103751fd0, {{310.0, 302.0}, {72.0, 32.0}}, label: 'Seasons'
+                                      Other, 0x103754920, {{-20.0, 357.0}, {442.0, 276.3}}
+                                      Cell, 0x103768090, {{20.0, 357.0}, {362.0, 38.7}}
+                                        Other, 0x10376c4f0, {{20.0, 357.0}, {362.0, 38.7}}
+                                        Other, 0x10376c170, {{20.0, 357.0}, {362.0, 38.7}}
+                                          Other, 0x10376be20, {{20.0, 357.0}, {362.0, 38.7}}
+                                            Other, 0x10376bac0, {{20.0, 357.0}, {362.0, 38.7}}
+                                              StaticText, 0x10376b740, {{20.0, 357.0}, {362.0, 38.7}}, label: 'SUN, JUN 21, 2026'
+                                      Cell, 0x10376b3c0, {{20.0, 395.7}, {362.0, 44.0}}
+                                        Other, 0x103769890, {{20.0, 395.7}, {362.0, 44.0}}
+                                          Other, 0x103769f70, {{20.0, 395.7}, {362.0, 44.0}}
+                                        Other, 0x10376b070, {{20.0, 395.7}, {362.0, 44.0}}
+                                          Other, 0x103769520, {{20.0, 395.7}, {362.0, 44.0}}
+                                            Other, 0x10376a980, {{20.0, 395.7}, {362.0, 44.0}}
+                                              StaticText, 0x10376ace0, {{20.0, 395.7}, {362.0, 44.0}}, label: 'Sunrise, 04:14 · 48.1° NE'
+                                                StaticText, 0x10376a2d0, {{40.0, 407.5}, {57.0, 20.3}}, label: 'Sunrise'
+                                                StaticText, 0x10376a620, {{233.7, 407.5}, {128.3, 20.3}}, label: '04:14 · 48.1° NE'
+                                      Cell, 0x1048bcad0, {{20.0, 439.7}, {362.0, 44.0}}
+                                        Other, 0x1037672d0, {{20.0, 439.7}, {362.0, 44.0}}
+                                          Other, 0x103766f70, {{20.0, 439.7}, {362.0, 44.0}}
+                                        Other, 0x103759210, {{20.0, 439.7}, {362.0, 44.0}}
+                                          Other, 0x1037587a0, {{20.0, 439.7}, {362.0, 44.0}}
+                                            Other, 0x10375cb00, {{20.0, 439.7}, {362.0, 44.0}}
+                                              StaticText, 0x103770630, {{20.0, 439.7}, {362.0, 44.0}}, label: 'Sunset, 21:01 · 311.9° NW'
+                                                StaticText, 0x1037709d0, {{40.0, 451.5}, {53.0, 20.3}}, label: 'Sunset'
+                                                StaticText, 0x1037691e0, {{217.0, 451.5}, {145.0, 20.3}}, label: '21:01 · 311.9° NW'
+                                      Other, 0x1037702c0, {{40.0, 439.3}, {342.0, 0.3}}
+                                      Cell, 0x10376ff60, {{20.0, 483.7}, {362.0, 44.0}}
+                                        Other, 0x10376fbf0, {{20.0, 483.7}, {362.0, 44.0}}
+                                          Other, 0x10376f190, {{20.0, 483.7}, {362.0, 44.0}}
+                                        Other, 0x103750090, {{20.0, 483.7}, {362.0, 44.0}}
+                                          Other, 0x10376ee30, {{20.0, 483.7}, {362.0, 44.0}}
+                                            Other, 0x103754fe0, {{20.0, 483.7}, {362.0, 44.0}}
+                                              StaticText, 0x10376e700, {{20.0, 483.7}, {362.0, 44.0}}, label: 'Solar noon, 12:38 · el 61.2°'
+                                                StaticText, 0x10376d250, {{40.0, 495.5}, {81.7, 20.3}}, label: 'Solar noon'
+                                                StaticText, 0x10376dcf0, {{242.3, 495.5}, {119.7, 20.3}}, label: '12:38 · el 61.2°'
+                                      Other, 0x10376d5e0, {{40.0, 483.3}, {342.0, 0.3}}
+                                      Cell, 0x10376e390, {{20.0, 527.7}, {362.0, 44.0}}
+                                        Other, 0x10376ea90, {{20.0, 527.7}, {362.0, 44.0}}
+                                          Other, 0x10376d950, {{20.0, 527.7}, {362.0, 44.0}}
+                                        Other, 0x103768770, {{20.0, 527.7}, {362.0, 44.0}}
+                                          Other, 0x103768b00, {{20.0, 527.7}, {362.0, 44.0}}
+                                            Other, 0x103768e70, {{20.0, 527.7}, {362.0, 44.0}}
+                                              StaticText, 0x103753830, {{20.0, 527.7}, {362.0, 44.0}}, label: 'Daylight, 16h 47m'
+                                                StaticText, 0x103765780, {{40.0, 539.5}, {62.3, 20.3}}, label: 'Daylight'
+                                                StaticText, 0x103767990, {{292.3, 539.5}, {69.7, 20.3}}, label: '16h 47m'
+                                      Other, 0x103767d10, {{40.0, 527.3}, {342.0, 0.3}}
+                                      Cell, 0x103767630, {{20.0, 571.7}, {362.0, 44.0}}
+                                        Other, 0x10375fb00, {{20.0, 571.7}, {362.0, 44.0}}
+                                          Other, 0x10375c7a0, {{20.0, 571.7}, {362.0, 44.0}}
+                                        Other, 0x103757630, {{20.0, 571.7}, {362.0, 44.0}}
+                                          Other, 0x103759570, {{20.0, 571.7}, {362.0, 44.0}}
+                                            Other, 0x103765400, {{20.0, 571.7}, {362.0, 44.0}}
+                                              StaticText, 0x1037650a0, {{20.0, 571.7}, {362.0, 44.0}}, label: 'Change from yesterday, +3s'
+                                                StaticText, 0x10375fe80, {{40.0, 583.5}, {177.7, 20.3}}, label: 'Change from yesterday'
+                                                StaticText, 0x10375f790, {{332.7, 583.5}, {29.3, 20.3}}, label: '+3s'
+                                      Other, 0x10375d540, {{40.0, 571.3}, {342.0, 0.3}}
+                                      Other, 0x10375f440, {{-20.0, 633.3}, {442.0, 2026.7}}
+                                      Cell, 0x10377d710, {{20.0, 633.3}, {362.0, 38.7}}
+                                        Other, 0x10377da60, {{20.0, 633.3}, {362.0, 38.7}}
+                                        Other, 0x10377dde0, {{20.0, 633.3}, {362.0, 38.7}}
+                                          Other, 0x10377e140, {{20.0, 633.3}, {362.0, 38.7}}
+                                            Other, 0x10377e4b0, {{20.0, 633.3}, {362.0, 38.7}}
+                                              StaticText, 0x10377e810, {{20.0, 633.3}, {362.0, 38.7}}, label: 'AT 20:30'
+                                      Cell, 0x10377eb80, {{20.0, 672.0}, {362.0, 44.0}}
+                                        Other, 0x10377eee0, {{20.0, 672.0}, {362.0, 44.0}}
+                                          Other, 0x10377f270, {{20.0, 672.0}, {362.0, 44.0}}
+                                        Other, 0x10377f600, {{20.0, 672.0}, {362.0, 44.0}}
+                                          Other, 0x10377f970, {{20.0, 672.0}, {362.0, 44.0}}
+                                            Other, 0x10377fcc0, {{20.0, 672.0}, {362.0, 44.0}}
+                                              StaticText, 0x103780060, {{20.0, 672.0}, {362.0, 44.0}}, label: 'Azimuth, 305.8° NW'
+                                                StaticText, 0x1037803c0, {{40.0, 683.8}, {62.7, 20.3}}, label: 'Azimuth'
+                                                StaticText, 0x103780740, {{276.0, 683.8}, {86.0, 20.3}}, label: '305.8° NW'
+                                      Cell, 0x103780ab0, {{20.0, 716.0}, {362.0, 44.0}}
+                                        Other, 0x103780e10, {{20.0, 716.0}, {362.0, 44.0}}
+                                          Other, 0x103781190, {{20.0, 716.0}, {362.0, 44.0}}
+                                        Other, 0x1037814e0, {{20.0, 716.0}, {362.0, 44.0}}
+                                          Other, 0x103781840, {{20.0, 716.0}, {362.0, 44.0}}
+                                            Other, 0x103781ba0, {{20.0, 716.0}, {362.0, 44.0}}
+                                              StaticText, 0x103781f10, {{20.0, 716.0}, {362.0, 44.0}}, label: 'Elevation, 3.1°'
+                                                StaticText, 0x103782280, {{40.0, 727.8}, {69.0, 20.3}}, label: 'Elevation'
+                                                StaticText, 0x1037825e0, {{329.0, 727.8}, {33.0, 20.3}}, label: '3.1°'
+                                      Other, 0x103782950, {{40.0, 715.7}, {342.0, 0.3}}
+                                      Cell, 0x103782ce0, {{20.0, 760.0}, {362.0, 44.0}}
+                                        Other, 0x103783060, {{20.0, 760.0}, {362.0, 44.0}}
+                                          Other, 0x1037833d0, {{20.0, 760.0}, {362.0, 44.0}}
+                                        Other, 0x103783730, {{20.0, 760.0}, {362.0, 44.0}}
+                                          Other, 0x103783ac0, {{20.0, 760.0}, {362.0, 44.0}}
+                                            Other, 0x103783e10, {{20.0, 760.0}, {362.0, 44.0}}
+                                              StaticText, 0x103784180, {{20.0, 760.0}, {362.0, 44.0}}, label: 'Light, Golden hour'
+                                                StaticText, 0x1037844f0, {{40.0, 771.8}, {38.3, 20.3}}, label: 'Light'
+                                                StaticText, 0x1048bec00, {{268.3, 771.8}, {93.7, 20.3}}, label: 'Golden hour'
+                                      Other, 0x1048bc630, {{40.0, 759.7}, {342.0, 0.3}}
+                                      Cell, 0x1048a03d0, {{20.0, 804.0}, {362.0, 44.0}}
+                                        Other, 0x10489ffb0, {{20.0, 804.0}, {362.0, 44.0}}
+                                          Other, 0x104884f00, {{20.0, 804.0}, {362.0, 44.0}}
+                                        Other, 0x1048c6e30, {{20.0, 804.0}, {362.0, 44.0}}
+                                          Other, 0x1048c6f50, {{20.0, 804.0}, {362.0, 44.0}}
+                                            Other, 0x1048c7070, {{20.0, 804.0}, {362.0, 44.0}}
+                                              StaticText, 0x1048c7190, {{20.0, 804.0}, {362.0, 44.0}}, label: 'Shadow length, 18.41 × height'
+                                                StaticText, 0x1048c72b0, {{40.0, 815.8}, {113.3, 20.3}}, label: 'Shadow length'
+                                                StaticText, 0x1048c73d0, {{249.3, 815.8}, {112.7, 20.3}}, label: '18.41 × height'
+                                      Other, 0x1048c74f0, {{40.0, 803.7}, {342.0, 0.3}}
+                                      Cell, 0x1048c7610, {{20.0, 848.0}, {362.0, 44.0}}
+                                        Other, 0x1048c7730, {{20.0, 848.0}, {362.0, 44.0}}
+                                          Other, 0x1048c7850, {{20.0, 848.0}, {362.0, 44.0}}
+                                        Other, 0x1048c7970, {{20.0, 848.0}, {362.0, 44.0}}
+                                          Other, 0x1048c7a90, {{20.0, 848.0}, {362.0, 44.0}}
+                                            Other, 0x1048c7bb0, {{20.0, 848.0}, {362.0, 44.0}}
+                                              StaticText, 0x1048c7cd0, {{20.0, 848.0}, {362.0, 44.0}}, label: 'Distance, 152.024 million km'
+                                                StaticText, 0x1048c7df0, {{40.0, 859.8}, {66.7, 20.3}}, label: 'Distance'
+                                                StaticText, 0x1048c7f10, {{215.0, 859.8}, {147.0, 20.3}}, label: '152.024 million km'
+                                      Other, 0x1048c8180, {{40.0, 847.7}, {342.0, 0.3}}
+                                      Other, 0x1048c82a0, {{369.0, 100.3}, {30.0, 690.7}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                                        Other, 0x1048c83c0, {{396.0, 781.0}, {3.0, 7.0}}
+                                      Other, 0x1048c84e0, {{369.0, 100.3}, {30.0, 690.7}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                                        Other, 0x1048c8600, {{396.0, 781.0}, {3.0, 7.0}}
+                TabBar, 0x1048c8920, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Tab Bar'
+                  Button, 0x1048c8a40, {{2.0, 792.0}, {97.0, 48.0}}, identifier: 'map', label: 'Planner'
+                  Button, 0x1048c8b60, {{103.0, 792.0}, {96.0, 48.0}}, identifier: 'square.grid.2x2', label: 'Tools', Selected
+                    Image, 0x1048c8c80, {{137.0, 797.0}, {27.0, 25.0}}, identifier: 'square.grid.2x2.fill', label: 'grid 2x2'
+                  Button, 0x1048c8da0, {{203.0, 792.0}, {97.0, 48.0}}, identifier: 'folder', label: 'My Stuff'
+                  Button, 0x1048c8ec0, {{304.0, 792.0}, {96.0, 48.0}}, identifier: 'gearshape', label: 'Settings'
+Path to element:
+ →Application, 0x103777ec0, pid: 16043, label: 'Lumora'
+Query chain:
+ →Find: Target Application 'com.pjeziorowski.lumora'
+  Output: {
+    Application, 0x1048c37a0, pid: 16043, label: 'Lumora'
+  }
+
+
+== Meteor showers ==
+Attributes: Application, 0x1048bc630, pid: 16043, label: 'Lumora'
+Element subtree:
+ →Application, 0x1048bc630, pid: 16043, label: 'Lumora'
+    Window (Main), 0x1048ce090, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x1048c37a0, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x1036e5890, {{0.0, 0.0}, {402.0, 874.0}}
+          Other, 0x1036c5790, {{0.0, 0.0}, {402.0, 874.0}}
+            Other, 0x1036e6330, {{0.0, 0.0}, {402.0, 874.0}}
+              Other, 0x1036a5ea0, {{0.0, 0.0}, {402.0, 874.0}}
+                Other, 0x1036d6ce0, {{0.0, 0.0}, {402.0, 874.0}}
+                  Other, 0x1036c7900, {{0.0, 0.0}, {402.0, 874.0}}
+                    Other, 0x1036d38b0, {{0.0, 0.0}, {402.0, 874.0}}
+                      Other, 0x1036d68c0, {{0.0, 0.0}, {402.0, 874.0}}
+                        Other, 0x1036e7c90, {{0.0, 0.0}, {402.0, 874.0}}
+                          Other, 0x1036e7db0, {{0.0, 0.0}, {402.0, 874.0}}
+                            NavigationBar, 0x1036e7ed0, {{0.0, 56.3}, {402.0, 44.0}}, identifier: 'Meteor showers'
+                              Button, 0x103781840, {{0.0, 56.3}, {70.7, 44.0}}, label: 'Tools'
+                              StaticText, 0x103781ba0, {{137.3, 68.0}, {127.7, 20.3}}, label: 'Meteor showers'
+                            Other, 0x103781f10, {{0.0, 0.0}, {402.0, 874.0}}
+                              Other, 0x1037825e0, {{0.0, 0.0}, {402.0, 874.0}}
+                                Other, 0x103781190, {{0.0, 0.0}, {402.0, 874.0}}
+                                  Other, 0x10377eb80, {{0.0, 0.0}, {402.0, 874.0}}
+                                    CollectionView, 0x103780e10, {{0.0, 0.0}, {402.0, 874.0}}
+                                      Other, 0x103782280, {{-20.0, -1647.7}, {442.0, 1925.3}}
+                                      Cell, 0x10377f600, {{20.0, 135.3}, {362.0, 58.7}}
+                                        Other, 0x10377f970, {{20.0, 135.3}, {362.0, 58.7}}
+                                          Other, 0x10377fcc0, {{20.0, 135.3}, {362.0, 58.7}}
+                                        Other, 0x103780060, {{20.0, 135.3}, {362.0, 58.7}}
+                                          Other, 0x103780740, {{20.0, 135.3}, {362.0, 58.7}}
+                                            Other, 0x1037803c0, {{20.0, 135.3}, {362.0, 58.7}}
+                                              Button, 0x10377eee0, {{20.0, 135.3}, {362.0, 58.7}}, identifier: 'pill.location', label: 'Warsaw, 52.22970° N, 21.01220° E · UTC+2'
+                                                Image, 0x10377f270, {{41.7, 153.0}, {18.7, 23.3}}, identifier: 'mappin.and.ellipse', label: 'Remove Map Pin'
+                                                StaticText, 0x10377d710, {{74.0, 146.3}, {63.0, 20.3}}, label: 'Warsaw'
+                                                StaticText, 0x10377dde0, {{74.0, 168.7}, {195.3, 14.3}}, label: '52.22970° N, 21.01220° E · UTC+2'
+                                                Image, 0x10377e140, {{355.0, 159.3}, {6.3, 10.7}}, identifier: 'chevron.right', label: 'Forward'
+                                      Cell, 0x10377e4b0, {{20.0, 194.0}, {362.0, 66.0}}
+                                        Other, 0x10377e810, {{20.0, 194.0}, {362.0, 66.0}}
+                                          Other, 0x10377da60, {{20.0, 194.0}, {362.0, 66.0}}
+                                        Other, 0x10375f440, {{20.0, 194.0}, {362.0, 66.0}}
+                                          Other, 0x103780ab0, {{20.0, 194.0}, {362.0, 66.0}}
+                                            Other, 0x10375f0c0, {{20.0, 194.0}, {362.0, 66.0}}
+                                              Button, 0x10377aec0, {{21.7, 205.0}, {44.0, 44.0}}, identifier: 'chevron.left', label: 'Previous day'
+                                              DatePicker, 0x10375b5d0, {{73.7, 209.0}, {212.7, 36.0}}, label: 'Date and time'
+                                                Button, 0x10377a110, {{73.7, 209.0}, {212.7, 36.0}}, label: 'Date and Time Picker', value: 8:30 PM, Jun 21, 2...
+                                                  Button, 0x10377ab30, {{73.7, 209.0}, {122.3, 36.0}}, label: 'Jun 21, 2026'
+                                                  Button, 0x103766c00, {{200.0, 209.0}, {86.3, 36.0}}, label: '8:30 PM'
+                                              Button, 0x103775550, {{294.3, 205.0}, {44.0, 44.0}}, identifier: 'chevron.right', label: 'Next day'
+                                              Button, 0x10377b210, {{346.3, 217.0}, {34.3, 20.3}}, label: 'Now'
+                                      Other, 0x103766890, {{74.0, 193.7}, {308.0, 0.3}}
+                                      Other, 0x10377bc40, {{-20.0, 277.7}, {442.0, 2792.3}}
+                                      Cell, 0x10377c640, {{20.0, 277.7}, {362.0, 38.7}}
+                                        Other, 0x1037580b0, {{20.0, 277.7}, {362.0, 38.7}}
+                                        Other, 0x103754c80, {{20.0, 277.7}, {362.0, 38.7}}
+                                          Other, 0x10377b8e0, {{20.0, 277.7}, {362.0, 38.7}}
+                                            Other, 0x1037634e0, {{20.0, 277.7}, {362.0, 38.7}}
+                                              StaticText, 0x1037766c0, {{20.0, 277.7}, {362.0, 38.7}}, label: 'SHOWERS IN 2026'
+                                      Cell, 0x103782ce0, {{20.0, 316.3}, {362.0, 78.7}}
+                                        Other, 0x103783730, {{20.0, 316.3}, {362.0, 78.7}}
+                                          Other, 0x103783ac0, {{20.0, 316.3}, {362.0, 78.7}}
+                                        Other, 0x103783e10, {{20.0, 316.3}, {362.0, 78.7}}
+                                          Other, 0x103784180, {{20.0, 316.3}, {362.0, 78.7}}
+                                            Other, 0x1037814e0, {{20.0, 316.3}, {362.0, 78.7}}
+                                              Button, 0x10375d540, {{20.0, 316.3}, {362.0, 78.7}}, identifier: 'meteors.QUA', label: 'Good, Quadrantids, Jan 3, 2026, 22:24, ZHR 80 · Moon 99% · ≈ 19/h here'
+                                                StaticText, 0x103767630, {{40.0, 327.3}, {267.0, 56.7}}, label: 'Good, Quadrantids, Jan 3, 2026, 22:24, ZHR 80 · Moon 99% · ≈ 19/h here'
+                                                  StaticText, 0x103757630, {{58.5, 349.0}, {29.0, 13.3}}, label: 'Good'
+                                                  StaticText, 0x103759570, {{118.0, 327.3}, {98.3, 20.3}}, label: 'Quadrantids'
+                                                  StaticText, 0x103765400, {{118.0, 349.7}, {129.3, 18.0}}, label: 'Jan 3, 2026, 22:24'
+                                                  StaticText, 0x1037650a0, {{118.0, 369.7}, {189.0, 14.3}}, label: 'ZHR 80 · Moon 99% · ≈ 19/h here'
+                                                Image, 0x10375f790, {{354.3, 349.3}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Cell, 0x10375fe80, {{20.0, 395.0}, {362.0, 78.7}}
+                                        Other, 0x10375fb00, {{20.0, 395.0}, {362.0, 78.7}}
+                                          Other, 0x10375c7a0, {{20.0, 395.0}, {362.0, 78.7}}
+                                        Other, 0x103767d10, {{20.0, 395.0}, {362.0, 78.7}}
+                                          Other, 0x10376e390, {{20.0, 395.0}, {362.0, 78.7}}
+                                            Other, 0x103768770, {{20.0, 395.0}, {362.0, 78.7}}
+                                              Button, 0x103768b00, {{20.0, 395.0}, {362.0, 78.7}}, identifier: 'meteors.LYR', label: 'Good, Lyrids, Apr 22, 2026, 21:46, ZHR 18 · Moon 37% · ≈ 16/h here'
+                                                StaticText, 0x103768e70, {{40.0, 406.0}, {264.0, 56.7}}, label: 'Good, Lyrids, Apr 22, 2026, 21:46, ZHR 18 · Moon 37% · ≈ 16/h here'
+                                                  StaticText, 0x103753830, {{58.5, 427.7}, {29.0, 13.3}}, label: 'Good'
+                                                  StaticText, 0x103767990, {{118.0, 406.0}, {48.0, 20.3}}, label: 'Lyrids'
+                                                  StaticText, 0x103765780, {{118.0, 428.3}, {136.3, 18.0}}, label: 'Apr 22, 2026, 21:46'
+                                                  StaticText, 0x10376ea90, {{118.0, 448.3}, {186.0, 14.3}}, label: 'ZHR 18 · Moon 37% · ≈ 16/h here'
+                                                Image, 0x10376d950, {{354.3, 428.0}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x10376d5e0, {{58.5, 394.7}, {323.5, 0.3}}
+                                      Cell, 0x10376ff60, {{20.0, 473.7}, {362.0, 78.7}}
+                                        Other, 0x103750090, {{20.0, 473.7}, {362.0, 78.7}}
+                                          Other, 0x10376ee30, {{20.0, 473.7}, {362.0, 78.7}}
+                                        Other, 0x103754fe0, {{20.0, 473.7}, {362.0, 78.7}}
+                                          Other, 0x10376e700, {{20.0, 473.7}, {362.0, 78.7}}
+                                            Other, 0x10376dcf0, {{20.0, 473.7}, {362.0, 78.7}}
+                                              Button, 0x10376d250, {{20.0, 473.7}, {362.0, 78.7}}, identifier: 'meteors.ETA', label: 'Poor, Eta Aquariids, May 6, 2026, 11:22, ZHR 50 · Moon 85% · ≈ 1/h here'
+                                                StaticText, 0x10376fbf0, {{40.0, 484.7}, {258.7, 56.7}}, label: 'Poor, Eta Aquariids, May 6, 2026, 11:22, ZHR 50 · Moon 85% · ≈ 1/h here'
+                                                  StaticText, 0x10376f190, {{60.3, 506.3}, {25.3, 13.3}}, label: 'Poor'
+                                                  StaticText, 0x1037702c0, {{118.0, 484.7}, {105.0, 20.3}}, label: 'Eta Aquariids'
+                                                  StaticText, 0x103759210, {{118.0, 507.0}, {129.0, 18.0}}, label: 'May 6, 2026, 11:22'
+                                                  StaticText, 0x1037587a0, {{118.0, 527.0}, {180.7, 14.3}}, label: 'ZHR 50 · Moon 85% · ≈ 1/h here'
+                                                Image, 0x10375cb00, {{354.3, 506.7}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x103770630, {{58.5, 473.3}, {323.5, 0.3}}
+                                      Cell, 0x1037691e0, {{20.0, 552.3}, {362.0, 78.7}}
+                                        Other, 0x1037709d0, {{20.0, 552.3}, {362.0, 78.7}}
+                                          Other, 0x1037672d0, {{20.0, 552.3}, {362.0, 78.7}}
+                                        Other, 0x103766f70, {{20.0, 552.3}, {362.0, 78.7}}
+                                          Other, 0x10376b3c0, {{20.0, 552.3}, {362.0, 78.7}}
+                                            Other, 0x10376b070, {{20.0, 552.3}, {362.0, 78.7}}
+                                              Button, 0x103769520, {{20.0, 552.3}, {362.0, 78.7}}, identifier: 'meteors.CAP', label: 'Poor, Alpha Capricornids, Jul 30, 2026, 14:29, ZHR 5 · Moon 98% · ≈ 1/h here'
+                                                StaticText, 0x10376a980, {{40.0, 563.3}, {251.3, 56.7}}, label: 'Poor, Alpha Capricornids, Jul 30, 2026, 14:29, ZHR 5 · Moon 98% · ≈ 1/h here'
+                                                  StaticText, 0x10376ace0, {{60.3, 585.0}, {25.3, 13.3}}, label: 'Poor'
+                                                  StaticText, 0x10376a620, {{118.0, 563.3}, {152.0, 20.3}}, label: 'Alpha Capricornids'
+                                                  StaticText, 0x10376a2d0, {{118.0, 585.7}, {132.3, 18.0}}, label: 'Jul 30, 2026, 14:29'
+                                                  StaticText, 0x103769890, {{118.0, 605.7}, {173.3, 14.3}}, label: 'ZHR 5 · Moon 98% · ≈ 1/h here'
+                                                Image, 0x103769f70, {{354.3, 585.3}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x103768090, {{60.3, 552.0}, {321.7, 0.3}}
+                                      Cell, 0x10376c170, {{20.0, 631.0}, {362.0, 78.7}}
+                                        Other, 0x10376be20, {{20.0, 631.0}, {362.0, 78.7}}
+                                          Other, 0x10376bac0, {{20.0, 631.0}, {362.0, 78.7}}
+                                        Other, 0x10376b740, {{20.0, 631.0}, {362.0, 78.7}}
+                                          Other, 0x10376c4f0, {{20.0, 631.0}, {362.0, 78.7}}
+                                            Other, 0x103754920, {{20.0, 631.0}, {362.0, 78.7}}
+                                              Button, 0x103764630, {{20.0, 631.0}, {362.0, 78.7}}, identifier: 'meteors.SDA', label: 'Poor, Southern Delta Aquariids, Jul 30, 2026, 14:29, ZHR 25 · Moon 98% · ≈ 2/h here'
+                                                StaticText, 0x1037534e0, {{40.0, 642.0}, {276.7, 56.7}}, label: 'Poor, Southern Delta Aquariids, Jul 30, 2026, 14:29, ZHR 25 · Moon 98% · ≈ 2/h here'
+                                                  StaticText, 0x1037623b0, {{60.3, 663.7}, {25.3, 13.3}}, label: 'Poor'
+                                                  StaticText, 0x103760fb0, {{118.0, 642.0}, {198.7, 20.3}}, label: 'Southern Delta Aquariids'
+                                                  StaticText, 0x103759fc0, {{118.0, 664.3}, {132.3, 18.0}}, label: 'Jul 30, 2026, 14:29'
+                                                  StaticText, 0x103751fd0, {{118.0, 684.3}, {182.3, 14.3}}, label: 'ZHR 25 · Moon 98% · ≈ 2/h here'
+                                                Image, 0x1037608b0, {{354.3, 664.0}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x10375ed20, {{60.3, 630.7}, {321.7, 0.3}}
+                                      Cell, 0x10375e2c0, {{20.0, 709.7}, {362.0, 78.7}}
+                                        Other, 0x10375d8a0, {{20.0, 709.7}, {362.0, 78.7}}
+                                          Other, 0x103763180, {{20.0, 709.7}, {362.0, 78.7}}
+                                        Other, 0x1037642e0, {{20.0, 709.7}, {362.0, 78.7}}
+                                          Other, 0x10374f260, {{20.0, 709.7}, {362.0, 78.7}}
+                                            Other, 0x103762a70, {{20.0, 709.7}, {362.0, 78.7}}
+                                              Button, 0x103763880, {{20.0, 709.7}, {362.0, 78.7}}, identifier: 'meteors.PER', label: 'Excellent, Perseids, Aug 13, 2026, 04:09, ZHR 100 · Moon 0% · ≈ 84/h here'
+                                                StaticText, 0x103775c60, {{40.0, 720.7}, {266.7, 56.7}}, label: 'Excellent, Perseids, Aug 13, 2026, 04:09, ZHR 100 · Moon 0% · ≈ 84/h here'
+                                                  StaticText, 0x1037740f0, {{48.0, 742.3}, {50.0, 13.3}}, label: 'Excellent'
+                                                  StaticText, 0x103773d90, {{118.0, 720.7}, {68.7, 20.3}}, label: 'Perseids'
+                                                  StaticText, 0x103774460, {{118.0, 743.0}, {140.0, 18.0}}, label: 'Aug 13, 2026, 04:09'
+                                                  StaticText, 0x103759c60, {{118.0, 763.0}, {188.7, 14.3}}, label: 'ZHR 100 · Moon 0% · ≈ 84/h here'
+                                                Image, 0x1037619c0, {{354.3, 742.7}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x10377bf90, {{60.3, 709.3}, {321.7, 0.3}}
+                                      Cell, 0x1037649d0, {{20.0, 788.3}, {362.0, 78.7}}
+                                        Other, 0x103766510, {{20.0, 788.3}, {362.0, 78.7}}
+                                          Other, 0x10377b590, {{20.0, 788.3}, {362.0, 78.7}}
+                                        Other, 0x1037747b0, {{20.0, 788.3}, {362.0, 78.7}}
+                                          Other, 0x103774e80, {{20.0, 788.3}, {362.0, 78.7}}
+                                            Other, 0x103774b20, {{20.0, 788.3}, {362.0, 78.7}}
+                                              Button, 0x103777120, {{20.0, 788.3}, {362.0, 78.7}}, identifier: 'meteors.DRA', label: 'Fair, Draconids, Oct 9, 2026, 03:22, ZHR 10 · Moon 3% · ≈ 9/h here'
+                                                StaticText, 0x103778590, {{40.0, 799.3}, {251.3, 56.7}}, label: 'Fair, Draconids, Oct 9, 2026, 03:22, ZHR 10 · Moon 3% · ≈ 9/h here'
+                                                  StaticText, 0x1037751f0, {{62.8, 821.0}, {20.3, 13.3}}, label: 'Fair'
+                                                  StaticText, 0x103778210, {{118.0, 799.3}, {81.0, 20.3}}, label: 'Draconids'
+                                                  StaticText, 0x1037777f0, {{118.0, 821.7}, {130.0, 18.0}}, label: 'Oct 9, 2026, 03:22'
+                                                  StaticText, 0x103775fe0, {{118.0, 841.7}, {173.3, 14.3}}, label: 'ZHR 10 · Moon 3% · ≈ 9/h here'
+                                                Image, 0x103773a10, {{354.3, 821.3}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x1037788f0, {{48.0, 788.0}, {334.0, 0.3}}
+                                      Cell, 0x103779020, {{20.0, 867.0}, {362.0, 78.7}}
+                                        Other, 0x103779a50, {{20.0, 867.0}, {362.0, 78.7}}
+                                          Other, 0x103779dd0, {{20.0, 867.0}, {362.0, 78.7}}
+                                        Other, 0x103777480, {{20.0, 867.0}, {362.0, 78.7}}
+                                          Other, 0x10377c2d0, {{20.0, 867.0}, {362.0, 78.7}}
+                                            Other, 0x1037572c0, {{20.0, 867.0}, {362.0, 78.7}}
+                                              Button, 0x103764d50, {{20.0, 867.0}, {362.0, 78.7}}, identifier: 'meteors.STA', label: 'Poor, Southern Taurids, Oct 10, 2026, 18:13, ZHR 5 · Moon 0% · ≈ 4/h here'
+                                                StaticText, 0x103784ef0, {{40.0, 878.0}, {246.0, 56.7}}, label: 'Poor, Southern Taurids, Oct 10, 2026, 18:13, ZHR 5 · Moon 0% · ≈ 4/h here'
+                                                  StaticText, 0x103784ba0, {{60.3, 899.7}, {25.3, 13.3}}, label: 'Poor'
+                                                  StaticText, 0x103785930, {{118.0, 878.0}, {136.0, 20.3}}, label: 'Southern Taurids'
+                                                  StaticText, 0x103785cb0, {{118.0, 900.3}, {132.7, 18.0}}, label: 'Oct 10, 2026, 18:13'
+                                                  StaticText, 0x103785260, {{118.0, 920.3}, {168.0, 14.3}}, label: 'ZHR 5 · Moon 0% · ≈ 4/h here'
+                                                Image, 0x103786010, {{354.3, 900.0}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x103786db0, {{62.8, 866.7}, {319.2, 0.3}}
+                                      Other, 0x103787480, {{369.0, 100.3}, {30.0, 690.7}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                                        Other, 0x103787130, {{396.0, 781.0}, {3.0, 7.0}}
+                                      Other, 0x103787b20, {{369.0, 100.3}, {30.0, 690.7}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                                        Other, 0x1037877d0, {{396.0, 781.0}, {3.0, 7.0}}
+                TabBar, 0x103788bd0, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Tab Bar'
+                  Button, 0x103788870, {{2.0, 792.0}, {97.0, 48.0}}, identifier: 'map', label: 'Planner'
+                  Button, 0x103788f50, {{103.0, 792.0}, {96.0, 48.0}}, identifier: 'square.grid.2x2', label: 'Tools', Selected
+                    Image, 0x1037881e0, {{137.0, 797.0}, {27.0, 25.0}}, identifier: 'square.grid.2x2.fill', label: 'grid 2x2'
+                  Button, 0x103788520, {{203.0, 792.0}, {97.0, 48.0}}, identifier: 'folder', label: 'My Stuff'
+                  Button, 0x103787e90, {{304.0, 792.0}, {96.0, 48.0}}, identifier: 'gearshape', label: 'Settings'
+Path to element:
+ →Application, 0x1048bc630, pid: 16043, label: 'Lumora'
+Query chain:
+ →Find: Target Application 'com.pjeziorowski.lumora'
+  Output: {
+    Application, 0x1036e8210, pid: 16043, label: 'Lumora'
+  }
+
+
+== My Stuff ==
+Attributes: Application, 0x1036e8210, pid: 16043, label: 'Lumora'
+Element subtree:
+ →Application, 0x1036e8210, pid: 16043, label: 'Lumora'
+    Window (Main), 0x1036f1a70, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x1036e7eb0, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x1036f7050, {{0.0, 0.0}, {402.0, 874.0}}
+          Other, 0x1036d5340, {{0.0, 0.0}, {402.0, 874.0}}
+            Other, 0x103787e90, {{0.0, 0.0}, {402.0, 874.0}}
+              Other, 0x103788f50, {{0.0, 0.0}, {402.0, 874.0}}
+                Other, 0x1037881e0, {{0.0, 0.0}, {402.0, 874.0}}
+                  Other, 0x103788870, {{0.0, 0.0}, {402.0, 874.0}}
+                    Other, 0x103781f10, {{0.0, 0.0}, {402.0, 874.0}}
+                      Other, 0x1037825e0, {{0.0, 0.0}, {402.0, 874.0}}
+                        Other, 0x103781190, {{0.0, 0.0}, {402.0, 874.0}}
+                          Other, 0x10377eb80, {{0.0, 0.0}, {402.0, 874.0}}
+                            NavigationBar, 0x103780e10, {{0.0, 56.3}, {402.0, 96.0}}, identifier: 'My Stuff'
+                              Button, 0x103787b20, {{296.3, 56.3}, {46.3, 44.0}}, identifier: 'plans.import', label: 'Import'
+                              Button, 0x1037877d0, {{350.7, 56.3}, {43.3, 44.0}}, identifier: 'plans.export', label: 'Export all'
+                              StaticText, 0x103787480, {{16.0, 104.0}, {135.0, 40.7}}, label: 'My Stuff'
+                            Other, 0x103787130, {{0.0, 0.0}, {402.0, 874.0}}
+                              Other, 0x103786db0, {{0.0, 0.0}, {402.0, 874.0}}
+                                Other, 0x103779020, {{0.0, 0.0}, {402.0, 874.0}}
+                                  Other, 0x103777480, {{0.0, 0.0}, {402.0, 874.0}}
+                                    SegmentedControl, 0x10377c2d0, {{16.0, 160.3}, {370.0, 31.0}}, identifier: 'mystuff.section'
+                                      Button, 0x1037572c0, {{16.0, 160.3}, {122.0, 32.0}}, label: 'Plans', Selected
+                                      Button, 0x103764d50, {{139.0, 160.3}, {123.0, 32.0}}, label: 'Places'
+                                      Button, 0x103786010, {{263.0, 160.3}, {123.0, 32.0}}, label: 'Cameras'
+                                    CollectionView, 0x103784ef0, {{0.0, 199.3}, {402.0, 674.7}}
+                                      Other, 0x103785260, {{-20.0, -1150.0}, {442.0, 3011.7}}
+                                      Cell, 0x103785cb0, {{20.0, 234.3}, {362.0, 86.0}}
+                                        Other, 0x103785930, {{20.0, 234.3}, {362.0, 86.0}}
+                                          Other, 0x103784ba0, {{20.0, 234.3}, {362.0, 86.0}}
+                                        Other, 0x103779a50, {{20.0, 234.3}, {362.0, 86.0}}
+                                          Other, 0x103779dd0, {{20.0, 234.3}, {362.0, 86.0}}
+                                            Other, 0x1037788f0, {{20.0, 234.3}, {362.0, 86.0}}
+                                              Button, 0x1037649d0, {{20.0, 234.3}, {362.0, 86.0}}, identifier: 'plan.row', label: 'Manhattanhenge, May 29, 2026 · 20:12, New York, Reminder, Target pin'
+                                                Image, 0x1037747b0, {{40.0, 245.3}, {64.0, 64.0}}
+                                                StaticText, 0x103774e80, {{116.0, 247.3}, {135.0, 20.3}}, label: 'Manhattanhenge'
+                                                StaticText, 0x103774b20, {{116.0, 270.7}, {144.7, 18.0}}, label: 'May 29, 2026 · 20:12'
+                                                StaticText, 0x103777120, {{116.0, 292.3}, {53.7, 14.3}}, label: 'New York'
+                                                Image, 0x103773a10, {{177.0, 293.3}, {11.3, 12.7}}, identifier: 'bell.fill', label: 'Reminder'
+                                                Image, 0x103778590, {{196.7, 292.3}, {14.3, 14.3}}, identifier: 'scope', label: 'Target pin'
+                                      Cell, 0x103775fe0, {{20.0, 320.3}, {362.0, 86.0}}
+                                        Other, 0x1037777f0, {{20.0, 320.3}, {362.0, 86.0}}
+                                          Other, 0x103778210, {{20.0, 320.3}, {362.0, 86.0}}
+                                        Other, 0x1037751f0, {{20.0, 320.3}, {362.0, 86.0}}
+                                          Other, 0x103766510, {{20.0, 320.3}, {362.0, 86.0}}
+                                            Other, 0x10377b590, {{20.0, 320.3}, {362.0, 86.0}}
+                                              Button, 0x10377bf90, {{20.0, 320.3}, {362.0, 86.0}}, identifier: 'plan.row', label: 'Sunset over the Vistula, Jun 21, 2026 · 20:45, Warsaw, Reminder'
+                                                Image, 0x10375e2c0, {{40.0, 331.3}, {64.0, 64.0}}
+                                                StaticText, 0x1037642e0, {{116.0, 334.0}, {183.0, 20.3}}, label: 'Sunset over the Vistula'
+                                                StaticText, 0x10374f260, {{116.0, 357.3}, {141.3, 18.0}}, label: 'Jun 21, 2026 · 20:45'
+                                                StaticText, 0x103762a70, {{116.0, 378.3}, {44.3, 14.3}}, label: 'Warsaw'
+                                                Image, 0x103763880, {{167.7, 379.3}, {11.3, 12.7}}, identifier: 'bell.fill', label: 'Reminder'
+                                      Other, 0x1037619c0, {{116.0, 320.0}, {266.0, 0.3}}
+                                      Cell, 0x103775c60, {{20.0, 406.3}, {362.0, 86.0}}
+                                        Other, 0x103759c60, {{20.0, 406.3}, {362.0, 86.0}}
+                                          Other, 0x103774460, {{20.0, 406.3}, {362.0, 86.0}}
+                                        Other, 0x103773d90, {{20.0, 406.3}, {362.0, 86.0}}
+                                          Other, 0x1037740f0, {{20.0, 406.3}, {362.0, 86.0}}
+                                            Other, 0x10375d8a0, {{20.0, 406.3}, {362.0, 86.0}}
+                                              Button, 0x103763180, {{20.0, 406.3}, {362.0, 86.0}}, identifier: 'plan.row', label: 'Milky Way from Cape Town, Jul 14, 2026 · 23:30, Cape Town'
+                                                Image, 0x10375ed20, {{40.0, 417.3}, {64.0, 64.0}}
+                                                StaticText, 0x10376c170, {{116.0, 420.0}, {213.7, 20.3}}, label: 'Milky Way from Cape Town'
+                                                StaticText, 0x10376b740, {{116.0, 443.3}, {136.7, 18.0}}, label: 'Jul 14, 2026 · 23:30'
+                                                StaticText, 0x10376c4f0, {{116.0, 464.3}, {62.7, 14.3}}, label: 'Cape Town'
+                                      Other, 0x103754920, {{116.0, 406.0}, {266.0, 0.3}}
+                                      Other, 0x103764630, {{369.0, 227.3}, {30.0, 563.7}}, label: 'Vertical scroll bar, 1 page', value: 0%
+                                        Other, 0x1037608b0, {{396.0, 509.0}, {3.0, 279.0}}
+                                      Other, 0x1037534e0, {{369.0, 227.3}, {30.0, 563.7}}, label: 'Vertical scroll bar, 1 page', value: 0%
+                                        Other, 0x103751fd0, {{396.0, 509.0}, {3.0, 279.0}}
+                TabBar, 0x103759fc0, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Tab Bar'
+                  Button, 0x103760fb0, {{2.0, 792.0}, {97.0, 48.0}}, identifier: 'map', label: 'Planner'
+                  Button, 0x1037623b0, {{103.0, 792.0}, {96.0, 48.0}}, identifier: 'square.grid.2x2', label: 'Tools'
+                  Button, 0x10376be20, {{203.0, 792.0}, {97.0, 48.0}}, identifier: 'folder', label: 'My Stuff', Selected
+                    Image, 0x10376bac0, {{235.3, 797.0}, {32.0, 25.0}}, identifier: 'folder.fill', label: 'move'
+                  Button, 0x103768090, {{304.0, 792.0}, {96.0, 48.0}}, identifier: 'gearshape', label: 'Settings'
+Path to element:
+ →Application, 0x1036e8210, pid: 16043, label: 'Lumora'
+Query chain:
+ →Find: Target Application 'com.pjeziorowski.lumora'
+  Output: {
+    Application, 0x1036d5640, pid: 16043, label: 'Lumora'
+  }
+
+
+== Settings ==
+Attributes: Application, 0x112b089c0, pid: 16043, label: 'Lumora'
+Element subtree:
+ →Application, 0x112b089c0, pid: 16043, label: 'Lumora'
+    Window (Main), 0x1048f6f70, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x1048e27c0, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x104884f00, {{0.0, 0.0}, {402.0, 874.0}}
+          Other, 0x1048d4be0, {{0.0, 0.0}, {402.0, 874.0}}
+            Other, 0x1048d5000, {{0.0, 0.0}, {402.0, 874.0}}
+              Other, 0x1048a03d0, {{0.0, 0.0}, {402.0, 874.0}}
+                Other, 0x1048edd60, {{0.0, 0.0}, {402.0, 874.0}}
+                  Other, 0x10489ffb0, {{0.0, 0.0}, {402.0, 874.0}}
+                    Other, 0x1048e3000, {{0.0, 0.0}, {402.0, 874.0}}
+                      Other, 0x1048d6080, {{0.0, 0.0}, {402.0, 874.0}}
+                        Other, 0x1048ed0e0, {{0.0, 0.0}, {402.0, 874.0}}
+                          Other, 0x1048d26c0, {{0.0, 0.0}, {402.0, 874.0}}
+                            NavigationBar, 0x1048ed500, {{0.0, 56.3}, {402.0, 96.0}}, identifier: 'Settings'
+                              StaticText, 0x112b0e540, {{16.0, 104.0}, {133.0, 40.7}}, label: 'Settings'
+                            Other, 0x112b0df00, {{0.0, 0.0}, {402.0, 874.0}}
+                              Other, 0x112b0dae0, {{0.0, 0.0}, {402.0, 874.0}}
+                                Other, 0x112b0d6c0, {{0.0, 0.0}, {402.0, 874.0}}
+                                  Other, 0x112b0d2a0, {{0.0, 0.0}, {402.0, 874.0}}
+                                    CollectionView, 0x112b0ce80, {{0.0, 0.0}, {402.0, 874.0}}
+                                      Other, 0x112b0ca60, {{-20.0, -1616.7}, {442.0, 1892.3}}
+                                      Cell, 0x112b0c420, {{20.0, 131.3}, {362.0, 38.7}}
+                                        Other, 0x112b0c000, {{20.0, 131.3}, {362.0, 38.7}}
+                                        Other, 0x112b07580, {{20.0, 131.3}, {362.0, 38.7}}
+                                          Other, 0x112b05e60, {{20.0, 131.3}, {362.0, 38.7}}
+                                            Other, 0x112b068e0, {{20.0, 131.3}, {362.0, 38.7}}
+                                              StaticText, 0x112b0eb80, {{20.0, 131.3}, {362.0, 38.7}}, label: 'UNITS'
+                                      Cell, 0x112b0eca0, {{20.0, 170.0}, {362.0, 44.0}}
+                                        Other, 0x112b0edc0, {{20.0, 170.0}, {362.0, 44.0}}
+                                          Other, 0x112b0eee0, {{20.0, 170.0}, {362.0, 44.0}}
+                                        Other, 0x112b0f000, {{20.0, 170.0}, {362.0, 44.0}}
+                                          Other, 0x112b0f120, {{20.0, 170.0}, {362.0, 44.0}}
+                                            Other, 0x112b0f240, {{20.0, 170.0}, {362.0, 44.0}}
+                                              Button, 0x112b0f360, {{20.0, 170.0}, {362.0, 44.0}}, label: 'Metric', Selected
+                                      Cell, 0x112b0f480, {{20.0, 214.0}, {362.0, 44.0}}
+                                        Other, 0x112b0f5a0, {{20.0, 214.0}, {362.0, 44.0}}
+                                          Other, 0x112b0f6c0, {{20.0, 214.0}, {362.0, 44.0}}
+                                        Other, 0x112b0f7e0, {{20.0, 214.0}, {362.0, 44.0}}
+                                          Other, 0x112b0f900, {{20.0, 214.0}, {362.0, 44.0}}
+                                            Other, 0x112b0fa20, {{20.0, 214.0}, {362.0, 44.0}}
+                                              Button, 0x112b0fb40, {{20.0, 214.0}, {362.0, 44.0}}, label: 'Imperial'
+                                      Other, 0x112b0fc60, {{40.0, 213.7}, {342.0, 0.3}}
+                                      Other, 0x112b0fd80, {{-20.0, 275.7}, {442.0, 144.3}}
+                                      Cell, 0x112b0fea0, {{20.0, 275.7}, {362.0, 38.7}}
+                                        Other, 0x112b0ffc0, {{20.0, 275.7}, {362.0, 38.7}}
+                                        Other, 0x112b100e0, {{20.0, 275.7}, {362.0, 38.7}}
+                                          Other, 0x112b10200, {{20.0, 275.7}, {362.0, 38.7}}
+                                            Other, 0x112b10320, {{20.0, 275.7}, {362.0, 38.7}}
+                                              StaticText, 0x112b10440, {{20.0, 275.7}, {362.0, 38.7}}, label: 'CLOCK'
+                                      Cell, 0x112b10560, {{20.0, 314.3}, {362.0, 44.0}}
+                                        Other, 0x112b10680, {{20.0, 314.3}, {362.0, 44.0}}
+                                          Other, 0x112b107a0, {{20.0, 314.3}, {362.0, 44.0}}
+                                        Other, 0x112b108c0, {{20.0, 314.3}, {362.0, 44.0}}
+                                          Other, 0x112b109e0, {{20.0, 314.3}, {362.0, 44.0}}
+                                            Other, 0x112b10b00, {{20.0, 314.3}, {362.0, 44.0}}
+                                              Button, 0x112b10c20, {{20.0, 314.3}, {362.0, 44.0}}, label: '24-hour', Selected
+                                      Cell, 0x112b10d40, {{20.0, 358.3}, {362.0, 44.0}}
+                                        Other, 0x112b10e60, {{20.0, 358.3}, {362.0, 44.0}}
+                                          Other, 0x112b10f80, {{20.0, 358.3}, {362.0, 44.0}}
+                                        Other, 0x112b110a0, {{20.0, 358.3}, {362.0, 44.0}}
+                                          Other, 0x112b111c0, {{20.0, 358.3}, {362.0, 44.0}}
+                                            Other, 0x112b112e0, {{20.0, 358.3}, {362.0, 44.0}}
+                                              Button, 0x112b11400, {{20.0, 358.3}, {362.0, 44.0}}, label: '12-hour'
+                                      Other, 0x112b11520, {{40.0, 358.0}, {342.0, 0.3}}
+                                      Other, 0x112b11640, {{-20.0, 420.0}, {442.0, 144.3}}
+                                      Cell, 0x112b11760, {{20.0, 420.0}, {362.0, 38.7}}
+                                        Other, 0x112b11880, {{20.0, 420.0}, {362.0, 38.7}}
+                                        Other, 0x112b119a0, {{20.0, 420.0}, {362.0, 38.7}}
+                                          Other, 0x112b11ac0, {{20.0, 420.0}, {362.0, 38.7}}
+                                            Other, 0x112b11be0, {{20.0, 420.0}, {362.0, 38.7}}
+                                              StaticText, 0x112b11d00, {{20.0, 420.0}, {362.0, 38.7}}, label: 'COORDINATES'
+                                      Cell, 0x112b11e20, {{20.0, 458.7}, {362.0, 44.0}}
+                                        Other, 0x112b11f40, {{20.0, 458.7}, {362.0, 44.0}}
+                                          Other, 0x112b12060, {{20.0, 458.7}, {362.0, 44.0}}
+                                        Other, 0x112b12180, {{20.0, 458.7}, {362.0, 44.0}}
+                                          Other, 0x112b122a0, {{20.0, 458.7}, {362.0, 44.0}}
+                                            Other, 0x112b123c0, {{20.0, 458.7}, {362.0, 44.0}}
+                                              Button, 0x112b124e0, {{20.0, 458.7}, {362.0, 44.0}}, label: 'Decimal degrees', Selected
+                                      Cell, 0x112b12600, {{20.0, 502.7}, {362.0, 44.0}}
+                                        Other, 0x112b12720, {{20.0, 502.7}, {362.0, 44.0}}
+                                          Other, 0x112b12840, {{20.0, 502.7}, {362.0, 44.0}}
+                                        Other, 0x112b12960, {{20.0, 502.7}, {362.0, 44.0}}
+                                          Other, 0x112b12a80, {{20.0, 502.7}, {362.0, 44.0}}
+                                            Other, 0x112b12ba0, {{20.0, 502.7}, {362.0, 44.0}}
+                                              Button, 0x112b12cc0, {{20.0, 502.7}, {362.0, 44.0}}, label: 'Degrees, minutes, seconds'
+                                      Other, 0x112b12de0, {{40.0, 502.3}, {342.0, 0.3}}
+                                      Other, 0x112b12f00, {{-20.0, 564.3}, {442.0, 120.7}}
+                                      Cell, 0x112b13020, {{20.0, 564.3}, {362.0, 38.7}}
+                                        Other, 0x112b13140, {{20.0, 564.3}, {362.0, 38.7}}
+                                        Other, 0x112b13260, {{20.0, 564.3}, {362.0, 38.7}}
+                                          Other, 0x112b13380, {{20.0, 564.3}, {362.0, 38.7}}
+                                            Other, 0x112b134a0, {{20.0, 564.3}, {362.0, 38.7}}
+                                              StaticText, 0x112b135c0, {{20.0, 564.3}, {362.0, 38.7}}, label: 'CAMERA'
+                                      Cell, 0x112b136e0, {{20.0, 603.0}, {362.0, 64.3}}
+                                        Other, 0x112b13800, {{20.0, 603.0}, {362.0, 64.3}}
+                                          Other, 0x112b13920, {{20.0, 603.0}, {362.0, 64.3}}
+                                        Other, 0x112b13a40, {{20.0, 603.0}, {362.0, 64.3}}
+                                          Other, 0x112b13b60, {{20.0, 603.0}, {362.0, 64.3}}
+                                            Other, 0x112b13c80, {{20.0, 603.0}, {362.0, 64.3}}
+                                              Button, 0x112b13da0, {{20.0, 603.0}, {362.0, 64.3}}, identifier: 'settings.camera', label: 'Default camera, Generic Full frame 24 MP'
+                                                StaticText, 0x112b13ec0, {{40.0, 614.0}, {303.7, 42.3}}, label: 'Default camera, Generic Full frame 24 MP'
+                                                  StaticText, 0x112b13fe0, {{40.0, 625.0}, {116.0, 20.3}}, label: 'Default camera'
+                                                  StaticText, 0x112b14100, {{200.3, 614.0}, {143.3, 42.3}}, label: 'Generic Full frame 24 MP'
+                                                Image, 0x112b14220, {{354.3, 629.0}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x112b14340, {{-20.0, 685.0}, {442.0, 100.3}}
+                                      Cell, 0x112b14460, {{20.0, 685.0}, {362.0, 38.7}}
+                                        Other, 0x112b14580, {{20.0, 685.0}, {362.0, 38.7}}
+                                        Other, 0x112b146a0, {{20.0, 685.0}, {362.0, 38.7}}
+                                          Other, 0x112b147c0, {{20.0, 685.0}, {362.0, 38.7}}
+                                            Other, 0x112b148e0, {{20.0, 685.0}, {362.0, 38.7}}
+                                              StaticText, 0x112b14a00, {{20.0, 685.0}, {362.0, 38.7}}, label: 'WIDGETS'
+                                      Cell, 0x112b14b20, {{20.0, 723.7}, {362.0, 44.0}}
+                                        Other, 0x112b14c40, {{20.0, 723.7}, {362.0, 44.0}}
+                                          Other, 0x112b14d60, {{20.0, 723.7}, {362.0, 44.0}}
+                                        Other, 0x112b14e80, {{20.0, 723.7}, {362.0, 44.0}}
+                                          Other, 0x112b14fa0, {{20.0, 723.7}, {362.0, 44.0}}
+                                            Other, 0x112b150c0, {{20.0, 723.7}, {362.0, 44.0}}
+                                              Button, 0x112b151e0, {{20.0, 723.7}, {362.0, 44.0}}, identifier: 'settings.widgets', label: 'Widgets'
+                                                Image, 0x112b15300, {{44.3, 735.7}, {19.7, 19.7}}, identifier: 'square.grid.2x2', label: 'Grid View'
+                                                StaticText, 0x112b15420, {{44.3, 735.5}, {103.0, 20.3}}, label: 'Widgets'
+                                                Image, 0x112b15540, {{354.3, 739.7}, {7.0, 12.0}}, identifier: 'chevron.forward'
+                                      Other, 0x112b15660, {{-20.0, 785.3}, {442.0, 1894.7}}
+                                      Cell, 0x112b15780, {{20.0, 785.3}, {362.0, 38.7}}
+                                        Other, 0x112b158a0, {{20.0, 785.3}, {362.0, 38.7}}
+                                        Other, 0x112b159c0, {{20.0, 785.3}, {362.0, 38.7}}
+                                          Other, 0x112b15ae0, {{20.0, 785.3}, {362.0, 38.7}}
+                                            Other, 0x112b15c00, {{20.0, 785.3}, {362.0, 38.7}}
+                                              StaticText, 0x112b15d20, {{20.0, 785.3}, {362.0, 38.7}}, label: 'ABOUT'
+                                      Cell, 0x112b15e40, {{20.0, 824.0}, {362.0, 44.0}}
+                                        Other, 0x112b15f60, {{20.0, 824.0}, {362.0, 44.0}}
+                                          Other, 0x112b16080, {{20.0, 824.0}, {362.0, 44.0}}
+                                        Other, 0x112b161a0, {{20.0, 824.0}, {362.0, 44.0}}
+                                          Other, 0x112b162c0, {{20.0, 824.0}, {362.0, 44.0}}
+                                            Other, 0x112b163e0, {{20.0, 824.0}, {362.0, 44.0}}
+                                              StaticText, 0x112b16500, {{20.0, 824.0}, {362.0, 44.0}}, label: 'Version, 0.1.0'
+                                                StaticText, 0x112b16620, {{40.0, 835.8}, {57.0, 20.3}}, label: 'Version'
+                                                StaticText, 0x112b16740, {{321.7, 835.8}, {40.3, 20.3}}, label: '0.1.0'
+                                      Cell, 0x112b16860, {{20.0, 868.0}, {362.0, 44.0}}
+                                        Other, 0x112b16980, {{20.0, 868.0}, {362.0, 44.0}}
+                                          Other, 0x112b16aa0, {{20.0, 868.0}, {362.0, 44.0}}
+                                        Other, 0x112b16bc0, {{20.0, 868.0}, {362.0, 44.0}}
+                                          Other, 0x112b16ce0, {{20.0, 868.0}, {362.0, 44.0}}
+                                            Other, 0x112b16e00, {{20.0, 868.0}, {362.0, 44.0}}
+                                              StaticText, 0x112b16f20, {{20.0, 868.0}, {362.0, 44.0}}, label: 'Astronomy calculations are ported from Astronomy Engine by Don Cross (MIT licence).'
+                                      Other, 0x112b17040, {{40.0, 867.7}, {342.0, 0.3}}
+                                      Other, 0x112b17160, {{369.0, 106.0}, {30.0, 685.0}}, label: 'Vertical scroll bar, 2 pages', value: 13%
+                                        Other, 0x112b17280, {{396.0, 126.3}, {3.0, 661.7}}
+                                      Other, 0x112b174f0, {{369.0, 106.0}, {30.0, 685.0}}, label: 'Vertical scroll bar, 2 pages', value: 13%
+                                        Other, 0x112b17610, {{396.0, 126.3}, {3.0, 661.7}}
+                TabBar, 0x112b17930, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Tab Bar'
+                  Button, 0x112b17a50, {{2.0, 792.0}, {97.0, 48.0}}, identifier: 'map', label: 'Planner'
+                  Button, 0x112b17b70, {{103.0, 792.0}, {96.0, 48.0}}, identifier: 'square.grid.2x2', label: 'Tools'
+                  Button, 0x112b17c90, {{203.0, 792.0}, {97.0, 48.0}}, identifier: 'folder', label: 'My Stuff'
+                  Button, 0x112b17db0, {{304.0, 792.0}, {96.0, 48.0}}, identifier: 'gearshape', label: 'Settings', Selected
+                    Image, 0x112b17ed0, {{338.0, 795.7}, {28.0, 28.0}}, identifier: 'gearshape.fill', label: 'gearshape.fill'
+Path to element:
+ →Application, 0x112b089c0, pid: 16043, label: 'Lumora'
+Query chain:
+ →Find: Target Application 'com.pjeziorowski.lumora'
+  Output: {
+    Application, 0x112b0c120, pid: 16043, label: 'Lumora'
+  }
