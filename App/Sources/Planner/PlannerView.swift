@@ -24,12 +24,14 @@ struct PlannerView: View {
     @State private var showingFind = false
     @State private var showingSave = false
     @State private var showingAR = false
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     var body: some View {
         @Bindable var state = state
         VStack(spacing: 0) {
             PlannerPanelsView(state: state, options: options)
-                .frame(height: 236)
+                // Stacked rows at accessibility sizes need the extra height to show more than one.
+                .frame(height: typeSize.isAccessibilitySize ? 300 : 236)
                 .background(.bar)
             PlannerMapView(
                 pin: state.session.location,
@@ -185,7 +187,7 @@ struct PlannerView: View {
             }
             if state.useDeviceTimeZone {
                 Label("Device time", systemImage: "iphone")
-                    .labelStyle(BadgeLabelStyle(tint: .secondary))
+                    .labelStyle(BadgeLabelStyle(tint: .subdued))
             }
             if state.mapOptics.isVisible {
                 Label(opticsSummary, systemImage: "camera.viewfinder")
@@ -193,7 +195,7 @@ struct PlannerView: View {
             }
             if state.resolvingPin {
                 Label("Finding time zone…", systemImage: "globe")
-                    .labelStyle(BadgeLabelStyle(tint: .secondary))
+                    .labelStyle(BadgeLabelStyle(tint: .subdued))
             }
         }
         .font(.caption.weight(.medium))

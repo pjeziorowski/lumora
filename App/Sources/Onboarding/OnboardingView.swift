@@ -100,11 +100,11 @@ struct OnboardingView: View {
                 .buttonStyle(.bordered)
                 .disabled(locating)
                 if let locationMessage {
-                    Text(locationMessage).font(.footnote).foregroundStyle(.secondary)
+                    Text(locationMessage).font(.footnote).foregroundStyle(.subdued)
                 }
                 Text("Your location stays on this iPhone. Lumora has no account and sends nothing about you anywhere.")
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
             }
         }
     }
@@ -127,7 +127,7 @@ struct OnboardingView: View {
                 .accessibilityIdentifier("onboarding.clock")
                 Text("Times are always shown in the planned place's own time zone.")
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
             }
         }
     }
@@ -175,7 +175,7 @@ private struct OnboardingPage<Content: View>: View {
                     .accessibilityAddTraits(.isHeader)
                 Text(message)
                     .font(.body)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
                     .multilineTextAlignment(.center)
                 VStack(alignment: .leading, spacing: 16) { content }
                     .padding(.top, 8)
@@ -200,7 +200,7 @@ private struct FeatureRow: View {
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 2) {
                 Text(title).font(.headline)
-                Text(text).font(.subheadline).foregroundStyle(.secondary)
+                Text(text).font(.subheadline).foregroundStyle(.subdued)
             }
         }
         .accessibilityElement(children: .combine)

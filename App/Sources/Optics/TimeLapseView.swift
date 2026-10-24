@@ -55,17 +55,19 @@ struct TimeLapseView: View {
                 ResultRow(label: "Storage", value: storage(TimeLapse.memoryMB(photos: solved.photos, fileSizeMB: fileSizeMB)))
                 ResultRow(label: "Batteries", value: "\(TimeLapse.batteries(photos: solved.photos, shotsPerCharge: Int(shotsPerCharge)))")
                 ForEach(warnings, id: \.self) { warning in
-                    Label(text(warning), systemImage: "exclamationmark.triangle").foregroundStyle(.orange)
+                    Label(text(warning), systemImage: "exclamationmark.triangle").foregroundStyle(.caution)
                 }
             } header: {
-                Text("Result")
+                SectionLabel {
+                    Text("Result")
+                }
             }
-            Section("Camera") {
+            TitledSection("Camera") {
                 NumberRow(label: "Shutter", value: $shutter, unit: "s", step: 0.5, range: 0.0001...600, decimals: 2)
                 NumberRow(label: "File size", value: $fileSizeMB, unit: "MB", step: 5, range: 1...500)
                 NumberRow(label: "Shots per battery", value: $shotsPerCharge, step: 50, range: 50...5000)
             }
-            Section("Presets") {
+            TitledSection("Presets") {
                 ForEach(TimeLapse.presets) { preset in
                     Button {
                         plan.interval = preset.interval
@@ -76,7 +78,7 @@ struct TimeLapseView: View {
                         } label: {
                             VStack(alignment: .leading) {
                                 Text(preset.name)
-                                Text(preset.note).font(.caption).foregroundStyle(.secondary)
+                                Text(preset.note).font(.caption).foregroundStyle(.subdued)
                             }
                         }
                     }

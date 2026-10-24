@@ -43,10 +43,14 @@ struct PlannerTargetSheet: View {
                     }
                     NumberRow(label: "Eye height", value: $state.eyeHeight, unit: "m", step: 0.1, range: 0...500, decimals: 1)
                 } header: {
-                    Text("Target pin")
+                    SectionLabel {
+                        Text("Target pin")
+                    }
                 } footer: {
-                    Text("Drag the black pin onto a ridge, building or landmark. Panels 6 and 7 show the distance, the angle "
-                         + "to its top with curvature and refraction, and whether the Sun or Moon clears it.")
+                    SectionLabel {
+                        Text("Drag the black pin onto a ridge, building or landmark. Panels 6 and 7 show the distance, the angle "
+                             + "to its top with curvature and refraction, and whether the Sun or Moon clears it.")
+                    }
                 }
                 Section {
                     Toggle("Field of view", isOn: $state.mapOptics.showFieldOfView)
@@ -71,10 +75,14 @@ struct PlannerTargetSheet: View {
                         NumberRow(label: "Bearing", value: $state.mapOptics.bearing, unit: "°", step: 1, range: 0...359)
                     }
                 } header: {
-                    Text("On the map")
+                    SectionLabel {
+                        Text("On the map")
+                    }
                 } footer: {
-                    Text("The wedge is the horizontal angle of view along the target's bearing; arcs mark the near limit, "
-                         + "the focus distance and the far limit of acceptable sharpness.")
+                    SectionLabel {
+                        Text("The wedge is the horizontal angle of view along the target's bearing; arcs mark the near limit, "
+                             + "the focus distance and the far limit of acceptable sharpness.")
+                    }
                 }
             }
             .navigationTitle("Target and optics")
@@ -143,11 +151,15 @@ struct FindView: View {
                             }
                         }
                     } header: {
-                        Text("Position")
+                        SectionLabel {
+                            Text("Position")
+                        }
                     } footer: {
-                        Text("Elevation is the apparent (refracted) height above the horizon; 0.5° puts the Sun's disc just on it.")
+                        SectionLabel {
+                            Text("Elevation is the apparent (refracted) height above the horizon; 0.5° puts the Sun's disc just on it.")
+                        }
                     }
-                    Section("Dates") {
+                    TitledSection("Dates") {
                         DatePicker("From", selection: $start, displayedComponents: .date)
                             .environment(\.timeZone, state.session.timeZone)
                         NumberRow(label: "Days", value: $days, step: 30, range: 1...730)
@@ -167,7 +179,7 @@ struct FindView: View {
                     if let results {
                         Section {
                             if results.isEmpty {
-                                Text("No moments match. Widen a tolerance or the date range.").foregroundStyle(.secondary)
+                                Text("No moments match. Widen a tolerance or the date range.").foregroundStyle(.subdued)
                             }
                             ForEach(results) { match in
                                 Button {
@@ -179,7 +191,9 @@ struct FindView: View {
                                 .accessibilityIdentifier("find.result")
                             }
                         } header: {
-                            Text("\(results.count) matches")
+                            SectionLabel {
+                                Text("\(results.count) matches")
+                            }
                         }
                         .id(Self.resultsID)
                     }
@@ -240,11 +254,11 @@ private struct MatchRow: View {
                 Text("az \(Formatting.azimuth(match.azimuth, decimals: 2))").monospacedDigit()
                 Text("el \(Formatting.degrees(match.elevation, decimals: 2))").monospacedDigit()
                 if let moon = match.moonIllumination {
-                    Text("Moon \(Int((moon * 100).rounded()))%").font(.caption).foregroundStyle(.secondary)
+                    Text("Moon \(Int((moon * 100).rounded()))%").font(.caption).foregroundStyle(.subdued)
                 }
             }
             .font(.subheadline)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(.subdued)
         }
         .accessibilityElement(children: .combine)
     }

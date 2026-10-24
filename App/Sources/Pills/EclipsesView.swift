@@ -27,7 +27,7 @@ struct EclipsesView: View {
             ReportLoader(key: ListKey(location: session.location, start: session.day.start)) { key in
                 EclipseCalendar.upcoming(location: key.location, from: key.start, count: 12)
             } content: { eclipses in
-                Section("Next eclipses") {
+                TitledSection("Next eclipses") {
                     ForEach(eclipses) { eclipse in
                         NavigationLink {
                             EclipseDetailView(eclipse: eclipse)
@@ -54,10 +54,10 @@ private struct EclipseRow: View {
                 .frame(width: 34, height: 34)
             VStack(alignment: .leading, spacing: 2) {
                 Text(eclipse.title).font(.headline)
-                Text(format.dateAndTime(eclipse.peak)).font(.subheadline).foregroundStyle(.secondary)
+                Text(format.dateAndTime(eclipse.peak)).font(.subheadline).foregroundStyle(.subdued)
                 Text(eclipse.visibleHere ? String(localized: "Visible here") : String(localized: "Not visible here"))
                     .font(.caption.bold())
-                    .foregroundStyle(eclipse.visibleHere ? .green : .secondary)
+                    .foregroundStyle(eclipse.visibleHere ? Color.positive : Color.subdued)
             }
         }
         .accessibilityElement(children: .combine)
@@ -116,14 +116,14 @@ struct EclipseDetailView: View {
                         if eclipse.title != eclipse.globalTitle {
                             Text("\(eclipse.globalTitle) elsewhere").font(.subheadline)
                         }
-                        Text(format.dateAndTime(eclipse.peak)).foregroundStyle(.secondary)
+                        Text(format.dateAndTime(eclipse.peak)).foregroundStyle(.subdued)
                     }
                 }
                 .padding(.vertical, 4)
             }
             if eclipse.contacts.isEmpty {
                 Section {
-                    Text("Not visible from \(session.location.name).").foregroundStyle(.secondary)
+                    Text("Not visible from \(session.location.name).").foregroundStyle(.subdued)
                 }
             } else {
                 Section {
@@ -133,25 +133,29 @@ struct EclipseDetailView: View {
                                 Text(format.time(contact.time)).monospacedDigit()
                                 Text(Formatting.degrees(contact.altitude, decimals: 0))
                                     .monospacedDigit()
-                                    .foregroundStyle(contact.altitude > 0 ? Color.primary : Color.secondary)
+                                    .foregroundStyle(contact.altitude > 0 ? Color.primary : Color.subdued)
                                     .frame(width: 44, alignment: .trailing)
                             }
                         }
                     }
                 } header: {
-                    Text("From \(session.location.name)")
+                    SectionLabel {
+                        Text("From \(session.location.name)")
+                    }
                 } footer: {
-                    Text(eclipse.body == .sun
-                         ? "Times in the place's time zone; the second column is the Sun's height. Below 0° it is set."
-                         : "Times in the place's time zone; the second column is the Moon's height. Below 0° it is set.")
+                    SectionLabel {
+                        Text(eclipse.body == .sun
+                             ? "Times in the place's time zone; the second column is the Sun's height. Below 0° it is set."
+                             : "Times in the place's time zone; the second column is the Moon's height. Below 0° it is set.")
+                    }
                 }
                 if let magnitude = eclipse.magnitude, let obscuration = eclipse.obscuration {
-                    Section("Coverage") {
+                    TitledSection("Coverage") {
                         ValueRow("Magnitude", String(format: "%.3f", magnitude))
                         ValueRow("Sun covered", "\(Int((obscuration * 100).rounded()))%")
                     }
                 } else if eclipse.body == .moon, let obscuration = eclipse.obscuration, eclipse.kind == .partial {
-                    Section("Coverage") {
+                    TitledSection("Coverage") {
                         ValueRow("Moon in the umbra", "\(Int((obscuration * 100).rounded()))%")
                     }
                 }
@@ -164,7 +168,9 @@ struct EclipseDetailView: View {
                         .frame(height: 240)
                         .listRowInsets(EdgeInsets())
                 } header: {
-                    Text("Path of \(eclipse.kind == .annular ? "annularity" : "totality")")
+                    SectionLabel {
+                        Text("Path of \(eclipse.kind == .annular ? "annularity" : "totality")")
+                    }
                 }
             }
         }

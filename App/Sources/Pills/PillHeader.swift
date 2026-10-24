@@ -26,12 +26,12 @@ struct PillHeader: View {
                             .foregroundStyle(.primary)
                         Text(subtitle)
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(.subdued)
                     }
                     Spacer()
                     Image(systemName: "chevron.right")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(.tertiary)
+                        .foregroundStyle(.subdued)
                 }
             }
             .accessibilityHint("Choose another place")

@@ -35,9 +35,13 @@ struct MeteorShowersView: View {
                         .accessibilityIdentifier("meteors.\(summary.shower.code)")
                     }
                 } header: {
-                    Text("Showers in \(String(session.day.year))")
+                    SectionLabel {
+                        Text("Showers in \(String(session.day.year))")
+                    }
                 } footer: {
-                    Text("Rates are for one observer on the peak night: ZHR × sin(radiant height), reduced for twilight and moonlight.")
+                    SectionLabel {
+                        Text("Rates are for one observer on the peak night: ZHR × sin(radiant height), reduced for twilight and moonlight.")
+                    }
                 }
             }
         }
@@ -56,11 +60,11 @@ private struct ShowerRow: View {
             RatingBadge(rating: night.rating)
             VStack(alignment: .leading, spacing: 2) {
                 Text(summary.shower.name).font(.headline)
-                Text(format.dateAndTime(summary.peak)).font(.subheadline).foregroundStyle(.secondary)
+                Text(format.dateAndTime(summary.peak)).font(.subheadline).foregroundStyle(.subdued)
                 Text("ZHR \(Int(summary.shower.zhr)) · Moon \(Int((night.moonIllumination * 100).rounded()))%"
                      + (night.best.map { " · ≈ \(Int($0.rate.rounded()))/h here" } ?? " · radiant not up in the dark"))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
             }
         }
         .accessibilityElement(children: .combine)
@@ -95,7 +99,7 @@ struct MeteorShowerDetailView: View {
         let night = summary.peakNight
         let shower = summary.shower
         List {
-            Section("Peak night") {
+            TitledSection("Peak night") {
                 ValueRow("Peak", format.dateAndTime(summary.peak))
                 if let best = night.best {
                     ValueRow("Best time", "\(format.time(best.time)) · ≈ \(Int(best.rate.rounded())) per hour")
@@ -111,11 +115,11 @@ struct MeteorShowerDetailView: View {
                     RatingBadge(rating: night.rating)
                 }
             }
-            Section("Through the night") {
+            TitledSection("Through the night") {
                 RateChart(report: night, format: format)
                     .padding(.vertical, 8)
             }
-            Section("Shower") {
+            TitledSection("Shower") {
                 ValueRow("Active", "\(format.date(summary.active.start)) – \(format.date(summary.active.end.addingTimeInterval(-1)))")
                 ValueRow("ZHR", "\(Int(shower.zhr))")
                 ValueRow("Radiant at peak", String(format: "RA %.0f°, Dec %+.0f°", shower.radiantRA, shower.radiantDec))

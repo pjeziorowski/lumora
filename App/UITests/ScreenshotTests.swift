@@ -12,6 +12,8 @@ final class ScreenshotTests: XCTestCase {
     private var counter = 0
     /// File names start with the phase ("p3-07-…") so every phase's captures can share one folder.
     private var phase = 2
+    /// Replaces "p<phase>" at the start of file names for captures that belong to no phase.
+    private var prefix: String?
 
     /// Phase 2: Sun and Moon tools and the shared location picker.
     func testPhase2SunAndMoonTools() throws {
@@ -88,17 +90,17 @@ final class ScreenshotTests: XCTestCase {
         settleMap()
         snap(app, "planner-warsaw-pin")
         for panel in ["sun", "moon", "twilights"] {
-            app.buttons["planner.panelTab.\(panel)"].tap()
+            tapPanelTab(app, panel)
             waitFor(app, id: "planner.panel.\(panel)")
             snap(app, "planner-warsaw-\(panel)")
         }
 
-        app.buttons["planner.panelTab.sun"].tap()
+        tapPanelTab(app, "sun")
         tapJump(app, "sunrise")
         settleMap()
         snap(app, "planner-jump-sunrise")
         tapJump(app, "moonrise")
-        app.buttons["planner.panelTab.moon"].tap()
+        tapPanelTab(app, "moon")
         settleMap()
         snap(app, "planner-jump-moonrise")
         tapJump(app, "now")
@@ -117,7 +119,7 @@ final class ScreenshotTests: XCTestCase {
         app.buttons["planner.options"].tap()
         app.buttons["Standard"].firstMatch.tap()
 
-        app.buttons["planner.panelTab.pin"].tap()
+        tapPanelTab(app, "pin")
         app.buttons["planner.options"].tap()
         app.buttons["planner.timezoneToggle"].firstMatch.tap()
         settleMap(seconds: 1)
@@ -130,7 +132,7 @@ final class ScreenshotTests: XCTestCase {
         expectVisible(app.buttons["place.Taveuni"].firstMatch)
         snap(app, "planner-search")
         pickPlace(app, "Taveuni")
-        app.buttons["planner.panelTab.sun"].tap()
+        tapPanelTab(app, "sun")
         settleMap(seconds: 4)
         snap(app, "planner-taveuni-antimeridian")
 
@@ -139,13 +141,13 @@ final class ScreenshotTests: XCTestCase {
         pickPlace(app, "Longyearbyen")
         settleMap(seconds: 4)
         snap(app, "planner-longyearbyen-midnight-sun")
-        app.buttons["planner.panelTab.twilights"].tap()
+        tapPanelTab(app, "twilights")
         snap(app, "planner-longyearbyen-twilights")
 
         // Sydney: southern hemisphere, the Sun's path arcs through the north.
         app.buttons["planner.search"].firstMatch.tap()
         pickPlace(app, "Sydney")
-        app.buttons["planner.panelTab.sun"].tap()
+        tapPanelTab(app, "sun")
         tapJump(app, "sunrise")
         settleMap(seconds: 4)
         snap(app, "planner-sydney-sunrise")
@@ -161,7 +163,7 @@ final class ScreenshotTests: XCTestCase {
 
         app.tabBars.buttons["Planner"].tap()
         waitFor(app, id: "planner.panel.pin")
-        app.buttons["planner.panelTab.milkyWay"].tap()
+        tapPanelTab(app, "milkyWay")
         waitFor(app, id: "planner.panel.milkyWay")
         settleMap()
         snap(app, "planner-milkyway-panel-newyork")
@@ -320,12 +322,12 @@ final class ScreenshotTests: XCTestCase {
                          extra: ["-target", "40.73029,-74.04748", "-objectHeight", "60"])
         app.tabBars.buttons["Planner"].tap()
         waitFor(app, id: "planner.panel.pin")
-        app.buttons["planner.panelTab.geodetics"].tap()
+        tapPanelTab(app, "geodetics")
         waitFor(app, id: "planner.panel.geodetics")
         expectVisible(app, "Distance")
         settleMap(seconds: 4)
         snap(app, "planner-geodetics-panel")
-        app.buttons["planner.panelTab.obstacle"].tap()
+        tapPanelTab(app, "obstacle")
         expectVisible(app, "Angle to top")
         snap(app, "planner-obstacle-panel")
 
@@ -355,7 +357,7 @@ final class ScreenshotTests: XCTestCase {
         app.buttons["Done"].firstMatch.tap()
         settleMap()
         snap(app, "planner-fov-dof-on-map")
-        app.buttons["planner.panelTab.geodetics"].tap()
+        tapPanelTab(app, "geodetics")
         settleMap(seconds: 1)
         snap(app, "planner-fov-dof-geodetics")
     }
@@ -494,12 +496,12 @@ final class ScreenshotTests: XCTestCase {
         var app = launch(date: "2026-08-12T22:00:00Z", place: "Warsaw")
         app.tabBars.buttons["Planner"].tap()
         waitFor(app, id: "planner.panel.pin")
-        app.buttons["planner.panelTab.meteors"].tap()
+        tapPanelTab(app, "meteors")
         waitFor(app, id: "planner.panel.meteors")
         expectVisible(app, "Shower")
         settleMap(seconds: 3)
         snap(app, "planner-meteors-perseids-radiant")
-        app.buttons["planner.panelTab.eclipse"].tap()
+        tapPanelTab(app, "eclipse")
         expectVisible(app, "Next here")
         snap(app, "planner-eclipse-panel")
         // Zoom out to the continent to see the eclipse centre line.
@@ -616,30 +618,43 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "dynamic-type-planner")
     }
 
-    /// Phase 10 accessibility pass: Xcode's accessibility audit on the main screens. Issues
-    /// are written to p10-accessibility-audit.txt next to the screenshots instead of failing
-    /// the run, so the list can be worked through.
+    /// Accessibility pass: Xcode's accessibility audit on the main screens. Issues are written
+    /// to p10-accessibility-audit.txt next to the screenshots, with a screenshot of each
+    /// audited screen, instead of failing the run, so the list can be worked through.
     func testPhase10AccessibilityAudit() throws {
         phase = 10
+        prefix = "audit"
         let app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw", extra: ["-seedPlans"])
         var report: [String] = []
         func audit(_ screen: String) {
             Thread.sleep(forTimeInterval: 1.5)
+            snap(app, screen.lowercased().replacingOccurrences(of: " ", with: "-"))
             var count = 0
+            func record(_ issue: XCUIAccessibilityAuditIssue) -> Bool {
+                count += 1
+                report.append([screen, Self.auditTypeName(issue.auditType), issue.compactDescription,
+                               Self.describe(issue.element), issue.detailedDescription].joined(separator: " | "))
+                return true
+            }
             do {
-                try app.performAccessibilityAudit { issue in
-                    count += 1
-                    let element = issue.element.map { "\($0.elementType.rawValue) '\($0.label)' id=\($0.identifier)" } ?? "-"
-                    report.append("\(screen) | \(issue.auditType.rawValue) | \(issue.compactDescription) | \(element)")
-                    return true
-                }
+                try app.performAccessibilityAudit(for: .all) { record($0) }
             } catch {
-                report.append("\(screen) | audit failed: \(error)")
+                // The whole audit can run out of time on a busy screen (the Planner's map);
+                // one type at a time fits.
+                report.append("\(screen) | full audit failed (\(error.localizedDescription)); auditing one type at a time")
+                for (type, _) in Self.auditTypes {
+                    do {
+                        try app.performAccessibilityAudit(for: type) { record($0) }
+                    } catch {
+                        report.append("\(screen) | \(Self.auditTypeName(type)) audit failed: \(error.localizedDescription)")
+                    }
+                }
             }
             report.append("\(screen) | \(count) issues")
         }
         app.tabBars.buttons["Planner"].tap()
         waitFor(app, id: "planner.panel.pin")
+        settleMap()
         audit("Planner")
         app.tabBars.buttons["Tools"].tap()
         audit("Tools")
@@ -660,6 +675,92 @@ final class ScreenshotTests: XCTestCase {
         if let dir = ProcessInfo.processInfo.environment["SCREENSHOT_DIR"], !dir.isEmpty {
             try? text.write(to: URL(fileURLWithPath: dir).appendingPathComponent("p10-accessibility-audit.txt"),
                             atomically: true, encoding: .utf8)
+        }
+    }
+
+    private static let auditTypes: [(XCUIAccessibilityAuditType, String)] = [
+        (.contrast, "contrast"), (.elementDetection, "element detection"), (.hitRegion, "hit region"),
+        (.sufficientElementDescription, "element description"), (.dynamicType, "dynamic type"),
+        (.textClipped, "text clipped"), (.trait, "trait"),
+    ]
+
+    private static func auditTypeName(_ type: XCUIAccessibilityAuditType) -> String {
+        auditTypes.first { $0.0 == type }?.1 ?? "type \(type.rawValue)"
+    }
+
+    /// "button 'Sun' id=planner.panelTab.sun at (45,120 44x44)", or "-" when the audit names no element.
+    private static func describe(_ element: XCUIElement?) -> String {
+        guard let element, element.exists else { return "-" }
+        let f = element.frame
+        return "\(element.elementType.rawValue) '\(element.label)' id=\(element.identifier) "
+            + "at (\(Int(f.minX)),\(Int(f.minY)) \(Int(f.width))x\(Int(f.height)))"
+    }
+
+    /// Large text: the Planner's panels at the largest accessibility size (AX5) and at AX3,
+    /// the panel buttons at the default size, and the screens whose audit issues were fixed.
+    func testAccessibilityLargeText() throws {
+        continueAfterFailure = false
+        prefix = "a11y"
+        var app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw",
+                         extra: ["-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXXXL"])
+        app.tabBars.buttons["Planner"].tap()
+        waitFor(app, id: "planner.panel.pin")
+        settleMap()
+        snap(app, "planner-ax5-pin")
+        for panel in ["sun", "moon", "twilights", "eclipse"] {
+            tapPanelTab(app, panel)
+            waitFor(app, id: "planner.panel.\(panel)")
+            Thread.sleep(forTimeInterval: 0.8)
+            snap(app, "planner-ax5-\(panel)")
+        }
+        // Rows scroll inside the panel; the last Sun row is reachable.
+        tapPanelTab(app, "sun")
+        waitFor(app, id: "planner.panel.sun")
+        let panel = app.descendants(matching: .any)["planner.panel.sun"].firstMatch
+        panel.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 2.2))
+            .press(forDuration: 0.05, thenDragTo: panel.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.4)))
+        Thread.sleep(forTimeInterval: 0.8)
+        snap(app, "planner-ax5-sun-scrolled")
+        app.terminate()
+
+        app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw",
+                     extra: ["-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXL"])
+        app.tabBars.buttons["Planner"].tap()
+        waitFor(app, id: "planner.panel.pin")
+        settleMap()
+        snap(app, "planner-ax3-pin")
+        tapPanelTab(app, "sun")
+        waitFor(app, id: "planner.panel.sun")
+        Thread.sleep(forTimeInterval: 0.8)
+        snap(app, "planner-ax3-sun")
+        app.terminate()
+
+        // Default size: nine 44 pt panel buttons, high-contrast secondary text everywhere.
+        app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw", extra: ["-seedPlans"])
+        app.tabBars.buttons["Planner"].tap()
+        waitFor(app, id: "planner.panel.pin")
+        settleMap()
+        let tab = app.buttons["planner.panelTab.eclipse"].firstMatch
+        XCTAssertGreaterThanOrEqual(tab.frame.width, 44, "Panel buttons must be at least 44 pt wide")
+        XCTAssertGreaterThanOrEqual(tab.frame.height, 44, "Panel buttons must be at least 44 pt tall")
+        snap(app, "planner-default-tabs")
+        app.tabBars.buttons["Tools"].tap()
+        openTool(app, "Sun", expecting: "Sunrise")
+        snap(app, "sun-contrast")
+        goBack(app)
+        openTool(app, "Meteor showers", expecting: "Showers in")
+        snap(app, "meteors-contrast")
+        app.tabBars.buttons["My Stuff"].tap()
+        Thread.sleep(forTimeInterval: 1)
+        snap(app, "mystuff-contrast")
+        app.tabBars.buttons["Settings"].tap()
+        Thread.sleep(forTimeInterval: 1)
+        snap(app, "settings-pickers")
+        let coordinates = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Coordinates")).firstMatch
+        if coordinates.waitForExistence(timeout: 5) {
+            coordinates.tap()
+            Thread.sleep(forTimeInterval: 1)
+            snap(app, "settings-coordinates-picker")
         }
     }
 
@@ -686,8 +787,18 @@ final class ScreenshotTests: XCTestCase {
     /// Taps a jump button, first dragging the jump row sideways while the button is off
     /// screen (XCUITest cannot even ask an off-screen SwiftUI button whether it is hittable).
     private func tapJump(_ app: XCUIApplication, _ name: String, file: StaticString = #filePath, line: UInt = #line) {
-        let button = app.buttons["planner.jump.\(name)"].firstMatch
-        XCTAssertTrue(button.waitForExistence(timeout: 10), "No jump \(name)", file: file, line: line)
+        tapInScrollingRow(app, app.buttons["planner.jump.\(name)"].firstMatch, file: file, line: line)
+    }
+
+    /// Taps a Planner panel button; the row scrolls when the buttons do not all fit.
+    private func tapPanelTab(_ app: XCUIApplication, _ name: String, file: StaticString = #filePath, line: UInt = #line) {
+        tapInScrollingRow(app, app.buttons["planner.panelTab.\(name)"].firstMatch, file: file, line: line)
+    }
+
+    /// Drags a horizontally scrolling row until `button` lies fully on screen, then taps it.
+    private func tapInScrollingRow(_ app: XCUIApplication, _ button: XCUIElement,
+                                   file: StaticString = #filePath, line: UInt = #line) {
+        XCTAssertTrue(button.waitForExistence(timeout: 10), "No \(button)", file: file, line: line)
         let screen = app.windows.firstMatch.frame
         let origin = app.coordinate(withNormalizedOffset: .zero)
         for _ in 0..<6 {
@@ -799,7 +910,7 @@ final class ScreenshotTests: XCTestCase {
 
     private func snap(_ app: XCUIApplication, _ name: String) {
         counter += 1
-        let fileName = String(format: "p%d-%02d-%@", phase, counter, name)
+        let fileName = String(format: "%@-%02d-%@", prefix ?? "p\(phase)", counter, name)
         let shot = app.screenshot()
         let attachment = XCTAttachment(screenshot: shot)
         attachment.name = fileName
