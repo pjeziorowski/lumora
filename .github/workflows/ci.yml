@@ -26,6 +26,28 @@ jobs:
         run: brew install xcodegen swiftlint xcbeautify
       - name: Lint
         run: swiftlint lint --quiet
+      - name: Check App Store signing spec
+        # The TestFlight workflow never runs on pull requests, so check here that project.yml
+        # merges App/AppStoreSigning.yml into the app and widget targets only when asked.
+        run: |
+          check() { # $1 = target, $2 = expected profile ("" when signing is automatic)
+            local settings
+            settings=$(xcodebuild -showBuildSettings -project Lumora.xcodeproj -target "$1" -configuration Release)
+            if [ -n "$2" ]; then
+              grep -q "^ *PROVISIONING_PROFILE_SPECIFIER = $2\$" <<<"$settings" \
+                && grep -q '^ *CODE_SIGN_STYLE = Manual$' <<<"$settings" \
+                || { echo "::error::$1 is missing App Store signing"; exit 1; }
+            else
+              ! grep -q '^ *CODE_SIGN_STYLE = Manual$' <<<"$settings" \
+                || { echo "::error::$1 is manually signed without LUMORA_APPSTORE_SIGNING"; exit 1; }
+            fi
+          }
+          LUMORA_APPSTORE_SIGNING=YES LUMORA_APP_PROFILE=ci-app LUMORA_WIDGETS_PROFILE=ci-widgets xcodegen generate --quiet
+          check Lumora ci-app
+          check LumoraWidgets ci-widgets
+          xcodegen generate --quiet
+          check Lumora ""
+          check LumoraWidgets ""
       - name: Generate Xcode project
         run: xcodegen generate
       - name: Build and test

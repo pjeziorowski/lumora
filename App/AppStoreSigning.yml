@@ -1,0 +1,16 @@
+# App/AppStoreSigning.yml
+# Manual App Store signing, merged into project.yml only when LUMORA_APPSTORE_SIGNING=YES.
+# The TestFlight workflow sets the two profile names after downloading the profiles.
+targets:
+  Lumora:
+    settings:
+      base:
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: Apple Distribution
+        PROVISIONING_PROFILE_SPECIFIER: ${LUMORA_APP_PROFILE}
+  LumoraWidgets:
+    settings:
+      base:
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: Apple Distribution
+        PROVISIONING_PROFILE_SPECIFIER: ${LUMORA_WIDGETS_PROFILE}

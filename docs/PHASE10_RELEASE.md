@@ -92,11 +92,9 @@ not localized yet.
 
 ## Release (needs the owner's Apple Developer account)
 
-1. In Xcode, set the team for the Lumora and LumoraWidgets targets; let Xcode register the
-   app group `group.com.pjeziorowski.lumora` for both bundle ids.
-2. `xcodegen generate`, open `Lumora.xcodeproj`, choose Any iOS Device, Product > Archive.
-3. In the Organizer, Distribute App > App Store Connect > Upload, then add the build to a
-   TestFlight group.
+TestFlight uploads run from `.github/workflows/testflight.yml` once the owner has done the
+one-time setup in `docs/TESTFLIGHT.md` (Team ID, identifiers, distribution certificate, app
+record, API key, repository secrets). The same guide covers uploading from Xcode instead.
 
 ## Not done (stretch goals in the brief)
 
