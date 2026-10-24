@@ -461,21 +461,25 @@ struct ARCalibrationSheet: View {
         NavigationStack {
             Form {
                 Section {
-                    LabeledContent("Compass", value: String(format: "%+.1f°", heading))
+                    ValueRow("Compass", String(format: "%+.1f°", heading))
                     Slider(value: $heading, in: -180...180, step: 0.1) { Text("Compass") }
                         .accessibilityIdentifier("ar.calibration.heading")
-                    LabeledContent("Horizon", value: String(format: "%+.1f°", pitch))
+                    ValueRow("Horizon", String(format: "%+.1f°", pitch))
                     Slider(value: $pitch, in: -30...30, step: 0.1) { Text("Horizon") }
                 } footer: {
-                    Text("Compass turns the overlay left or right; horizon raises or lowers it. "
-                         + "Line up the green horizon or a known object.")
+                    SectionLabel {
+                        Text("Compass turns the overlay left or right; horizon raises or lowers it. "
+                             + "Line up the green horizon or a known object.")
+                    }
                 }
                 if let reference {
                     Section {
                         Button("Align on \(reference.label)") { align(on: reference) }
                             .accessibilityIdentifier("ar.calibration.align")
                     } footer: {
-                        Text("Put \(reference.label) in the centre circle, then tap.")
+                        SectionLabel {
+                            Text("Put \(reference.label) in the centre circle, then tap.")
+                        }
                     }
                 }
                 Section {

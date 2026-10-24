@@ -76,9 +76,12 @@ func signedDuration(_ seconds: Double) -> String {
     return seconds < 0 ? "−\(text)" : "+\(text)"
 }
 
+/// Label and value on one line; at accessibility text sizes the value goes under the label
+/// so long values ("12:38 · el 61.2°") keep growing instead of being squeezed.
 struct ValueRow: View {
     let label: LocalizedStringKey
     let value: String
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     init(_ label: LocalizedStringKey, _ value: String) {
         self.label = label
@@ -86,10 +89,26 @@ struct ValueRow: View {
     }
 
     var body: some View {
+        if typeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(label)
+                Text(value)
+                    .monospacedDigit()
+                    .foregroundStyle(.subdued)
+            }
+            .accessibilityElement(children: .combine)
+        } else {
+            sideBySide
+        }
+    }
+
+    private var sideBySide: some View {
         LabeledContent {
+            // LabeledContent draws values in the system's faint secondary style.
             Text(value)
                 .monospacedDigit()
                 .multilineTextAlignment(.trailing)
+                .foregroundStyle(.subdued)
         } label: {
             Text(label)
         }

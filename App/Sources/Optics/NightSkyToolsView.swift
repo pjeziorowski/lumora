@@ -31,10 +31,10 @@ struct SpotStarsView: View {
                 NumberRow(label: "Focal length", value: $focalLength, unit: "mm", step: 1, range: 4...800)
                 ScalePicker(label: "Aperture", value: $aperture, scale: Exposure.apertureScale, format: OpticsFormat.aperture)
                 VStack(alignment: .leading) {
-                    LabeledContent("Declination", value: String(format: "%.0f°", declination))
+                    ValueRow("Declination", String(format: "%.0f°", declination))
                     Slider(value: $declination, in: -89...89, step: 1)
                         .accessibilityIdentifier("spotstars.declination")
-                    Text(declinationHint).font(.caption).foregroundStyle(.secondary)
+                    Text(declinationHint).font(.caption).foregroundStyle(.subdued)
                 }
             }
             Section {
@@ -48,11 +48,15 @@ struct SpotStarsView: View {
                     Text("600").tag(600.0)
                 }
             } header: {
-                Text("Longest exposure for pinpoint stars")
+                SectionLabel {
+                    Text("Longest exposure for pinpoint stars")
+                }
             } footer: {
-                Text("NPF: (35·N + 30·p) ÷ (f · cos δ), with pixel pitch p = \(String(format: "%.2f", pitch)) µm. "
-                     + "Accurate: (16.856·N + 0.0997·f + 13.713·p) ÷ (f · cos δ). The simple rule ignores pixels and "
-                     + "trails on high-resolution sensors.")
+                SectionLabel {
+                    Text("NPF: (35·N + 30·p) ÷ (f · cos δ), with pixel pitch p = \(String(format: "%.2f", pitch)) µm. "
+                         + "Accurate: (16.856·N + 0.0997·f + 13.713·p) ÷ (f · cos δ). The simple rule ignores pixels and "
+                         + "trails on high-resolution sensors.")
+                }
             }
         }
         .navigationTitle("Spot stars")
@@ -108,7 +112,7 @@ struct StarTrailsView: View {
                     NumberRow(label: "Trail length", value: $targetPixels, unit: "px", step: 10, range: 1...20_000)
                 }
                 VStack(alignment: .leading) {
-                    LabeledContent("Declination", value: String(format: "%.0f°", declination))
+                    ValueRow("Declination", String(format: "%.0f°", declination))
                     Slider(value: $declination, in: -89...89, step: 1)
                 }
             }
@@ -124,10 +128,14 @@ struct StarTrailsView: View {
                     .frame(height: 200)
                     .padding(.vertical, 6)
             } header: {
-                Text("Trails")
+                SectionLabel {
+                    Text("Trails")
+                }
             } footer: {
-                Text("Stars turn 15.04″ per second around the celestial pole; trails shorten by cos δ toward it. "
-                     + "A full circle takes 23 h 56 min.")
+                SectionLabel {
+                    Text("Stars turn 15.04″ per second around the celestial pole; trails shorten by cos δ toward it. "
+                         + "A full circle takes 23 h 56 min.")
+                }
             }
         }
         .navigationTitle("Star trails")

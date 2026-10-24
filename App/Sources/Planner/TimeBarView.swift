@@ -13,6 +13,7 @@ struct TimeBarView: View {
     let zone: TimeZone
     let clock: ClockStyle
     @State private var showingDatePicker = false
+    @Environment(\.dynamicTypeSize) private var typeSize
     /// The ruler grows with Dynamic Type so its hour labels keep room below the ticks.
     @ScaledMetric(relativeTo: .caption2) private var rulerHeight: CGFloat = 44
 
@@ -33,7 +34,9 @@ struct TimeBarView: View {
                     VStack(spacing: 0) {
                         Text(dayText)
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(.subdued)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
                         Text(Formatting.clockTime(state.session.instant, timeZone: zone, style: clock))
                             .font(.title3.monospacedDigit().weight(.semibold))
                             .foregroundStyle(.primary)
@@ -85,8 +88,12 @@ struct TimeBarView: View {
         }
     }
 
+    /// "Sun, Jun 21, 2026 · UTC+2"; "Jun 21 · UTC+2" at accessibility sizes, where the long
+    /// form takes three lines and squeezes the map out. The date sheet shows the full date.
     private var dayText: String {
-        var style = Date.FormatStyle(date: .abbreviated, time: .omitted).weekday(.abbreviated)
+        var style = typeSize.isAccessibilitySize
+            ? Date.FormatStyle().month(.abbreviated).day()
+            : Date.FormatStyle(date: .abbreviated, time: .omitted).weekday(.abbreviated)
         style.timeZone = zone
         return "\(state.session.instant.formatted(style)) · \(Formatting.utcOffset(zone, at: state.session.instant))"
     }

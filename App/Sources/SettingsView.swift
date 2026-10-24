@@ -18,28 +18,40 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            Picker("Units", selection: $units) {
+            // Inline pickers: every choice is a full-width row that wraps at large text sizes.
+            // The menu style clipped "Decimal degrees" next to its chevron, and menu and
+            // navigation-link styles draw the value in the faint system secondary colour.
+            Picker(selection: $units) {
                 Text("Metric").tag(UnitSystem.metric)
                 Text("Imperial").tag(UnitSystem.imperial)
+            } label: {
+                SectionLabel { Text("Units") }
             }
-            Picker("Clock", selection: $clock) {
+            .pickerStyle(.inline)
+            Picker(selection: $clock) {
                 Text("24-hour").tag(ClockStyle.twentyFourHour)
                 Text("12-hour").tag(ClockStyle.twelveHour)
+            } label: {
+                SectionLabel { Text("Clock") }
             }
-            Picker("Coordinates", selection: $coordinates) {
+            .pickerStyle(.inline)
+            Picker(selection: $coordinates) {
                 Text("Decimal degrees").tag(CoordinateStyle.decimal)
                 Text("Degrees, minutes, seconds").tag(CoordinateStyle.degreesMinutesSeconds)
+            } label: {
+                SectionLabel { Text("Coordinates") }
             }
-            Section("Camera") {
+            .pickerStyle(.inline)
+            TitledSection("Camera") {
                 NavigationLink {
                     CameraManagerView()
                         .navigationTitle("Default camera")
                 } label: {
-                    LabeledContent("Default camera", value: cameras.defaultCamera.name)
+                    ValueRow("Default camera", cameras.defaultCamera.name)
                 }
                 .accessibilityIdentifier("settings.camera")
             }
-            Section("Widgets") {
+            TitledSection("Widgets") {
                 NavigationLink {
                     WidgetGalleryView()
                 } label: {
@@ -47,11 +59,11 @@ struct SettingsView: View {
                 }
                 .accessibilityIdentifier("settings.widgets")
             }
-            Section("About") {
-                LabeledContent("Version", value: Bundle.main.shortVersion)
+            TitledSection("About") {
+                ValueRow("Version", Bundle.main.shortVersion)
                 Text("Astronomy calculations are ported from Astronomy Engine by Don Cross (MIT licence).")
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
             }
         }
     }

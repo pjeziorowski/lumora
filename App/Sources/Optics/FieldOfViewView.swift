@@ -78,10 +78,14 @@ struct FieldOfViewView: View {
                 ResultRow(label: "Magnification", value: r.magnification.isFinite ? String(format: "1:%.0f", 1 / r.magnification) : "—")
                 ResultRow(label: "35 mm equivalent", value: String(format: "%.0f mm", r.equivalentFocalLength))
             } header: {
-                Text("Result")
+                SectionLabel {
+                    Text("Result")
+                }
             } footer: {
-                let crop = String(format: "%.2f", camera.cropFactor)
-                Text("Thin-lens approximation focused at the subject; \(camera.formatName), crop \(crop)×.")
+                SectionLabel {
+                    let crop = String(format: "%.2f", camera.cropFactor)
+                    Text("Thin-lens approximation focused at the subject; \(camera.formatName), crop \(crop)×.")
+                }
             }
         }
         .navigationTitle("Field of view")

@@ -24,12 +24,14 @@ struct PlannerView: View {
     @State private var showingFind = false
     @State private var showingSave = false
     @State private var showingAR = false
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     var body: some View {
         @Bindable var state = state
         VStack(spacing: 0) {
             PlannerPanelsView(state: state, options: options)
-                .frame(height: 236)
+                // Stacked rows at accessibility sizes need the extra height to show more than one.
+                .frame(height: typeSize.isAccessibilitySize ? 280 : 236)
                 .background(.bar)
             PlannerMapView(
                 pin: state.session.location,
@@ -51,6 +53,8 @@ struct PlannerView: View {
             .overlay(alignment: .topLeading) { mapBadges }
             .ignoresSafeArea(.keyboard)
             TimeBarView(state: state, zone: displayZone, clock: clock)
+                // Beyond AX3 the date line wraps and the map has no room left at all.
+                .dynamicTypeSize(...DynamicTypeSize.accessibility3)
                 .background(.bar)
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -180,20 +184,16 @@ struct PlannerView: View {
     @ViewBuilder private var mapBadges: some View {
         VStack(alignment: .leading, spacing: 6) {
             if let light = state.snapshot?.lightPhase {
-                Label(light.label, systemImage: "circle.fill")
-                    .labelStyle(BadgeLabelStyle(tint: light.color))
+                MapBadge(Text(light.label), systemImage: "circle.fill", tint: light.color)
             }
             if state.useDeviceTimeZone {
-                Label("Device time", systemImage: "iphone")
-                    .labelStyle(BadgeLabelStyle(tint: .secondary))
+                MapBadge(Text("Device time"), systemImage: "iphone", tint: .subdued)
             }
             if state.mapOptics.isVisible {
-                Label(opticsSummary, systemImage: "camera.viewfinder")
-                    .labelStyle(BadgeLabelStyle(tint: .blue))
+                MapBadge(Text(opticsSummary), systemImage: "camera.viewfinder", tint: .blue)
             }
             if state.resolvingPin {
-                Label("Finding time zone…", systemImage: "globe")
-                    .labelStyle(BadgeLabelStyle(tint: .secondary))
+                MapBadge(Text("Finding time zone…"), systemImage: "globe", tint: .subdued)
             }
         }
         .font(.caption.weight(.medium))
@@ -224,18 +224,31 @@ struct PlannerView: View {
     }
 }
 
-private struct BadgeLabelStyle<Tint: ShapeStyle>: LabelStyle {
+/// A capsule on the map: a coloured symbol and a line of text. The symbol is decorative and
+/// left out of accessibility, so the text is its own element: the contrast audit measured the
+/// pale "golden hour" dot against the white capsule when both shared one element.
+private struct MapBadge<Tint: ShapeStyle>: View {
+    let title: Text
+    let systemImage: String
     let tint: Tint
 
-    func makeBody(configuration: Configuration) -> some View {
+    init(_ title: Text, systemImage: String, tint: Tint) {
+        self.title = title
+        self.systemImage = systemImage
+        self.tint = tint
+    }
+
+    var body: some View {
         HStack(spacing: 5) {
-            configuration.icon
+            Image(systemName: systemImage)
                 .foregroundStyle(tint)
                 .imageScale(.small)
-            configuration.title
+                .accessibilityHidden(true)
+            title
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 4)
-        .background(.regularMaterial, in: Capsule())
+        // Nearly opaque, so bright map tiles never show through behind the text.
+        .background(Color(uiColor: .systemBackground).opacity(0.94), in: Capsule())
     }
 }

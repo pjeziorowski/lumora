@@ -82,21 +82,21 @@ private struct MoonDaySections: View {
                         Text("\(Int((report.illumination * 100).rounded()))% lit")
                         if report.ageDays.isFinite {
                             Text("Age \(String(format: "%.1f", report.ageDays)) days")
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(.subdued)
                         }
                     }
                 }
                 .padding(.vertical, 4)
                 .accessibilityElement(children: .combine)
             }
-            Section(format.dayLabel(report.day)) {
+            TitledSection(format.dayLabel(report.day)) {
                 ValueRow("Moonrise", format.events(report.rises, none: report.state.noEventLabel(body: .moon)))
                 ValueRow("Moonset", format.events(report.sets, none: report.state.noEventLabel(body: .moon)))
                 if let transit = report.transit {
                     ValueRow("Highest", "\(format.time(transit.time)) · el \(Formatting.degrees(transit.altitude))")
                 }
             }
-            Section("At \(format.time(report.position.time))") {
+            TitledSection("At \(format.time(report.position.time))") {
                 ValueRow("Azimuth", Formatting.azimuth(report.position.azimuth))
                 ValueRow("Elevation", Formatting.degrees(report.position.altitude))
                 ValueRow("Distance", distance(report.position.distanceKm))
@@ -105,12 +105,12 @@ private struct MoonDaySections: View {
             ReportLoader(key: MoonPathKey(location: session.location, day: session.day)) { key in
                 SkyPath.compute(.moon, location: key.location, day: key.day)
             } content: { path in
-                Section("Moon path") {
+                TitledSection("Moon path") {
                     SkyPathChart(path: path, day: report.day, selected: session.instant, format: format)
                         .padding(.vertical, 8)
                 }
             }
-            Section("Next phases") {
+            TitledSection("Next phases") {
                 ForEach(report.upcoming) { event in
                     PhaseEventRow(event: event, format: format, southern: report.location.isSouthern, units: units)
                 }
@@ -152,7 +152,7 @@ private struct PhaseEventRow: View {
                 Text(subtitle)
                     .font(.callout)
                     .monospacedDigit()
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
             }
             Spacer(minLength: 0)
         }
@@ -213,7 +213,7 @@ private struct MoonCalendarSection: View {
                         case let .weekday(_, symbol):
                             Text(symbol)
                                 .font(.caption2.weight(.semibold))
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(.subdued)
                                 .accessibilityHidden(true)
                         case .blank:
                             Color.clear.frame(height: 1)
@@ -230,9 +230,11 @@ private struct MoonCalendarSection: View {
                 }
                 .padding(.vertical, 4)
             } footer: {
-                Text("Phase at local noon. Marked days hold a new moon, quarter or full moon; tap a day to select it.")
+                SectionLabel {
+                    Text("Phase at local noon. Marked days hold a new moon, quarter or full moon; tap a day to select it.")
+                }
             }
-            Section("This month") {
+            TitledSection("This month") {
                 ForEach(month.days.filter { $0.phaseEvent != nil }) { entry in
                     if let event = entry.phaseEvent {
                         ValueRow(LocalizedStringKey(event.quarter.displayName), format.dateAndTime(event.time.date))
@@ -325,12 +327,14 @@ private struct MoonPhasesSections: View {
                 ValueRow("Supermoons", "\(year.supermoons.count)")
                 ValueRow("Blue moons", "\(year.blueMoons.count)")
             } footer: {
-                Text(ruleNote(session.supermoonRule))
+                SectionLabel {
+                    Text(ruleNote(session.supermoonRule))
+                }
             }
-            Section("Full moons") {
+            TitledSection("Full moons") {
                 ForEach(year.fullMoons) { PhaseEventRow(event: $0, format: format, southern: session.location.isSouthern, units: units) }
             }
-            Section("New moons") {
+            TitledSection("New moons") {
                 ForEach(year.newMoons) { PhaseEventRow(event: $0, format: format, southern: session.location.isSouthern, units: units) }
             }
         }

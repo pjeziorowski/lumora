@@ -35,9 +35,13 @@ struct MeteorShowersView: View {
                         .accessibilityIdentifier("meteors.\(summary.shower.code)")
                     }
                 } header: {
-                    Text("Showers in \(String(session.day.year))")
+                    SectionLabel {
+                        Text("Showers in \(String(session.day.year))")
+                    }
                 } footer: {
-                    Text("Rates are for one observer on the peak night: ZHR × sin(radiant height), reduced for twilight and moonlight.")
+                    SectionLabel {
+                        Text("Rates are for one observer on the peak night: ZHR × sin(radiant height), reduced for twilight and moonlight.")
+                    }
                 }
             }
         }
@@ -56,32 +60,38 @@ private struct ShowerRow: View {
             RatingBadge(rating: night.rating)
             VStack(alignment: .leading, spacing: 2) {
                 Text(summary.shower.name).font(.headline)
-                Text(format.dateAndTime(summary.peak)).font(.subheadline).foregroundStyle(.secondary)
+                Text(format.dateAndTime(summary.peak)).font(.subheadline).foregroundStyle(.subdued)
                 Text("ZHR \(Int(summary.shower.zhr)) · Moon \(Int((night.moonIllumination * 100).rounded()))%"
                      + (night.best.map { " · ≈ \(Int($0.rate.rounded()))/h here" } ?? " · radiant not up in the dark"))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
             }
         }
         .accessibilityElement(children: .combine)
     }
 }
 
+/// White on a dark fill in both appearances (at least 5.3:1), sized by its text so it grows
+/// with Dynamic Type instead of clipping.
 struct RatingBadge: View {
     let rating: MeteorRating
+    @ScaledMetric(relativeTo: .caption2) private var minWidth: CGFloat = 66
 
     var body: some View {
-        let color: Color = switch rating {
-        case .excellent: .green
-        case .good: .teal
-        case .fair: .orange
-        case .poor: .gray
+        let hex: UInt32 = switch rating {
+        case .excellent: 0x1E7B34
+        case .good: 0x0B6E79
+        case .fair: 0xA35200
+        case .poor: 0x5C5C61
         }
         Text(rating.label)
             .font(.caption2.bold())
             .foregroundStyle(.white)
-            .frame(width: 66, height: 22)
-            .background(color, in: Capsule())
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .frame(minWidth: minWidth)
+            .background(Color(red: Double(hex >> 16) / 255, green: Double((hex >> 8) & 0xFF) / 255,
+                              blue: Double(hex & 0xFF) / 255), in: Capsule())
     }
 }
 
@@ -95,7 +105,7 @@ struct MeteorShowerDetailView: View {
         let night = summary.peakNight
         let shower = summary.shower
         List {
-            Section("Peak night") {
+            TitledSection("Peak night") {
                 ValueRow("Peak", format.dateAndTime(summary.peak))
                 if let best = night.best {
                     ValueRow("Best time", "\(format.time(best.time)) · ≈ \(Int(best.rate.rounded())) per hour")
@@ -111,11 +121,11 @@ struct MeteorShowerDetailView: View {
                     RatingBadge(rating: night.rating)
                 }
             }
-            Section("Through the night") {
+            TitledSection("Through the night") {
                 RateChart(report: night, format: format)
                     .padding(.vertical, 8)
             }
-            Section("Shower") {
+            TitledSection("Shower") {
                 ValueRow("Active", "\(format.date(summary.active.start)) – \(format.date(summary.active.end.addingTimeInterval(-1)))")
                 ValueRow("ZHR", "\(Int(shower.zhr))")
                 ValueRow("Radiant at peak", String(format: "RA %.0f°, Dec %+.0f°", shower.radiantRA, shower.radiantDec))

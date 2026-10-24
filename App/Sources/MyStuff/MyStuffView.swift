@@ -172,24 +172,27 @@ private struct PlanRow: View {
                 if let data = record.thumbnail, let image = UIImage(data: data) {
                     Image(uiImage: image).resizable().scaledToFill()
                 } else {
-                    Rectangle().fill(.quaternary).overlay { Image(systemName: "map").foregroundStyle(.secondary) }
+                    Rectangle().fill(.quaternary).overlay { Image(systemName: "map").foregroundStyle(.subdued) }
                 }
             }
             .frame(width: 64, height: 64)
             .clipShape(RoundedRectangle(cornerRadius: 10))
+            // A picture of the map, labels included, that cannot scale with the text size; the
+            // row's text already names the place.
+            .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 3) {
                 Text(record.name.isEmpty ? String(localized: "Untitled plan") : record.name)
                     .font(.headline)
                     .foregroundStyle(.primary)
                 if let plan = record.plan {
-                    Text(stamp(plan)).font(.subheadline).foregroundStyle(.secondary)
+                    Text(stamp(plan)).font(.subheadline).foregroundStyle(.subdued)
                     HStack(spacing: 6) {
                         Text(plan.location.name)
                         if plan.reminderMinutes != nil { Image(systemName: "bell.fill").accessibilityLabel("Reminder") }
                         if plan.target != nil { Image(systemName: "scope").accessibilityLabel("Target pin") }
                     }
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
                 }
             }
             Spacer(minLength: 0)
@@ -236,8 +239,8 @@ private struct PlacesList: View {
                                 Text(place.location.name).font(.headline).foregroundStyle(.primary)
                                 Text(Formatting.coordinate(latitude: place.location.latitude, longitude: place.location.longitude,
                                                            style: coordinates))
-                                    .font(.subheadline).foregroundStyle(.secondary)
-                                if !place.notes.isEmpty { Text(place.notes).font(.caption).foregroundStyle(.secondary) }
+                                    .font(.subheadline).foregroundStyle(.subdued)
+                                if !place.notes.isEmpty { Text(place.notes).font(.caption).foregroundStyle(.subdued) }
                             }
                         }
                         .tint(.primary)
@@ -252,7 +255,9 @@ private struct PlacesList: View {
                     }
                 }
             } header: {
-                Text("Saved places")
+                SectionLabel {
+                    Text("Saved places")
+                }
             }
         }
     }

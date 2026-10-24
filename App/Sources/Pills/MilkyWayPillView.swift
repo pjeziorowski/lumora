@@ -82,7 +82,7 @@ private struct MilkyWayNightSections: View {
         ReportLoader(key: NightKey(location: session.location, day: nightDay(session))) { key in
             MilkyWayNightReport.compute(location: key.location, day: key.day)
         } content: { report in
-            Section("Night of \(format.dayLabel(report.day))") {
+            TitledSection("Night of \(format.dayLabel(report.day))") {
                 ValueRow("Core visible", spans(report.visible))
                 ValueRow("Moon-free", spans(report.moonFree))
                 ValueRow("Dark sky", spans(report.dark))
@@ -92,28 +92,28 @@ private struct MilkyWayNightSections: View {
                 }
             }
             if let best = report.bestMoment {
-                Section("Best moment") {
+                TitledSection("Best moment") {
                     HStack(spacing: 16) {
                         ArcGlyph(tilt: best.tilt)
                             .frame(width: 56, height: 56)
                         VStack(alignment: .leading, spacing: 4) {
                             Text(format.time(best.time)).font(.title3.weight(.semibold))
                             Text("Core at \(Formatting.azimuth(best.azimuth)), el \(Formatting.degrees(best.altitude))")
-                            Text(best.orientation.label).foregroundStyle(.secondary)
+                            Text(best.orientation.label).foregroundStyle(.subdued)
                         }
                     }
                     .padding(.vertical, 4)
                     .accessibilityElement(children: .combine)
                 }
             }
-            Section("Core through the night") {
+            TitledSection("Core through the night") {
                 CoreNightChart(report: report, format: format)
                     .padding(.vertical, 8)
             }
-            Section("Hour by hour") {
+            TitledSection("Hour by hour") {
                 let hourly = report.path.filter { $0.altitude > -2 && isOnTheHour($0.time) }
                 if hourly.isEmpty {
-                    Text("The core stays below the horizon all night.").foregroundStyle(.secondary)
+                    Text("The core stays below the horizon all night.").foregroundStyle(.subdued)
                 }
                 ForEach(hourly) { sample in
                     HourRow(sample: sample, format: format, visible: report.visible.contains { $0.contains(sample.time) })
@@ -135,18 +135,19 @@ private struct HourRow: View {
     let sample: GalacticCenterSample
     let format: PillFormat
     let visible: Bool
+    @ScaledMetric private var timeWidth: CGFloat = 64
 
     var body: some View {
         HStack(spacing: 12) {
             Text(format.time(sample.time))
                 .monospacedDigit()
-                .frame(width: 64, alignment: .leading)
+                .frame(width: timeWidth, alignment: .leading)
             ArcGlyph(tilt: sample.tilt)
                 .frame(width: 26, height: 26)
                 .opacity(sample.altitude > 0 ? 1 : 0.35)
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(Formatting.azimuth(sample.azimuth)) · el \(Formatting.degrees(sample.altitude))").monospacedDigit()
-                Text(sample.orientation.label).font(.caption).foregroundStyle(.secondary)
+                Text(sample.orientation.label).font(.caption).foregroundStyle(.subdued)
             }
             Spacer()
             if visible {
@@ -180,7 +181,7 @@ private struct CoreNightChart: View {
                     .foregroundStyle(Color.purple.opacity(0.22))
             }
             RuleMark(y: .value("Horizon", 0.0))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.subdued)
                 .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 3]))
             ForEach(report.path) { sample in
                 LineMark(x: .value("Time", sample.time), y: .value("Elevation", sample.altitude))
@@ -252,22 +253,22 @@ private struct MilkyWayYearSections: View {
         ReportLoader(key: YearKey(location: session.location, year: session.day.year)) { key in
             MilkyWayYearReport.compute(location: key.location, year: key.year)
         } content: { report in
-            Section("Season \(String(report.year))") {
+            TitledSection("Season \(String(report.year))") {
                 if let start = report.seasonStart, let end = report.seasonEnd {
                     ValueRow("First core night", format.dayLabel(start))
                     ValueRow("Last core night", format.dayLabel(end))
                 } else {
-                    Text("The core never rises in a dark sky here.").foregroundStyle(.secondary)
+                    Text("The core never rises in a dark sky here.").foregroundStyle(.subdued)
                 }
                 if !report.bestMonths.isEmpty {
                     ValueRow("Best months", report.bestMonths.prefix(3).map { monthName($0.month) }.joined(separator: ", "))
                 }
             }
-            Section("Core hours by month") {
+            TitledSection("Core hours by month") {
                 MonthChart(months: report.months)
                     .padding(.vertical, 8)
             }
-            Section("Best nights") {
+            TitledSection("Best nights") {
                 ForEach(report.bestNights(10)) { night in
                     Button {
                         // 23:00 local on that date, inside the night that starts there.
