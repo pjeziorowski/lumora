@@ -45,21 +45,40 @@ location"), units and clock, and plans and widgets. It is shown once (`onboardin
   `p10-accessibility-audit.txt` instead of failing, so they can be worked through.
 - Charts have accessibility labels; the Moon disc and eclipse glyphs are decorative and
   hidden, with the row they sit in carrying the label; rows combine label and value.
-- Screenshots at the largest accessibility text size check that the Tools list, the Sun tool
-  and the Planner still read. The Planner's time ruler grows with the text size and labels
-  every second or third hour when the labels no longer fit an hour apart.
+- Screenshots at accessibility text sizes check that the Tools list, the Sun tool and the
+  Planner still read (`testAccessibilityLargeText`, files `a11y-NN-…`, at AX5 and AX3). The
+  Planner's time ruler grows with the text size and labels every second or third hour when
+  the labels no longer fit an hour apart.
+
+### Large text in the Planner
+
+The nine panel buttons used to sit in a fixed row. At accessibility sizes the row needed
+more than the screen width, which made the whole Planner wider than the phone and cut off the
+panel rows, the date line and the jump buttons at both edges. Now:
+
+- Each panel button is at least 44 × 44 pt. The buttons share the width when they fit and
+  scroll sideways when they don't, and the selected one stays in view. Their icons stop
+  growing at AX1, and a long press shows the large content viewer, as in a tab bar.
+- At accessibility sizes, panel rows put the label above the value, the panel area is
+  280 pt tall (236 pt otherwise), and the date line is shortened to "Jun 21 · UTC+2". The
+  time bar stops growing at AX3, so the map keeps some room at AX5.
+- Rows in the Sun, Moon and other tools (`ValueRow`) stack the same way at accessibility
+  sizes.
 
 ### Audit triage
 
-The audit at the default text size reports about 140 issues on six screens. What they are and
-what was decided:
+`testPhase10AccessibilityAudit` writes every issue, a screenshot (`audit-NN-…`) and the
+element tree (`audit-element-trees.txt`) for each screen. Contrast and hit-area issues on
+the app's own elements fail the test. Before this pass the audit reported about 140 issues,
+and the Planner's audit timed out. Its "0 issues" was that timeout. The test now audits one
+type at a time when the full audit runs out of time. After this pass about 80 remain:
 
-| Issue | Where | Decision |
+| Issue | Fixed | Remaining, and why |
 |---|---|---|
-| Contrast failed or nearly passed | Secondary labels (coordinates, list values, section headers) in system lists | Accepted: these use the system `.secondary` style on grouped backgrounds, which follows Increase Contrast. Revisit if a custom palette is introduced. |
-| Dynamic Type partially unsupported | List cells in Sun, Meteor showers, My Stuff, Settings | Accepted: the cells use text styles and scale (see the accessibility-size screenshots); the audit flags fixed-size SF Symbols and chart axes inside them. |
-| Text clipped | Long dates in the Planner header and Sun tool, Settings pickers | Accepted at the default size, where the text truncates with an ellipsis and VoiceOver reads it whole; at accessibility sizes the header stacks instead. |
-| Hit area too small | The nine Planner panel tabs (about 37 × 44 pt on a 6.1-inch iPhone); the map's Legal link | Accepted: the panels also page by swipe and each tab is a labelled VoiceOver button; the Legal link is drawn by MapKit. A scrolling tab bar would fix it at the cost of hiding tabs. |
+| Contrast | Secondary text, section headers and footers, list values and Settings choices use `Color.subdued` (6.0:1 light, 7.7:1 dark, darker with Increase Contrast; `App/Sources/Accessibility/Palette.swift`). The light-mode accent orange is darker (5.2:1 on grouped backgrounds). Status text uses accessible green, orange and red, and the meteor rating badges are white on dark fills. | Text the audit samples while it scrolls under the translucent tab bar (every remaining named element sits below the tab bar's top edge). The two unnamed issues per scrolling screen follow the same pattern: none on the Planner or My Stuff, where nothing scrolls under the bar. |
+| Hit area too small | Planner panel buttons are now 44 × 44 pt (checked in `testAccessibilityLargeText`). | MapKit's Legal link, which MapKit draws and the app cannot resize. |
+| Dynamic Type unsupported | Meteor badges and the hour and eclipse-altitude columns scale. Plan thumbnails (map pictures) are hidden from accessibility. | UIKit controls that use the large content viewer instead of growing: tab bar items, segmented controls, navigation bar buttons and the compact date picker. The audit names no element for these, and the counts match the controls on each screen (Sun: 4 tabs, 5 segments, back button, 2 date picker buttons). |
+| Text clipped | Settings pickers are inline rows (the menu style clipped "Decimal degrees"). The meteor badge has no fixed frame. | Unnamed issues on the same UIKit controls and large navigation titles, plus the combined meteor rows, whose merged VoiceOver label is longer than any one line. |
 
 ## Localization
 

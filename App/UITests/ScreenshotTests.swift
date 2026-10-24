@@ -618,23 +618,35 @@ final class ScreenshotTests: XCTestCase {
         snap(app, "dynamic-type-planner")
     }
 
-    /// Accessibility pass: Xcode's accessibility audit on the main screens. Issues are written
-    /// to p10-accessibility-audit.txt next to the screenshots, with a screenshot of each
-    /// audited screen, instead of failing the run, so the list can be worked through.
+    /// Accessibility pass: Xcode's accessibility audit on the main screens. Every issue is written
+    /// to p10-accessibility-audit.txt next to the screenshots, with a screenshot and the element
+    /// tree of each audited screen. Contrast and hit-area issues on the app's own elements fail
+    /// the test; the rest (mostly UIKit controls the audit cannot name) are triaged in
+    /// docs/PHASE10_RELEASE.md.
     func testPhase10AccessibilityAudit() throws {
         phase = 10
         prefix = "audit"
         let app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw", extra: ["-seedPlans"])
         var report: [String] = []
         var trees: [String] = []
+        // Contrast and hit-area issues on named elements fail the test, except two the app
+        // cannot change: MapKit's Legal link, and text the audit samples while it scrolls
+        // under the translucent tab bar.
+        var blocking: [String] = []
         func audit(_ screen: String) {
             Thread.sleep(forTimeInterval: 1.5)
+            let tabBarTop = app.tabBars.firstMatch.frame.minY
             snap(app, screen.lowercased().replacingOccurrences(of: " ", with: "-"))
             var count = 0
             func record(_ issue: XCUIAccessibilityAuditIssue) -> Bool {
                 count += 1
-                report.append([screen, Self.auditTypeName(issue.auditType), issue.compactDescription,
-                               Self.describe(issue.element), issue.detailedDescription].joined(separator: " | "))
+                let line = [screen, Self.auditTypeName(issue.auditType), issue.compactDescription,
+                            Self.describe(issue.element), issue.detailedDescription].joined(separator: " | ")
+                report.append(line)
+                if [XCUIAccessibilityAuditType.contrast, .hitRegion].contains(issue.auditType), let element = issue.element, element.exists,
+                   element.label != "Legal", element.frame.maxY <= tabBarTop {
+                    blocking.append(line)
+                }
                 return true
             }
             do {
@@ -681,6 +693,7 @@ final class ScreenshotTests: XCTestCase {
             try? trees.joined(separator: "\n\n").write(to: URL(fileURLWithPath: dir).appendingPathComponent("audit-element-trees.txt"),
                                                         atomically: true, encoding: .utf8)
         }
+        XCTAssertTrue(blocking.isEmpty, "Accessibility audit:\n" + blocking.joined(separator: "\n"))
     }
 
     private static let auditTypes: [(XCUIAccessibilityAuditType, String)] = [

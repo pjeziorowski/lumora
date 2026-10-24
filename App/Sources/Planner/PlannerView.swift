@@ -31,7 +31,7 @@ struct PlannerView: View {
         VStack(spacing: 0) {
             PlannerPanelsView(state: state, options: options)
                 // Stacked rows at accessibility sizes need the extra height to show more than one.
-                .frame(height: typeSize.isAccessibilitySize ? 300 : 236)
+                .frame(height: typeSize.isAccessibilitySize ? 280 : 236)
                 .background(.bar)
             PlannerMapView(
                 pin: state.session.location,
@@ -53,6 +53,8 @@ struct PlannerView: View {
             .overlay(alignment: .topLeading) { mapBadges }
             .ignoresSafeArea(.keyboard)
             TimeBarView(state: state, zone: displayZone, clock: clock)
+                // Beyond AX3 the date line wraps and the map has no room left at all.
+                .dynamicTypeSize(...DynamicTypeSize.accessibility3)
                 .background(.bar)
         }
         .navigationBarTitleDisplayMode(.inline)
