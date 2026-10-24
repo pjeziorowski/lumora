@@ -184,20 +184,16 @@ struct PlannerView: View {
     @ViewBuilder private var mapBadges: some View {
         VStack(alignment: .leading, spacing: 6) {
             if let light = state.snapshot?.lightPhase {
-                Label(light.label, systemImage: "circle.fill")
-                    .labelStyle(BadgeLabelStyle(tint: light.color))
+                MapBadge(Text(light.label), systemImage: "circle.fill", tint: light.color)
             }
             if state.useDeviceTimeZone {
-                Label("Device time", systemImage: "iphone")
-                    .labelStyle(BadgeLabelStyle(tint: .subdued))
+                MapBadge(Text("Device time"), systemImage: "iphone", tint: .subdued)
             }
             if state.mapOptics.isVisible {
-                Label(opticsSummary, systemImage: "camera.viewfinder")
-                    .labelStyle(BadgeLabelStyle(tint: .blue))
+                MapBadge(Text(opticsSummary), systemImage: "camera.viewfinder", tint: .blue)
             }
             if state.resolvingPin {
-                Label("Finding time zone…", systemImage: "globe")
-                    .labelStyle(BadgeLabelStyle(tint: .subdued))
+                MapBadge(Text("Finding time zone…"), systemImage: "globe", tint: .subdued)
             }
         }
         .font(.caption.weight(.medium))
@@ -228,19 +224,31 @@ struct PlannerView: View {
     }
 }
 
-private struct BadgeLabelStyle<Tint: ShapeStyle>: LabelStyle {
+/// A capsule on the map: a coloured symbol and a line of text. The symbol is decorative and
+/// left out of accessibility, so the text is its own element: the contrast audit measured the
+/// pale "golden hour" dot against the white capsule when both shared one element.
+private struct MapBadge<Tint: ShapeStyle>: View {
+    let title: Text
+    let systemImage: String
     let tint: Tint
 
-    func makeBody(configuration: Configuration) -> some View {
+    init(_ title: Text, systemImage: String, tint: Tint) {
+        self.title = title
+        self.systemImage = systemImage
+        self.tint = tint
+    }
+
+    var body: some View {
         HStack(spacing: 5) {
-            configuration.icon
+            Image(systemName: systemImage)
                 .foregroundStyle(tint)
                 .imageScale(.small)
-            configuration.title
+                .accessibilityHidden(true)
+            title
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 4)
-        // Nearly opaque: over bright map tiles a material let the text fall below 4.5:1.
+        // Nearly opaque, so bright map tiles never show through behind the text.
         .background(Color(uiColor: .systemBackground).opacity(0.94), in: Capsule())
     }
 }
