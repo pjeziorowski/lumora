@@ -46,7 +46,8 @@ scripts/test-packages.sh        # prints ACCURACY lines for AstroCore and Planne
 - Phase 7 (saved plans and places, My Stuff, sharing, JSON export and import, reminders, calendar) is done. See `docs/PHASE7_ACCURACY.md`.
 - Phase 8 (AR: Sun and Moon, Milky Way, night sky, lens frame and depth of field, time scrubbing, calibration) is done. See `docs/PHASE8_ACCURACY.md`.
 - Phase 9 (meteor showers with nightly rates, solar and lunar eclipses with local contacts and paths, Planner panels and map layers) is done. See `docs/PHASE9_ACCURACY.md`.
-- Phase 10 (widgets for the Home and Lock Screen, onboarding, accessibility audit, Polish localization, privacy manifests, app icon) is done; TestFlight needs the owner's Apple Developer account. See `docs/PHASE10_RELEASE.md`.
+- Phase 10 (widgets for the Home and Lock Screen, onboarding, accessibility audit, Polish localization, privacy manifests, app icon) is done. See `docs/PHASE10_RELEASE.md`.
+- TestFlight: `.github/workflows/testflight.yml` archives and uploads a build once the owner has set up signing; see `docs/TESTFLIGHT.md`.
 - Settings: units, clock, coordinate format persist with `@AppStorage`.
 
 ## Licences

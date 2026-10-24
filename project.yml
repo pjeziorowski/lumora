@@ -1,6 +1,11 @@
 # project.yml
 # XcodeGen spec. Generate the Xcode project with:  xcodegen generate
 name: Lumora
+include:
+  # App Store signing for the TestFlight workflow (.github/workflows/testflight.yml).
+  # Left out unless LUMORA_APPSTORE_SIGNING=YES, so local builds keep automatic signing.
+  - path: App/AppStoreSigning.yml
+    enable: ${LUMORA_APPSTORE_SIGNING}
 options:
   bundleIdPrefix: com.pjeziorowski
   deploymentTarget:
@@ -54,6 +59,8 @@ targets:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.photography
+        # Only HTTPS to Apple and Open-Meteo, which is exempt from export compliance.
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
         INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "Lumora uses your location to compute Sun and Moon times where you are."
         INFOPLIST_KEY_NSCameraUsageDescription: "Lumora shows the camera view behind the Sun, Moon and Milky Way in AR."
         INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription: "Lumora adds your saved plans to your calendar when you ask it to."

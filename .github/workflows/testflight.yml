@@ -1,0 +1,183 @@
+# .github/workflows/testflight.yml
+# Archives Lumora, signs it for the App Store and uploads it to TestFlight.
+# Runs by hand (Actions > TestFlight > Run workflow) or on a version tag such as v0.2.0, never on
+# pull requests, so fork PRs cannot reach the signing secrets. Setup steps: docs/TESTFLIGHT.md.
+name: TestFlight
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+concurrency:
+  group: testflight
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  upload:
+    name: Archive and upload
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      ASC_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+      CERTIFICATE_P12_BASE64: ${{ secrets.DISTRIBUTION_CERTIFICATE_P12_BASE64 }}
+      CERTIFICATE_PASSWORD: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
+      TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
+      APP_ID: com.pjeziorowski.lumora
+      WIDGETS_ID: com.pjeziorowski.lumora.widgets
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check configuration
+        run: |
+          # The team comes from the APPLE_TEAM_ID variable, else from project.yml.
+          if [ -z "$TEAM_ID" ]; then
+            TEAM_ID=$(sed -n 's/^ *DEVELOPMENT_TEAM: *"\{0,1\}\([A-Z0-9]*\)"\{0,1\} *$/\1/p' project.yml | head -n 1)
+          fi
+          missing=()
+          [ -n "$TEAM_ID" ] || missing+=("APPLE_TEAM_ID (repository variable, or DEVELOPMENT_TEAM in project.yml)")
+          for name in ASC_KEY_ID ASC_ISSUER_ID ASC_PRIVATE_KEY CERTIFICATE_P12_BASE64 CERTIFICATE_PASSWORD; do
+            [ -n "${!name}" ] || missing+=("$name")
+          done
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::Missing TestFlight settings: ${missing[*]}. See docs/TESTFLIGHT.md."
+            exit 1
+          fi
+          echo "TEAM_ID=$TEAM_ID" >> "$GITHUB_ENV"
+          # Build number: the run number, so every upload is higher than the last.
+          echo "BUILD_NUMBER=${{ github.run_number }}" >> "$GITHUB_ENV"
+          # A tag such as v0.2.0 sets the version shown in TestFlight; otherwise project.yml's.
+          if [ "${GITHUB_REF_TYPE}" = tag ]; then
+            echo "VERSION_OVERRIDE=MARKETING_VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Install tools
+        run: |
+          brew install xcodegen xcbeautify
+          command -v fastlane >/dev/null || brew install fastlane
+
+      - name: Write App Store Connect API key
+        run: |
+          KEY_PATH="$RUNNER_TEMP/AuthKey_$ASC_KEY_ID.p8"
+          printf '%s\n' "$ASC_PRIVATE_KEY" > "$KEY_PATH"
+          jq -n --arg id "$ASC_KEY_ID" --arg issuer "$ASC_ISSUER_ID" --rawfile key "$KEY_PATH" \
+            '{key_id: $id, issuer_id: $issuer, key: $key, in_house: false}' > "$RUNNER_TEMP/asc_api_key.json"
+          echo "KEY_PATH=$KEY_PATH" >> "$GITHUB_ENV"
+
+      - name: Install the distribution certificate
+        run: |
+          KEYCHAIN_PATH="$RUNNER_TEMP/signing.keychain-db"
+          KEYCHAIN_PASSWORD=$(openssl rand -base64 24)
+          printf '%s' "$CERTIFICATE_P12_BASE64" | base64 --decode > "$RUNNER_TEMP/distribution.p12"
+          curl -fsSL -o "$RUNNER_TEMP/AppleWWDRCAG3.cer" https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security import "$RUNNER_TEMP/AppleWWDRCAG3.cer" -k "$KEYCHAIN_PATH" -t cert -f x509 -A || true
+          security import "$RUNNER_TEMP/distribution.p12" -P "$CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH" >/dev/null
+          # Search the signing keychain first, then the runner's own.
+          security list-keychains -d user -s "$KEYCHAIN_PATH" $(security list-keychains -d user | tr -d '"')
+          rm "$RUNNER_TEMP/distribution.p12"
+          security find-identity -v -p codesigning "$KEYCHAIN_PATH"
+          echo "KEYCHAIN_PATH=$KEYCHAIN_PATH" >> "$GITHUB_ENV"
+
+      - name: Download App Store provisioning profiles
+        run: |
+          # fastlane's get_provisioning_profile (sigh) downloads the App Store profile for each
+          # bundle id, or creates it for the certificate installed above if there is none.
+          mkdir -p "$RUNNER_TEMP/profiles" \
+            "$HOME/Library/MobileDevice/Provisioning Profiles" \
+            "$HOME/Library/Developer/Xcode/UserData/Provisioning Profiles"
+          for pair in "APP:$APP_ID" "WIDGETS:$WIDGETS_ID"; do
+            key=${pair%%:*}; bundle=${pair#*:}
+            fastlane run get_provisioning_profile \
+              api_key_path:"$RUNNER_TEMP/asc_api_key.json" \
+              app_identifier:"$bundle" \
+              output_path:"$RUNNER_TEMP/profiles" \
+              filename:"$bundle.mobileprovision" \
+              skip_install:true
+            file="$RUNNER_TEMP/profiles/$bundle.mobileprovision"
+            security cms -D -i "$file" > "$RUNNER_TEMP/profiles/$bundle.plist"
+            name=$(/usr/libexec/PlistBuddy -c 'Print :Name' "$RUNNER_TEMP/profiles/$bundle.plist")
+            uuid=$(/usr/libexec/PlistBuddy -c 'Print :UUID' "$RUNNER_TEMP/profiles/$bundle.plist")
+            # Xcode 16 reads UserData; older tools read MobileDevice.
+            cp "$file" "$HOME/Library/MobileDevice/Provisioning Profiles/$uuid.mobileprovision"
+            cp "$file" "$HOME/Library/Developer/Xcode/UserData/Provisioning Profiles/$uuid.mobileprovision"
+            echo "Profile for $bundle: $name ($uuid)"
+            echo "LUMORA_${key}_PROFILE=$name" >> "$GITHUB_ENV"
+          done
+
+      - name: Generate Xcode project with App Store signing
+        env:
+          LUMORA_APPSTORE_SIGNING: 'YES'
+        run: xcodegen generate
+
+      - name: Archive
+        run: |
+          set -o pipefail
+          xcodebuild archive \
+            -project Lumora.xcodeproj \
+            -scheme Lumora \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/Lumora.xcarchive" \
+            DEVELOPMENT_TEAM="$TEAM_ID" \
+            CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
+            $VERSION_OVERRIDE \
+            OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH" | xcbeautify
+
+      - name: Upload to App Store Connect
+        run: |
+          set -o pipefail
+          plist="$RUNNER_TEMP/ExportOptions.plist"
+          cat > "$plist" <<PLIST
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>destination</key><string>upload</string>
+            <key>teamID</key><string>$TEAM_ID</string>
+            <key>signingStyle</key><string>manual</string>
+            <key>signingCertificate</key><string>Apple Distribution</string>
+            <key>provisioningProfiles</key>
+            <dict>
+              <key>$APP_ID</key><string>$LUMORA_APP_PROFILE</string>
+              <key>$WIDGETS_ID</key><string>$LUMORA_WIDGETS_PROFILE</string>
+            </dict>
+            <key>uploadSymbols</key><true/>
+            <key>manageAppVersionAndBuildNumber</key><false/>
+          </dict>
+          </plist>
+          PLIST
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/Lumora.xcarchive" \
+            -exportOptionsPlist "$plist" \
+            -exportPath "$RUNNER_TEMP/export" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$KEY_PATH" \
+            -authenticationKeyID "$ASC_KEY_ID" \
+            -authenticationKeyIssuerID "$ASC_ISSUER_ID" | xcbeautify
+          echo "Uploaded build $BUILD_NUMBER. It shows in TestFlight once App Store Connect has processed it (usually 5 to 30 minutes)." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep export logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testflight-logs
+          path: |
+            ${{ runner.temp }}/export
+            ~/Library/Logs/gym
+          if-no-files-found: ignore
+
+      - name: Remove signing material
+        if: always()
+        run: |
+          [ -n "${KEYCHAIN_PATH:-}" ] && security delete-keychain "$KEYCHAIN_PATH" || true
+          rm -rf "$RUNNER_TEMP"/AuthKey_*.p8 "$RUNNER_TEMP/asc_api_key.json" "$RUNNER_TEMP/profiles"
