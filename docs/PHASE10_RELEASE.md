@@ -61,7 +61,9 @@ panel rows, the date line and the jump buttons at both edges. Now:
   growing at AX1, and a long press shows the large content viewer, as in a tab bar.
 - At accessibility sizes, panel rows put the label above the value, the panel area is
   280 pt tall (236 pt otherwise), and the date line is shortened to "Jun 21 · UTC+2". The
-  time bar stops growing at AX3, so the map keeps some room at AX5.
+  time bar stops growing at AX3, so the map keeps some room at AX5. The audit reports its
+  labels as "Dynamic Type partially unsupported" for that reason. Without the cap, the map
+  has no room left at AX5.
 - Rows in the Sun, Moon and other tools (`ValueRow`) stack the same way at accessibility
   sizes.
 
@@ -76,6 +78,7 @@ type at a time when the full audit runs out of time. After this pass about 80 re
 | Issue | Fixed | Remaining, and why |
 |---|---|---|
 | Contrast | Secondary text, section headers and footers, list values and Settings choices use `Color.subdued` (6.0:1 light, 7.7:1 dark, darker with Increase Contrast; `App/Sources/Accessibility/Palette.swift`). The light-mode accent orange is darker (5.2:1 on grouped backgrounds). Status text uses accessible green, orange and red, and the meteor rating badges are white on dark fills. | Text the audit samples while it scrolls under the translucent tab bar (every remaining named element sits below the tab bar's top edge). The two unnamed issues per scrolling screen follow the same pattern: none on the Planner or My Stuff, where nothing scrolls under the bar. |
+| Contrast (map badges) | The Planner's map badges ("Golden hour", "Device time") sit on a nearly opaque capsule instead of a material that let bright map tiles show through. | — |
 | Hit area too small | Planner panel buttons are now 44 × 44 pt (checked in `testAccessibilityLargeText`). | MapKit's Legal link, which MapKit draws and the app cannot resize. |
 | Dynamic Type unsupported | Meteor badges and the hour and eclipse-altitude columns scale. Plan thumbnails (map pictures) are hidden from accessibility. | UIKit controls that use the large content viewer instead of growing: tab bar items, segmented controls, navigation bar buttons and the compact date picker. The audit names no element for these, and the counts match the controls on each screen (Sun: 4 tabs, 5 segments, back button, 2 date picker buttons). |
 | Text clipped | Settings pickers are inline rows (the menu style clipped "Decimal degrees"). The meteor badge has no fixed frame. | Unnamed issues on the same UIKit controls and large navigation titles, plus the combined meteor rows, whose merged VoiceOver label is longer than any one line. |

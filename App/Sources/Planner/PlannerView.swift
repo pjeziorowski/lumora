@@ -240,6 +240,7 @@ private struct BadgeLabelStyle<Tint: ShapeStyle>: LabelStyle {
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 4)
-        .background(.regularMaterial, in: Capsule())
+        // Nearly opaque: over bright map tiles a material let the text fall below 4.5:1.
+        .background(Color(uiColor: .systemBackground).opacity(0.94), in: Capsule())
     }
 }
