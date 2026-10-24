@@ -87,9 +87,11 @@ struct ValueRow: View {
 
     var body: some View {
         LabeledContent {
+            // LabeledContent draws values in the system's faint secondary style.
             Text(value)
                 .monospacedDigit()
                 .multilineTextAlignment(.trailing)
+                .foregroundStyle(.subdued)
         } label: {
             Text(label)
         }

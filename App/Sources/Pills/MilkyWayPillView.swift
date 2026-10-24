@@ -135,12 +135,13 @@ private struct HourRow: View {
     let sample: GalacticCenterSample
     let format: PillFormat
     let visible: Bool
+    @ScaledMetric private var timeWidth: CGFloat = 64
 
     var body: some View {
         HStack(spacing: 12) {
             Text(format.time(sample.time))
                 .monospacedDigit()
-                .frame(width: 64, alignment: .leading)
+                .frame(width: timeWidth, alignment: .leading)
             ArcGlyph(tilt: sample.tilt)
                 .frame(width: 26, height: 26)
                 .opacity(sample.altitude > 0 ? 1 : 0.35)

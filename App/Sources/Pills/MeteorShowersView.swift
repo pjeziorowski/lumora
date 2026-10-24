@@ -71,21 +71,27 @@ private struct ShowerRow: View {
     }
 }
 
+/// White on a dark fill in both appearances (at least 5.3:1), sized by its text so it grows
+/// with Dynamic Type instead of clipping.
 struct RatingBadge: View {
     let rating: MeteorRating
+    @ScaledMetric(relativeTo: .caption2) private var minWidth: CGFloat = 66
 
     var body: some View {
-        let color: Color = switch rating {
-        case .excellent: .green
-        case .good: .teal
-        case .fair: .orange
-        case .poor: .gray
+        let hex: UInt32 = switch rating {
+        case .excellent: 0x1E7B34
+        case .good: 0x0B6E79
+        case .fair: 0xA35200
+        case .poor: 0x5C5C61
         }
         Text(rating.label)
             .font(.caption2.bold())
             .foregroundStyle(.white)
-            .frame(width: 66, height: 22)
-            .background(color, in: Capsule())
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .frame(minWidth: minWidth)
+            .background(Color(red: Double(hex >> 16) / 255, green: Double((hex >> 8) & 0xFF) / 255,
+                              blue: Double(hex & 0xFF) / 255), in: Capsule())
     }
 }
 

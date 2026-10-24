@@ -103,6 +103,7 @@ struct EclipseDetailView: View {
     @Environment(PillSession.self) private var session
     @AppStorage(SettingsKeys.clockStyle) private var clock: ClockStyle = .twentyFourHour
     @AppStorage(SettingsKeys.coordinateStyle) private var coordinates: CoordinateStyle = .decimal
+    @ScaledMetric private var altitudeWidth: CGFloat = 44
 
     var body: some View {
         let format = PillFormat(timeZone: session.timeZone, clock: clock)
@@ -134,7 +135,7 @@ struct EclipseDetailView: View {
                                 Text(Formatting.degrees(contact.altitude, decimals: 0))
                                     .monospacedDigit()
                                     .foregroundStyle(contact.altitude > 0 ? Color.primary : Color.subdued)
-                                    .frame(width: 44, alignment: .trailing)
+                                    .frame(width: altitudeWidth, alignment: .trailing)
                             }
                         }
                     }

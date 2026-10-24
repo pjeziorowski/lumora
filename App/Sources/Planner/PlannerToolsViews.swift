@@ -23,10 +23,10 @@ struct PlannerTargetSheet: View {
             Form {
                 Section {
                     if let target = state.target {
-                        LabeledContent("Position", value: Formatting.coordinate(latitude: target.point.latitude,
-                                                                                longitude: target.point.longitude, style: .decimal))
-                        LabeledContent("Ground", value: target.groundElevation.map { Formatting.height(meters: $0, units: units) }
-                                       ?? (state.resolvingTarget ? String(localized: "Looking up…") : String(localized: "Unknown")))
+                        ValueRow("Position", Formatting.coordinate(latitude: target.point.latitude,
+                                                                   longitude: target.point.longitude, style: .decimal))
+                        ValueRow("Ground", target.groundElevation.map { Formatting.height(meters: $0, units: units) }
+                                           ?? (state.resolvingTarget ? String(localized: "Looking up…") : String(localized: "Unknown")))
                         NumberRow(label: "Object height", value: Binding(get: { target.objectHeight },
                                                                          set: { state.setObjectHeight($0) }),
                                   unit: "m", step: 5, range: 0...2000)

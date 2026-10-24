@@ -18,29 +18,36 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            // Navigation-link pickers show the whole value and wrap at large text sizes; the
-            // menu style clipped "Decimal degrees" next to its chevron.
-            Picker("Units", selection: $units) {
+            // Inline pickers: every choice is a full-width row that wraps at large text sizes.
+            // The menu style clipped "Decimal degrees" next to its chevron, and menu and
+            // navigation-link styles draw the value in the faint system secondary colour.
+            Picker(selection: $units) {
                 Text("Metric").tag(UnitSystem.metric)
                 Text("Imperial").tag(UnitSystem.imperial)
+            } label: {
+                SectionLabel { Text("Units") }
             }
-            .pickerStyle(.navigationLink)
-            Picker("Clock", selection: $clock) {
+            .pickerStyle(.inline)
+            Picker(selection: $clock) {
                 Text("24-hour").tag(ClockStyle.twentyFourHour)
                 Text("12-hour").tag(ClockStyle.twelveHour)
+            } label: {
+                SectionLabel { Text("Clock") }
             }
-            .pickerStyle(.navigationLink)
-            Picker("Coordinates", selection: $coordinates) {
+            .pickerStyle(.inline)
+            Picker(selection: $coordinates) {
                 Text("Decimal degrees").tag(CoordinateStyle.decimal)
                 Text("Degrees, minutes, seconds").tag(CoordinateStyle.degreesMinutesSeconds)
+            } label: {
+                SectionLabel { Text("Coordinates") }
             }
-            .pickerStyle(.navigationLink)
+            .pickerStyle(.inline)
             TitledSection("Camera") {
                 NavigationLink {
                     CameraManagerView()
                         .navigationTitle("Default camera")
                 } label: {
-                    LabeledContent("Default camera", value: cameras.defaultCamera.name)
+                    ValueRow("Default camera", cameras.defaultCamera.name)
                 }
                 .accessibilityIdentifier("settings.camera")
             }
@@ -53,7 +60,7 @@ struct SettingsView: View {
                 .accessibilityIdentifier("settings.widgets")
             }
             TitledSection("About") {
-                LabeledContent("Version", value: Bundle.main.shortVersion)
+                ValueRow("Version", Bundle.main.shortVersion)
                 Text("Astronomy calculations are ported from Astronomy Engine by Don Cross (MIT licence).")
                     .font(.footnote)
                     .foregroundStyle(.subdued)

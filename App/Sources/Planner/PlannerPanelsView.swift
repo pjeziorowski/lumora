@@ -14,7 +14,10 @@ struct PlannerPanelsView: View {
     var body: some View {
         let panels = state.panels(options: options)
         VStack(spacing: 6) {
+            // Icons stop growing at the first accessibility size so the panel rows and the map
+            // keep their room; a long press shows the large content viewer instead, as in a tab bar.
             PanelTabBar(selection: $state.selectedPanel)
+                .dynamicTypeSize(...DynamicTypeSize.accessibility1)
 
             TabView(selection: $state.selectedPanel) {
                 ForEach(PlannerPanelKind.allCases) { kind in
@@ -73,6 +76,9 @@ private struct PanelTabBar: View {
         .buttonStyle(.plain)
         .foregroundStyle(selection == kind ? AnyShapeStyle(.tint) : AnyShapeStyle(.subdued))
         .accessibilityLabel(kind.title)
+        .accessibilityShowsLargeContentViewer {
+            Label(kind.title, systemImage: kind.systemImage)
+        }
         .accessibilityAddTraits(selection == kind ? .isSelected : [])
         .accessibilityIdentifier("planner.panelTab.\(kind.rawValue)")
     }

@@ -31,11 +31,11 @@ struct SavePlanSheet: View {
                 }
                 Section {
                     let zone = planner.session.timeZone
-                    LabeledContent("Place", value: planner.session.location.name)
-                    LabeledContent("When", value: planner.session.instant.formatted(Date.FormatStyle(date: .abbreviated, time: .omitted,
-                                                                                                    timeZone: zone))
-                                   + " " + Formatting.clockTime(planner.session.instant, timeZone: zone, style: clock))
-                    if planner.target != nil { LabeledContent("Target pin", value: String(localized: "Included")) }
+                    ValueRow("Place", planner.session.location.name)
+                    ValueRow("When", planner.session.instant.formatted(Date.FormatStyle(date: .abbreviated, time: .omitted,
+                                                                                       timeZone: zone))
+                                     + " " + Formatting.clockTime(planner.session.instant, timeZone: zone, style: clock))
+                    if planner.target != nil { ValueRow("Target pin", String(localized: "Included")) }
                 }
                 Section {
                     Picker("Reminder", selection: $reminder) {

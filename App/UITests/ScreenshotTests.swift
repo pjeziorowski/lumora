@@ -626,6 +626,7 @@ final class ScreenshotTests: XCTestCase {
         prefix = "audit"
         let app = launch(date: "2026-06-21T18:30:00Z", place: "Warsaw", extra: ["-seedPlans"])
         var report: [String] = []
+        var trees: [String] = []
         func audit(_ screen: String) {
             Thread.sleep(forTimeInterval: 1.5)
             snap(app, screen.lowercased().replacingOccurrences(of: " ", with: "-"))
@@ -651,6 +652,8 @@ final class ScreenshotTests: XCTestCase {
                 }
             }
             report.append("\(screen) | \(count) issues")
+            // The audit names no element for most issues; the tree helps match them up.
+            trees.append("== \(screen) ==\n\(app.debugDescription)")
         }
         app.tabBars.buttons["Planner"].tap()
         waitFor(app, id: "planner.panel.pin")
@@ -675,6 +678,8 @@ final class ScreenshotTests: XCTestCase {
         if let dir = ProcessInfo.processInfo.environment["SCREENSHOT_DIR"], !dir.isEmpty {
             try? text.write(to: URL(fileURLWithPath: dir).appendingPathComponent("p10-accessibility-audit.txt"),
                             atomically: true, encoding: .utf8)
+            try? trees.joined(separator: "\n\n").write(to: URL(fileURLWithPath: dir).appendingPathComponent("audit-element-trees.txt"),
+                                                        atomically: true, encoding: .utf8)
         }
     }
 
@@ -741,8 +746,9 @@ final class ScreenshotTests: XCTestCase {
         waitFor(app, id: "planner.panel.pin")
         settleMap()
         let tab = app.buttons["planner.panelTab.eclipse"].firstMatch
-        XCTAssertGreaterThanOrEqual(tab.frame.width, 44, "Panel buttons must be at least 44 pt wide")
-        XCTAssertGreaterThanOrEqual(tab.frame.height, 44, "Panel buttons must be at least 44 pt tall")
+        // Frames come back as 43.99999…; compare in whole points.
+        XCTAssertGreaterThanOrEqual(tab.frame.width.rounded(), 44, "Panel buttons must be at least 44 pt wide")
+        XCTAssertGreaterThanOrEqual(tab.frame.height.rounded(), 44, "Panel buttons must be at least 44 pt tall")
         snap(app, "planner-default-tabs")
         app.tabBars.buttons["Tools"].tap()
         openTool(app, "Sun", expecting: "Sunrise")
@@ -756,12 +762,6 @@ final class ScreenshotTests: XCTestCase {
         app.tabBars.buttons["Settings"].tap()
         Thread.sleep(forTimeInterval: 1)
         snap(app, "settings-pickers")
-        let coordinates = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Coordinates")).firstMatch
-        if coordinates.waitForExistence(timeout: 5) {
-            coordinates.tap()
-            Thread.sleep(forTimeInterval: 1)
-            snap(app, "settings-coordinates-picker")
-        }
     }
 
     // MARK: Helpers

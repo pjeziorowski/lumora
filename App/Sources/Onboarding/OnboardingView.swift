@@ -86,7 +86,7 @@ struct OnboardingView: View {
         OnboardingPage(systemImage: "location.circle.fill", tint: .blue, title: "Your place",
                        message: "Times and directions are worked out for one place. Use where you are now, or choose any place from the place bar later.") {
             VStack(spacing: 12) {
-                LabeledContent("Now planning for", value: session.location.name)
+                ValueRow("Now planning for", session.location.name)
                     .accessibilityIdentifier("onboarding.place")
                 Button {
                     useCurrentLocation()

@@ -31,7 +31,7 @@ struct SpotStarsView: View {
                 NumberRow(label: "Focal length", value: $focalLength, unit: "mm", step: 1, range: 4...800)
                 ScalePicker(label: "Aperture", value: $aperture, scale: Exposure.apertureScale, format: OpticsFormat.aperture)
                 VStack(alignment: .leading) {
-                    LabeledContent("Declination", value: String(format: "%.0f°", declination))
+                    ValueRow("Declination", String(format: "%.0f°", declination))
                     Slider(value: $declination, in: -89...89, step: 1)
                         .accessibilityIdentifier("spotstars.declination")
                     Text(declinationHint).font(.caption).foregroundStyle(.subdued)
@@ -112,7 +112,7 @@ struct StarTrailsView: View {
                     NumberRow(label: "Trail length", value: $targetPixels, unit: "px", step: 10, range: 1...20_000)
                 }
                 VStack(alignment: .leading) {
-                    LabeledContent("Declination", value: String(format: "%.0f°", declination))
+                    ValueRow("Declination", String(format: "%.0f°", declination))
                     Slider(value: $declination, in: -89...89, step: 1)
                 }
             }
