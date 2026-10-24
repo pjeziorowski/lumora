@@ -24,7 +24,7 @@ struct WidgetGalleryView: View {
                 }
                 .pickerStyle(.segmented)
                 .accessibilityIdentifier("widgets.kind")
-                Text(kind.summary).font(.subheadline).foregroundStyle(.secondary)
+                Text(kind.summary).font(.subheadline).foregroundStyle(.subdued)
                 if let content = contents[kind] {
                     Text("Home Screen").font(.headline)
                     HStack(spacing: 14) {
@@ -39,7 +39,7 @@ struct WidgetGalleryView: View {
                 }
                 Text("To add a widget, touch and hold the Home Screen or Lock Screen, tap Edit, then Add Widgets, and choose Lumora. Widgets use the place selected here.")
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
             }
             .padding()
         }

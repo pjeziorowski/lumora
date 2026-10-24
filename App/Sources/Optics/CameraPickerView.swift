@@ -21,9 +21,9 @@ struct CameraPickerView: View {
             if query.isEmpty {
                 let favourites = store.all.filter { store.favourites.contains($0.id) }
                 if !favourites.isEmpty {
-                    Section("Favourites") { ForEach(favourites) { row($0) } }
+                    TitledSection("Favourites") { ForEach(favourites) { row($0) } }
                 }
-                Section("My cameras") {
+                TitledSection("My cameras") {
                     ForEach(store.custom) { row($0) }
                     Button {
                         editing = Camera(brand: "", model: "", sensorWidth: 36, sensorHeight: 24, pixelsWide: 6000, pixelsHigh: 4000)
@@ -33,7 +33,7 @@ struct CameraPickerView: View {
                     .accessibilityIdentifier("camera.add")
                 }
                 ForEach(CameraCatalog.brands, id: \.self) { brand in
-                    Section(brand) {
+                    TitledSection(brand) {
                         ForEach(results.filter { $0.brand == brand && $0.category != .custom }) { row($0) }
                     }
                 }
@@ -62,11 +62,11 @@ struct CameraPickerView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(camera.name).foregroundStyle(.primary)
-                    Text(details(camera)).font(.caption).foregroundStyle(.secondary)
+                    Text(details(camera)).font(.caption).foregroundStyle(.subdued)
                 }
                 Spacer()
                 if camera.id == selection { Image(systemName: "checkmark").foregroundStyle(.tint) }
-                if camera.id == store.defaultID { Text("Default").font(.caption2).foregroundStyle(.secondary) }
+                if camera.id == store.defaultID { Text("Default").font(.caption2).foregroundStyle(.subdued) }
             }
         }
         .accessibilityIdentifier("camera.\(camera.id)")
@@ -118,7 +118,7 @@ private struct CustomCameraForm: View {
                 TextField("Brand", text: $camera.brand)
                 TextField("Model", text: $camera.model)
             }
-            Section("Sensor") {
+            TitledSection("Sensor") {
                 NumberRow(label: "Width", value: $camera.sensorWidth, unit: "mm", step: 0.1, range: 1...60, decimals: 1)
                 NumberRow(label: "Height", value: $camera.sensorHeight, unit: "mm", step: 0.1, range: 1...60, decimals: 1)
                 NumberRow(label: "Pixels wide", value: intBinding(\.pixelsWide), step: 100, range: 100...20_000)
@@ -133,8 +133,10 @@ private struct CustomCameraForm: View {
                     ), unit: "mm", step: 0.001, range: 0.001...0.2, decimals: 3)
                 }
             } footer: {
-                Text("Default: sensor diagonal ÷ 1500 = \(String(format: "%.4f", camera.sensor.defaultCoC)) mm. "
-                     + "Pixel pitch \(String(format: "%.2f", camera.pixelPitchMicrons)) µm.")
+                SectionLabel {
+                    Text("Default: sensor diagonal ÷ 1500 = \(String(format: "%.4f", camera.sensor.defaultCoC)) mm. "
+                         + "Pixel pitch \(String(format: "%.2f", camera.pixelPitchMicrons)) µm.")
+                }
             }
         }
         .navigationTitle(camera.model.isEmpty ? "New camera" : camera.model)

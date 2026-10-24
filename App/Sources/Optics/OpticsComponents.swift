@@ -24,7 +24,7 @@ struct CameraRow: View {
                     Text(camera.name).lineLimit(1)
                     Text("\(camera.formatName) · CoC \(String(format: "%.3f", camera.coc)) mm")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.subdued)
                 }
             } label: {
                 Label("Camera", systemImage: "camera")
@@ -51,7 +51,7 @@ struct NumberRow: View {
                     .multilineTextAlignment(.trailing)
                     .monospacedDigit()
                     .frame(maxWidth: 90)
-                if !unit.isEmpty { Text(unit).foregroundStyle(.secondary) }
+                if !unit.isEmpty { Text(unit).foregroundStyle(.subdued) }
                 Stepper("", value: $value, in: range, step: step)
                     .labelsHidden()
             }

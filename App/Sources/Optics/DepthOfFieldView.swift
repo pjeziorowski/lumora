@@ -99,13 +99,17 @@ struct DepthOfFieldView: View {
                       + OpticsFormat.length(mm: r.behind, units: units))
             ResultRow(label: "Hyperfocal", value: OpticsFormat.length(mm: r.hyperfocal, units: units))
         } header: {
-            Text("Sharp zone")
+            SectionLabel {
+                Text("Sharp zone")
+            }
         } footer: {
-            Text("Circle of confusion \(String(format: "%.4f", coc)) mm"
-                 + (teleconverter > 1
-                    ? ", effective \(Int(focalLength * teleconverter)) mm \(OpticsFormat.aperture(aperture * teleconverter))"
-                    : "")
-                 + ".")
+            SectionLabel {
+                Text("Circle of confusion \(String(format: "%.4f", coc)) mm"
+                     + (teleconverter > 1
+                        ? ", effective \(Int(focalLength * teleconverter)) mm \(OpticsFormat.aperture(aperture * teleconverter))"
+                        : "")
+                     + ".")
+            }
         }
     }
 
@@ -122,7 +126,9 @@ struct DepthOfFieldView: View {
                       unit: "cm", step: 5, range: 10...1000)
             NumberRow(label: "Visual acuity", value: $acuity, unit: "lp/mm", step: 1, range: 1...15)
         } header: {
-            Text("Viewing conditions")
+            SectionLabel {
+                Text("Viewing conditions")
+            }
         }
         let r = DepthOfField.compute(input)
         results(r)
@@ -138,9 +144,13 @@ struct DepthOfFieldView: View {
                   systemImage: DepthOfField.isDiffractionLimited(aperture: aperture * teleconverter, pixelPitchMicrons: pitch)
                   ? "exclamationmark.triangle" : "checkmark.circle")
         } header: {
-            Text("Diffraction")
+            SectionLabel {
+                Text("Diffraction")
+            }
         } footer: {
-            Text("Airy disc 2.44 · λ · N with λ = 550 nm; limited when it exceeds 2 × the pixel pitch.")
+            SectionLabel {
+                Text("Airy disc 2.44 · λ · N with λ = 550 nm; limited when it exceeds 2 × the pixel pitch.")
+            }
         }
     }
 
@@ -164,7 +174,7 @@ struct DepthOfFieldView: View {
                         ForEach(Array(row.cells.enumerated()), id: \.offset) { _, cell in
                             VStack(alignment: .trailing, spacing: 0) {
                                 Text(OpticsFormat.length(mm: cell.near, units: units))
-                                Text(OpticsFormat.length(mm: cell.far, units: units)).foregroundStyle(.secondary)
+                                Text(OpticsFormat.length(mm: cell.far, units: units)).foregroundStyle(.subdued)
                             }
                         }
                     }
@@ -173,9 +183,13 @@ struct DepthOfFieldView: View {
             }
             .accessibilityIdentifier("dof.table")
         } header: {
-            Text("Near / far limits")
+            SectionLabel {
+                Text("Near / far limits")
+            }
         } footer: {
-            Text("Columns: focus distance. Rows: aperture. CoC \(String(format: "%.4f", coc)) mm.")
+            SectionLabel {
+                Text("Columns: focus distance. Rows: aperture. CoC \(String(format: "%.4f", coc)) mm.")
+            }
         }
     }
 
@@ -201,9 +215,13 @@ struct DepthOfFieldView: View {
             .font(.caption2.monospacedDigit())
             .accessibilityIdentifier("dof.hyperfocal")
         } header: {
-            Text("Hyperfocal distance")
+            SectionLabel {
+                Text("Hyperfocal distance")
+            }
         } footer: {
-            Text("Focus here and everything from half this distance to infinity is acceptably sharp.")
+            SectionLabel {
+                Text("Focus here and everything from half this distance to infinity is acceptably sharp.")
+            }
         }
     }
 }

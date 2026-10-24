@@ -48,7 +48,9 @@ struct SavePlanSheet: View {
                     }
                     Toggle("Add to Calendar", isOn: $addToCalendar)
                 } footer: {
-                    if let problem { Text(problem).foregroundStyle(.red) }
+                    SectionLabel {
+                        if let problem { Text(problem).foregroundStyle(.critical) }
+                    }
                 }
             }
             .navigationTitle("Save plan")

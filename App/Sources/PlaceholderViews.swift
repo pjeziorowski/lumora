@@ -34,7 +34,7 @@ struct ToolsView: View {
                     Label("Milky Way", systemImage: "sparkles")
                 }
             }
-            Section("Events") {
+            TitledSection("Events") {
                 NavigationLink {
                     MeteorShowersView()
                 } label: {
@@ -46,7 +46,7 @@ struct ToolsView: View {
                     Label("Eclipses", systemImage: "circle.lefthalf.filled")
                 }
             }
-            Section("Photography") {
+            TitledSection("Photography") {
                 NavigationLink {
                     ExposureView()
                 } label: {
@@ -83,7 +83,7 @@ struct ToolsView: View {
                     Label("Cameras", systemImage: "camera")
                 }
             }
-            Section("Augmented reality") {
+            TitledSection("Augmented reality") {
                 NavigationLink {
                     SkyARView(mode: .sunMoon)
                 } label: {

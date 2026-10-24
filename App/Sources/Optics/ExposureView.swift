@@ -27,7 +27,9 @@ struct ExposureView: View {
                 ScalePicker(label: "ISO", value: $metered.iso, scale: Exposure.isoScale, format: OpticsFormat.iso)
                 ResultRow(label: "Exposure value", value: String(format: "EV %.1f", metered.ev100))
             } header: {
-                Text("Metered exposure")
+                SectionLabel {
+                    Text("Metered exposure")
+                }
             }
             Section {
                 Picker("Solve for", selection: $solving) {
@@ -48,9 +50,13 @@ struct ExposureView: View {
                 }
                 ResultRow(label: "Equivalent", value: label(result, solving), emphasised: true)
             } header: {
-                Text("Equivalent exposure")
+                SectionLabel {
+                    Text("Equivalent exposure")
+                }
             } footer: {
-                Text("Exact value \(exact(result, solving)); nearest marked setting shown.")
+                SectionLabel {
+                    Text("Exact value \(exact(result, solving)); nearest marked setting shown.")
+                }
             }
             Section {
                 Picker("ND filter", selection: $filterStops) {
@@ -60,9 +66,13 @@ struct ExposureView: View {
                 ResultRow(label: "With filter", value: Exposure.shutterLabel(longExposure), emphasised: true)
                 TimerControls(timer: timer, duration: longExposure)
             } header: {
-                Text("Long exposure")
+                SectionLabel {
+                    Text("Long exposure")
+                }
             } footer: {
-                Text("Shutter × 2^stops. Stops, brand factor (ND1000) and optical density (3.0) are shown for each filter.")
+                SectionLabel {
+                    Text("Shutter × 2^stops. Stops, brand factor (ND1000) and optical density (3.0) are shown for each filter.")
+                }
             }
         }
         .navigationTitle("Exposure")

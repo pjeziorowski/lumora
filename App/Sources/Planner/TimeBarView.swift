@@ -33,7 +33,9 @@ struct TimeBarView: View {
                     VStack(spacing: 0) {
                         Text(dayText)
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(.subdued)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
                         Text(Formatting.clockTime(state.session.instant, timeZone: zone, style: clock))
                             .font(.title3.monospacedDigit().weight(.semibold))
                             .foregroundStyle(.primary)

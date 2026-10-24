@@ -71,7 +71,7 @@ private struct SunDaySections: View {
                                  thresholds: session.thresholds)) { key in
             SunDayReport.compute(location: key.location, day: key.day, instant: key.instant, thresholds: key.thresholds)
         } content: { report in
-            Section(format.dayLabel(report.day)) {
+            TitledSection(format.dayLabel(report.day)) {
                 ValueRow("Sunrise", format.events(report.rises, none: report.state.noEventLabel(body: .sun)))
                 ValueRow("Sunset", format.events(report.sets, none: report.state.noEventLabel(body: .sun)))
                 if let noon = report.noon {
@@ -80,7 +80,7 @@ private struct SunDaySections: View {
                 ValueRow("Daylight", daylightText(report.daylightSeconds))
                 ValueRow("Change from yesterday", signedDuration(report.daylightChangeSeconds))
             }
-            Section("At \(format.time(report.position.time))") {
+            TitledSection("At \(format.time(report.position.time))") {
                 ValueRow("Azimuth", Formatting.azimuth(report.position.azimuth))
                 ValueRow("Elevation", Formatting.degrees(report.position.altitude))
                 ValueRow("Light", report.lightPhase.displayName)
@@ -123,7 +123,9 @@ private struct TwilightSections: View {
                 ValueRow("Golden hour", format.spans(report.morningGoldenHours))
                 ValueRow("Sunrise", format.times(morning(.horizon, report)))
             } header: {
-                Text("Morning")
+                SectionLabel {
+                    Text("Morning")
+                }
             }
             Section {
                 ValueRow("Sunset", format.times(evening(.horizon, report)))
@@ -133,15 +135,19 @@ private struct TwilightSections: View {
                 ValueRow("Nautical dusk", format.times(evening(.nautical, report)))
                 ValueRow("Astronomical dusk", format.times(evening(.astronomical, report)))
             } header: {
-                Text("Evening")
+                SectionLabel {
+                    Text("Evening")
+                }
             } footer: {
-                VStack(alignment: .leading, spacing: 4) {
-                    if report.isDarkAllDay {
-                        Text("Polar night: the Sun stays below −18° all day.")
-                    } else if let note = report.darkness.explanation {
-                        Text(note)
+                SectionLabel {
+                    VStack(alignment: .leading, spacing: 4) {
+                        if report.isDarkAllDay {
+                            Text("Polar night: the Sun stays below −18° all day.")
+                        } else if let note = report.darkness.explanation {
+                            Text(note)
+                        }
+                        Text(thresholdNote(report.thresholds))
                     }
-                    Text(thresholdNote(report.thresholds))
                 }
             }
         }
@@ -190,9 +196,13 @@ private struct SunGraphSection: View {
                     ValueRow("Lowest", "\(Formatting.degrees(low.altitude)) at \(format.time(low.time))")
                 }
             } header: {
-                Text("Sun elevation")
+                SectionLabel {
+                    Text("Sun elevation")
+                }
             } footer: {
-                Text("Shaded bands: astronomical and nautical twilight, blue hour and golden hour. The vertical line is the selected time.")
+                SectionLabel {
+                    Text("Shaded bands: astronomical and nautical twilight, blue hour and golden hour. The vertical line is the selected time.")
+                }
             }
         }
     }
@@ -219,7 +229,7 @@ private struct SunMonthSection: View {
                 MonthNavigator(title: format.monthTitle(year: table.year, month: table.month))
                 MonthTableRow(cells: ["Day", "Rise", "Set", "Daylight"])
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
                     .accessibilityHidden(true)
                 ForEach(table.rows) { row in
                     Button {
@@ -238,8 +248,10 @@ private struct SunMonthSection: View {
                     .accessibilityLabel(accessibilityText(row))
                 }
             } footer: {
-                if let longest = table.longestDay, let shortest = table.shortestDay {
-                    Text("Longest day this month: \(longest). Shortest: \(shortest). Tap a day to select it.")
+                SectionLabel {
+                    if let longest = table.longestDay, let shortest = table.shortestDay {
+                        Text("Longest day this month: \(longest). Shortest: \(shortest). Tap a day to select it.")
+                    }
                 }
             }
         }
@@ -334,7 +346,7 @@ private struct SeasonsSections: View {
                                 .monospacedDigit()
                             Text("Daylight: \(daylightText(event.daylightSeconds))")
                                 .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(.subdued)
                         }
                         .accessibilityElement(children: .combine)
                     }
@@ -342,12 +354,14 @@ private struct SeasonsSections: View {
                     Text("Seasons are not available for this year.")
                 }
             } footer: {
-                Text(session.location.isSouthern
-                    ? "Southern hemisphere: seasons are the reverse of the north."
-                    : "Northern hemisphere seasons.")
+                SectionLabel {
+                    Text(session.location.isSouthern
+                        ? "Southern hemisphere: seasons are the reverse of the north."
+                        : "Northern hemisphere seasons.")
+                }
             }
             if let report, report.midnightSun != nil || report.polarNight != nil {
-                Section("Polar days") {
+                TitledSection("Polar days") {
                     if let period = report.midnightSun {
                         ValueRow("Midnight sun", periodText(period))
                     }

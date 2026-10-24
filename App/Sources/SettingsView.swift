@@ -18,19 +18,24 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
+            // Navigation-link pickers show the whole value and wrap at large text sizes; the
+            // menu style clipped "Decimal degrees" next to its chevron.
             Picker("Units", selection: $units) {
                 Text("Metric").tag(UnitSystem.metric)
                 Text("Imperial").tag(UnitSystem.imperial)
             }
+            .pickerStyle(.navigationLink)
             Picker("Clock", selection: $clock) {
                 Text("24-hour").tag(ClockStyle.twentyFourHour)
                 Text("12-hour").tag(ClockStyle.twelveHour)
             }
+            .pickerStyle(.navigationLink)
             Picker("Coordinates", selection: $coordinates) {
                 Text("Decimal degrees").tag(CoordinateStyle.decimal)
                 Text("Degrees, minutes, seconds").tag(CoordinateStyle.degreesMinutesSeconds)
             }
-            Section("Camera") {
+            .pickerStyle(.navigationLink)
+            TitledSection("Camera") {
                 NavigationLink {
                     CameraManagerView()
                         .navigationTitle("Default camera")
@@ -39,7 +44,7 @@ struct SettingsView: View {
                 }
                 .accessibilityIdentifier("settings.camera")
             }
-            Section("Widgets") {
+            TitledSection("Widgets") {
                 NavigationLink {
                     WidgetGalleryView()
                 } label: {
@@ -47,11 +52,11 @@ struct SettingsView: View {
                 }
                 .accessibilityIdentifier("settings.widgets")
             }
-            Section("About") {
+            TitledSection("About") {
                 LabeledContent("Version", value: Bundle.main.shortVersion)
                 Text("Astronomy calculations are ported from Astronomy Engine by Don Cross (MIT licence).")
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
             }
         }
     }

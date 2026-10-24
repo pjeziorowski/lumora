@@ -28,7 +28,7 @@ struct LocationPickerView: View {
         NavigationStack {
             List {
                 if let typed = CoordinateParser.parse(query) {
-                    Section("Coordinates") {
+                    TitledSection("Coordinates") {
                         Button {
                             useCoordinates(typed.latitude, typed.longitude)
                         } label: {
@@ -47,12 +47,12 @@ struct LocationPickerView: View {
                 }
 
                 if !query.isEmpty {
-                    Section("Search results") {
+                    TitledSection("Search results") {
                         if searching && results.isEmpty {
                             ProgressView()
                         } else if results.isEmpty {
                             Text("No places found.")
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(.subdued)
                         }
                         ForEach(results) { place in
                             placeRow(place)
@@ -76,17 +76,17 @@ struct LocationPickerView: View {
                     if let errorMessage {
                         Text(errorMessage)
                             .font(.footnote)
-                            .foregroundStyle(.red)
+                            .foregroundStyle(.critical)
                     }
                 }
 
                 if !session.recents.isEmpty {
-                    Section("Recent") {
+                    TitledSection("Recent") {
                         ForEach(session.recents) { placeRow($0) }
                     }
                 }
 
-                Section("Sample places") {
+                TitledSection("Sample places") {
                     ForEach(PillLocation.samples) { placeRow($0) }
                 }
             }
@@ -116,7 +116,7 @@ struct LocationPickerView: View {
                 let coordinate = Formatting.coordinate(latitude: place.latitude, longitude: place.longitude, style: coordinateStyle)
                 Text("\(coordinate) · \(place.timeZoneIdentifier)")
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.subdued)
             }
         }
         .accessibilityElement(children: .combine)
