@@ -73,7 +73,7 @@ panel rows, the date line and the jump buttons at both edges. Now:
 element tree (`audit-element-trees.txt`) for each screen. Contrast and hit-area issues on
 the app's own elements fail the test. Before this pass the audit reported about 140 issues,
 and the Planner's audit timed out. Its "0 issues" was that timeout. The test now audits one
-type at a time when the full audit runs out of time. After this pass about 80 remain:
+type at a time when the full audit runs out of time, which also audits more of the Planner. After this pass 95 remain:
 
 | Issue | Fixed | Remaining, and why |
 |---|---|---|
